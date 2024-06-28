@@ -1,0 +1,113 @@
+/*HEADER*/
+
+.header{
+        
+    position: fixed;
+    z-index: 1;
+    top: 0%;
+
+    a{
+        text-decoration: none;
+    }
+}
+
+/*version mobile*/
+@media only screen and (max-width: 556px){
+    .logo{
+        width:15vw;
+    }
+
+    .menu-icon{
+        width: 7vw;
+    }
+}
+
+/*version desktop*/
+@media only screen and (min-width: 556px){
+    .navbar-toggler{
+        display: none;
+    }
+
+    .top{
+        background-color: rgba(250,255,241,0.3);
+    }
+
+    .nav-link, .dropdown-item{
+        color : var(--white);
+    }
+
+    .scroll{
+        background-color : var(--beige);
+        .nav-link{
+            color : var(--brown);
+            font-weight: bold;
+        }
+    }
+    
+    .container-fluid{
+        width: 100vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    
+        .navbar-nav{
+            display: flex;
+            flex-direction: row;
+    
+            li{
+                margin : 10px;
+            }
+        }
+    }    
+        
+    .logo{
+        height: 80px;
+        width: 100%;
+    }
+    
+    .connexion{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: var(--brown);;
+        font-weight: bold;
+    
+        .account{
+            filter: invert(31%) sepia(17%) saturate(979%) hue-rotate(348deg) brightness(89%) contrast(84%);
+                @media only screen and (max-width: 992px){
+                    width:5vw;
+                }
+                @media only screen and (min-width: 992px){
+                height: 61px;
+                }
+            }
+    }
+    .connexion:hover{
+        background-color: rgba(250,255,241,0.8);
+    }
+    
+    .nav-link:hover{
+        color: var(--dark_green);  
+        font-weight : bold;
+    }
+    
+    .active, .active:hover{
+        color: var(--blue) !important;
+        font-weight: bold;
+    }
+    .dropdown{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dropdown-menu{
+        position: absolute;
+        margin-top: 49px;
+        width : 200px;
+        li{
+            padding : 5px;
+        }
+
+    }
+}
+
