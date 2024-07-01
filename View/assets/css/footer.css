@@ -1,0 +1,133 @@
+.footer{
+    .text-center{
+        text-align: center;
+    }
+
+    background-color: var(--beige);
+    color : var(--brown);
+    .line-top{
+        width:100%;
+        border-color : var(--white);
+        background-color: var(--white);
+        height: 4px;
+        margin-left:auto;
+        margin-right:auto;
+        margin-top:0px;
+    }
+    h2{
+        font-family: var(--font_sans_serif);
+        font-weight: bold;
+        font-size: 13px; 
+        padding-bottom: 7px;
+    }
+    span, a, p{
+        font-size:12px;
+    }
+
+    a{
+        font-style: italic;
+        color : var(--brown);
+    }
+    .contactDetails-container, .discover-container{
+        display: flex;
+        flex-direction: column;
+    }
+    br{
+        content: "";
+        display: block;
+        margin-bottom: 6px;
+    }
+}
+
+/*VERSION DESKTOP*/
+
+@media only screen and (min-width: 576px){
+    .footer-mobile{
+        display:none;
+    }
+    .footer-desktop{
+        .container-illu{
+            display: flex;
+        }
+
+        .container-links{
+            display: flex;
+            justify-content:space-around;
+            padding-top: 20px;
+            padding-bottom: 10px;
+        }
+
+        .networks-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 2px;
+            width: 14vw;
+        }
+
+        .illustration{
+            width: 12vw;
+        }
+
+        .logo-network{
+            width: 2vw;
+        }
+
+        .line{
+            width : 50%;
+            border-color : white;
+            background-color: white;
+            height: 1px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+
+        .other{
+            display: flex;
+            justify-content: space-around;
+            padding-top : 10px;
+            padding-bottom : 20px;
+            span{
+                color : var(--blue);
+            }
+            a{
+                color: var(--blue);
+                text-decoration: none;
+                font-style: normal;
+            }
+            a:hover{
+                font-style: italic;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+/*VERSION MOBILE*/
+@media only screen and (max-width: 576px){
+    .footer-desktop{
+        display:none;
+    }
+    .logo-network{
+        filter: invert(31%) sepia(17%) saturate(979%) hue-rotate(348deg) brightness(89%) contrast(84%);
+        width: 6vw;
+        margin: 10px;
+    }
+    .networks{
+        display: flex;
+        justify-content: center;
+    }
+    .copyright{
+        color : var(--blue);
+    }
+    .other{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .row{
+        display: flex;
+        justify-content: space-around;
+        margin-bottom : 20px;
+    }
+}
