@@ -25,24 +25,36 @@ window.onscroll = function(){
 
 //affiche le sous-menu de l'espace utilisateur
 const userMenu = document.querySelector("#dropdown-toggle");
+const menuUser = document.querySelector(".dropdown");
+const arrowC = document.querySelector("#arrow-close");
+const arrowO = document.querySelector("#arrow-open");
+
 userMenu.addEventListener("click", ()=>{
     if(document.querySelector('#dropdown-menu.none') !== null){
-        dropdown.classList.remove("none");
+        dropdown.classList.remove('none');
+        dropdown.classList.add('bgc-dropdown')
+        userMenu.classList.add('dropdown-selected')
+        arrowO.classList.remove('none');
+        arrowC.classList.add('none');
     }
     else{
-        dropdown.classList.add("none");
+        dropdown.classList.add('none');
+        arrowO.classList.add('none');
+        arrowC.classList.remove('none');
+        dropdown.classList.remove('bgc-dropdown')
+        userMenu.classList.remove('dropdown-selected')
     }
 })
 
+//image burger centré
+const burger = document.querySelector(".menu");
+const check = document.getElementById("toggle").checked = true;
 
-const MenuMobile = document.querySelector(".navbar-toggler");
-if(window.width < 556){
-    if(document.querySelector('.navbar-toggler.none') !== null){
-        MenuMobile.classList.remove("none");
-    }
+if(check){
+    burger.classList.add('center')
+    console.log("hello")
 }
 else{
-    if(document.querySelector('.navbar-toggler.none') == null){
-        MenuMobile.classList.add("none");
-    }
+    burger.classList.remove('center')
+    console.log("hola")
 }
