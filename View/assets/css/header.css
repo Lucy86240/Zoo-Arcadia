@@ -1,7 +1,5 @@
 /*HEADER*/
 
-
-
 .header{
         
     position: fixed;
@@ -16,46 +14,15 @@
         color : var(--white);
     }
 
-    .nav-link:hover, .dropdown-item:hover, .dropdown-selected{
-        color: var(--dark_green);  
-        font-weight : bold;
-        .arrow{
-            filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(2365%) hue-rotate(39deg) brightness(90%) contrast(87%);
-        }
-    }
-
     .connected-link:hover{
         .arrow{
             filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(2365%) hue-rotate(39deg) brightness(90%) contrast(87%);
         }
     }
 
-    .bgc-dropdown{
-        border: solid 1px var(--white);
-        margin-right : 1px;
-    }
-
     .active, .active:hover{
         color: var(--blue) !important;
         font-weight: bold;
-    }
-
-    .scroll{
-        background-color : var(--beige);
-        .nav-link, .dropdown-item{
-            color : var(--brown);
-            font-weight: bold;
-            .arrow{
-                filter: brightness(0) saturate(100%) invert(31%) sepia(4%) saturate(3558%) hue-rotate(348deg) brightness(96%) contrast(91%);
-            }
-        }
-        .nav-link:hover, .dropdown-item:hover, .dropdown-selected{
-            color: var(--dark_green);  
-            font-weight : bold;
-            .arrow{
-                filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(2365%) hue-rotate(39deg) brightness(90%) contrast(87%);
-            }
-        }
     }
 
     .connected-link{
@@ -67,7 +34,19 @@
         width : 37px; 
         filter: invert(91%) sepia(4%) saturate(603%) hue-rotate(53deg) brightness(109%) contrast(103%);
     }
+}
 
+.nav-link:hover, .dropdown-item:hover,.connected-link:hover{
+    color: var(--dark_green);  
+    font-weight : bold;
+    .arrow{
+        filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(2365%) hue-rotate(39deg) brightness(90%) contrast(87%);
+    }
+}
+
+.bgc-dropdown{
+    border: solid 1px var(--white);
+    margin-right : 1px;
 }
 
 /*version mobile*/
@@ -83,42 +62,46 @@
     }
 
     .mobile{
-        top:0px;
+        margin-right: 6vw;
     }
 
     .account{
         display : none;
     }
-.container-fluid{
-    display: flex;
-    background-color: transparent;
-    height: 40px;
-    width: 100vw;
-    justify-content: space-between;
 
-    .navbar-nav, .connexion, #toggle{
-        display: none;
-    }
+    .container-fluid{
+        display: flex;
+        background-color: transparent;
+        height: 40px;
+        width: 100vw;
+        justify-content: space-between;
 
-    .navbar-nav{
-        flex-direction: column;
-        width : 100vw;
-    }
-
-    #toggle:checked + .navbar-collapse{
-        .mobile{
-            text-align:center;
+        .navbar-nav, .connexion, #toggle{
+            display: none;
         }
-        .navbar-nav {
-            display: flex;
-            text-align: center;
-            .connected-link{
+
+        .navbar-nav{
+            flex-direction: column;
+            width : 100vw;
+        }
+
+        #toggle:not(:checked) + .navbar-collapse{
+            .mobile{
+                text-align:center;
+                background-color: rgba(250,255,241,0.3);
+            }
+            .navbar-nav {
                 display: flex;
-                justify-content: center;
+                text-align: center;
+                background-color: rgba(250,255,241,0.3);
+                .connected-link{
+                    display: flex;
+                    justify-content: center;
+                    background-color: rgba(250,255,241,0.3);
+                }
             }
         }
     }
-}
 }
 
 /*version desktop*/
@@ -162,9 +145,11 @@
     }
     
     .connexion{
+        margin-right: 2vw;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         color: var(--brown);;
         font-weight: bold;
     
@@ -195,5 +180,31 @@
             padding : 5px;
         }
 
+    }
+}
+
+/*au scroll de la souris*/
+.scroll{
+    @media only screen and (min-width: 556px){
+        background-color : var(--beige) !important;
+    }
+    .nav-link, .dropdown-item{
+        color : var(--brown);
+        font-weight: bold;
+    }
+
+    .navbar-nav, .connected-link{
+        background-color : var(--beige) !important;
+    }
+
+    .arrow{
+        filter: brightness(0) saturate(100%) invert(27%) sepia(40%) saturate(388%) hue-rotate(349deg) brightness(100%) contrast(88%);
+    }
+    .nav-link:hover, .dropdown-item:hover, .dropdown-selected{
+        color: var(--dark_green);  
+        font-weight : bold;
+        .arrow{
+            filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(2365%) hue-rotate(39deg) brightness(90%) contrast(87%);
+        }
     }
 }

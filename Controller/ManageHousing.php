@@ -30,13 +30,20 @@
             else{
                 $nb = $nbImgs;
             }
-            $housing["images"] = [];
+            $housing['images'] = [];
             for($i=0 ; $i<$nb; $i++){
                 $img= array(
-                    "path" => $housingObject->getImage($i)->getPath(),
-                    "description" => $housingObject->getImage($i)->getDescription(),
+                    'path' => $housingObject->getImage($i)->getPath(),
+                    'description' => $housingObject->getImage($i)->getDescription(),
                 );
-                array_push($housing["images"],$img);
+                array_push($housing['images'],$img);
+            }
+            if($housing['images'] == []){
+                $img= array(
+                    'path' => IMG_DEFAULT_HOUSING,
+                    'description' => "photo indisponible",
+                );
+                array_push($housing['images'],$img);
             }
             
 
@@ -57,6 +64,13 @@
                         $img= array(
                             "pathAnimals" => $animalObject->getImage($i)->getPath(),
                             "descriptionAnimals" => $animalObject->getImage($i)->getDescription(),
+                        );
+                        array_push($animal['imagesAnimals'],$img);
+                    }
+                    if($animal['imagesAnimals']==[]){
+                        $img= array(
+                            "pathAnimals" => IMG_DEFAULT_ANIMAL,
+                            "descriptionAnimals" => 'pas de photo disponible',
                         );
                         array_push($animal['imagesAnimals'],$img);
                     }

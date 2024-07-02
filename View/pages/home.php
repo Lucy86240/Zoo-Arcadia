@@ -23,20 +23,20 @@
                 $animal3 = $housing["animals"][2];
                 ?>
                 <div class="home-housing-container">
-                    <div class="home-img-font"> 
+                    <div class="home-img-font js-slide"> 
                         <div class="home-title-housing-position"><h3 class="text-brown text-center home-housing-title"><?php echo($housing["name"]); ?></h3></div>
                         <div><img class="home-housing-img rounded-circle " src="<?php echo($housing["images"][0]["path"]); ?>" alt="<?php echo($housing["images"][0]["description"]);?>"></div>
                     </div>
 
-                    <div class="home-img-font">
+                    <div class="home-img-font js-slide">
                         <div><img class="home-animal-img rounded-circle home-housing-animal1" src="<?php echo($animal1["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal1["imagesAnimals"][0]["descriptionAnimals"]); ?>"></div>
                         <div class="home-title-animal1-position none"><span class="text-center home-animal-title"><?php echo($animal1["name"]); ?></span></div>
                     </div>
-                    <div class="home-img-font">
+                    <div class="home-img-font js-slide">
                         <img class="home-animal-img rounded-circle home-housing-animal2" src="<?php echo($animal2["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal2["imagesAnimals"][0]["descriptionAnimals"]); ?>">
                         <div class="home-title-animal2-position none"><span class="text-center home-animal-title"><?php echo($animal2["name"]); ?></span></div>
                     </div>
-                    <div class="home-img-font">
+                    <div class="home-img-font js-slide">
                         <img class="home-animal-img rounded-circle home-housing-animal3" src="<?php echo($animal3["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal3["imagesAnimals"][0]["descriptionAnimals"]); ?>">
                         <div class="home-title-animal3-position none"><span class="text-center home-animal-title"><?php echo($animal3["name"]); ?></span></div>
                     </div>
@@ -90,7 +90,7 @@
         $review = Reviews(1,0,1,0,0,0)[0];?>
         <div class="home-review">
             <h3><?php echo($review["pseudo"]);?></h3>
-            <p class="h-review-date">visite du <?php echo($review["date"]);?></p>
+            <p class="h-review-date">visite du <?php echo($review["dateVisite"]);?></p>
             <div class="home-review-stars">
                 <?php for($i=0;$i<$review["note"];$i++){ ?>
                     <img class="start" src="View/assets/img/general/review/Star-gold.png" alt="Etoile">
