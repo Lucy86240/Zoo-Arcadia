@@ -51,10 +51,8 @@ const burger = document.querySelector(".menu");
 const check = document.getElementById("toggle").checked = true;
 
 if(check){
-    burger.classList.add('center')
-    console.log("hello")
+    burger.classList.add('text-center')
 }
 else{
     burger.classList.remove('center')
-    console.log("hola")
 }

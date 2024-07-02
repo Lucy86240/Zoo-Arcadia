@@ -42,12 +42,12 @@
     function loadContentPage($request){
         $actualRoute = getRouteByUrl($request);
 
-        if($actualRoute->getPathHtml()!=null){
-            include $actualRoute->getPathHtml();
-        }
-
         if($actualRoute->getPathController()!=null)
         {
             include $actualRoute->getPathController();
+        }
+
+        if($actualRoute->getPathHtml()!=null){
+            include $actualRoute->getPathHtml();
         }
     }

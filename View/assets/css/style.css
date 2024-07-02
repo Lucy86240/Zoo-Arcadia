@@ -2,10 +2,8 @@
 @import url('reset.css');
 @import url('header.css');
 @import url('footer.css');
-
-body{
-    background-color: grey;
-}
+@import url('elements.css');
+@import url('home.css');
 
 h1, h2, h3{
     font-family: var(--font_serif);
@@ -52,9 +50,20 @@ p,a,span{
     display:none;
 }
 
-.center{
+.text-center{
     text-align : center;
 }
+
+.text-white{
+    color : var(--white);
+}
+
+.text-brown{
+    color : var(--brown);
+}
+
+
+
 
 
 

@@ -185,6 +185,9 @@
 
 /*au scroll de la souris*/
 .scroll{
+    @media only screen and (min-width: 556px){
+        background-color : var(--beige) !important;
+    }
     .nav-link, .dropdown-item{
         color : var(--brown);
         font-weight: bold;

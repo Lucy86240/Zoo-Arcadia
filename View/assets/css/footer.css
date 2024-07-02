@@ -1,7 +1,5 @@
 .footer{
-    .text-center{
-        text-align: center;
-    }
+    width:100vw;
 
     background-color: var(--beige);
     color : var(--brown);
