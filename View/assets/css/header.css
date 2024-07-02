@@ -42,9 +42,19 @@
 
     .scroll{
         background-color : var(--beige);
-        .nav-link{
+        .nav-link, .dropdown-item{
             color : var(--brown);
             font-weight: bold;
+            .arrow{
+                filter: brightness(0) saturate(100%) invert(31%) sepia(4%) saturate(3558%) hue-rotate(348deg) brightness(96%) contrast(91%);
+            }
+        }
+        .nav-link:hover, .dropdown-item:hover, .dropdown-selected{
+            color: var(--dark_green);  
+            font-weight : bold;
+            .arrow{
+                filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(2365%) hue-rotate(39deg) brightness(90%) contrast(87%);
+            }
         }
     }
 
@@ -70,7 +80,6 @@
         width: 25px;
         background-color: var(--brown);
         border-radius: 10px;
-        /*filter: invert(91%) sepia(4%) saturate(603%) hue-rotate(53deg) brightness(109%) contrast(103%);*/
     }
 
     .mobile{

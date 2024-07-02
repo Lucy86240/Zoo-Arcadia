@@ -1,7 +1,5 @@
 .footer{
-    .text-center{
-        text-align: center;
-    }
+    width:100vw;
 
     background-color: var(--beige);
     color : var(--brown);
@@ -9,7 +7,7 @@
         width:100%;
         border-color : var(--white);
         background-color: var(--white);
-        height: 4px;
+        height: 1px;
         margin-left:auto;
         margin-right:auto;
         margin-top:0px;

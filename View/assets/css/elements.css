@@ -1,0 +1,46 @@
+.rounded-circle{
+    border-radius: 50%;
+}
+
+.button{
+    display: flex;
+    justify-content: right;
+    margin-right:5vw;
+}
+
+button{
+    margin-top: 20px;
+    margin-bottom : 20px;
+    border-radius: 20px;
+    padding : 10px;
+    border-style: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-brown{
+    background-color: var(--brown);
+    color: var(--white);
+    font-weight: bold;
+}
+
+.btn-blue{
+    background-color: var(--blue);
+    color: var(--white) ;
+    font-weight: bold ;
+    border-right : 2px solid black;
+    border-bottom :2px solid black;
+}
+
+.btn-green{
+    background-color: var(--green);
+    color: var(--blue);
+    font-weight: bold;
+    border-right : 2px solid var(--dark_green);
+    border-bottom :2px solid var(--dark_green);
+}
+
+.btn-brown:hover,.btn-blue:hover, .btn-green:hover, .btn-previous:hover, .btn-next:hover{
+    opacity:0.8;
+}
