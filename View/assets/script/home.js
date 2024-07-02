@@ -39,14 +39,14 @@ for(let i=0;i<animals3.length;i++){
 
 /*carroussel en cas de plus de trois habitats*/
 
-const slides = document.querySelectorAll(".js-slide");
-let slideIndex = 0;;
+const slidesHousing = document.querySelectorAll(".js-slide");
+let slideIndex = 0;
 const imagesPerHousing=4;
-const nbSlideView = 3*imagesPerHousing;
+const nbSlideViewHousing = 3*imagesPerHousing;
 const durationSlide = 5_000;
 
 //rend visible la slide définie et les x suivantes (suivant le nombre à afficher(nbSlideView))
-const showSlides = (firstSlide) => {
+const showSlides = (slides, firstSlide, nbSlideView) => {
     let slideIndex = firstSlide;
 
     //on vérifie que la slide est incluse dans dans slides
@@ -72,16 +72,67 @@ const showSlides = (firstSlide) => {
 }
 
 //change la slide automatiquement
-const changeSlideAuto = () => {
+const changeSlideAuto = (slides, imagesPer, nbSlide) => {
     setInterval( () => {
-        slideIndex +=imagesPerHousing;
-        console.log(slideIndex);
-        slideIndex=showSlides(slideIndex);
+        slideIndex +=imagesPer;
+        slideIndex=showSlides(slides,slideIndex,nbSlide);
     },durationSlide)
 }
 
 //lancement des fonctions
-if(slides.length > nbSlideView){
+if(slidesHousing.length > nbSlideViewHousing){
     slideIndex=showSlides(slideIndex);
-    changeSlideAuto();
+    changeSlideAuto(slidesHousing,imagePerHousing,nbSlideViewHousing);
+}
+
+
+/*carrousel animaux mobile*/
+const slidesAnimals = document.querySelectorAll(".js-slideAnimal");
+const rounds = document.querySelectorAll(".round");
+slideIndex = 0;
+const elementsPerAnimals=4;
+const nbSlideViewAnimals = 1*elementsPerAnimals;
+
+const showSlidesAnimal = (firstSlide) => {
+    let slideIndex = firstSlide;
+
+    //on vérifie que la slide est incluse dans dans slides
+    if (slideIndex >= slidesAnimals.length) {slideIndex = 0;}
+    if (slideIndex < 0) {slideIndex = slidesAnimals.length-1;}
+
+    firstSlide = slideIndex
+
+    //on rend "invisible" tous les habitats
+    for (let i = 0; i < slidesAnimals.length; i++) {
+        slidesAnimals[i].classList.add("none");
+        slidesAnimals[i].classList.remove("animal-selected"); 
+    }
+    for(let k=0; k<slidesAnimals.length/elementsPerAnimals; k++){
+        rounds[k].classList.remove("round-selected");
+    }
+    rounds[slideIndex/elementsPerAnimals].classList.add("round-selected");
+
+    //on affiche ceux souhaités
+    let index = slideIndex;
+
+    for (let j=0; j<nbSlideViewAnimals ; j++){
+        slidesAnimals[index].classList.remove("none");
+        slidesAnimals[index].classList.add("animal-selected");       
+        index++;
+        if (index > slidesAnimals.length-1) {index = 0;}
+        if (index < 0) {index= slidesAnimals.length-1;}
+    }
+    return firstSlide;
+}
+
+const changeSlideAutoAnimal = () => {
+    setInterval( () => {
+        slideIndex +=elementsPerAnimals;
+        slideIndex=showSlidesAnimal(slideIndex);
+    },durationSlide)
+}
+
+if(slidesAnimals.length > nbSlideViewAnimals){
+    slideIndex=showSlidesAnimal(slideIndex);
+    changeSlideAutoAnimal();
 }

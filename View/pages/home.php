@@ -44,7 +44,31 @@
             <?php } ?>
         
     </div>
-    <div class="button"><button type="button" class="btn btn-green mt-5">En voir plus...</button></div>
+    <div class="button"><button type="button" class="btn btn-green">En voir plus...</button></div>
+</section>
+
+<!-- animals for mobile -->
+<section class="animals-mobile">
+    <h2>Plus de 1200 animaux à découvrir</h2>
+    <?php 
+    foreach($housings as $housing){
+        for($i=0;$i<3;$i++){
+            $animal = $housing["animals"][$i]; ?>
+            <div class = "animal-mobile js-slideAnimal">
+                <h3 class="js-slideAnimal"><?php echo($animal["name"]); ?></h3>
+                <img class="img-animal-mobile js-slideAnimal" src="<?php echo($animal["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal["imagesAnimals"][0]["descriptionAnimals"]); ?>">
+                <a class="js-slideAnimal" href="">Découvrir</a>
+            </div>
+    <?php }}?>
+    <div class="rounds">
+        <?php $lenght = count($housings)*3;
+        for($i=0;$i<$lenght;$i++){ ?>
+            <div class="round"> </div>  
+        <?php }
+        ?>
+    </div>
+    
+    <div class="button"><button type="button" class="btn btn-DarkGreen">En voir plus...</button></div>
 </section>
 
 <section class = "home-services">

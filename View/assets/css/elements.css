@@ -41,6 +41,14 @@ button{
     border-bottom :2px solid var(--dark_green);
 }
 
-.btn-brown:hover,.btn-blue:hover, .btn-green:hover, .btn-previous:hover, .btn-next:hover{
+.btn-DarkGreen{
+    background-color: var(--dark_green);
+    color: var(--white);
+    font-weight: bold;
+    border-right : 1px solid black;
+    border-bottom :1px solid black;
+}
+
+.btn-brown:hover,.btn-blue:hover, .btn-green:hover, .btn-previous:hover, .btn-next:hover, .btn-DarkGreen:hover{
     opacity:0.8;
 }
