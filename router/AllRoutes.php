@@ -5,7 +5,7 @@ require_once "Route.php";
 //    function __construct($url, $title, $pathHtml, $authorize, $pathController)
 $allRoutes = array(
     new Route('','Accueil','View/pages/home.php',[],'Controller/AllController.php'),
-    new Route('avis','Avis','View/pages/review.php',[],''),
+    new Route('avis','Avis','View/pages/reviews/reviews.php',[],'Controller/ManageReview.php'),
 );
 
 define('ALL_ROUTES',$allRoutes);

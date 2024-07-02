@@ -327,9 +327,12 @@
 
 /*styles specials for desktop*/
 @media only screen and (min-width: 576px){
-    h2{
-        padding-top:10vh;
+    .home-services{
+        h2{
+            padding-top:10vh;
+        }
     }
+
     .home-service{
         display : flex;
         align-items : center;

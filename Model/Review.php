@@ -7,7 +7,7 @@ Class Review{
     private int $note;
     private string $comment;
     private $date_check;
-    private string $check_by;
+    private $check_by;
     private bool $isVisible;
 
     function getId():int{
@@ -54,7 +54,7 @@ Class Review{
         $this->date_check = $dateCheck;
     }
 
-    function getCheckBy():string{
+    function getCheckBy(){
         return $this->check_by;
     }
 

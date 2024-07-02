@@ -142,3 +142,58 @@ function porcentNote(int $note){
         }
     }
 }
+
+/**Permet de savoir si un commentaire a été vérifié
+ * @param $review id de l'avis
+ */
+function ValidateReview(int $review){
+    try{
+        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+        $stmt = $pdo->prepare('SELECT isVisible FROM reviews WHERE id_review=:id');
+        $stmt->bindParam(":id", $review, PDO::PARAM_INT);
+        if($stmt->execute())
+        {
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($res['isVisible']==1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+    catch(error $e){
+        echo("problème avec les données");
+        return false;
+    }
+}
+
+function ModerateReview(int $review){
+    try{
+        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+        $stmt = $pdo->prepare('SELECT isVisible, date_check FROM reviews WHERE id_review=:id');
+        $stmt->bindParam(":id", $review, PDO::PARAM_INT);
+        if($stmt->execute())
+        {
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($res['isVisible']==0 && $res['date_check']!=null){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+    catch(error $e){
+        echo("problème avec les données");
+        return false;
+    }
+}

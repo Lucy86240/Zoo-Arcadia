@@ -7,6 +7,7 @@ function reviews(int $nbReviews, int $startList, bool $justVisible, bool $Elemen
     $reviews = [];
     foreach($reviewsObject as $reviewObject){
         $review = array(
+            "id" => $reviewObject->getId(),
             "pseudo" => $reviewObject->getPseudo(),
             "dateVisite" => $reviewObject->getDateVisite(),
             "note" => $reviewObject->getNote(),

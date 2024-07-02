@@ -106,80 +106,82 @@
 
 /*version desktop*/
 @media only screen and (min-width: 556px){
-    .menu{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-    }
-    .navbar{
-        display: flex;
-    }
-
-    .mobile, #toggle{
-        display: none;
-    }
-
-    .top{
-        background-color: rgba(250,255,241,0.3);
-    }    
-    .container-fluid{
-        width: 100vw;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    
-        .navbar-nav{
+    header{
+        .menu{
             display: flex;
             flex-direction: row;
+            justify-content: space-around;
+        }
+        .navbar{
+            display: flex;
+        }
+
+        .mobile, #toggle{
+            display: none;
+        }
+
+        .top{
+            background-color: rgba(250,255,241,0.3);
+        }    
+        .container-fluid{
+            width: 100vw;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-    
-            li{
-                margin : 10px;
-            }
-        }
-    }    
         
-    .logo{
-        height: 80px;
-        width: 100%;
-    }
-    
-    .connexion{
-        margin-right: 2vw;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: var(--brown);;
-        font-weight: bold;
-    
-        .account{
-            filter: invert(31%) sepia(17%) saturate(979%) hue-rotate(348deg) brightness(89%) contrast(84%);
-                @media only screen and (max-width: 992px){
-                    width:5vw;
-                }
-                @media only screen and (min-width: 992px){
-                height: 61px;
+            .navbar-nav{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+        
+                li{
+                    margin : 10px;
                 }
             }
-    }
-    .connexion:hover{
-        background-color: rgba(250,255,241,0.8);
-    }
-
-    .dropdown{
-        display: flex;
-        flex-direction: column;
-    }
-
-    .dropdown-menu{
-        position: absolute;
-        margin-top: 60px;
-        width : 200px;
-        li{
-            padding : 5px;
+        }    
+            
+        .logo{
+            height: 80px;
+            width: 100%;
+        }
+        
+        .connexion{
+            margin-right: 2vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--brown);;
+            font-weight: bold;
+        
+            .account{
+                filter: invert(31%) sepia(17%) saturate(979%) hue-rotate(348deg) brightness(89%) contrast(84%);
+                    @media only screen and (max-width: 992px){
+                        width:5vw;
+                    }
+                    @media only screen and (min-width: 992px){
+                    height: 61px;
+                    }
+                }
+        }
+        .connexion:hover{
+            background-color: rgba(250,255,241,0.8);
         }
 
+        .dropdown{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dropdown-menu{
+            position: absolute;
+            margin-top: 60px;
+            width : 200px;
+            li{
+                padding : 5px;
+            }
+
+        }
     }
 }
 
