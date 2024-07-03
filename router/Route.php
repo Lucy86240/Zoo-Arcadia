@@ -2,13 +2,15 @@
 
 Class Route {
     private string $url;
+    private bool $option;
     private string $title;
     private string $pathHtml;
     private array $authorize;
     private string $pathController;
 
-    function __construct($url, $title, $pathHtml, $authorize, $pathController) {
+    function __construct($url, $option, $title, $pathHtml, $authorize, $pathController) {
         $this->url = $url;
+        $this->option = $option;
         $this->title = $title;
         $this->pathHtml = $pathHtml;
         $this->pathController = $pathController;
@@ -17,6 +19,10 @@ Class Route {
 
     function getURL(){
         return $this->url;
+    }
+
+    function getOption(){
+        return $this->option;
     }
 
     function getPathHtml(){

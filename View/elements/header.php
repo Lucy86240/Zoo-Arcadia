@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href = "View/assets/css/style.css">
-    <script src="View/assets/script/header.js" defer></script>
+    <link rel="stylesheet" href = "<?php if($optionPage){echo("../");}?>View/assets/css/style.css">
+    <script src="<?php if($optionPage){echo("../");}?>View/assets/script/header.js" defer></script>
     <title>Zoo Arcadia</title>
 </head>
 <body>
@@ -12,10 +12,10 @@
         <nav class="navbar top">
             <div class="container-fluid" id="container-fluid">
                 <a class="navbar-brand" href="/">
-                    <img class="logo" src="View/assets/img/general/header/logo.png" alt="logo du zoo Arcadia">
+                    <img class="logo" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/header/logo.png" alt="logo du zoo Arcadia">
                 </a>
                 <div class="menu">
-                    <label class="mobile" for="toggle"><img class="menu-icon" src="View/assets/img/general/header/menu.svg" alt="Menu"></label>
+                    <label class="mobile" for="toggle"><img class="menu-icon" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/header/menu.svg" alt="Menu"></label>
                     <input type="checkbox" id="toggle">
                     <div class="navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav">
@@ -34,8 +34,8 @@
                             <li class="nav-item dropdown">
                             <a class="nav-link connected-link" id="dropdown-toggle" href="#" role="button" aria-expanded="false">
                                 Espace ROLE
-                                <img class="arrow" id="arrow-close" src="View/assets/img/general/buttons/arrow-drop-down.svg" alt="menu-close">
-                                <img class="arrow none" id="arrow-open" src="View/assets/img/general/buttons/arrow-drop-up.svg" alt="menu-open">
+                                <img class="arrow" id="arrow-close" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/arrow-drop-down.svg" alt="menu-close">
+                                <img class="arrow none" id="arrow-open" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/arrow-drop-up.svg" alt="menu-open">
                             </a>
                             <ul class="dropdown-menu none top" id="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Tableau de bord</a></li>
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="connexion">
-                    <a href=#"><img class="account" src="View/assets/img/general/header/account.svg" alt="Connexion"> </a>
+                    <a href=#"><img class="account" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/header/account.svg" alt="Connexion"> </a>
                     <span class="text-center">Me connecter</span>
                 </div>
             </div>

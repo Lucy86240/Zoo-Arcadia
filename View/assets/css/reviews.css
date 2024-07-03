@@ -186,4 +186,7 @@
             }
         }
     }
+    .pagination{
+        color : var(--blue);
+    }
 }

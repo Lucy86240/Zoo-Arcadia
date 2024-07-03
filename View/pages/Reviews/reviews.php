@@ -61,14 +61,14 @@
     </div>
     <div class="button-give">
         <button type="button" class="btn btn-blue">
-            <img class="edit-review" src="View/assets/img/general/buttons/edit_square.png" alt="">
+            <img class="edit-review" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/edit_square.png" alt="">
             Donner mon avis
         </button>
     </div>
     <div class="choices">
         <div class="filter">
             <label class="title-filter" for="toggleFilter">                
-                <img class="icon-filter" src="View/assets/img/general/buttons/filter.svg" alt="filtrer">
+                <img class="icon-filter" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/filter.svg" alt="filtrer">
                 <span>filtrer</span>
             </label>
             <input type="checkbox" id="toggleFilter">
@@ -202,7 +202,6 @@
     </div>
     <div class="reviews-list">
         <?php 
-            $reviews = reviews(10,0, false, true, true, true);
             $index=0;
             foreach($reviews as $review){ ?>
                 <div class="reviews-review">
@@ -212,13 +211,14 @@
                             <div class="block">
                                 <p class="r-review-date">visite du <?php echo($review["dateVisite"]);?></p>
                                 <div class="r-review-stars">
-                                    <?php for($i=0;$i<$review["note"];$i++){ ?>
-                                        <img class="start" src="View/assets/img/general/review/Star-gold.png" alt="Etoile">
+                                    <?php for($i=0;$i<$review["note"];$i++){ 
+                                        ?>
+                                        <img class="start" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/review/Star-gold.png" alt="Etoile">
                                     <?php } 
                                     if($review["note"]<NOTE_MAX){
                                         $notStart=NOTE_MAX-$review["note"];
                                         for($i=0;$i<$notStart;$i++){ ?>
-                                            <img class="start" src="View/assets/img/general/review/Star-white.png" alt="">
+                                            <img class="start" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/review/Star-white.png" alt="">
                                         <?php }
                                     } ?>
                                 </div>
@@ -253,7 +253,31 @@
                                 } ?></p>
                     </div>
                 </div>
-        <?php
-        $index++; } ?>
+            <?php
+            $index++; 
+            } 
+        ?>
     </div>
+    <nav>
+    <ul class="pagination">
+
+        <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
+        <li class=" <?php echo(($currentPage == 1) ? "hidden" : "");?>">
+            <a href="<?php if(!$optionPage){echo("avis/");};?>?page=<?= $currentPage - 1 ?>" class="btn-previous bp-blue">
+                <img class="previous-img" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/previous_blue.png" alt="Bouton précédent">
+                <p class="previous-text">Précédent</p> 
+            </a>   
+        </li>
+
+        <li><p class="page-blue">Page <?php echo($currentPage); ?> / <?php echo($pages); ?></p></li>
+
+        <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
+        <li class=" <?php echo(($currentPage == $pages) ? "hidden" : "");?>">
+            <a href="<?php if(!$optionPage){echo("avis/");};?>?page=<?= $currentPage + 1 ?>" class="btn-next bn-blue">
+                <p class="next-text">Suivant</p> 
+                <img class="next-img" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/next_blue.png" alt="Bouton suivant">
+            </a>    
+        </li> 
+    </ul>
+</nav>
 </section>

@@ -130,9 +130,9 @@
         </div>
     </div>
     <div class="buttons">
-        <div class="button"><button type="button" class="btn btn-blue mt-5">
+        <div class="button"><a href="/avis"><button type="button" class="btn btn-blue">
             En voir plus...
-        </button></div> 
+        </button></a></div> 
         <div class="button"><button type="button" class="btn btn-blue mt-5">
             <img class="edit-review" src="View/assets/img/general/buttons/edit_square.png" alt="">
             Mon avis

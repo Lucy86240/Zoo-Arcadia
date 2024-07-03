@@ -3,12 +3,12 @@
     <div class="container-links">
         <div class="container-illu">
                 <div class="networks-container">
-                    <img class="illustration" src="View/assets/img/general/footer/animals_quokka_map.png" alt="illustration d'un quokka tenant une carte">
+                    <img class="illustration" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/footer/animals_quokka_map.png" alt="illustration d'un quokka tenant une carte">
                     <div class="network">
-                        <a href=""><img class="logo-network" src="View/assets/img/general/footer/facebook.svg" alt="logo de facebook"></a>
-                        <a href=""><img class="logo-network" src="View/assets/img/general/footer/x.svg" alt="logo de X"></a>
-                        <a href=""><img class="logo-network" src="View/assets/img/general/footer/instagram.svg" alt="logo d'instagram'"></a>
-                        <a href=""><img class="logo-network" src="View/assets/img/general/footer/tiktok.svg" alt="logo de tiktok"></a>
+                        <a href=""><img class="logo-network" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/footer/facebook.svg" alt="logo de facebook"></a>
+                        <a href=""><img class="logo-network" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/footer/x.svg" alt="logo de X"></a>
+                        <a href=""><img class="logo-network" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/footer/instagram.svg" alt="logo d'instagram'"></a>
+                        <a href=""><img class="logo-network" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/footer/tiktok.svg" alt="logo de tiktok"></a>
                     </div>
                 </div>
                 <div class="contactDetails-container">

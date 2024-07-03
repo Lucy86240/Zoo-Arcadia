@@ -13,19 +13,15 @@
     //Requested page = something
     $request = str_replace($site_url, '', $current_url);
 
-    //Replacing extra back slash at the end
-    $request = str_replace('/', '', $request);
-
-    //Converting the request to lowercase
     $request = strtolower($request);
 
-    function getRouteByUrl($url){
+    function getRouteByUrl($url,$option){
 
         $currentRoute = null;
 
       // Parcours de toutes les routes pour trouver la correspondance
         foreach(ALL_ROUTES as $route){
-            if ($route->getURL() == $url) {
+            if ($route->getURL() == $url && $option == $route->getOption()) {
                 $currentRoute = $route;
             }
         }
@@ -39,8 +35,22 @@
         }
     }
 
+    function optionPage($request){
+        $request = explode('/',$request,2);
+        if(count($request)>1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     function loadContentPage($request){
-        $actualRoute = getRouteByUrl($request);
+        $option = optionPage($request);
+        $request = explode('/',$request,2);
+
+        $actualRoute = getRouteByUrl($request[0],$option);
+
 
         if($actualRoute->getPathController()!=null)
         {
@@ -51,3 +61,4 @@
             include $actualRoute->getPathHtml();
         }
     }
+    

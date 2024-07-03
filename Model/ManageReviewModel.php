@@ -70,7 +70,8 @@ function reviewsExtract(int $nbReviews,int $startList=0, string $orderBy="DvD", 
         $stmt->bindParam(":order", $order, PDO::PARAM_STR);
     }
     else{
-        $stmt = $pdo->prepare('SELECT * FROM reviews ORDER BY :order LIMIT :limit');
+        $stmt = $pdo->prepare('SELECT * FROM reviews ORDER BY :order LIMIT :limit OFFSET :start');
+        $stmt->bindParam(":start", $startList, PDO::PARAM_INT);
         $stmt->bindParam(":limit", $nbReviews, PDO::PARAM_INT);
         $stmt->bindParam(":order", $order, PDO::PARAM_STR);
     }

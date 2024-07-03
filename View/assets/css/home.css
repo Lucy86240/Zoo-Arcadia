@@ -419,6 +419,9 @@
 /*styles specials desktop*/
 @media only screen and (min-width: 576px){
     .home-reviews{
+        a{
+            text-decoration: none;
+        }
         background: linear-gradient(var(--blue), var(--beige));
         h2{
             padding-top:10vh;

@@ -51,6 +51,10 @@ p,a,span{
     display:none;
 }
 
+.hidden{
+    visibility: hidden;
+}
+
 .text-center{
     text-align : center;
 }
