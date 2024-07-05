@@ -4,7 +4,9 @@
 @import url('footer.css');
 @import url('elements.css');
 @import url('home.css');
+@import url('addReview.css');
 @import url('reviews.css');
+
 
 h1, h2, h3{
     font-family: var(--font_serif);

@@ -62,10 +62,7 @@
         </div>
     </div>
     <div class="button-give">
-        <button type="button" class="btn btn-blue">
-            <img class="edit-review" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/edit_square.png" alt="">
-            Donner mon avis
-        </button>
+        <?php include_once ('addReview.php') ?>
     </div>
     <div class="body-reviews">
         <form  class="choices" method="POST" action="../avis">
@@ -93,7 +90,6 @@
                             Modéré
                         </label>
                     </li>
-                    <!--<input class="btn-DarkGreen" type="submit" value="Filtrer" name="filter">-->
                 </div>
             </div>
             <div class="choice">            

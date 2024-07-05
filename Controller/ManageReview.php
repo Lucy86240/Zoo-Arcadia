@@ -176,7 +176,7 @@ function sortInit($sortInit){
 }
 
 // On détermine le nombre d'avis par page
-$perPage = 10;
+$perPage = 2;
 
 // On détermine sur quelle page on se trouve
     if((isset($_GET['page']) && !empty($_GET['page']))&& !isset($_POST['filter'])){
