@@ -30,8 +30,7 @@ include_once "Model/User.php";
  * @Param $showDateCheck : false = l'avis n'inclus pas la date d'acceptation
  * @Param $showCheckBy : false = l'avis n'inclus pas l'employé qui l'a validé
  */
-function reviewsExtract(int $nbReviews,int $startList=0, string $orderBy="DvD", bool $JustVisible=true){
-    $order="DvD";
+function reviewsExtract(int $nbReviews,int $startList=0, string $orderBy, bool $JustVisible=true,string $filter){
     switch ($orderBy){
         case "idC": 
             $order="id_review ASC";
@@ -52,28 +51,25 @@ function reviewsExtract(int $nbReviews,int $startList=0, string $orderBy="DvD", 
         default:
             $order="date_visite DESC";
             break;
-
     }
     $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
     if($nbReviews<1 && $JustVisible==false){
         $stmt = $pdo->prepare('SELECT * FROM reviews');
+        echo("1");
     }
     else if($JustVisible){
-        if($startList==0){
-            $stmt = $pdo->prepare('SELECT * FROM reviews WHERE isVisible=1 ORDER BY :order LIMIT :limit');
-        }
-        else{
-            $stmt = $pdo->prepare('SELECT * FROM reviews WHERE isVisible=1 ORDER BY :order LIMIT :limit OFFSET :start');
-            $stmt->bindParam(":start", $startList, PDO::PARAM_INT);
-        }
-        $stmt->bindParam(":limit", $nbReviews, PDO::PARAM_INT);
-        $stmt->bindParam(":order", $order, PDO::PARAM_STR);
+        $request = 'SELECT * FROM reviews WHERE isVisible=1 ORDER BY '.$order .' LIMIT '.$nbReviews.' OFFSET '.$startList;
+        $stmt = $pdo->prepare($request);
     }
     else{
-        $stmt = $pdo->prepare('SELECT * FROM reviews ORDER BY :order LIMIT :limit OFFSET :start');
-        $stmt->bindParam(":start", $startList, PDO::PARAM_INT);
-        $stmt->bindParam(":limit", $nbReviews, PDO::PARAM_INT);
-        $stmt->bindParam(":order", $order, PDO::PARAM_STR);
+        if($filter !=""){
+            $request = 'SELECT * FROM reviews WHERE '.$filter.' ORDER BY '.$order .' LIMIT '.$nbReviews.' OFFSET '.$startList;
+            $stmt = $pdo->prepare($request);
+        }
+        else{
+            $request = 'SELECT * FROM reviews ORDER BY '.$order .' LIMIT '.$nbReviews.' OFFSET '.$startList;
+            $stmt = $pdo->prepare($request);
+        }
     }
     $stmt->setFetchMode(PDO::FETCH_CLASS,'Review');
     if($stmt->execute()){
@@ -100,6 +96,25 @@ function countReviews(int $isVisible=2, int $check=2){
             $stmt = $pdo->prepare('SELECT count(*) FROM reviews WHERE isVisible=0 and date_check is null');
         }
         
+    }
+
+    if($stmt->execute()){
+        $res = $stmt->fetch();
+        return $res[0];
+    }
+    else{
+        return 0;
+    }
+}
+
+function countReviewsFilter(string $filter){
+    $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+    if($filter==""){
+        $stmt = $pdo->prepare('SELECT count(*) FROM reviews');
+    }
+    else {
+        $request = 'SELECT count(*) FROM reviews WHERE '.$filter;
+        $stmt = $pdo->prepare($request);
     }
 
     if($stmt->execute()){

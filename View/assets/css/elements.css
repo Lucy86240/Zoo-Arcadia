@@ -29,28 +29,38 @@ button{
     background-color: var(--blue);
     color: var(--white) ;
     font-weight: bold ;
-    border-right : 2px solid black;
-    border-bottom :2px solid black;
+    border-radius : 20px;
+   /* border-right : 2px solid black;
+    border-bottom :2px solid black;*/
+    box-shadow: 3px 1px 1px var(black);
+
 }
 
 .btn-green{
     background-color: var(--green);
     color: var(--blue);
+    border-radius : 20px;
     font-weight: bold;
-    border-right : 2px solid var(--dark_green);
-    border-bottom :2px solid var(--dark_green);
+    /*border-right : 2px solid var(--dark_green);
+    border-bottom :2px solid var(--dark_green);*/
+    box-shadow: 3px 1px 1px var(--dark_green);
 }
 
 .btn-DarkGreen{
     background-color: var(--dark_green);
     color: var(--white);
     font-weight: bold;
+    border-radius : 20px;
+    /*box-shadow: 3px 1px 1px black;*/
     border-right : 1px solid black;
     border-bottom :1px solid black;
 }
 
 .btn-brown:hover,.btn-blue:hover, .btn-green:hover, .btn-previous:hover, .btn-next:hover, .btn-DarkGreen:hover{
     opacity:0.8;
+    cursor : pointer;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .pagination{

@@ -89,7 +89,7 @@
     <h2 class="text-center text-white">Vous parlez de nous</h2>
     <div class="home-reviews-container-desktop">
         <?php
-        $reviews = reviews(4,0,1,0,0,0);
+        $reviews = reviews(4,0,1,"","",0,0,0);
         foreach($reviews as $review){ ?>
             <div class="home-review">
             <h3><?php echo($review["pseudo"]);?></h3>
@@ -111,7 +111,7 @@
     </div>
     <div class="home-reviews-container-mobile">
         <?php
-        $review = Reviews(1,0,1,0,0,0)[0];?>
+        $review = Reviews(1,0,1,"","",0,0,0)[0];?>
         <div class="home-review">
             <h3><?php echo($review["pseudo"]);?></h3>
             <p class="h-review-date">visite du <?php echo($review["dateVisite"]);?></p>
