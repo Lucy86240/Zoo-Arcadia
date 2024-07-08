@@ -213,3 +213,31 @@ function ModerateReview(int $review){
         return false;
     }
 }
+
+function now(){
+    $now = date('Y-m-d',time());
+    return $now;
+}
+
+function addReviewRequest(Review $review){
+    try{
+        $pseudo = $review->getPseudo();
+        $visite = now();
+        $note = $review->getNote();
+        $comment = $review->getComment();
+
+        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+        $stmt = $pdo->prepare('insert into reviews (pseudo, date_visite,note,comment,isVisible) VALUES (:pseudo, :dateVisite, :note,:comment, 0)');
+        $stmt->bindParam(":pseudo", $pseudo, PDO::PARAM_STR);
+        $stmt->bindParam(":dateVisite", $visite, PDO::PARAM_STR);
+        $stmt->bindParam(":note", $note, PDO::PARAM_INT);
+        $stmt->bindParam(":comment", $comment, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+    catch(error $e){
+        echo("problème avec les données");
+        return false;
+    }
+
+}
+

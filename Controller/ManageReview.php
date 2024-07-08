@@ -22,7 +22,7 @@ function reviews(int $nbReviews, int $startList,bool $justVisible,string $filter
         $review = array(
             "id" => $reviewObject->getId(),
             "pseudo" => $reviewObject->getPseudo(),
-            "dateVisite" => $reviewObject->getDateVisite(),
+            "dateVisite" => date("d/m/Y",strtotime($reviewObject->getDateVisite())),
             "note" => $reviewObject->getNote(),
             "comment" => $reviewObject->getComment(),
         );
@@ -39,13 +39,6 @@ function reviews(int $nbReviews, int $startList,bool $justVisible,string $filter
         array_push($reviews,$review);
     }
     return $reviews;
-}
-
-if(empty($_GET['page'])){
-    $optionPage = false;
-}
-else{
-    $optionPage = true;
 }
 
 /**Fonction filterInit permet de mettre la mention checked à une checkbox en cas de besoin
@@ -114,7 +107,8 @@ function filterRequestReview(){
 function urlFilter(){
     $url ='';
         if((isset($_POST['choices']) && isset($_POST['CheckValidateReviews'])) ||
-        (isset($_GET['Validate']) && $_GET['Validate'] =='true')){
+        (isset($_GET['Validate']) && $_GET['Validate'] =='true') ||
+        (!isset($_POST['choices']) && !isset($_GET['page']))){
             $url.='&Validate=true';
         }
         else{
@@ -122,7 +116,8 @@ function urlFilter(){
         }
 
         if((isset($_POST['choices']) && isset($_POST['CheckToValidateReviews']))||
-        (isset($_GET['ToValidate']) && $_GET['ToValidate']=='true')){
+        (isset($_GET['ToValidate']) && $_GET['ToValidate']=='true') ||
+        (!isset($_POST['choices']) && !isset($_GET['page']))){
             $url.='&ToValidate=true';
         }
         else{
@@ -130,7 +125,8 @@ function urlFilter(){
         }
 
         if((isset($_POST['choices']) && isset($_POST['CheckModerateReviews']))||
-        (isset($_GET['Moderate']) && $_GET['Moderate']=='true')){
+        (isset($_GET['Moderate']) && $_GET['Moderate']=='true') ||
+        (!isset($_POST['choices']) && !isset($_GET['page']))){
             $url.='&Moderate=true';
         }
         else{
@@ -175,8 +171,25 @@ function sortInit($sortInit){
     }
 }
 
+function addReview(){
+    if(isset($_POST['addReview'])){
+        $review = new Review();
+        if(isset($_POST['NewReviewPseudo'])) $review->setPseudo($_POST['NewReviewPseudo']);
+        if(isset($_POST['NewReviewComment'])) $review->setComment($_POST['NewReviewComment']);
+        if(isset($_POST['stars'])) $review->setNote($_POST['stars']);
+        addReviewRequest($review);
+    }
+}
+
+if(empty($_GET['page'])){
+    $optionPage = false;
+}
+else{
+    $optionPage = true;
+}
+
 // On détermine le nombre d'avis par page
-$perPage = 2;
+$perPage = 10;
 
 // On détermine sur quelle page on se trouve
     if((isset($_GET['page']) && !empty($_GET['page']))&& !isset($_POST['filter'])){
@@ -199,3 +212,6 @@ $perPage = 2;
 
     // On calcule le nombre de pages total
     $pages = ceil($nbReviews / $perPage);
+
+    //on ajoute un nouvel avis en cas de soumission
+    addReview();

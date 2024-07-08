@@ -1,9 +1,208 @@
 /*REVIEWS*/
 
+/*styles specials for desktop*/
+@media only screen and (min-width: 576px){
+    .reviews{
+        .top{
+            height: 80px;
+        }
+        .illustration{
+            top: 175px;
+        }
+
+        .summary{
+            .summary-block{
+                display: flex;
+                justify-content: center;
+
+                .reviews-stats{
+                    padding-bottom : 10px;
+                    .data{
+                        font-size: 30px;
+                    }
+                }
+            }
+        }
+        .body-reviews{
+            display: flex;
+            flex-direction: row;
+            margin-top : 4vh;
+            padding-bottom : 7vh;
+            .choices{
+                margin-right: 5vw;
+            }
+            .reviews-list{
+                .reviews-review{
+                    width : 50vw;
+                }
+            }
+        }
+    }
+}
+
+/*styles specials for mobile*/
+@media only screen and (max-width: 576px){
+    .reviews{
+        .top{
+            height: 40px;
+        }
+        .illustration{
+            top: 110px;
+        }
+        .summary{
+            .summary-block{
+                .stats-reviews-container{
+                    display: flex;
+                    justify-content: center;
+                    margin-top : 15px;
+                    .data{
+                        font-size: 20px;
+                    }
+                }
+                .notations{                  
+                    align-items: center;
+                }
+            }
+        }
+        .body-reviews{
+            .choices{
+                padding-bottom : 5vw;
+                .choices-mobile{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                
+                .choice{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    height : 120px;
+                    border : 2px solid var(--beige);
+                    background-color: var(--beige);
+                    box-shadow: 5px 2px 2px var(--dark_green);
+                    border-radius : 20px;
+                    padding : 10px;
+                    margin : 5px;
+                    margin-bottom : 15px;
+                    .title-choice{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        span{
+                            color : var(--dark_green);
+                            font-weight: bold;
+                        }
+                        .icon-filter{
+                            width : 25px;
+                            filter: brightness(0) saturate(100%) invert(41%) sepia(26%) saturate(734%) hue-rotate(39deg) brightness(93%) contrast(86%);
+                        }
+                    }
+                    .check-choices{
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        li, input{
+                            margin: 2px 0px;
+                            label{
+                                color:var(--dark_green);
+                            }
+                        }
+                        input[type="checkbox"]:checked, input[type="radio"]:checked {
+                            accent-color : var(--dark_green);
+                        }
+                    }
+                }
+                .valid-choices{
+                    display: flex;
+                    justify-content: center;
+                    input[type="submit"]{
+                        font-weight: normal;
+                        padding : 5px;
+                        text-align: center;
+                        border : var(--beige);
+                        box-shadow: 3px 1px 1px var(--beige);
+                    }
+                }
+            }
+            .reviews-list{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .reviews-review{
+                    width : 80vw;
+        
+                    border : 1px solid var(--blue);
+    
+                    border-radius: 20px;
+                    box-shadow: 5px 2px 2px var(--blue);
+    
+                    margin-bottom : 10px;
+                    padding : 8px;
+        
+                    h3{
+                        color : var(--green);
+                        margin-bottom : 5px;
+                    }
+                    .heading-review-Employee{
+                        .heading-review{
+                            .block{
+                                p{
+                                    font-size: 12px;
+                                }
+                                display: flex;
+                                flex-direction: row;
+                                margin-bottom : 5px;
+                                .r-review-date{
+                                    padding-right: 4px;
+                                }
+                                .r-review-stars{
+                                    width: 85px;
+                                    height:18px;
+                    
+                                    display: flex;
+                                    flex-direction: row;
+                                    justify-content: center;
+                                    align-items: center;
+                    
+                                    background-color: var(--blue);
+                                    border-radius: 20px;
+                    
+                                    .start{
+                                        height: 15px;
+                                    }
+                                }
+                            }
+                        }
+                        .box-backOffice{
+                            display: flex;
+                            margin-bottom : 5px;
+                            input[type="radio"]:checked {
+                                accent-color : var(--blue);
+                            }
+                        }
+                    }
+                    .check{
+                        font-size: 14px;
+                    }
+                    p{
+                        margin-bottom : 5px;
+                    }
+                }
+            }
+        }
+        
+        .pagination{
+            color : var(--blue);
+        }
+    }
+}
+
 .reviews{
     background-color: var(--white);
     .top{
-        height: 82px;
         background-color: var(--green);
     }
     h1{
@@ -23,15 +222,13 @@
     .illustration{
         position: absolute;
         width: 130px;
-        top: 28.5vh;
-        left: 40vw;
+        left: 50%;
+        transform: translate(-50%,0);
     }
-
-
 
     .summary{
         background-color: var(--beige);
-        margin-top:15vh;
+        margin-top:80px;
         h2{
             color:var(--dark_green);
             text-align:  center;
@@ -43,10 +240,7 @@
         }
         .summary-block{
             padding-bottom:10px;
-            display: flex;
-            justify-content: center;
             .data{
-                font-size: 30px;
                 padding-right:5px;
             }
             .block-nb{
@@ -87,12 +281,7 @@
         }
     }
     .body-reviews{
-        display: flex;
-        flex-direction: row;
-        margin-top : 7vh;
-        padding-bottom : 7vh;
         .choices{
-            margin-right: 5vw;
             .choice{
                 display: flex;
                 flex-direction: column;
@@ -149,11 +338,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            .reviews-review{
-                width : 50vw;
-    
+            .reviews-review{    
                 border : 1px solid var(--blue);
-
                 border-radius: 20px;
                 box-shadow: 5px 2px 2px var(--blue);
 

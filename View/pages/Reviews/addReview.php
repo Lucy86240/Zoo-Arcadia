@@ -20,7 +20,7 @@
                     <div class="stars">
                     <?php for($i=1;$i<6;$i++){?>
                         <div class="star">
-                            <input class="check-stars-input" type="radio" name="stars" value="<?php echo($i)?>" id="star<?php echo($i)?>">
+                            <input class="check-stars-input" type="radio" name="stars" value="<?php echo($i)?>" id="star<?php echo($i)?>" required>
                             <label class="form-check-label" for="star<?php echo($i)?>">
                                 <img class="NewReview-star" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/review/Star-white.png" alt="" id="startImg<?php echo($i)?>">
                             </label>
@@ -33,7 +33,7 @@
                     <textarea name="NewReviewComment" id="NewReviewComment" required></textarea>
                 </div>
                 <div class="form-submit">
-                    <input type="submit" value="Soumettre" class="button btn-green" />
+                    <input type="submit" value="Soumettre" name="addReview" class="button btn-green" />
                 </div>
             </form>
         </div>

@@ -4,7 +4,7 @@
         
     position: fixed;
     z-index: 1;
-    top: 0%;
+    top: 0;
 
     a{
         text-decoration: none;
@@ -52,17 +52,16 @@
 /*version mobile*/
 @media only screen and (max-width: 556px){
     .logo{
-        width:70px;
+        display: none;
     }
 
     .menu-icon{
-        width: 25px;
         background-color: var(--brown);
         border-radius: 10px;
     }
 
     .mobile{
-        margin-right: 6vw;
+        margin-right: 30px;
     }
 
     .account{

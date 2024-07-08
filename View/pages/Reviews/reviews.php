@@ -38,26 +38,28 @@
                     </div>
                 </div>
             </div>
-            <div class="reviews-stats">
-                <h3>Avis vérifiés</h3>
-                <p class="data"> <?php echo(avgReviewsVisible())?>/5</p>
-                <p><?php echo(countReviews(1, 1))?> avis</p>
-            </div>
-            <div class="reviews-stats">
-                <h3>Avis à vérifier</h3>
-                <div class="block-nb">
-                    <p class="data"><?php echo(countReviews(0,0))?></p>
-                    <p>avis</p>
+            <div class="stats-reviews-container">
+                <div class="reviews-stats">
+                    <h3>Avis vérifiés</h3>
+                    <p class="data"> <?php echo(avgReviewsVisible())?>/5</p>
+                    <p><?php echo(countReviews(1, 1))?> avis</p>
                 </div>
-                <div> </div>
-            </div>
-            <div class="reviews-stats">
-                <h3>Avis modérés</h3>
-                <div class="block-nb">
-                    <p class="data"><?php echo(countReviews(0,1))?></p>
-                    <p>avis</p>
+                <div class="reviews-stats">
+                    <h3>Avis à vérifier</h3>
+                    <div class="block-nb">
+                        <p class="data"><?php echo(countReviews(0,0))?></p>
+                        <p>avis</p>
+                    </div>
+                    <div> </div>
                 </div>
-                <div> </div>
+                <div class="reviews-stats">
+                    <h3>Avis modérés</h3>
+                    <div class="block-nb">
+                        <p class="data"><?php echo(countReviews(0,1))?></p>
+                        <p>avis</p>
+                    </div>
+                    <div> </div>
+                </div>
             </div>
         </div>
     </div>
@@ -66,6 +68,7 @@
     </div>
     <div class="body-reviews">
         <form  class="choices" method="POST" action="../avis">
+            <div class="choices-mobile">
             <div class="choice">
                 <div class="title-choice">                
                     <img class="icon-filter" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/filter.svg" alt="filtrer">
@@ -120,6 +123,7 @@
                         </label>
                     </li>
                 </div>
+            </div>
             </div>
             <div class="valid-choices"><input class="btn-DarkGreen" type="submit" value="Appliquer" name="choices"></div>
                 <?php $urlFilter=urlFilter();?>

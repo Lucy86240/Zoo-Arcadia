@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   for(let i=0; i<starsInput.length;i++){
     starsInput[i].addEventListener('click', ()=> {
       for(let j=0; j<starsInput.length;j++){
-        if(window.location.href==(SITE_URL+'/avis')){
+        if(window.location.href==(SITE_URL+'/avis') ||window.location.href==(SITE_URL+'/') ){
           starsImg[j].src="View/assets/img/general/review/Star-white.png";
         }else{
           starsImg[j].src="../View/assets/img/general/review/Star-white.png";

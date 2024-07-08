@@ -42,7 +42,7 @@ h3{
 p,a,span,label, input{
     font-family: var(--font_sans_serif);
     @media only screen and (max-width: 576px){
-        font-size: 16px;
+        font-size: 14px;
     }
     @media only screen and (min-width: 576px){
         font-size: 18px;        
@@ -69,8 +69,22 @@ p,a,span,label, input{
     color : var(--brown);
 }
 
-
-
+.E404{
+    .head{
+        width:50%;
+        height: 80px;
+        background-color: var(--brown);
+    }
+    margin-bottom:10px;
+    img{
+        margin-top : 2vh;
+        width : 25vw;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 
 
