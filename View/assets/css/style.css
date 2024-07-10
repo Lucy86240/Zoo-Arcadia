@@ -4,8 +4,10 @@
 @import url('footer.css');
 @import url('elements.css');
 @import url('home.css');
-@import url('addReview.css');
+@import url('connected.css');
+@import url('popup.css');
 @import url('reviews.css');
+
 
 
 h1, h2, h3{

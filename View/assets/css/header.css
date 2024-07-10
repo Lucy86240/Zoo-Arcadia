@@ -144,7 +144,7 @@
             width: 100%;
         }
         
-        .connexion{
+        .login{
             margin-right: 2vw;
             display: flex;
             flex-direction: column;
@@ -153,8 +153,7 @@
             color: var(--brown);;
             font-weight: bold;
         
-            .account{
-                filter: invert(31%) sepia(17%) saturate(979%) hue-rotate(348deg) brightness(89%) contrast(84%);
+            .account, .account-connected{
                     @media only screen and (max-width: 992px){
                         width:5vw;
                     }
@@ -162,6 +161,9 @@
                     height: 61px;
                     }
                 }
+            .account {
+                filter: invert(31%) sepia(17%) saturate(979%) hue-rotate(348deg) brightness(89%) contrast(84%);
+            }
         }
         .connexion:hover{
             background-color: rgba(250,255,241,0.8);

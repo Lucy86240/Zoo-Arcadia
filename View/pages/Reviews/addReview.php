@@ -1,21 +1,21 @@
 <section class="NewReview">
-    <button type="button" aria-haspopup="dialog" aria-controls="dialog" class="btn btn-blue">
+    <button type="button" id="popup-review" aria-haspopup="dialog" aria-controls="dialog" class="btn btn-blue">
         <img class="edit-review" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/edit_square.png" alt="">
         Donner mon avis
     </button>
-    <div id="dialog" role="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-desc" aria-modal="true" aria-hidden="true" tabindex="-1" class="c-dialog">
+    <div id="new-review-dialog" role="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-desc" aria-modal="true" aria-hidden="true" tabindex="-1" class="c-dialog">
         <div class="fond"></div>
         <div role="document" class="c-dialog__box">
-            <div class="newReview-Entete">
-                <h3 id="dialog-title">Mon avis</h3>
+            <div class="Entete">
+                <h3 class="dialog-title">Mon avis</h3>
                 <button type="button" aria-label="Fermer" title="Fermer nouvel avis" data-dismiss="dialog">x</button>
             </div>
             <form method="POST" action="">
-                <div class="NewReview-element">
+                <div class="element">
                     <label for="NewReviewPseudo">Votre pseudo :</label>
                     <input type="text" name="NewReviewPseudo" id="NewReviewPseudo" required />
                 </div>
-                <div class = "NewReview-element">
+                <div class = "element">
                     <label>Votre note :</label>
                     <div class="stars">
                     <?php for($i=1;$i<6;$i++){?>
@@ -28,7 +28,7 @@
                     <?php } ?>
                     </div>
                 </div>
-                <div class="NewReview-element">
+                <div class="element">
                     <label for="NewReviewComment">Votre avis :</label>
                     <textarea name="NewReviewComment" id="NewReviewComment" required></textarea>
                 </div>
@@ -38,5 +38,6 @@
             </form>
         </div>
     </div>
+    <script src="<?php if($optionPage){echo("../");}?>View/assets/script/popup.js"></script>
     <script src="<?php if($optionPage){echo("../");}?>View/assets/script/addReview.js"></script>
 </section>

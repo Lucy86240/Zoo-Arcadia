@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href = "<?php if($optionPage){echo("../");}?>View/assets/css/style.css">
+    <script src="<?php if($optionPage){echo("../");}?>View/assets/script/popup.js" defer></script>
     <script src="<?php if($optionPage){echo("../");}?>View/assets/script/header.js" defer></script>
     <title>Zoo Arcadia</title>
 </head>
@@ -12,7 +13,7 @@
         <nav class="navbar top">
             <div class="container-fluid" id="container-fluid">
                 <a class="navbar-brand" href="/">
-                    <img class="logo" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/header/logo.png" alt="logo du zoo Arcadia">
+                    <!--<img class="logo" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/header/logo.png" alt="logo du zoo Arcadia">-->
                 </a>
                 <div class="menu">
                     <label class="mobile" for="toggle"><img class="menu-icon" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/header/menu.svg" alt="Menu"></label>
@@ -51,9 +52,8 @@
                         </ul>
                     </div>
                 </div>
-                <div class="connexion">
-                    <a href=#"><img class="account" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/header/account.svg" alt="Connexion"> </a>
-                    <span class="text-center">Me connecter</span>
+                <div class="login">
+                    <?php include_once ("View/pages/connected/login.php");?>
                 </div>
             </div>
         </nav>

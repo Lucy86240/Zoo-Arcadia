@@ -56,3 +56,11 @@ if(check){
 else{
     burger.classList.remove('center')
 }
+
+//popup de connexion
+const triggerCo = document.querySelector('#popup-login'); 
+const dialogCo = document.getElementById('login-dialog');
+const dismissTriggerCo = dialogCo.querySelector('[data-dismiss]');
+popup(dialogCo,triggerCo,dismissTriggerCo)
+
+//validation connexion

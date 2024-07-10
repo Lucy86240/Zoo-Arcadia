@@ -1,4 +1,4 @@
-<section class = "reviews">
+<section class = "reviews"> 
     <div class="top"></div>
     <h1>Les avis des visiteurs</h1>
     <img class="illustration" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/review/panda.png" alt="">

@@ -1,7 +1,7 @@
 <?php
 
-namespace user;
-use \PDO;
+//namespace user;
+//use \PDO;
 
 Class User{
     private string $username;
@@ -9,12 +9,45 @@ Class User{
     private string $first_name;
     private string $last_name;
 
+    public function getUsername():string{
+        return $this->username;
+    }
+
+    public function setUsername(string $username){
+        $this->username = $username;
+    }
+
+    public function getPassword():string{
+        return $this->password;
+    }
+
+    public function setPassword(string $password){
+        $this->password = $password;
+    }
+
+    public function getFirstName(){
+        return $this->first_name;
+    }
+
+    public function setFirstName(string $firstName){
+        $this->first_name = $firstName;
+    }
+
+    public function getLastName(){
+        return $this->last_name;
+    }
+    public function setLastName(string $lastName){
+        $this->last_name = $lastName;
+    }
+
+
+
     public function saveToDatabase() { 
-        include_once 'config.php';
+        /*include_once 'config.php';
         $pdo = new PDO($HOST.';'.$DBNAME, $USERNAME, $PASSWORD);
         $stmt = $pdo->prepare('SELECT * FROM users WHERE username = :username ');
         $stmt->bindParam(":username", $this->username,PDO::PARAM_STR);
-        $stmt->execute();
+        $stmt->execute();*/
         //faire si un résultat retourner une erreur
         /*$resultats = $stmt->get_result();
         if($resultats->num_rows > 0 )
