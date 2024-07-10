@@ -1,17 +1,13 @@
 
-    <?php 
-        if($optionPage){
-            include_once "../Controller/ManageUser.php";
-        }
-        else{
-            include_once "Controller/ManageUser.php";
-        }
-    ?>
-    <img class="account-connected <?php if(!isset($_SESSION['firstName'])) echo('none');?>"src="<?php if($optionPage)echo("../");?>View/assets/img/general/header/connected.png"  alt="Connexion">
-    <img class="account <?php if(isset($_SESSION['firstName'])) echo('none');?>"src="<?php if($optionPage)echo("../");?>View/assets/img/general/header/account.svg"  alt="Connexion">
-    <span id="popup-login" aria-haspopup="dialog" aria-controls="dialog">
-        <?php if(!isset($_SESSION['firstName'])) echo('Me connecter'); 
-        if(isset($_SESSION['firstName'])) echo($_SESSION['firstName']);  
+    <form method="POST" action="" id="logout-btn">
+        <button class="btn-logout" type="submit" name="logout" form="logout-btn">
+            <img class="account-connected <?php if(!isset($_SESSION['firstName']) || empty($_SESSION['firstName'])) echo('none');?>"src="<?php if($optionPage)echo("../");?>View/assets/img/general/header/connected.png"  alt="Connexion">
+            <img class="account <?php if(isset($_SESSION['firstName']) && !empty($_SESSION['firstName'])) echo('none');?>"src="<?php if($optionPage)echo("../");?>View/assets/img/general/header/account.svg"  alt="Connexion">
+            <span class="logoutText none">Déconnexion</span>
+        </button>
+    </form>
+    <span id="popup-login" aria-haspopup="dialog" aria-controls="dialog"><?php if(!isset($_SESSION['firstName']) || empty($_SESSION['firstName'])) echo('Me connecter'); 
+        else echo($_SESSION['firstName']);  
     ?></span>
     <div id="login-dialog" role="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-desc" aria-modal="true" aria-hidden="true" tabindex="-1" class="c-dialog">
         <div class="fond"></div>

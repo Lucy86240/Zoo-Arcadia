@@ -47,7 +47,7 @@ userMenu.addEventListener("click", ()=>{
 })
 
 //image burger centré
-const burger = document.querySelector(".menu");
+/*const burger = document.querySelector(".menu");
 const check = document.getElementById("toggle").checked = true;
 
 if(check){
@@ -55,12 +55,41 @@ if(check){
 }
 else{
     burger.classList.remove('center')
-}
+}*/
 
 //popup de connexion
 const triggerCo = document.querySelector('#popup-login'); 
 const dialogCo = document.getElementById('login-dialog');
 const dismissTriggerCo = dialogCo.querySelector('[data-dismiss]');
-popup(dialogCo,triggerCo,dismissTriggerCo)
+const nameLog = document.querySelector('#popup-login');
+/*if(nameLog.innertHTML == 'Me connecter')*/ popup(dialogCo,triggerCo,dismissTriggerCo);
 
-//validation connexion
+//déconnexion
+const accountConnected = document.querySelector('.account-connected');
+const text = document.querySelector('.logoutText');
+
+accountConnected.addEventListener('mouseover', ()=>{
+    accountConnected.src = "View/assets/img/general/header/logout.svg";
+    if(nameLog.innertHTML != 'Me connecter'){
+        text.classList.remove('none');
+        text.style = 'color: red; font-size: 12px;';
+    }
+})
+accountConnected.addEventListener('mouseout', ()=>{
+    accountConnected.src = "View/assets/img/general/header/connected.png";
+    text.classList.add('none');
+})
+
+if(nameLog.innerHTML != 'Me connecter'){
+    nameLog.addEventListener('mouseover', ()=>{
+        accountConnected.src = "View/assets/img/general/header/logout.svg";
+        text.classList.remove('none');
+        text.style = 'color: red; font-size: 12px;';
+    })
+    nameLog.addEventListener('mouseout', ()=>{
+        accountConnected.src = "View/assets/img/general/header/connected.png";
+        text.classList.add('none');
+    })
+}
+
+

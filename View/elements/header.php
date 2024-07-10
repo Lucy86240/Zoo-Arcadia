@@ -9,6 +9,14 @@
     <title>Zoo Arcadia</title>
 </head>
 <body>
+    <?php 
+        if($optionPage){
+            include_once "../Controller/ManageUser.php";
+        }
+        else{
+            include_once "Controller/ManageUser.php";
+        }
+    ?>
     <header class="header">
         <nav class="navbar top">
             <div class="container-fluid" id="container-fluid">
@@ -32,23 +40,25 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="contact">Contact</a>
                             </li>
-                            <li class="nav-item dropdown">
-                            <a class="nav-link connected-link" id="dropdown-toggle" href="#" role="button" aria-expanded="false">
-                                Espace ROLE
-                                <img class="arrow" id="arrow-close" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/arrow-drop-down.svg" alt="menu-close">
-                                <img class="arrow none" id="arrow-open" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/arrow-drop-up.svg" alt="menu-open">
-                            </a>
-                            <ul class="dropdown-menu none top" id="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Tableau de bord</a></li>
-                                <li><a class="dropdown-item" href="#">Comptes-rendus vétérinaires</a></li>
-                                <li><a class="dropdown-item" href="#">Animaux</a></li>
-                                <li><a class="dropdown-item" href="#">Horaires du zoo</a></li>
-                                <li><a class="dropdown-item" href="avis">Avis</a></li>
-                                <li><a class="dropdown-item" href="#">Nourrir un animal</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Comptes utilisateurs</a></li>
-                            </ul>
-                            </li>
+                            <?php //if(permission(['connected'])){?>
+                                <li class="nav-item dropdown permission(['connected'])">
+                                    <a class="nav-link connected-link" id="dropdown-toggle" href="#" role="button" aria-expanded="false">
+                                        Espace <?php if(isset($_SESSION['role'])) echo($_SESSION['role']);?>
+                                        <img class="arrow" id="arrow-close" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/arrow-drop-down.svg" alt="menu-close">
+                                        <img class="arrow none" id="arrow-open" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/arrow-drop-up.svg" alt="menu-open">
+                                    </a>
+                                    <ul class="dropdown-menu none top" id="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Tableau de bord</a></li>
+                                        <li><a class="dropdown-item" href="#">Comptes-rendus vétérinaires</a></li>
+                                        <li><a class="dropdown-item" href="#">Animaux</a></li>
+                                        <li><a class="dropdown-item" href="#">Horaires du zoo</a></li>
+                                        <li><a class="dropdown-item" href="avis">Avis</a></li>
+                                        <li><a class="dropdown-item <?php permission(['Employé.e']); ?>" href="#">Nourrir un animal</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#">Comptes utilisateurs</a></li>
+                                    </ul>
+                                </li>
+                            <?php //} ?>
                         </ul>
                     </div>
                 </div>

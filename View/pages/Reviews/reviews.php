@@ -44,7 +44,7 @@
                     <p class="data"> <?php echo(avgReviewsVisible())?>/5</p>
                     <p><?php echo(countReviews(1, 1))?> avis</p>
                 </div>
-                <div class="reviews-stats">
+                <div class="reviews-stats <?php permission(['Employé.e','Administrateur.rice']); ?>">
                     <h3>Avis à vérifier</h3>
                     <div class="block-nb">
                         <p class="data"><?php echo(countReviews(0,0))?></p>
@@ -52,7 +52,7 @@
                     </div>
                     <div> </div>
                 </div>
-                <div class="reviews-stats">
+                <div class="reviews-stats <?php permission(['Employé.e','Administrateur.rice']); ?>">
                     <h3>Avis modérés</h3>
                     <div class="block-nb">
                         <p class="data"><?php echo(countReviews(0,1))?></p>
@@ -70,11 +70,11 @@
         <form  class="choices" method="POST" action="../avis">
             <div class="choices-mobile">
             <div class="choice">
-                <div class="title-choice">                
+                <div class="title-choice <?php permission(['Employé.e','Administrateur.rice']); ?>">                
                     <img class="icon-filter" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/filter.svg" alt="filtrer">
                     <span>filtrer</span>
                 </div>
-                <div class="check-choices">
+                <div class="check-choices <?php permission(['Employé.e','Administrateur.rice']); ?>">
                     <li class="form-check">
                         <input class="form-check-input" type="checkbox" name="CheckValidateReviews" value="true" id="CheckValidateReviews" <?php filterInit("Validate", "CheckValidateReviews"); ?>>
                         <label class="form-check-label" for="CheckValidateReviews">
@@ -153,7 +153,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="box-backOffice">
+                            <div class="box-backOffice <?php permission(['Employé.e','Administrateur.rice']); ?>">
                                 <li class="form-check">
                                     <input class="form-check-input" type="radio" name="State<?php echo($index);?>" id="Validate<?php echo($index);?>" <?php if(validateReview($review['id'])){echo('checked');}?>>
                                     <label class="form-check-label" for="Validate<?php echo($index);?>">

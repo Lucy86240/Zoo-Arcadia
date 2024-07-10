@@ -15,4 +15,27 @@ function verifiedLogin(){
     }
 }
 
+function logout(){
+    if(isset($_POST['logout'])){
+        $_SESSION['role']='';
+        $_SESSION['firstName']='';
+    }
+}
+
+/**Cette fonction indique si le role de l'utilisateur est différent de ceux passés en paramètres
+ * $permissions est un tableau (possibilités : 'connected', 'Administrateur.rice', 'Vétérinaire', 'Employé.e')
+ */
+function permission($permissions)/*:bool*/{
+
+    if($permissions[0]=='connected' && (!isset($_SESSION['role']) || empty($_SESSION['role']))){
+        echo('none');
+    }
+    else if(isset($_SESSION['role']) && !in_array($_SESSION['role'],$permissions,true)){
+        echo('none');
+    }
+    /*else
+        return true;*/
+}
+
 verifiedLogin();
+logout();

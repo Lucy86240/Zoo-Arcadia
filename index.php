@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once 'CONSTANTES.php';
     require_once 'router/router.php';
     $optionPage=optionPage($request);

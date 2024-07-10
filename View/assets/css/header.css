@@ -30,27 +30,46 @@
         align-items: center;
     }
 
+    .nav-link:hover, .dropdown-item:hover,.connected-link:hover{
+        color: var(--dark_green);  
+        font-weight : bold;
+        .arrow{
+            filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(2365%) hue-rotate(39deg) brightness(90%) contrast(87%);
+        }
+    }
+
     .arrow{
         width : 37px; 
         filter: invert(91%) sepia(4%) saturate(603%) hue-rotate(53deg) brightness(109%) contrast(103%);
     }
-}
 
-.nav-link:hover, .dropdown-item:hover,.connected-link:hover{
-    color: var(--dark_green);  
-    font-weight : bold;
-    .arrow{
-        filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(2365%) hue-rotate(39deg) brightness(90%) contrast(87%);
+    .bgc-dropdown{
+        border: solid 1px var(--white);
+        margin-right : 1px;
     }
-}
 
-.bgc-dropdown{
-    border: solid 1px var(--white);
-    margin-right : 1px;
+    .login{
+        .btn-logout{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
+        }
+    }
+    .account{
+        filter: invert(31%) sepia(17%) saturate(979%) hue-rotate(348deg) brightness(89%) contrast(84%);
+    }
 }
 
 /*version mobile*/
 @media only screen and (max-width: 556px){
+    /*.menu, .text-center{
+        margin:0;
+        padding:0;
+    }*/
     .logo{
         display: none;
     }
@@ -58,45 +77,62 @@
     .menu-icon{
         background-color: var(--brown);
         border-radius: 10px;
+        width : 8vw;
     }
 
-    .mobile{
-        margin-right: 30px;
-    }
-
-    .account{
-        display : none;
+    .login{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color : var(-white);
+        filter:brightness(0.95);
+        margin-left : 2px;
+        padding:2px;
+        border-radius: 50%;
+        .account, .account-connected{
+            width : 6vw;
+        }
+        #popup-login{
+            color : var(--white);
+        }
     }
 
     .container-fluid{
         display: flex;
-        background-color: transparent;
+        justify-content: flex-start;
+        align-items: flex-start;
         height: 40px;
         width: 100vw;
-        justify-content: space-between;
 
-        .navbar-nav, .connexion, #toggle{
+        .navbar-nav, #toggle{
             display: none;
         }
 
         .navbar-nav{
             flex-direction: column;
-            width : 100vw;
+            width : 60vw;
+            background-color: var(--brown);
+            color : var(--white);
+
         }
 
-        #toggle:not(:checked) + .navbar-collapse{
+        #toggle:checked + .navbar-collapse{
             .mobile{
                 text-align:center;
-                background-color: rgba(250,255,241,0.3);
+                background-color: var(--brown);
+                color : var(--white);
             }
             .navbar-nav {
                 display: flex;
                 text-align: center;
-                background-color: rgba(250,255,241,0.3);
+                background-color: var(--brown);
+                color : var(--white);
                 .connected-link{
                     display: flex;
                     justify-content: center;
-                    background-color: rgba(250,255,241,0.3);
+                    background-color: var(--brown);
+                    color : var(--white);
                 }
             }
         }
@@ -150,7 +186,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: var(--brown);;
+            color: var(--brown);
             font-weight: bold;
         
             .account, .account-connected{
@@ -161,8 +197,8 @@
                     height: 61px;
                     }
                 }
-            .account {
-                filter: invert(31%) sepia(17%) saturate(979%) hue-rotate(348deg) brightness(89%) contrast(84%);
+            #popup-login:hover,.account-connected:hover{
+                cursor:pointer;
             }
         }
         .connexion:hover{

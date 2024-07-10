@@ -29,7 +29,6 @@ function verifiedLoginInput(string $mailInput, string $passwordInput){
         $stmt->execute();
         $res = $stmt->fetch();
         if(password_verify($passwordInput,$res['password'])){
-            session_start();
             $_SESSION['mail']=$mailInput;
             $_SESSION['firstName']=$res['first_name'];
             $_SESSION['role'] = $res['label'];
