@@ -1,4 +1,5 @@
 <script src = "View/assets/script/home.js" defer></script>
+
 <!--HERO-->
 
 <section class="home-hero background">

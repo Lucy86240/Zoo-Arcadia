@@ -58,6 +58,11 @@
             padding: 0;
             margin: 0;
         }
+        .container-login{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
     }
     .account{
         filter: invert(31%) sepia(17%) saturate(979%) hue-rotate(348deg) brightness(89%) contrast(84%);
@@ -66,10 +71,6 @@
 
 /*version mobile*/
 @media only screen and (max-width: 556px){
-    /*.menu, .text-center{
-        margin:0;
-        padding:0;
-    }*/
     .logo{
         display: none;
     }
@@ -81,20 +82,27 @@
     }
 
     .login{
+        width : 100vw;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         color : var(-white);
         filter:brightness(0.95);
         margin-left : 2px;
         padding:2px;
         border-radius: 50%;
+
         .account, .account-connected{
             width : 6vw;
         }
         #popup-login{
             color : var(--white);
+        }
+        #login-dialog{
+            top:0;
+            left:-8vw;
+            height: 100vh;
         }
     }
 

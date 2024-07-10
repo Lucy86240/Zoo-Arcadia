@@ -40,8 +40,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="contact">Contact</a>
                             </li>
-                            <?php //if(permission(['connected'])){?>
-                                <li class="nav-item dropdown permission(['connected'])">
+                                <li class="nav-item dropdown <?php permission(['connected']) ?>">
                                     <a class="nav-link connected-link" id="dropdown-toggle" href="#" role="button" aria-expanded="false">
                                         Espace <?php if(isset($_SESSION['role'])) echo($_SESSION['role']);?>
                                         <img class="arrow" id="arrow-close" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/arrow-drop-down.svg" alt="menu-close">
@@ -51,11 +50,11 @@
                                         <li><a class="dropdown-item" href="#">Tableau de bord</a></li>
                                         <li><a class="dropdown-item" href="#">Comptes-rendus vétérinaires</a></li>
                                         <li><a class="dropdown-item" href="#">Animaux</a></li>
-                                        <li><a class="dropdown-item" href="#">Horaires du zoo</a></li>
-                                        <li><a class="dropdown-item" href="avis">Avis</a></li>
+                                        <li><a class="dropdown-item <?php permission(['Administrateur.rice']); ?>" href="#">Horaires du zoo</a></li>
+                                        <li><a class="dropdown-item <?php permission(['Administrateur.rice','Employé.e']); ?>" href="avis">Avis</a></li>
                                         <li><a class="dropdown-item <?php permission(['Employé.e']); ?>" href="#">Nourrir un animal</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#">Comptes utilisateurs</a></li>
+                                        <li><a class="dropdown-item <?php permission(['Administrateur.rice']); ?>" href="#">Comptes utilisateurs</a></li>
                                     </ul>
                                 </li>
                             <?php //} ?>
