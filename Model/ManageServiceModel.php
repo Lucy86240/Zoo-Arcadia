@@ -19,7 +19,7 @@ function allServices(bool $justIcon=false){
                 }
                 else{
                     $stmt2 = $pdo->prepare('SELECT images.id_image, images.path, images.description, images.icon, images.portrait 
-                    FROM images_services JOIN images ON images_services.id_image = images.id_image  WHERE id_service = :id');
+                    FROM images_services JOIN images ON images_services.id_image = images.id_image  WHERE id_service = :id and images.icon=0');
                 }
                 $stmt2->bindParam(":id", $id, PDO::PARAM_INT);
                 $stmt2->setFetchMode(PDO::FETCH_CLASS,'Image');

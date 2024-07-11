@@ -26,6 +26,7 @@ function AllServicesView(bool $id=false, bool $description=true, int $nbImgs=-1,
                 $img= array(
                     "path" => $serviceObject->getImage($i)->getPath(),
                     "description" => $serviceObject->getImage($i)->getDescription(),
+                    "portrait" => $serviceObject->getImage($i)->getPortrait(),
                 );
                 array_push($service["images"],$img);
             }
@@ -35,3 +36,6 @@ function AllServicesView(bool $id=false, bool $description=true, int $nbImgs=-1,
         }            
     return $services;
     }
+
+$services = AllServicesView(true,true, 1,true,false);
+//var_dump($services);

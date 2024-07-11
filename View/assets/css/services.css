@@ -1,0 +1,159 @@
+.services{
+    background-color: var(--brown);
+    .service{
+        background-color: var(--green);
+        border-radius: 20px;
+        margin-left : 15vw;
+        margin-right : 15vw;
+        margin-bottom : 5vh;
+        padding-top: 2vh;
+        .box-backOffice{
+            display: flex;
+            margin-left : 3vw;
+            .bgc-img-box{
+                padding : 5px;
+            }
+            .img-box{
+                filter: brightness(0) saturate(100%) invert(30%) sepia(35%) saturate(384%) hue-rotate(348deg) brightness(96%) contrast(96%) drop-shadow(0.1rem 0.2rem 0.1rem grey);
+            }
+            .bgc-img-box:hover{
+                background-color: var(--brown);
+                border-radius: 50%;
+                cursor : pointer;
+                .img-box{
+                    filter: brightness(0) saturate(100%) invert(100%) sepia(77%) saturate(185%) hue-rotate(342deg) brightness(111%) contrast(102%) drop-shadow(0.1rem 0.2rem 0.1rem grey);
+                }
+            }
+        }
+        .container-service{
+            display: flex;
+            h2{
+                color:var(--white);
+            }
+            p{
+                color : var(--blue);
+            }
+        }
+    }
+    .button-addService{
+        display: flex;
+        justify-content: center;
+    }
+}
+
+/*styles specials for desktop*/
+@media only screen and (min-width: 576px){
+    .services{
+        background-color: var(--brown);
+        .title{
+            color :var(--white);
+            text-align: center;
+            margin-bottom : 5vh;
+            margin-top : 5vh;
+        }
+        .service-mobile{
+            display: none;
+        }
+        .service-desktop{
+            background-color: var(--green);
+            /*border-radius: 20px;
+            margin-left : 15vw;
+            margin-right : 15vw;
+            margin-bottom : 5vh;
+            padding-top: 2vh;*/
+           /* .box-backOffice{
+                display: flex;
+                margin-left : 3vw;
+                .bgc-img-box{
+                    padding : 5px;
+                }
+                .img-box{
+                    filter: brightness(0) saturate(100%) invert(30%) sepia(35%) saturate(384%) hue-rotate(348deg) brightness(96%) contrast(96%) drop-shadow(0.1rem 0.2rem 0.1rem grey);
+                }
+                .bgc-img-box:hover{
+                    background-color: var(--brown);
+                    border-radius: 50%;
+                    cursor : pointer;
+                    .img-box{
+                        filter: brightness(0) saturate(100%) invert(100%) sepia(77%) saturate(185%) hue-rotate(342deg) brightness(111%) contrast(102%) drop-shadow(0.1rem 0.2rem 0.1rem grey);
+                    }
+                }
+            }*/
+            .container-service{
+                display: flex;
+                h2{
+                    margin-bottom : 3vh;
+                }
+                .img-service{
+                    border-radius: 20px;
+                    max-width: 30%;
+                    height : auto;
+                    margin : 4vh 3vw;
+                }
+                .img-portrait{
+                    max-width : 20%;
+                    margin-left: 6vw;
+                    margin-right : 6vw;
+                }
+                .text-service{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    text-align: center;
+                    margin : 4vh 3vw;
+                }
+            }
+        }
+    }
+}
+
+/*styles specials for mobile*/
+@media only screen and (max-width: 576px){
+    .services{
+        .title{
+            p{
+                display : none;
+            }
+            h1{
+                background-color : var(--dark_green);
+                color : var(--white);
+                width:100vw;
+                text-align: center;
+                padding-top:5vh;
+                padding-bottom:5vh;
+                margin-bottom:5vh;
+            }
+        }
+        .service-desktop{
+            display: none;
+        }
+        .service-mobile{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .container-service{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-left : 2vw;
+                padding-right : 2vw;
+                h2, p{
+                    text-align: center;
+                    margin-top : 3vh;
+                    margin-bottom : 3vh;
+                }
+
+                .img-service{
+                    width: 50%;
+                    clip-path:ellipse(33% 50%);
+                }
+                .img-portrait{
+                    width: 50%;
+                    clip-path:ellipse(50% 33%);
+                    margin-top : -6vw;
+                    margin-bottom : -6vw;
+                }                
+            }
+        }
+    }
+}
