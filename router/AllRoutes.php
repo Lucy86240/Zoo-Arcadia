@@ -7,7 +7,8 @@ $allRoutes = array(
     new Route('',false,'Accueil','View/pages/home.php',[],'Controller/AllController.php'),
     new Route('avis',true,'Avis','View/pages/reviews/reviews.php',[],'Controller/ManageReview.php'),
     new Route('avis',false,'Avis','View/pages/reviews/reviews.php',[],'Controller/ManageReview.php'),
-    new Route('nouvel_avis',false,'Poster un avis','View/pages/reviews/addReview.php',[],'Controller/ManageReview.php'),
+    new Route('habitats',true,'Habitats','View/pages/housings.php',[],'Controller/ManageHousing.php'),
+    new Route('habitats',false,'Habitats','View/pages/housings.php',[],'Controller/ManageHousing.php'),
 );
 
 define('ALL_ROUTES',$allRoutes);

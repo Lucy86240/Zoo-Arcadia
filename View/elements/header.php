@@ -9,14 +9,7 @@
     <title>Zoo Arcadia</title>
 </head>
 <body>
-    <?php 
-        if($optionPage){
-            include_once "../Controller/ManageUser.php";
-        }
-        else{
-            include_once "Controller/ManageUser.php";
-        }
-    ?>
+    <?php include_once "Controller/ManageUser.php"; ?>
     <header class="header">
         <nav class="navbar top">
             <div class="container-fluid" id="container-fluid">

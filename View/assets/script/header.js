@@ -1,4 +1,4 @@
-//Pour une mise en page différente après le scrool
+//Pour une mise en page différente après le scroll
 
 const container = document.querySelector("#container-fluid")
 const dropdown = document.querySelector("#dropdown-menu")
@@ -46,17 +46,6 @@ userMenu.addEventListener("click", ()=>{
     }
 })
 
-//image burger centré
-/*const burger = document.querySelector(".menu");
-const check = document.getElementById("toggle").checked = true;
-
-if(check){
-    burger.classList.add('text-center')
-}
-else{
-    burger.classList.remove('center')
-}*/
-
 //popup de connexion
 const triggerCo = document.querySelector('#popup-login'); 
 const dialogCo = document.getElementById('login-dialog');
@@ -68,26 +57,57 @@ const nameLog = document.querySelector('#popup-login');
 const accountConnected = document.querySelector('.account-connected');
 const text = document.querySelector('.logoutText');
 
+function urlWithoutParameters(){
+
+    switch(window.location.href){
+        case SITE_URL+'/avis': return true;
+        case SITE_URL+'/': return true;
+    }
+    return false;
+}
+
 accountConnected.addEventListener('mouseover', ()=>{
-    accountConnected.src = "View/assets/img/general/header/logout.svg";
+    if (urlWithoutParameters()){
+        accountConnected.src = "View/assets/img/general/header/logout.svg";
+    }
+    else{
+        accountConnected.src = "../View/assets/img/general/header/logout.svg";
+    }
+    
     if(nameLog.innertHTML != 'Me connecter'){
         text.classList.remove('none');
         text.style = 'color: red; font-size: 12px;';
     }
 })
 accountConnected.addEventListener('mouseout', ()=>{
-    accountConnected.src = "View/assets/img/general/header/connected.png";
+    if (urlWithoutParameters()){
+        accountConnected.src = "View/assets/img/general/header/connected.png";
+    }
+    else{
+        accountConnected.src = "../View/assets/img/general/header/connected.png";
+    }
+
     text.classList.add('none');
 })
 
 if(nameLog.innerHTML != 'Me connecter'){
     nameLog.addEventListener('mouseover', ()=>{
-        accountConnected.src = "View/assets/img/general/header/logout.svg";
+        if (urlWithoutParameters()){
+            accountConnected.src = "View/assets/img/general/header/logout.svg";
+        }
+        else{
+            accountConnected.src = "../View/assets/img/general/header/logout.svg";
+        }
         text.classList.remove('none');
         text.style = 'color: red; font-size: 12px;';
     })
     nameLog.addEventListener('mouseout', ()=>{
-        accountConnected.src = "View/assets/img/general/header/connected.png";
+        if (urlWithoutParameters()){
+            accountConnected.src = "View/assets/img/general/header/connected.png";
+        }
+        else{
+            accountConnected.src = "../View/assets/img/general/header/connected.png";
+        }
         text.classList.add('none');
     })
 }

@@ -282,6 +282,52 @@
     }
     .body-reviews{
         .choices{
+            .legends{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                border : 2px solid var(--blue);
+                background-color: var(--white);
+                box-shadow: 5px 2px 2px var(--blue);
+                border-radius : 20px;
+                padding : 10px;
+                margin : 5px;
+                margin-bottom : 15px;
+                /*span{
+                    color : var(--dark_green);
+                }*/
+                .legends-title{
+                    text-align: center;
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                }
+                .legend{
+                    display: flex;
+                    margin-bottom: 5px;
+                    .img{
+                        background-color : var(--white);
+                        border-radius: 50%;
+                        padding : 1px;
+                    }
+                    .notSelected{
+                        display: flex;
+                        flex-direction: row;
+                    }
+                    .img-valid{
+                        filter: brightness(0) saturate(100%) invert(83%) sepia(14%) saturate(1474%) hue-rotate(30deg) brightness(89%) contrast(93%);
+                    }
+                    .img-moderate{
+                        filter: brightness(0) saturate(100%) invert(30%) sepia(23%) saturate(648%) hue-rotate(348deg) brightness(92%) contrast(88%);
+                    }
+
+                    .img-delete{
+                        filter: brightness(0) saturate(100%) invert(18%) sepia(75%) saturate(4216%) hue-rotate(354deg) brightness(88%) contrast(100%);
+                    }
+                    .img-notSelected{
+                        filter: brightness(0) saturate(100%) invert(89%) sepia(0%) saturate(1021%) hue-rotate(62deg) brightness(102%) contrast(84%);
+                    }
+                }
+            }
             .choice{
                 display: flex;
                 flex-direction: column;
@@ -387,6 +433,26 @@
                         input[type="radio"]:checked {
                             accent-color : var(--blue);
                         }
+
+                        .form-check-input{
+                            display : none;
+                        }
+                        .img-valid, .img-moderate, .img-delete{
+                            filter: brightness(0) saturate(100%) invert(89%) sepia(0%) saturate(1021%) hue-rotate(62deg) brightness(102%) contrast(84%);
+                        }
+
+                        .check-validate-review:checked + label img{
+                            filter: brightness(0) saturate(100%) invert(83%) sepia(14%) saturate(1474%) hue-rotate(30deg) brightness(89%) contrast(93%);
+                        }
+                        
+
+                        .check-moderate-review:checked + label img{
+                            filter: brightness(0) saturate(100%) invert(30%) sepia(23%) saturate(648%) hue-rotate(348deg) brightness(92%) contrast(88%);
+                        }
+
+                        .check-delete-review:checked + label img{
+                            filter: brightness(0) saturate(100%) invert(18%) sepia(75%) saturate(4216%) hue-rotate(354deg) brightness(88%) contrast(100%);
+                        }
                     }
                 }
                 .check{
@@ -395,6 +461,11 @@
                 p{
                     margin-bottom : 5px;
                 }
+            }
+            .valid-verif{
+                margin-top : 15px;
+                margin-bottom : 25px;
+                border:0px;
             }
         }
     }

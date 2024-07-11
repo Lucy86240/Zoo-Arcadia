@@ -40,7 +40,8 @@
             </div>
             <div class="stats-reviews-container">
                 <div class="reviews-stats">
-                    <h3>Avis vérifiés</h3>
+                    <h3 class="<?php permission(['Employé.e','Administrateur.rice']); ?>">Avis vérifiés</h3>
+                    <h3 class="<?php permission(['disconnect']); ?>">Moyenne</h3>
                     <p class="data"> <?php echo(avgReviewsVisible())?>/5</p>
                     <p><?php echo(countReviews(1, 1))?> avis</p>
                 </div>
@@ -69,67 +70,90 @@
     <div class="body-reviews">
         <form  class="choices" method="POST" action="../avis">
             <div class="choices-mobile">
-            <div class="choice">
-                <div class="title-choice <?php permission(['Employé.e','Administrateur.rice']); ?>">                
-                    <img class="icon-filter" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/filter.svg" alt="filtrer">
-                    <span>filtrer</span>
+                <div class="legends <?php permission(['Employé.e','Administrateur.rice']); ?>">
+                    <span class="legends-title">Légende</span>
+                    <div class="legend">
+                        <img class="img-valid" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/thumb_up.svg" alt="Validé">
+                        <span> : Avis validé</span>
+                    </div>
+                    <div class="legend">
+                        <img class="img-moderate" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/thumb_down.svg" alt="Modéré">
+                        <span> : Avis modéré</span>
+                    </div>
+                    <div class="legend">
+                        <img class="img-delete" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimé">
+                        <span> : Avis supprimé après validation</span>
+                    </div>
+                    <div class="legend">
+                        <div class="notSelected">
+                            <img class="img-notSelected" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/thumb_up.svg" alt="Validé">
+                            <img class="img-notSelected" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/thumb_down.svg" alt="Modéré">
+                            <img class="img-notSelected" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimé">
+                        </div>
+                        <span> : avis à vérifier</span>
+                    </div>
                 </div>
-                <div class="check-choices <?php permission(['Employé.e','Administrateur.rice']); ?>">
-                    <li class="form-check">
-                        <input class="form-check-input" type="checkbox" name="CheckValidateReviews" value="true" id="CheckValidateReviews" <?php filterInit("Validate", "CheckValidateReviews"); ?>>
-                        <label class="form-check-label" for="CheckValidateReviews">
-                            Validé
-                        </label>
-                    </li>
-                    <li class="form-check">
-                        <input class="form-check-input" type="checkbox" name="CheckToValidateReviews" value="true" id="CheckToValidateReviews" <?php filterInit("ToValidate","CheckToValidateReviews"); ?>>
-                        <label class="form-check-label" for="CheckToValidateReviews">
-                            A vérifier
-                        </label>
-                    </li>
-                    <li class="form-check">
-                        <input class="form-check-input" type="checkbox" name="CheckModerateReviews" value="true" id="CheckModerateReviews" <?php filterInit("Moderate","CheckModerateReviews"); ?>>
-                        <label class="form-check-label" for="CheckModerateReviews">
-                            Modéré
-                        </label>
-                    </li>
+                <div class="choice <?php permission(['Employé.e','Administrateur.rice']); ?>">
+                    <div class="title-choice">                
+                        <img class="icon-filter" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/filter.svg" alt="filtrer">
+                        <span>filtrer</span>
+                    </div>
+                    <div class="check-choices">
+                        <li class="form-check">
+                            <input class="form-check-input" type="checkbox" name="CheckValidateReviews" value="true" id="CheckValidateReviews" <?php filterInit("Validate", "CheckValidateReviews"); ?>>
+                            <label class="form-check-label" for="CheckValidateReviews">
+                                Validé 
+                            </label>
+                        </li>
+                        <li class="form-check">
+                            <input class="form-check-input" type="checkbox" name="CheckToValidateReviews" value="true" id="CheckToValidateReviews" <?php filterInit("ToValidate","CheckToValidateReviews"); ?>>
+                            <label class="form-check-label" for="CheckToValidateReviews">
+                                A vérifier
+                            </label>
+                        </li>
+                        <li class="form-check">
+                            <input class="form-check-input" type="checkbox" name="CheckModerateReviews" value="true" id="CheckModerateReviews" <?php filterInit("Moderate","CheckModerateReviews"); ?>>
+                            <label class="form-check-label" for="CheckModerateReviews">
+                                Modéré
+                            </label>
+                        </li>
+                    </div>
                 </div>
-            </div>
-            <div class="choice">            
-                <div class="title-choice"><span>Trier par</span></div>
-                <div class="check-choices" method="POST" action="../avis">
-                    <li class="form-check">
-                        <input class="form-check-input" type="radio" name="sort" value="DvD" id="SortDateVisiteD" <?php sortInit("DvD"); ?>>
-                        <label class="form-check-label" for="SortDateVisiteD">
-                            Dernières visites
-                        </label>
-                    </li>
-                    <li class="form-check">
-                        <input class="form-check-input" type="radio" name="sort" value="DvC" id="SortDateVisiteP" <?php sortInit("DvC"); ?>>
-                        <label class="form-check-label" for="SortDateVisiteP">
-                            Premières visites
-                        </label>
-                    </li>
-                    <li class="form-check">
-                        <input class="form-check-input" type="radio" name="sort" value="ND" id="SortNoteD" <?php sortInit("ND"); ?>>
-                        <label class="form-check-label" for="SortNoteD">
-                            Notes décroissantes
-                        </label>
-                    </li>
-                    <li class="form-check">
-                        <input class="form-check-input" type="radio" name="sort" value="NC" id="SortNoteC" <?php sortInit("NC"); ?>>
-                        <label class="form-check-label" for="SortNoteC">
-                            Notes croissantes
-                        </label>
-                    </li>
+                <div class="choice">            
+                    <div class="title-choice"><span>Trier par</span></div>
+                    <div class="check-choices" method="POST" action="../avis">
+                        <li class="form-check">
+                            <input class="form-check-input" type="radio" name="sort" value="DvD" id="SortDateVisiteD" <?php sortInit("DvD"); ?>>
+                            <label class="form-check-label" for="SortDateVisiteD">
+                                Dernières visites
+                            </label>
+                        </li>
+                        <li class="form-check">
+                            <input class="form-check-input" type="radio" name="sort" value="DvC" id="SortDateVisiteP" <?php sortInit("DvC"); ?>>
+                            <label class="form-check-label" for="SortDateVisiteP">
+                                Premières visites
+                            </label>
+                        </li>
+                        <li class="form-check">
+                            <input class="form-check-input" type="radio" name="sort" value="ND" id="SortNoteD" <?php sortInit("ND"); ?>>
+                            <label class="form-check-label" for="SortNoteD">
+                                Notes décroissantes
+                            </label>
+                        </li>
+                        <li class="form-check">
+                            <input class="form-check-input" type="radio" name="sort" value="NC" id="SortNoteC" <?php sortInit("NC"); ?>>
+                            <label class="form-check-label" for="SortNoteC">
+                                Notes croissantes
+                            </label>
+                        </li>
+                    </div>
                 </div>
-            </div>
             </div>
             <div class="valid-choices"><input class="btn-DarkGreen" type="submit" value="Appliquer" name="choices"></div>
                 <?php $urlFilter=urlFilter();?>
                 <?php $urlSort= urlSort();?>
         </form>
-        <div class="reviews-list">
+        <form class="reviews-list" method="POST" action="">
             <?php 
                 $index=0;
                 foreach($reviews as $review){ ?>
@@ -155,21 +179,27 @@
                             </div>
                             <div class="box-backOffice <?php permission(['Employé.e','Administrateur.rice']); ?>">
                                 <li class="form-check">
-                                    <input class="form-check-input" type="radio" name="State<?php echo($index);?>" id="Validate<?php echo($index);?>" <?php if(validateReview($review['id'])){echo('checked');}?>>
+                                    <input class="form-check-input check-validate-review" type="radio" name="status<?php echo($index);?>" value= "validate" id="Validate<?php echo($index);?>" <?php if(validateReview($review['id'])){echo('checked');}?>>
                                     <label class="form-check-label" for="Validate<?php echo($index);?>">
-                                        <span>Validé</span> 
+                                        <img class="img-valid" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/thumb_up.svg" alt="Validé">
                                     </label>
                                 </li>
                                 <li class="form-check">
-                                    <input class="form-check-input" type="radio" name="State<?php echo($index);?>" id="Refuse<?php echo($index);?>" <?php if(moderateReview($review['id'])){echo('checked');}?>>
+                                    <input class="form-check-input check-moderate-review" type="radio" name="status<?php echo($index);?>" value= "moderate" id="Refuse<?php echo($index);?>" <?php if(moderateReview($review['id'])){echo('checked');}?>>
                                     <label class="form-check-label" for="Refuse<?php echo($index);?>">
-                                        <span>Modéré</span>
+                                        <img class="img-moderate" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/thumb_down.svg" alt="Modéré">
+                                    </label>
+                                </li>
+                                <li class="form-check">
+                                    <input class="form-check-input check-delete-review" type="radio" name="status<?php echo($index);?>" value= "delete" id="Delete<?php echo($index);?>">
+                                    <label class="form-check-label" for="Delete<?php echo($index);?>">
+                                        <img class="img-delete" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimé">
                                     </label>
                                 </li>
                             </div>
                         </div>
                         <p>“<?php echo($review["comment"]);?>”</p>        
-                        <div class="check">
+                        <div class="check <?php permission(['Employé.e','Administrateur.rice']); ?>">
                             <p>Vérifié le 
                                 <?php   
                                     if($review['dateCheck']!=null){
@@ -185,29 +215,28 @@
                 $index++; 
                 } 
             ?>
-                <nav>
-        <ul class="pagination">
+            <div class="valid-verif <?php permission(['Employé.e','Administrateur.rice']); ?>"><input class="btn-blue" type="submit" value="Valider vérifications" name="valid-verif"></div>
+            <nav>
+                <ul class="pagination">
+                    <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
+                    <li class=" <?php echo(($currentPage == 1) ? "hidden" : "");?>">
+                        <a href="<?php urlOption($currentPage -1, $optionPage,$urlFilter,$urlSort) ?>" class="btn-previous bp-blue">
+                            <img class="previous-img" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/previous_blue.png" alt="Bouton précédent">
+                            <p class="previous-text">Précédent</p> 
+                        </a>   
+                    </li>
 
-            <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
-            <li class=" <?php echo(($currentPage == 1) ? "hidden" : "");?>">
-                <a href="<?php urlOption($currentPage -1, $optionPage,$urlFilter,$urlSort) ?>" class="btn-previous bp-blue">
-                    <img class="previous-img" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/previous_blue.png" alt="Bouton précédent">
-                    <p class="previous-text">Précédent</p> 
-                </a>   
-            </li>
+                    <li><p class="page-blue">Page <?php echo($currentPage); ?> / <?php echo($pages); ?></p></li>
 
-            <li><p class="page-blue">Page <?php echo($currentPage); ?> / <?php echo($pages); ?></p></li>
-
-            <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
-            <li class=" <?php echo(($currentPage == $pages) ? "hidden" : "");?>">
-                <a href="<?php urlOption($currentPage + 1, $optionPage,$urlFilter,$urlSort)?>" class="btn-next bn-blue">
-                    <p class="next-text">Suivant</p> 
-                    <img class="next-img" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/next_blue.png" alt="Bouton suivant">
-                </a>    
-            </li> 
-        </ul>
-    </nav>
-        </div>
-
+                    <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
+                    <li class=" <?php echo(($currentPage == $pages) ? "hidden" : "");?>">
+                        <a href="<?php urlOption($currentPage + 1, $optionPage,$urlFilter,$urlSort)?>" class="btn-next bn-blue">
+                            <p class="next-text">Suivant</p> 
+                            <img class="next-img" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/next_blue.png" alt="Bouton suivant">
+                        </a>    
+                    </li> 
+                </ul>
+            </nav>
+            </form>
     </div>
 </section>

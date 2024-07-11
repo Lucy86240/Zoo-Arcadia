@@ -241,3 +241,31 @@ function addReviewRequest(Review $review){
 
 }
 
+function updateReview($id,$status){
+    if($status == 'delete'){
+        $request = 'DELETE FROM reviews WHERE id_review='.$id;
+    }
+    else{
+        $date_check = now();
+        $check_by = $_SESSION['mail'];
+        $request= 'UPDATE reviews SET date_check ="'.$date_check.'", check_by="'.$check_by.'"';
+        if($status =='validate'){
+            $isVisible = 'isVisible = 1';
+        }
+        if($status == 'moderate'){
+            $isVisible = 'isVisible = 0';
+        }
+        $request.=', '.$isVisible.' WHERE id_review='.$id;
+    }
+    echo($request);
+    try{
+        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+        $stmt = $pdo->prepare($request);
+        $stmt->execute();
+    }
+    catch(error $e){
+        echo('erreur bd');
+    }
+    
+
+}

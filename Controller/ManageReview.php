@@ -171,6 +171,26 @@ function sortInit($sortInit){
     }
 }
 
+function validVerif(&$currentPage,&$reviews,&$pages,&$nbReviews){
+    if(isset($_POST['valid-verif'])){
+        for($i=0;$i<$nbReviews;$i++){
+            $name = 'status'.$i;
+            if(isset($_POST[$name])){
+                if(($_POST[$name]=='validate'&& !validateReview($reviews[$i]['id'])) ||
+                $_POST[$name]=='moderate'&& !moderateReview($reviews[$i]['id']) ||
+                $_POST[$name]=='delete'
+                ){
+                    updateReview($reviews[$i]['id'],$_POST[$name]);
+                }
+                
+            }
+        }
+        $_POST['valid-verif']=null;
+        displayReviews($currentPage,$reviews,$pages,$nbReviews);
+    }
+    
+}
+
 function addReview(){
     if(isset($_POST['addReview'])){
         $review = new Review();
@@ -181,6 +201,7 @@ function addReview(){
     }
 }
 
+
 if(empty($_GET['page'])){
     $optionPage = false;
 }
@@ -188,8 +209,26 @@ else{
     $optionPage = true;
 }
 
+function displayReviews($currentPage,&$reviews,&$pages,&$nbReviews){
 // On détermine le nombre d'avis par page
-$perPage = 10;
+    $perPage = 2;
+//on détermine le 1er avis à afficher
+    $firstAvis = ($currentPage * $perPage) - $perPage;
+    
+//on détermine le filtre et le trie à appliquer
+    if(isConnected()) $filter = filterRequestReview();
+    else $filter = 'isVisible = 1';
+    $sort = sortReview();
+
+    //on récupère les avis
+    $reviews = reviews($perPage,$firstAvis,false,$filter, $sort, true, true, true);
+    
+    //on compte le nombre d'avis    
+    $nbReviews = countReviewsFilter($filter);
+    
+    // On calcule le nombre de pages total
+    $pages = ceil($nbReviews / $perPage);
+}
 
 // On détermine sur quelle page on se trouve
     if((isset($_GET['page']) && !empty($_GET['page']))&& !isset($_POST['filter'])){
@@ -198,20 +237,14 @@ $perPage = 10;
         $currentPage = 1;
     }
 
-    //on détermine le 1er avis à afficher
-    $firstAvis = ($currentPage * $perPage) - $perPage;
-    
-    //on détermine le filtre et le trie à appliquer
-    $filter = filterRequestReview();
-    $sort = sortReview();
-    //on récupère les avis
-    $reviews = reviews($perPage,$firstAvis,false,$filter, $sort, true, true, true);
-
-    //on compte le nombre d'avis    
-    $nbReviews = countReviewsFilter($filter);
-
-    // On calcule le nombre de pages total
-    $pages = ceil($nbReviews / $perPage);
+    //on récupère les infos clés pour l'affichage des avis
+    $reviews=null;
+    $pages=null;
+    $nbReviews=0;
+    displayReviews($currentPage,$reviews,$pages,$nbReviews);
 
     //on ajoute un nouvel avis en cas de soumission
     addReview();
+
+    //on met à jour la bd en fonction des vérifications effectuées
+    validVerif($currentPage,$reviews,$pages,$nbReviews);

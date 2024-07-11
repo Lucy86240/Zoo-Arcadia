@@ -12,7 +12,7 @@ button{
     margin-top: 20px;
     margin-bottom : 20px;
     border-radius: 20px;
-    padding : 10px;
+    padding : 12px;
     border-style: hidden;
     display: flex;
     align-items: center;
@@ -56,7 +56,16 @@ button{
     border-bottom :1px solid black;
 }
 
-.btn-brown:hover,.btn-blue:hover, .btn-green:hover, .btn-previous:hover, .btn-next:hover, .btn-DarkGreen:hover{
+.btn-beige{
+    background-color: var(--beige);
+    color: var(--dark_green);
+    font-weight: bold;
+    border-radius : 20px;
+    border:0px;
+    box-shadow: 3px 1px 1px var(--dark_green);
+}
+
+.btn-brown:hover,.btn-blue:hover, .btn-green:hover, .btn-previous:hover, .btn-next:hover, .btn-DarkGreen:hover, .btn-beige:hover{
     opacity:0.8;
     cursor : pointer;
     -webkit-transform: scale(1.1);
