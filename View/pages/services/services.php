@@ -34,7 +34,8 @@
         </div>
     </div>
     <?php $index++; }?>
-    <div class="button-addService">
+
+    <div class="button-addService <?php permission(['Employé.e','Administrateur.rice']); ?>">
         <?php include_once ('addService.php') ?>
     </div>
 </section>
