@@ -10,12 +10,12 @@
         <span id="popup-login" aria-haspopup="dialog" aria-controls="dialog"><?php if(!isset($_SESSION['firstName']) || empty($_SESSION['firstName'])) echo('Me connecter'); 
             else echo($_SESSION['firstName']);  
         ?></span>
-        <div id="login-dialog" role="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-desc" aria-modal="true" aria-hidden="true" tabindex="-1" class="c-dialog">
+        <div id="login-dialog" role="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-desc" aria-modal="true" tabindex="-1" class="c-dialog <?php if(!passwordError()) echo('none');?>">
             <div class="fond"></div>
             <div role="document" class="c-dialog__box">
                 <div class="Entete">
                     <h3>Me connecter</h3>
-                    <button type="button" aria-label="Fermer" title="Fermer connexion" data-dismiss="dialog">x</button>
+                    <form method="POST"><input class="close" type="submit" aria-label="Fermer" value="x" name="close-login" data-dismiss="dialog"></form>
                 </div>
                 <div class="img"><img id="illustration-login" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/header/login.png"></div>
                 <form class="login-form" method="POST" action="">
@@ -27,6 +27,8 @@
                         <label for="password">Votre mot de passe : </label>
                         <input type="password" name="password" id="password" minlength="12" required>
                     </div>
+                    <p class="<?php if(!passwordError()) echo('none');?>">
+                        Votre mail ou votre mot de passe est incorrect</p>
                     <div class="form-submit">
                         <input type="submit" value="Connexion" name="login" class="button btn-green" />
                     </div>
@@ -34,4 +36,3 @@
             </div>
         </div>
     </div>
-    <script src="<?php if($optionPage){echo("../");}?>View/assets/script/popup.js"></script>

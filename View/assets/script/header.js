@@ -49,9 +49,10 @@ userMenu.addEventListener("click", ()=>{
 //popup de connexion
 const triggerCo = document.querySelector('#popup-login'); 
 const dialogCo = document.getElementById('login-dialog');
-const dismissTriggerCo = dialogCo.querySelector('[data-dismiss]');
-const nameLog = document.querySelector('#popup-login');
-/*if(nameLog.innertHTML == 'Me connecter')*/ popup(dialogCo,triggerCo,dismissTriggerCo);
+
+triggerCo.addEventListener('click',()=>{
+    dialogCo.classList.remove('none');
+})
 
 //déconnexion
 const accountConnected = document.querySelector('.account-connected');
@@ -89,27 +90,5 @@ accountConnected.addEventListener('mouseout', ()=>{
 
     text.classList.add('none');
 })
-
-if(nameLog.innerHTML != 'Me connecter'){
-    nameLog.addEventListener('mouseover', ()=>{
-        if (urlWithoutParameters()){
-            accountConnected.src = "View/assets/img/general/header/logout.svg";
-        }
-        else{
-            accountConnected.src = "../View/assets/img/general/header/logout.svg";
-        }
-        text.classList.remove('none');
-        text.style = 'color: red; font-size: 12px;';
-    })
-    nameLog.addEventListener('mouseout', ()=>{
-        if (urlWithoutParameters()){
-            accountConnected.src = "View/assets/img/general/header/connected.png";
-        }
-        else{
-            accountConnected.src = "../View/assets/img/general/header/connected.png";
-        }
-        text.classList.add('none');
-    })
-}
 
 

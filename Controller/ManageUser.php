@@ -5,10 +5,28 @@ include_once "Model/ManageUserModel.php";
 function verifiedLogin(){
     if(isset($_POST['login'])){
         if(isset($_POST['user']) && isset($_POST['password'])){
-            verifiedLoginInput($_POST['user'], $_POST['password']);
+            if(verifiedLoginInput($_POST['user'], $_POST['password'])){
+                $_SESSION['passwordError']=false;
+                return true;
+            }
+            else{
+                $_POST['login']=null;
+                $_SESSION['passwordError']=true;
+                return false;
+            }
         }
     }
 }
+
+function passwordError(){
+    if (isset($_POST['close-login'])){
+        $_SESSION['passwordError']=false;
+        $_SESSION['openLogin']=false;
+        $_POST['close-login']=null;
+    }
+    if(isset($_SESSION['passwordError'])) return $_SESSION['passwordError'];
+    else return false;
+    }
 
 function logout(){
     if(isset($_POST['logout'])){

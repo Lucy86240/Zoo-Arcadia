@@ -67,6 +67,31 @@
     .account{
         filter: invert(31%) sepia(17%) saturate(979%) hue-rotate(348deg) brightness(89%) contrast(84%);
     }
+
+    .login-form{
+        p{
+        color:var(--green); 
+        text-align:center; 
+        font-weight:normal;
+        }
+    }
+    .close{
+        position : absolute;
+        top : -5vh;
+        right : -1vw;
+        background-color: var(--green);
+        font-size: 25px;
+        color : var(--blue);
+        font-weight: bold;
+        border-radius: 50%;
+        padding:3px 8px;
+        box-shadow: 2px 1px 1px black;
+      }
+      .close:hover{
+        background-color: red;
+        box-shadow: 2px 1px 1px black;
+        cursor: pointer;
+      }
 }
 
 /*version mobile*/
