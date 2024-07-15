@@ -2,7 +2,7 @@
 
 include_once "Model/Service.php";
 include_once "Model/Image.php";
-function allServices(bool $justIcon=false){
+function allServicesRequest(bool $justIcon=false){
     try{
         $services = [];
         $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
@@ -36,5 +36,56 @@ function allServices(bool $justIcon=false){
     catch (error $e){
         echo "Désolée";
         return new Service();
+    }
+}
+
+function addServiceRequest(Service $service){
+    try{
+        $name = $service->getName();
+        $description = $service->getDescription();
+        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+        $stmt = $pdo->prepare('insert into services (name, description) VALUES (:name, :description)');
+        $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+        $stmt->bindParam(":description", $description, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $stmt = $pdo->prepare('SELECT id_service FROM services WHERE name = :name and description = :description');
+        $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+        $stmt->bindParam(":description", $description, PDO::PARAM_STR);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $res['id_service'];
+    }
+    catch(error $e){
+        echo("problème avec les données");
+        return 0;
+    }
+}
+
+function deleteServiceRequest(int $id){
+    try{
+        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+
+        //on cherche toutes les images associées au service
+        $stmt = $pdo->prepare('SELECT id_image FROM images_services WHERE id_service = :id');
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        //on supprime toutes les images
+        foreach ($res as $r){
+            $id_image = $r["id_image"];
+            $stmt = $pdo->prepare('DELETE FROM images WHERE id_image = :id');
+            $stmt->bindParam(":id", $id_image, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+
+        //on supprime le service
+        $stmt = $pdo->prepare('DELETE FROM services WHERE id_service = :id');
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    catch(error $e){
+        echo("problème avec les données");
     }
 }

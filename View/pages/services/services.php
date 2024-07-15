@@ -35,7 +35,11 @@
     </div>
     <?php $index++; }?>
 
-    <div class="button-addService <?php permission(['Employé.e','Administrateur.rice']); ?>">
-        <?php include_once ('addService.php') ?>
+    <div class="button-addService <?php permission(['Administrateur.rice']); ?>">
+        <a href="nouveau_service">
+            <button type="button" id="popup-service" aria-haspopup="dialog" aria-controls="dialog" class="btn btn-green">
+                Ajouter un service
+            </button>
+        </a>
     </div>
 </section>

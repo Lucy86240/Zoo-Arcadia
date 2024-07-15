@@ -1,0 +1,70 @@
+.newService{
+    background-color: var(--brown);
+    .head{
+        background-color: var(--green);
+        padding-top : 80px;
+    }
+    h3{
+        color : var(--white);
+        text-align: center;
+        margin-top : 20px;
+        margin-bottom: 20px;
+    }
+
+    .txt{
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        .element{
+            display: flex;
+            justify-content: space-between;
+            width: 70%;
+        }
+    }
+    label{
+        color : var(--white);
+        padding : 5px;
+    }
+
+    input{
+        padding : 5px;
+    }
+
+    input[type="text"], textarea{
+        width : 40vw;
+    }
+    .images{
+        display: flex;
+        justify-content: space-around;
+        .image{
+            width : 45%;
+            display: flex;
+            padding: 10px;
+            flex-direction: column;
+            background-color: var(--green);
+            border-radius: 20px;
+            color : var(--blue);
+            .title-img{
+                text-align: center;
+                font-family: pangolin;
+            }
+            label{
+                color : var(--blue);
+            }
+            p{
+                padding-top : 10px;
+                font-size : 11px;
+            }
+
+        }
+    }
+    .form-submit{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top : 20px;
+        padding-bottom : 20px;
+    }
+}
