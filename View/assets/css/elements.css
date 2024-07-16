@@ -65,7 +65,7 @@ button{
     box-shadow: 3px 1px 1px var(--dark_green);
 }
 
-.btn-brown:hover,.btn-blue:hover, .btn-green:hover, .btn-previous:hover, .btn-next:hover, .btn-DarkGreen:hover, .btn-beige:hover{
+.btn-brown:hover,.btn-blue:hover, .btn-green:hover, .btn-previous:hover, .btn-next:hover, .btn-DarkGreen:hover, .btn-beige:hover, .button-delete:hover{
     opacity:0.8;
     cursor : pointer;
     -webkit-transform: scale(1.1);

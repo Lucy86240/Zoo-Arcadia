@@ -103,12 +103,25 @@ function addService(){
 }
 
 function deleteService(int $id){
-    //suppression dans la base de données
-    deleteServiceRequest($id);
-
-    //suppression des images
-    $path = "View/assets/img/services/".$id.'/';
-    rrmdir($path);
+    $name_button = "ValidationDeleteService".$id;
+    if(isset($_POST[$name_button]) && $_POST[$name_button]!=null){
+        //suppression dans la base de données
+        deleteServiceRequest($id);
+        //suppression des images
+        $path = "View/assets/img/services/".$id.'/';
+        rrmdir($path);
+        $_POST[$name_button]=null;
+    } 
+    
 }
 
+//génère les infos des services
 $services = AllServices(true,true, 1,true,false);
+
+//gère la suppression de service
+foreach($services as $service){
+    deleteService($service['id_service']);
+}
+$services = AllServices(true,true, 1,true,false);
+
+

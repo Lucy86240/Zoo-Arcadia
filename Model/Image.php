@@ -14,6 +14,10 @@ class Image{
         $this->portrait = $portrait;
     }*/
 
+    public function getId() : int{
+        return $this->id_image;
+    }
+
     public function getPath() : string{
         return $this->path;
     }

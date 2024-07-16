@@ -24,6 +24,28 @@
                     filter: brightness(0) saturate(100%) invert(100%) sepia(77%) saturate(185%) hue-rotate(342deg) brightness(111%) contrast(102%) drop-shadow(0.1rem 0.2rem 0.1rem grey);
                 }
             }
+
+            .popup-delete{
+                width : 50%;
+                height: 40%;
+                left : 50%;
+                top : 50%;
+                transform: translate(-50%,-50%);
+                .delete-choice{
+                    display: flex;
+                    justify-content: center;
+                    .button-delete{
+                        background-color : red;
+                        color : var(--white);
+                        margin : 20px;
+                        padding-left : 10px;
+                        padding-right: 10px;
+                        border-radius: 20px;
+                        border: red;
+                        box-shadow: 3px 1px 1px brown;
+                    }
+                }
+            }
         }
         .container-service{
             display: flex;
