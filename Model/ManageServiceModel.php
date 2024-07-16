@@ -70,11 +70,12 @@ function deleteServiceRequest(int $id){
         $stmt = $pdo->prepare('SELECT id_image FROM images_services WHERE id_service = :id');
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
-        $res = $stmt->fetch(PDO::FETCH_ASSOC);
+        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         //on supprime toutes les images
         if($res != null){
             foreach ($res as $id_image){
+                echo($id_image);
                 $stmt = $pdo->prepare('DELETE FROM images WHERE id_image = :id');
                 $stmt->bindParam(":id", $id_image, PDO::PARAM_INT);
                 $stmt->execute();
