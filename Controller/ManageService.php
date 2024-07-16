@@ -52,8 +52,9 @@ function AllServices(bool $id=false, bool $description=true, int $nbImgs=-1, boo
     return $services;
 }
 
-function addService(){
+function addService(&$message){
     if(isset($_POST['addReview']) && $_POST['addReview']!=null){
+        $_POST['addReview']=null;
         if(validImg($_FILES['NewServicePhoto'])==null && validIcon($_FILES['NewServiceIcon'])==null){
             $newService = new Service();
             $newService->setName($_POST['NewServiceName']);
@@ -97,8 +98,14 @@ function addService(){
                 addImgRequest("services", $id, $imgImg);
                 
             }
+            $message="Le service \"".$_POST['NewServiceName']."\" a bien été ajouté.";
+            return true;
         }
-        $_POST['addReview']=null;
+        else{
+            $message=validImg($_FILES['NewServicePhoto']);
+            $message.="<br>".validIcon($_FILES['NewServiceIcon']);
+            return false;
+        }
     }
 }
 

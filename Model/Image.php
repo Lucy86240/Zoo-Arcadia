@@ -59,17 +59,25 @@ class Image{
 function validImg($file){
     $name_file = explode('.',$file['name']);
     $extension = end($name_file);
-    if(!($extension == 'png' || $extension == 'jpg')) return "L'image doit être au format jpg ou png";
-    if($file['size']>5000000) return "La taille de l'image ne peut pas être supérieure à 5000 ko";
-    return null;
+    $message = null;
+    if(!($extension == 'png' || $extension == 'jpg')) $message = "La photo doit être au format jpg ou png. ";
+    if($file['size']>5000000){
+        if($message != null) $message .= " <br> ";
+        $message .= "La taille de la photo ne peut pas être supérieure à 5Mo.";
+    } 
+    return $message;
 }
 
 function validIcon($file){
     $name_file = explode('.',$file['name']);
     $extension = end($name_file);
-    if($extension != 'png') return "L'image doit être au format png";
-    if($file['size']>100000) return "La taille de l'image ne peut pas être supérieure à 100 ko";
-    return null;
+    $message = null;
+    if($extension != 'png') $message = "L'icone doit être au format png. ";
+    if($file['size']>100000){
+        if($message != null) $message .= " <br> ";
+        $message .= "La taille de l'icone ne peut pas être supérieure à 100 ko.";
+    } 
+    return $message;
 }
 
 /**

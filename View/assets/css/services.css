@@ -1,5 +1,6 @@
 .services{
     background-color: var(--brown);
+    padding-bottom : 20px;
     .service{
         background-color: var(--green);
         border-radius: 20px;

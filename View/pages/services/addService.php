@@ -1,15 +1,20 @@
 <section class="newService">
             <div class="head"> </div>
                 <h3>Ajouter un service</h3>
+                <?php $message=null;
+                    $submit = addService($message); ?>
             <form method="POST" action="" enctype = "multipart/form-data">
                 <div class="txt">
                     <div class="element">
                         <label for="NewServiceName">Intitulé :</label>
-                        <input type="text" name="NewServiceName" id="NewServiceName" required />
+                        <div><input type="text" name="NewServiceName" id="NewServiceName" maxlength="155" required />
+                        <p>Max 155 caractères</p>
+                        </div>
                     </div>
                     <div class="element">
                         <label for="NewServiceDescription">Description :</label>
-                        <textarea name="NewServiceDescription" id="NewServiceDescription" required></textarea>
+                        <div></di><textarea name="NewServiceDescription" id="NewServiceDescription" maxlength="255" required></textarea>
+                        <p>Max 255 caractères</p></div>
                     </div>
                 </div>
                 <div class="images">
@@ -31,10 +36,20 @@
                     </div>
                 </div>
                 <div class="form-submit">
-                    <input type="submit" value="Ajouter" name="addReview" class="button btn-green" />
-                    <?php addService(); ?>
+                    <input type="submit" value="Ajouter" name="addReview" class="button btn-green"/>
+                    <p class="messageOfSubmit<?php if($submit) echo("__good"); else if($submit == false && $message !=null) echo("__bad");?>">
+                        <?php
+                            if($submit == false && $message != null){
+                                ?><img class="illustration" src="View/assets/img/general/problem.png" alt=""> <?php
+                                echo("Le service n'a pas pu être ajouté :"); ?>
+                                <br> <br><?php
+                            } 
+                            if($message != null && $submit){ ?>
+                                <img class="illustration" src="View/assets/img/general/good.png" alt="">
+                            <?php } 
+                            echo($message); 
+                    ?></p>
                 </div>
             </form>
-    <script src="View/assets/script/popup.js"></script>
-    <script src="View/assets/script/addService.js"></script>
+            <a href="services"><button class="button btn-beige">Retour aux services</button></a>
 </section>
