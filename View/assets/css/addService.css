@@ -13,18 +13,9 @@
     }
 
     .txt{
-        
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
-        .element{
-            display: flex;
-            justify-content: space-between;
-            width: 70%;
-        }
         p{
             color:var(--white);
+            padding-top : 2px;
             padding-bottom : 10px;
             font-size : 11px;
         }
@@ -38,22 +29,16 @@
         padding : 5px;
     }
 
-    input[type="text"], textarea{
-        width : 40vw;
-    }
-    textarea{
-        height: 100px;
-    }
-
     .images{
+        @media only screen and (min-width: 576px){
         display: flex;
         justify-content: space-around;
+        }
         p{
             padding-top : 10px;
             font-size : 11px;
         }
         .image{
-            width : 45%;
             display: flex;
             padding: 10px;
             flex-direction: column;
@@ -115,3 +100,66 @@
     }
 
 }
+
+/*special desktop*/
+@media only screen and (min-width: 576px){
+    .newService{
+        .images{
+            display: flex;
+            justify-content: space-around;
+            .image{
+                width : 45%;
+            }
+        }
+        input[type="text"], textarea{
+            width : 40vw;
+        }
+        textarea{
+            height: 100px;
+        }
+        .txt{
+        
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            .element{
+                display: flex;
+                justify-content: space-between;
+                width: 70%;
+            }
+        }
+    }
+}
+
+/*special mobile*/
+@media only screen and (max-width: 576px){
+    .newService{
+        .images{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .image{
+                margin-bottom : 10px;
+            }           
+        }
+        input[type="text"], textarea{
+            width : 60vw;
+        }
+        textarea{
+            height: 200px;
+        }
+        .txt{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .image{
+            width : 70%;
+        }
+    }
+}
+
+
+
+
