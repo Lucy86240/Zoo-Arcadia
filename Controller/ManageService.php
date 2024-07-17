@@ -15,8 +15,8 @@ function rrmdir($dir) {
     }
 }
 
-function AllServices(bool $id=false, bool $description=true, int $nbImgs=-1, bool $portraitAccept=true, bool $iconJust){
-        $servicesObject = AllServicesRequest($iconJust);
+function AllServices(bool $id=false, bool $description=true){
+        $servicesObject = AllServicesRequest();
         $services = [];
         $id = 0;
         foreach($servicesObject as $serviceObject){ 
@@ -27,24 +27,8 @@ function AllServices(bool $id=false, bool $description=true, int $nbImgs=-1, boo
             if($description == true){
                 $service["description"] = $serviceObject->getDescription();
             }
-
-            //ajout du nombre d'images souhaitées
-            if ($nbImgs == -1 || $nbImgs > $serviceObject->countImages() ){
-                $nb = $serviceObject->countImages();
-            }
-            else{
-                $nb = $nbImgs;
-            }
-            $service["images"] = [];
-            for($i=0 ; $i<$nb; $i++){
-                $img= array(
-                    "id_image" => $serviceObject->getImage($i)->getId(),
-                    "path" => $serviceObject->getImage($i)->getPath(),
-                    "description" => $serviceObject->getImage($i)->getDescription(),
-                    "portrait" => $serviceObject->getImage($i)->getPortrait(),
-                );
-                array_push($service["images"],$img);
-            }
+            $service["icon"] = $serviceObject->getIcon();
+            $service["photo"] = $serviceObject->getPhoto();
 
             $services[$id]=$service;
             $id++;
@@ -123,12 +107,12 @@ function deleteService(int $id){
 }
 
 //génère les infos des services
-$services = AllServices(true,true, 1,true,false);
+$services = AllServices(true,true);
 
 //gère la suppression de service
 foreach($services as $service){
     deleteService($service['id_service']);
 }
-$services = AllServices(true,true, 1,true,false);
+$services = AllServices(true,true);
 
 

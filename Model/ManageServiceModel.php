@@ -2,7 +2,7 @@
 
 include_once "Model/Service.php";
 include_once "Model/Image.php";
-function allServicesRequest(bool $justIcon=false){
+function allServicesRequest(){
     try{
         $services = [];
         $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
@@ -13,22 +13,26 @@ function allServicesRequest(bool $justIcon=false){
                 array_push($services,$service);
                 $indice=count($services)-1;
                 $id = $services[$indice]->getId();
-                if($justIcon == true){
-                    $stmt2 = $pdo->prepare('SELECT images.id_image, images.path, images.description, images.icon, images.portrait 
-                    FROM images_services JOIN images ON images_services.id_image = images.id_image  WHERE id_service = :id and images.icon=true');
-                }
-                else{
-                    $stmt2 = $pdo->prepare('SELECT images.id_image, images.path, images.description, images.icon, images.portrait 
-                    FROM images_services JOIN images ON images_services.id_image = images.id_image  WHERE id_service = :id and images.icon=0');
-                }
-                $stmt2->bindParam(":id", $id, PDO::PARAM_INT);
-                $stmt2->setFetchMode(PDO::FETCH_CLASS,'Image');
-                if ($stmt2->execute())
+
+                $stmtIcon = $pdo->prepare('SELECT images.id_image, images.path, images.description, images.icon, images.portrait 
+                FROM images_services JOIN images ON images_services.id_image = images.id_image  WHERE id_service = :id and images.icon=true');
+                $stmtIcon->bindParam(":id", $id, PDO::PARAM_INT);
+                $stmtIcon->setFetchMode(PDO::FETCH_CLASS,'Image');
+                if ($stmtIcon->execute())
                 {
-                    while($image = $stmt2->fetch()){
-                            $services[$indice]->addImage($image);
-                    }
+                    $image = $stmtIcon->fetch();
+                    $services[$indice]->setIcon($image);
                 }
+
+                $stmtPhoto = $pdo->prepare('SELECT images.id_image, images.path, images.description, images.icon, images.portrait 
+                FROM images_services JOIN images ON images_services.id_image = images.id_image  WHERE id_service = :id and images.icon=0');
+                $stmtPhoto->bindParam(":id", $id, PDO::PARAM_INT);
+                $stmtPhoto->setFetchMode(PDO::FETCH_CLASS,'Image');
+                if ($stmtPhoto->execute()){                    
+                    $image = $stmtPhoto->fetch();
+                    $services[$indice]->setPhoto($image);
+                }
+
             }
         }
         return $services;

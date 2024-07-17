@@ -6,7 +6,9 @@ class Service{
     private string $name;
     private string $description;
 
-    private $images=[];
+    private Image $photo;
+
+    private Image $icon;
 
     public function getId(){
         return $this->id_service;
@@ -29,24 +31,21 @@ class Service{
     }
 
     
-    public function setImage(int $indice, $img){
-        $this->images[$indice]=$img;
+    public function setPhoto($img){
+        $this->photo=$img;
     }
 
-    public function getImage(int $id) : Image{
-        if($id<count($this->images)){
-            return $this->images[$id];
-        }
-        else{
-            return new Image();
-        }
+    public function getPhoto() : Image{
+        return $this->photo;
     }
 
-    public function addImage(Image $img){
-        array_push($this->images,$img);
+    public function setIcon($img){
+        $this->icon=$img;
     }
 
-    public function countImages(){
-        return count($this->images);
+    public function getIcon() : Image{
+        return $this->icon;
     }
+
+
 }

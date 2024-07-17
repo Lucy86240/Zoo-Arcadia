@@ -74,11 +74,11 @@
 <section class = "home-services">
     <h2 class="text-white text-center mb-5">Un parc à votre service</h2>
     <?php
-    $services = AllServicesView(false,false,1,0,1);
+    $services = AllServices(false,false);
 
     foreach($services as $service){?>
         <div class = "home-service">
-            <img class="" src="<?php echo($service["images"][0]["path"]);?>" alt="<?php echo($service["images"][0]["description"]);?>">
+            <img class="" src="<?php echo($service["icon"]->getPath());?>" alt="<?php echo($service["icon"]->getDescription());?>">
             <h3 class = "cb"><?php echo($service["name"]); ?></h3>
         </div>
     <?php } ?>

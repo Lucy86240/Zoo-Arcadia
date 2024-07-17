@@ -43,7 +43,7 @@ h3{
     }
 }
 
-p,a,span,label,input, textarea{
+p,a,span,label,input, textarea, button{
     font-family: var(--font_sans_serif);
     @media only screen and (max-width: 576px){
         font-size: 14px;
