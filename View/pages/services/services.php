@@ -9,9 +9,10 @@
         <!-- service version desktop-->
         <div class="service service-desktop">
 
-            <!-- icones permettant la modification / suppresion d'un service-->
+            <!-- icones permettant la modification / suppression d'un service (seulement pour admin et employés)-->
             <div class = "box-backOffice <?php permission(['Employé.e','Administrateur.rice']); ?>">
                 <div class="bgc-img-box"><img class="img-box editServiceD" src="View/assets/img/general/icons/edit.svg" alt="Modifier service"></div>
+                <!-- bouton de suppression seulement pour admin-->
                 <a href="#" class="bgc-img-box deleteServiceD <?php permission(['Administrateur.rice']); ?>"><img class="img-box" src="View/assets/img/general/icons/delete.svg" alt="Supprimer service"></a>
                 
                 <!-- le popup de suppression s'affichant quand la poubelle est cliquée-->
@@ -39,11 +40,11 @@
                 <?php if($index%2!=0){?> <img class="img-service <?php if($service['photo']->getPortrait()) echo('img-portrait'); ?>" src="<?php echo($service['photo']->getPath());?>" alt="<?php echo($service['photo']->getDescription()); ?>"><?php } ?>
             </div>
         </div>
-
+        <!-- les services version mobile-->
         <div class="service service-mobile">
             <div class = "box-backOffice <?php permission(['Employé.e','Administrateur.rice']); ?>">
                 <div class="bgc-img-box editServiceM"><img class="img-box" src="View/assets/img/general/icons/edit.svg" alt="Modifier service"></div>
-                <div class="bgc-img-box deleteServiceM"><img class="img-box" src="View/assets/img/general/icons/delete.svg" alt="Supprimer service"></div>
+                <div class="bgc-img-box deleteServiceM <?php permission(['Administrateur.rice']); ?>"><img class="img-box" src="View/assets/img/general/icons/delete.svg" alt="Supprimer service"></div>
             </div>
             <!-- le popup de suppression s'affichant quand la poubelle est cliquée-->
             <div class="none c-dialog dialog-deleteMobile-js">

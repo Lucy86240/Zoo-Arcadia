@@ -108,7 +108,7 @@
                 margin : 30px;
                 padding : 10px;
                 
-                label, p, input, span, a{
+                label, p, input[type=file], span, a{
                     color : var(--white);
                     width : 100%;
                 }

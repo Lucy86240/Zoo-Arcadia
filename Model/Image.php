@@ -56,6 +56,51 @@ class Image{
     }
 }
 
+function searchIdImage(string $type, int $id_type, bool $icon){
+    try{
+        switch($type){
+            case "services" : 
+                $table = "images_services";
+                $name_id = "id_service";
+            case"animals":
+                $table = "images_animals";
+                $name_id = "id_animal";
+            case "housings":
+                $table = "images_housings";
+                $name_id = "id_housing";
+            default :
+                $table = "images_services";
+                $name_id = "id_service";
+        }
+        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+        $request = 'SELECT images.id_image FROM '.$table.' JOIN images ON '.$table.'.id_image = images.id_image WHERE '.$table.'.'.$name_id.' = ';
+        $stmt = $pdo->prepare($request.' :id_type and images.icon = :icon');
+        $stmt->bindParam(":id_type", $id_type, PDO::PARAM_INT);
+        $stmt->bindParam(":icon", $icon, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch()["id_image"];
+
+    }
+    catch(error $e){
+        echo("problème avec les données");
+        return 0;
+    }
+}
+
+function imageExistById(int $id){
+    try{
+        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+        $stmt = $pdo->prepare('SELECT id_image FROM images WHERE id_image = :id');
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($res != null) return true;
+        else return false;
+    }
+    catch(error $e){
+        echo('erreur de bd');
+    }
+}
 function validImg($file){
     $name_file = explode('.',$file['name']);
     $extension = end($name_file);
@@ -131,4 +176,24 @@ function addImgRequest(string $type, int $id_type, Image $image){
     catch(error $e){
         echo("problème avec les données");
     }
+}
+
+function updateImageRequest(int $id, string $path, string $description, bool $portrait){
+
+    try{
+        if(imageExistById($id)){
+            $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+            $stmt = $pdo->prepare('UPDATE images SET path = :path, description = :description, portrait = :portrait  WHERE id_image = :id');
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmt->bindParam(":path", $path, PDO::PARAM_STR);
+            $stmt->bindParam(":description", $description, PDO::PARAM_STR);
+            $stmt->bindParam(":portrait", $portrait, PDO::PARAM_STR);
+            $stmt->execute();
+        }
+    }
+    catch(error $e)
+    {
+        echo('erreur bd');
+    }
+
 }

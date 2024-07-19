@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="form-submit">
-                <div><input type="submit" value="Modifier" name="UpdateReview" class="buttonSubmit btn-brown"/></div>
+                <div><input type="submit" value="Modifier" name="UpdateReview<?php echo($service['id_service']);?>" class="buttonSubmit btn-brown"/></div>
                 <button class="button btn-red">Annuler</button>
             </div>
 </form>
