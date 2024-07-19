@@ -23,6 +23,8 @@ button{
     background-color: var(--brown);
     color: var(--white);
     font-weight: bold;
+    border-radius : 20px;
+    box-shadow: 3px 1px 1px var(black);
 }
 
 .btn-blue{
@@ -30,10 +32,7 @@ button{
     color: var(--white) ;
     font-weight: bold ;
     border-radius : 20px;
-   /* border-right : 2px solid black;
-    border-bottom :2px solid black;*/
     box-shadow: 3px 1px 1px var(black);
-
 }
 
 .btn-green{
@@ -41,8 +40,6 @@ button{
     color: var(--blue);
     border-radius : 20px;
     font-weight: bold;
-    /*border-right : 2px solid var(--dark_green);
-    border-bottom :2px solid var(--dark_green);*/
     box-shadow: 3px 1px 1px var(--dark_green);
 }
 
@@ -65,7 +62,17 @@ button{
     box-shadow: 3px 1px 1px var(--dark_green);
 }
 
-.btn-brown:hover,.btn-blue:hover, .btn-green:hover, .btn-previous:hover, .btn-next:hover, .btn-DarkGreen:hover, .btn-beige:hover{
+.btn-red{
+    background-color: red;
+    color: var(--white);
+    font-weight: bold;
+    border-radius : 20px;
+    border:0px;
+    box-shadow: 3px 1px 1px brown;
+}
+
+.btn-brown:hover,.btn-blue:hover, .btn-green:hover, .btn-DarkGreen:hover, .btn-beige:hover, .btn-red:hover,
+.btn-previous:hover, .btn-next:hover,  .button-delete:hover{
     opacity:0.8;
     cursor : pointer;
     -webkit-transform: scale(1.1);

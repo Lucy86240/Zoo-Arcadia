@@ -211,7 +211,7 @@ else{
 
 function displayReviews($currentPage,&$reviews,&$pages,&$nbReviews){
 // On détermine le nombre d'avis par page
-    $perPage = 2;
+    $perPage = 10;
 //on détermine le 1er avis à afficher
     $firstAvis = ($currentPage * $perPage) - $perPage;
     

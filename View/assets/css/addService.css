@@ -1,0 +1,165 @@
+.newService{
+    background-color: var(--brown);
+    padding-bottom : 20px;
+    .head{
+        background-color: var(--green);
+        padding-top : 80px;
+    }
+    h3{
+        color : var(--white);
+        text-align: center;
+        margin-top : 20px;
+        margin-bottom: 20px;
+    }
+
+    .txt{
+        p{
+            color:var(--white);
+            padding-top : 2px;
+            padding-bottom : 10px;
+            font-size : 11px;
+        }
+    }
+    label{
+        color : var(--white);
+        padding : 5px;
+    }
+
+    input{
+        padding : 5px;
+    }
+
+    .images{
+        @media only screen and (min-width: 576px){
+        display: flex;
+        justify-content: space-around;
+        }
+        p{
+            padding-top : 10px;
+            font-size : 11px;
+        }
+        .image{
+            display: flex;
+            padding: 10px;
+            flex-direction: column;
+            background-color: var(--green);
+            border-radius: 20px;
+            color : var(--blue);
+            .title-img{
+                text-align: center;
+                font-family: pangolin;
+            }
+            label{
+                color : var(--blue);
+            }
+        }
+    }
+    .form-submit{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top : 20px;
+        padding-bottom : 20px;
+        .illustration{
+            width: 10vw;
+        }
+        .messageOfSubmit__good{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px;
+            padding : 20px;
+            color : var(--green);
+            font-weight: bold;
+            border: solid 1px var(--beige);
+            border-radius: 20px;
+        }
+        .messageOfSubmit__bad{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin : 10px;
+            color : var(--white);
+            font-weight: bold;
+            border: solid 1px var(--brown);
+            border-radius: 20px;
+            padding : 10px;
+            background-color: red;
+            .illustration{
+                background-color: var(--white);
+                border-radius : 50%;
+                margin-right : 5px;
+            }
+        }
+    }
+    a{
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+    }
+
+}
+
+/*special desktop*/
+@media only screen and (min-width: 576px){
+    .newService{
+        .images{
+            display: flex;
+            justify-content: space-around;
+            .image{
+                width : 45%;
+            }
+        }
+        input[type="text"], textarea{
+            width : 40vw;
+        }
+        textarea{
+            height: 100px;
+        }
+        .txt{
+        
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            .element{
+                display: flex;
+                justify-content: space-between;
+                width: 70%;
+            }
+        }
+    }
+}
+
+/*special mobile*/
+@media only screen and (max-width: 576px){
+    .newService{
+        .images{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .image{
+                margin-bottom : 10px;
+            }           
+        }
+        input[type="text"], textarea{
+            width : 60vw;
+        }
+        textarea{
+            height: 200px;
+        }
+        .txt{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .image{
+            width : 70%;
+        }
+    }
+}
+
+
+
+

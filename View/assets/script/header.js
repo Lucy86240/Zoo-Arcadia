@@ -5,8 +5,10 @@ const dropdown = document.querySelector("#dropdown-menu")
 
 let scroll = false
 
+//&& window.location.href== SITE_URL+'/'
+
 window.onscroll = function(){
-    if (window.scrollY > 1 && scroll===false ){
+    if (window.scrollY > 1 && scroll===false){
         container.classList.add("scroll");
         dropdown.classList.add("scroll");
         container.classList.remove("top");

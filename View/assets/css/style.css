@@ -7,6 +7,8 @@
 @import url('connected.css');
 @import url('popup.css');
 @import url('reviews.css');
+@import url('services.css');
+@import url('addService.css');
 
 
 
@@ -41,7 +43,7 @@ h3{
     }
 }
 
-p,a,span,label, input{
+p,a,span,label,input, textarea, button{
     font-family: var(--font_sans_serif);
     @media only screen and (max-width: 576px){
         font-size: 14px;

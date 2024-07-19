@@ -26,8 +26,7 @@ function passwordError(){
     }
     if(isset($_SESSION['passwordError'])) return $_SESSION['passwordError'];
     else return false;
-    }
-
+}
 function logout(){
     if(isset($_POST['logout'])){
         $_SESSION['mail']='';
