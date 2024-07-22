@@ -10,7 +10,7 @@ include_once "Model/Image.php";
  */
 function serviceExistById(int $id){
     try{
-        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
         $stmt = $pdo->prepare('SELECT id_service FROM services WHERE id_service = :id');
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -30,7 +30,7 @@ function serviceExistById(int $id){
 function allServicesRequest(){
     try{
         $services = [];
-        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
         $stmt = $pdo->prepare('SELECT * FROM services');
         $stmt->setFetchMode(PDO::FETCH_CLASS,'Service');
         if($stmt->execute()){
@@ -85,7 +85,7 @@ function addServiceRequest(Service $service){
         //ajoute les éléments dans la table services
         $name = $service->getName();
         $description = $service->getDescription();
-        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
         $stmt = $pdo->prepare('insert into services (name, description) VALUES (:name, :description)');
         $stmt->bindParam(":name", $name, PDO::PARAM_STR);
         $stmt->bindParam(":description", $description, PDO::PARAM_STR);
@@ -113,7 +113,7 @@ function addServiceRequest(Service $service){
 function deleteServiceRequest(int $id){
     try{
         if(serviceExistById($id)){
-            $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
 
             //on cherche toutes les images associées au service
             $stmt = $pdo->prepare('SELECT id_image FROM images_services WHERE id_service = :id');
@@ -153,7 +153,7 @@ function updateServiceRequest(int $id, string $name, string $description){
     try{
         //on vérifie que le service existe et qu'il y a une modification à faire
         if(serviceExistById($id) && ($name != null || $description != null)){
-            $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
             //on adapte la requête suivant la/les modifications à effectuer
             //si on modifie l'intitulé et la description
             if(($name != null && $description != null)){

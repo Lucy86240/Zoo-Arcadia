@@ -6,7 +6,7 @@
     function AllHousings(bool $portraitAccept=true){
         try{
             $housings = [];
-            $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
             $stmt = $pdo->prepare('SELECT * FROM housings');
             $stmt->setFetchMode(PDO::FETCH_CLASS,'Housing');
             if($stmt->execute()){
@@ -42,7 +42,7 @@
 
 //    public function FindHousingByid(int $id){
     function FindHousingByid(int $id){
-        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
         $stmt = $pdo->prepare('SELECT * FROM housings WHERE id_housing = :id');
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -53,7 +53,7 @@
 //    public function FindHousingByName(string $name){
     function FindHousingByName(string $name){
         try{
-            $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
             $stmt = $pdo->prepare('SELECT * FROM housings WHERE name = :name');
             $stmt->bindParam(":name", $name, PDO::PARAM_STR);
             $stmt->execute();
@@ -76,7 +76,7 @@
     function FindAnimalsByHousing(int $id_housing, int $nbAnimals=-1, int $justVisibleAnimal=1,bool $portraitAccept=true){
         try{
             $animals = [];
-            $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
             if($nbAnimals<1){
                 if($justVisibleAnimal==0 || $justVisibleAnimal==1){
                     $stmt = $pdo->prepare('SELECT * FROM animals WHERE housing = :id and isVisible = :visible');
@@ -130,6 +130,5 @@
         catch(error $e){
 
         }
-    }
+}
 
-//}

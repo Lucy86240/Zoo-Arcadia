@@ -2,7 +2,7 @@
 
 function userExist(string $user){
     try{
-        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
         $stmt = $pdo->prepare('SELECT * FROM users WHERE mail = :username ');
         $stmt->bindParam(":username", $user,PDO::PARAM_STR);
         $stmt->execute();
@@ -21,7 +21,7 @@ function userExist(string $user){
 
 function verifiedLoginInput(string $mailInput, string $passwordInput){
     try{
-        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
         
         $stmt = $pdo->prepare('SELECT users.password, users.first_name, users.role, roles.label FROM users JOIN roles ON users.role = roles.id_role WHERE mail = :username');
 
@@ -45,7 +45,7 @@ function verifiedLoginInput(string $mailInput, string $passwordInput){
 }
 
 function newUser(User $user){
-    $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+    $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
     $stmt=$pdo->prepare("INSERT INTO users ( mail, password, first_name, last_name) VALUES (:username, :password,:first_name,:last_name) ");
     $username = $user->getUsername();
     $password= password_hash($user->getPassword(), PASSWORD_DEFAULT);
