@@ -10,7 +10,7 @@ include_once "Model/User.php";
  * @Param $nbReviews nombre d'avis retournés souhaités
  * @Param $startList premier avis à retourner
  * @Param $orderBy : "idC" = id_review croissants, "idD" = id_review decroissants, 
- * "DvC" = dates de visite croissants, "DvD" = dates de visite décroissants, 
+ * "DvC" = dates de visite croissantes, "DvD" = dates de visite décroissantes, 
  * "NC" = notes croissantes, "ND" = notes décroissantes
  * @Param $JustVisible true = ne retourne que des avis acceptés
  * @Param $showDateCheck : false = l'avis n'inclus pas la date d'acceptation

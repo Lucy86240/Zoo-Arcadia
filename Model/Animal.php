@@ -9,13 +9,17 @@ Class Animal{
     private string $name;
     private int $breed;
     private int $housing;
-    private string $health;
     private bool $isVisible;
 
     private $images=[];
 
+    private $medicalReports=[];
+
     public function getId(){
         return $this->id_animal;
+    }
+    public function setId(int $id){
+        $this->id_animal = $id;
     }
 
     public function getName(){
@@ -32,12 +36,12 @@ Class Animal{
 
     public function getBreed(){
         try{
-            $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
             $stmt = $pdo->prepare('SELECT label FROM breeds WHERE id_breed = :id');
             $stmt->bindParam(":id", $this->breed, PDO::PARAM_INT);
             $stmt->execute();
-            $breed = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $breed;
+            $breed = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $breed['label'];
         }
         catch(error $e)
         {
@@ -53,16 +57,23 @@ Class Animal{
         return $this->housing;
     }
 
+    public function getHousing(){
+        try{
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+            $stmt = $pdo->prepare('SELECT name FROM housings WHERE id_housing = :id');
+            $stmt->bindParam(":id", $this->housing, PDO::PARAM_INT);
+            $stmt->execute();
+            $breed = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $breed['name'];
+        }
+        catch(error $e)
+        {
+            return "inconnue";
+        }
+    }
+
     public function setIdHousing(int $housing){
         $this->housing = $housing;
-    }
-
-    public function getHealth(){
-        return $this->health;
-    }
-
-    public function setHealth(int $health){
-        $this->health = $health;
     }
 
     public function getIsVisible(){
@@ -73,7 +84,31 @@ Class Animal{
         $this->isVisible = $isVisible;
     }
 
-     public function setImage(int $indice, $img){
+    public function setMedicalReport(int $indice, $report){
+        $this->medicalReports[$indice]=$report;
+    }
+
+    public function getMedicalReport(int $id){
+        if($id<count($this->medicalReports)){
+            return $this->medicalReports[$id];
+        }
+        else{
+            return new MedicalReport();
+        }
+    }
+    public function getLastMedicalReport(){
+        if ($this->countMedicalReports() <1) return new MedicalReport;
+        return $this->medicalReports[0];
+    }
+    public function addMedicalReport($report){
+        array_push($this->medicalReports,$report);
+    }
+
+    public function countMedicalReports(){
+        return count($this->medicalReports);
+    }
+
+    public function setImage(int $indice, $img){
         $this->images[$indice]=$img;
     }
 

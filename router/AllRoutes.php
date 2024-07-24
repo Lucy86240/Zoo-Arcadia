@@ -9,7 +9,7 @@ $allRoutes = array(
     new Route('avis',false,'Avis','View/pages/reviews/reviews.php',[],'Controller/ManageReview.php'),
     new Route('services',false,'Services','View/pages/services/services.php',[],'Controller/ManageService.php'),
     new Route('nouveau_service',false,'Nouveau service','View/pages/services/addService.php',['administrateur.trice'],'Controller/ManageService.php'),
-    new Route('habitats',false,'Habitats','View/elements/animal.php',[],'Controller/ManageHousing.php'),
+    new Route('habitats',false,'Habitats','View/elements/animal.php',[],'Controller/ManageAnimal.php'),
     new Route('habitats',true,'Habitats','View/pages/housings.php',[],'Controller/ManageHousing.php'),
 );
 

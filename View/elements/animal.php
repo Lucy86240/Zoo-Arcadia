@@ -46,8 +46,8 @@
             </div>
         </div>
         <div class="title">
-            <h2>name</h2>
-            <h3>race</h3>
+            <h2><?php echo($animal['name']); ?></h2>
+            <h3><?php echo($animal['breed']); ?></h3>
         </div>
         <div class="body">
             <div class="images">
@@ -68,27 +68,27 @@
             <div class="description">
                 <div class="element">
                     <p><span>Son habitat :</span>
-                    Savane</p>
+                    <?php echo($animal['housing']); ?></p>
                 </div>
                 <div class="element">
                     <p> <span>Son état :</span> 
-                    Lorem ipsum dolor sit amet, consectetur cras amet.</p>
+                    <?php echo($animal['LastMedicalReport']['health']); ?></p>
                 </div>
                 <div class="element"> 
                     <p> <span>Sa nourriture :</span>
-                    Lorem ipsum dolor sit amet, consectetur cras amet.</p>
+                    <?php echo($animal['LastMedicalReport']['food']); ?></p>
                 </div>
                 <div class="element"> 
                     <p> <span>Son grammage :</span> 
-                    Lorem ipsum dolor sit amet, consectetur cras amet.</p>
+                    <?php echo($animal['LastMedicalReport']['weightFood']); ?></p>
                 </div>
                 <div class="element">
                     <p> <span>Détail de son état :</span>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquet dolor eget cursus consectetur. Vestibulum ut tortor sed neque sodales rhoncus. Pellentesque ipsum augue, faucibus non justo lacinia, venenatis congue nunc. Mauris vel risus sit amet.</p>
+                    <?php echo($animal['LastMedicalReport']['comment']); ?></p>
                 </div>
                 <div class="element">
                     <p> <span>Dernière visite du vétérinaire :</span>
-                    XX/XX/XX</p>
+                    <?php echo($animal['LastMedicalReport']['date']); ?></p>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 <?php
-    //include_once '../config.php';
     include_once "Model/ManageHousingModel.php";
+    include_once "ManageAnimal.php";
 
 /**
  * Retourne un tableau associatif avec au moins tout les noms des habitats
@@ -56,7 +56,6 @@
                     $animal = array(
                         "name" => $animalObject->getName(),
                         "breed" => $animalObject->getBreed(),
-                        "health" => $animalObject->getHealth(),
                         "IsVisible" => $animalObject->getIsVisible(),
                     );
                     $animal['imagesAnimals'] = [];
