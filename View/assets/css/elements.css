@@ -80,26 +80,31 @@ button{
 }
 
 .pagination{
-    display : flex;
-    align-items: center;
-    justify-content: space-around;
-    
+    display: flex;
+    justify-content: space-between;
+
     .btn-previous, .btn-next{
-        text-decoration: none;
-        display: flex;
-        width: 132px;
+        display : flex;
+        align-items: center;
         .previous-img, .next-img{
             height:32px;
             filter:drop-shadow(1px 1px);
         }
-        .previous-text, .next-text{
-            filter:drop-shadow(1px 1px #000000);
-            margin-top:5px;
-            border-radius: 20px;
-            width : 100px;
-            height : 20px;
+        .next-text, .previous-text{
+            @media only screen and (max-width: 576px){
+                width : 75px;
+            }
+            @media only screen and (min-width: 576px){
+                width : 95px;
+            }
+
+            
             text-align: center;
-            padding-top:2px;
+            background-color: var(--brown);
+            color : var(--white);
+            padding : 2px;
+            border-radius: 20px;
+            filter:drop-shadow(1px 1px black);
         }
     }
     

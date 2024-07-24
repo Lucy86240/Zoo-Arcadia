@@ -74,7 +74,7 @@
 <section class = "home-services">
     <h2 class="text-white text-center mb-5">Un parc à votre service</h2>
     <?php
-    $services = AllServices(false,false);
+    $services = AllServices(false);
 
     foreach($services as $service){?>
         <div class = "home-service">

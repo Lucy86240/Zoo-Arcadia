@@ -9,6 +9,7 @@
 @import url('reviews.css');
 @import url('services.css');
 @import url('addService.css');
+@import url('animal.css');
 
 
 
@@ -43,7 +44,7 @@ h3{
     }
 }
 
-p,a,span,label,input, textarea, button{
+p,a,span,label,input, textarea, button, h4{
     font-family: var(--font_sans_serif);
     @media only screen and (max-width: 576px){
         font-size: 14px;
