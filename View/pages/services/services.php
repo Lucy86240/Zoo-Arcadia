@@ -13,12 +13,12 @@
             <div class = "box-backOffice <?php permission(['Employé.e','Administrateur.rice']); ?>">
                 <div class="bgc-img-box"><img class="img-box editServiceD" src="View/assets/img/general/icons/edit.svg" alt="Modifier service"></div>
                 <!-- bouton de suppression seulement pour admin-->
-                <a href="#" class="bgc-img-box deleteServiceD <?php permission(['Administrateur.rice']); ?>"><img class="img-box" src="View/assets/img/general/icons/delete.svg" alt="Supprimer service"></a>
+                <a href="#" class="bgc-img-box deleteDesktop <?php permission(['Administrateur.rice']); ?>"><img class="img-box" src="View/assets/img/general/icons/delete.svg" alt="Supprimer service"></a>
                 
                 <!-- le popup de suppression s'affichant quand la poubelle est cliquée-->
                 <div class="none c-dialog dialog-delete-js">
                     <div class="fond"> </div>
-                    <form class="c-dialog__box popup-delete" method="POST">
+                    <form class="popup popup-delete" method="POST">
                             <span class="Entete">Suppression</span>
                             
                             <p>Etes vous sûr de vouloir supprimer le service : "<?php echo($service['name']);?>" ?</p>
@@ -44,7 +44,7 @@
         <div class="service service-mobile">
             <div class = "box-backOffice <?php permission(['Employé.e','Administrateur.rice']); ?>">
                 <div class="bgc-img-box editServiceM"><img class="img-box" src="View/assets/img/general/icons/edit.svg" alt="Modifier service"></div>
-                <div class="bgc-img-box deleteServiceM <?php permission(['Administrateur.rice']); ?>"><img class="img-box" src="View/assets/img/general/icons/delete.svg" alt="Supprimer service"></div>
+                <div class="bgc-img-box deleteMobile <?php permission(['Administrateur.rice']); ?>"><img class="img-box" src="View/assets/img/general/icons/delete.svg" alt="Supprimer service"></div>
             </div>
             <!-- le popup de suppression s'affichant quand la poubelle est cliquée-->
             <div class="none c-dialog dialog-deleteMobile-js">
@@ -79,4 +79,5 @@
         </a>
     </div>
     <script src="View/assets/script/services.js"></script>
+    <script src="View/assets/script/delete.js"></script>
 </section>

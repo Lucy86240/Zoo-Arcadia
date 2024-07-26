@@ -22,9 +22,8 @@ function userExist(string $user){
 function verifiedLoginInput(string $mailInput, string $passwordInput){
     try{
         $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-        
-        $stmt = $pdo->prepare('SELECT users.password, users.first_name, users.role, roles.label FROM users JOIN roles ON users.role = roles.id_role WHERE mail = :username');
-
+        $stmt = $pdo->prepare('SELECT users.password, users.first_name, users.role, roles.label FROM users 
+        JOIN roles ON users.role = roles.id_role WHERE mail = :username');
         $stmt->bindValue(":username", $mailInput,PDO::PARAM_STR);
         $stmt->execute();
         $res = $stmt->fetch();
@@ -57,4 +56,21 @@ function newUser(User $user){
     $stmt->bindValue(":last_name", $lastName,PDO::PARAM_STR);
     $stmt->execute();
 
+}
+
+function findNameOfUser(string $id) : string{
+    try{
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        $stmt = $pdo->prepare('SELECT first_name, last_name FROM users 
+        WHERE mail = :username');
+        $stmt->bindValue(":username", $id,PDO::PARAM_STR);
+        $stmt->execute();
+        $res = $stmt->fetch();
+        $name = $res['first_name'].' '.$res['last_name'] ; 
+        return $name;
+    }
+    catch(error $e){
+        echo("erreur de bd");
+        return '';
+    }
 }

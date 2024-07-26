@@ -93,4 +93,7 @@ accountConnected.addEventListener('mouseout', ()=>{
     text.classList.add('none');
 })
 
+//page courrante en bleu
+
+
 

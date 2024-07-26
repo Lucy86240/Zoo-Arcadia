@@ -138,7 +138,7 @@ function AnimalsExtract(int $justVisibleAnimal, int $nbAnimals, int $currentPage
                 if ($stmt2->execute())
                 {
                     while($image = $stmt2->fetch()){
-                            $animals[$indice]->addImage($image);
+                        $animals[$indice]->addImage($image);
                     }
                 }
                 if ($medicalDetail==1){
@@ -161,5 +161,85 @@ function AnimalsExtract(int $justVisibleAnimal, int $nbAnimals, int $currentPage
         echo('erreur');
         return [];
     }
+}
 
+function findAnimalById(int $id){
+    try{
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        $stmt = $pdo->prepare('SELECT * FROM animals WHERE id_animal = :id');
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->setFetchMode(PDO::FETCH_CLASS,'Animal');
+
+        if($stmt->execute()){
+            $animal = $stmt->fetch();
+            //add images
+            $id = $animal->getId();
+            $stmt2 = $pdo->prepare('SELECT images.id_image, images.path, images.description, images.icon, images.portrait 
+            FROM images_animals JOIN images ON images_animals.id_image = images.id_image  WHERE id_animal = :id and images.portrait = 0');
+            $stmt2->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmt2->setFetchMode(PDO::FETCH_CLASS,'Image');
+            if ($stmt2->execute())
+            {
+                while($image = $stmt2->fetch()){
+                    $animal->addImage($image);
+                }
+            }
+            $request = 'SELECT * FROM reports_veterinarian WHERE animal = '.$id.' ORDER BY date DESC';
+            $stmt3 = $pdo->prepare($request);
+            $stmt2->setFetchMode(PDO::FETCH_CLASS,'MedicalReport');
+            if ($stmt3->execute())
+            {
+                while($report = $stmt3->fetch()){
+                    $animal->addMedicalReport($report);
+                }
+            }
+        }
+        return $animal;
+    }
+    catch(error $e){
+
+    }
+}
+
+function animalExistById(int $id){
+    $animal = findAnimalById($id);
+    if($animal == null) return false;
+    else return true;
+}
+
+/**
+ * Summary of deleteServiceRequest : supprime un service dans la base de données
+ * @param int $id : id du service à supprimer
+ * @return void
+ */
+function deleteAnimalRequest(int $id){
+    try{
+        if(animalExistById($id)){
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+
+            //on cherche toutes les images associées à l'animal
+            $stmt = $pdo->prepare('SELECT id_image FROM images_animals WHERE id_animal = :id');
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            //on supprime toutes les images
+            if($res != null){
+               // var_dump($res);
+                foreach ($res as $id_image){
+                    $stmt = $pdo->prepare('DELETE FROM images WHERE id_image = :id');
+                    $stmt->bindParam(":id", $id_image['id_image'], PDO::PARAM_INT);
+                    $stmt->execute();
+                }
+            }
+
+            //on supprime l'animal
+            $stmt = $pdo->prepare('DELETE FROM animals WHERE id_animal = :id');
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+    }
+    catch(error $e){
+        echo("problème avec les données");
+    }
 }

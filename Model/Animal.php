@@ -97,7 +97,7 @@ Class Animal{
         }
     }
     public function getLastMedicalReport(){
-        if ($this->countMedicalReports() <1) return new MedicalReport;
+        if ($this->countMedicalReports() <1) return null;
         return $this->medicalReports[0];
     }
     public function addMedicalReport($report){

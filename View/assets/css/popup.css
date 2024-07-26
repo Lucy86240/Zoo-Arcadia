@@ -34,42 +34,6 @@
     box-shadow: 2px 1px 1px black;
     color : var(--white);
     border-radius: 20px;
-
-    .Entete{
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      margin-bottom : 8vh;
-      padding : 4px;
-      background-color: var(--white);
-      border-radius: 20px;
-      color : var(--blue);
-
-      h3{
-        font-weight :normal;
-        text-align: center;
-      }
-
-      button{
-        position : absolute;
-        top : -2vh;
-        right : -1vw;
-        background-color: var(--green);
-        font-size: 25px;
-        color : var(--blue);
-        font-weight: bold;
-        border-radius: 50%;
-        padding:3px 8px;
-        box-shadow: 2px 1px 1px black;
-        border : var(--green);
-      }
-      button:hover{
-        background-color: red;
-        border :red;
-        box-shadow: 2px 1px 1px black;
-        cursor: pointer;
-      }
-    }
     .img{
       display: flex;
       justify-content: center;
@@ -78,42 +42,80 @@
     #illustration-login{
       width : 20vh;
     }
-    form{
-      display : flex;
-      flex-direction: column;
+  }
 
-      .element{
+    .popup{
+      .Entete{
         display: flex;
-        justify-content: space-between;
-        margin-left: 5vw;
-        margin-right: 5vw;
-        margin-bottom : 1vh;
-        textarea, input[type="text"], .stars{
-          width : 40vw;
+        align-items: center;
+        justify-content: space-around;
+        margin-bottom : 8vh;
+        padding : 4px;
+        background-color: var(--white);
+        border-radius: 20px;
+        color : var(--blue) !important;
+  
+        h3{
+          font-weight :normal;
+          text-align: center;
         }
-        textarea{
-          height: 20vh;
-        }
-        .stars{
-          .check-stars-input{
-            display: none;
+        form{
+          display : flex;
+          flex-direction: column;
+    
+          .element{
+            display: flex;
+            justify-content: space-between;
+            margin-left: 5vw;
+            margin-right: 5vw;
+            margin-bottom : 1vh;
+            textarea, input[type="text"], .stars{
+              width : 40vw;
+            }
+            textarea{
+              height: 20vh;
+            }
+            .stars{
+              .check-stars-input{
+                display: none;
+              }
+              display: flex;
+              flex-direction: row;
+            }
+    
           }
-          display: flex;
-          flex-direction: row;
+          .form-submit{
+            display:flex;
+            justify-content: center;
+            margin-bottom : 2vh;
+            margin-top: 8vh;
+            input {
+              border: var(--dark_green);
+            }
+          }
         }
-
-      }
-      .form-submit{
-        display:flex;
-        justify-content: center;
-        margin-bottom : 2vh;
-        margin-top: 8vh;
-        input {
-          border: var(--dark_green);
+  
+        button{
+          position : absolute;
+          top : -2vh;
+          right : -1vw;
+          background-color: var(--green);
+          font-size: 25px;
+          color : var(--blue);
+          font-weight: bold;
+          border-radius: 50%;
+          padding:3px 8px;
+          box-shadow: 2px 1px 1px black;
+          border : var(--green);
+        }
+        button:hover{
+          background-color: red;
+          border :red;
+          box-shadow: 2px 1px 1px black;
+          cursor: pointer;
         }
       }
     }
-  }
   
   /* hidden dialog*/
   .c-dialog[aria-hidden="true"] {

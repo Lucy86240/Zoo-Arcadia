@@ -76,8 +76,9 @@
     }
     .theme-beige{
         background-color: var(--beige);
-        h2,h3,h4,p,span{
+        h2,h3,h4,p,span,a{
             color : var(--brown);
+            text-decoration: none;
         }
         .box-general, .box-feed, .box-cure{
             .icon{
@@ -125,8 +126,32 @@
 
     .theme-blue{
         background-color: var(--blue);
-        h2,h3,h4,p{
+        h2,h3,h4,p,a{
             color : var(--white);
+            text-decoration: none;
+        }
+        .box-general, .box-feed, .box-cure{
+            .icon{
+                .bgc-img-box{
+                    background-color: var(--green);
+                    border-radius: 50%;
+                    padding : 1px;
+                    margin-right: 2px;
+                    .img-box{
+                        filter: brightness(0) saturate(100%) invert(18%) sepia(10%) saturate(3714%) hue-rotate(178deg) brightness(92%) contrast(87%);
+                    }
+                }
+            }
+
+            .icon:hover{
+                .bgc-img-box{
+                    background-color: var(--dark_green);
+                    border-radius: 50%;
+                    .img-box{
+                        filter: brightness(0) saturate(100%) invert(87%) sepia(29%) saturate(114%) hue-rotate(5deg) brightness(110%) contrast(105%);
+                    }
+                }
+            }    
         }
     }
 }

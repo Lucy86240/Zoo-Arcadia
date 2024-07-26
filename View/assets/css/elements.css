@@ -135,5 +135,48 @@ button{
             background-color: var(--blue);
         }
     }
+
+    .bp-white, .bn-white{
+        .previous-text, .next-text{
+            filter:drop-shadow(1px 1px #000000);
+            color:var(--blue);
+            background-color: var(--white);
+        }
+    }
+}
+
+/*popup de suppression*/
+
+.popup-delete{
+    position: absolute;
+    flex: 1;
+    margin: auto;
+    padding: 5px;
+    background-color: var(--blue);
+    box-shadow: 2px 1px 1px black;
+    color: var(--white) !important;
+    border-radius: 20px;
+    width : 50%;
+    height: 40%;
+    left : 50%;
+    top : 50%;
+    transform: translate(-50%,-50%);
+    p{
+        color : var(--white) !important;
+    }
+    .delete-choice{
+        display: flex;
+        justify-content: center;
+        .button-delete{
+            background-color : red;
+            color : var(--white);
+            margin : 20px;
+            padding-left : 10px;
+            padding-right: 10px;
+            border-radius: 20px;
+            border: red;
+            box-shadow: 3px 1px 1px brown;
+        }
+    }
 }
 

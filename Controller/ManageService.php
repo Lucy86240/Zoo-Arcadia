@@ -3,24 +3,6 @@
 include_once "Model/ManageServiceModel.php";
 
 /**
- * Summary of rrmdir : supprime tous les éléments d'un dosser
- * @param mixed $dir : dossier à supprimer
- * @return void
- */
-function rrmdir($dir) {
-    if (is_dir($dir)) {
-        $objects = scandir($dir);
-        foreach ($objects as $object) {
-            if ($object != "." && $object != "..") {
-                if (filetype($dir."/".$object) == "dir") rmdir($dir."/".$object); else unlink($dir."/".$object);
-            }
-        }
-        reset($objects);
-        rmdir($dir);
-    }
-}
-
-/**
  * Summary of AllServices : permet d'obtenir un tableau associatif avec les éléments essentiels des services
  * @param bool $description : true = on souhaite avoir la description des services
  * @return array[] : retourne un tableau associatif avec les infos des services (id_service, name, description, icon, photo)

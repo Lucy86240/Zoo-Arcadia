@@ -17,7 +17,7 @@
                     <!--<img class="logo" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/header/logo.png" alt="logo du zoo Arcadia">-->
                 </a>
                 <div class="menu">
-                    <label class="mobile" for="toggle"><img class="menu-icon" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/header/menu.svg" alt="Menu"></label>
+                    <label class="mobile" for="toggle"><img class="menu-icon" src="<?php if($optionPage==true){echo("../");}?>View/assets/img/general/header/menu.svg" alt="Menu"></label>
                     <input type="checkbox" id="toggle">
                     <div class="navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav">
@@ -25,13 +25,13 @@
                                 <a class="nav-link active" aria-current="page" href="/">Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="services">Nos services</a>
+                                <a class="nav-link" href="<?php if($optionPage==true){echo("../");}?>services">Nos services</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="habitats">Nos habitats</a>
+                                <a class="nav-link text-white" href="<?php if($optionPage==true){echo("../");}?>habitats">Nos habitats</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="contact">Contact</a>
+                                <a class="nav-link text-white" href="<?php if($optionPage==true){echo("../");}?>contact">Contact</a>
                             </li>
                                 <li class="nav-item dropdown <?php permission(['connected']) ?>">
                                     <a class="nav-link connected-link" id="dropdown-toggle" href="#" role="button" aria-expanded="false">
