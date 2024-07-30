@@ -1,6 +1,6 @@
 <?php
     include_once "Model/ManageHousingModel.php";
-    include_once "ManageAnimal.php";
+    include_once "Model/ManageAnimalModel.php";
 
 /**
  * Retourne un tableau associatif avec au moins tout les noms des habitats
@@ -11,7 +11,7 @@
  * @param $justVisibleAnimals 1: animaux visibles, 0: animaux non visibles, 2: tous
  * @param $portraitAccept si les images en portrait sont acceptées (par défaut true)
  */
-    function AllHousingsView(bool $id=false, bool $description=true, int $nbImgs=-1, int $nbAnimals=0, int $justVisibleAnimals=1, bool $portraitAccept=true){
+function allHousingsView(bool $id=false, bool $description=true, int $nbImgs=-1, int $nbAnimals=0, int $justVisibleAnimals=1, bool $portraitAccept=true){
         $housingsObject = AllHousings($portraitAccept);
         $housings = [];
         $id = 0;
@@ -50,7 +50,7 @@
             //ajout du nombre d'animaux souhaités
             if ($nbAnimals != 0)
             {
-                $animalsObject = FindAnimalsByHousing($housingObject->getId(), $nbAnimals, $justVisibleAnimals,$portraitAccept);
+                $animalsObject = findAnimalsByHousing($housingObject->getId(), $nbAnimals,1, $justVisibleAnimals,$portraitAccept);
                 $housing["animals"] =[];
                 foreach($animalsObject as $animalObject){
                     $animal = array(
@@ -81,4 +81,4 @@
             $id++;
         }            
     return $housings;
-    }
+}

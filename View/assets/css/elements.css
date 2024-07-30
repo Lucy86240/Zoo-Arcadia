@@ -82,6 +82,9 @@ button{
 .pagination{
     display: flex;
     justify-content: space-between;
+    a{
+        text-decoration: none;
+    }
 
     .btn-previous, .btn-next{
         display : flex;

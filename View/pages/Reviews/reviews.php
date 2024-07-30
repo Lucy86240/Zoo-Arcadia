@@ -166,12 +166,12 @@
                                     <div class="r-review-stars">
                                         <?php for($i=0;$i<$review["note"];$i++){ 
                                             ?>
-                                            <img class="start" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/review/Star-gold.png" alt="Etoile">
+                                            <img class="start" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/pages/reviews/Star-gold.png" alt="Etoile">
                                         <?php } 
                                         if($review["note"]<NOTE_MAX){
                                             $notStart=NOTE_MAX-$review["note"];
                                             for($i=0;$i<$notStart;$i++){ ?>
-                                                <img class="start" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/review/Star-white.png" alt="">
+                                                <img class="start" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/pages/reviews/Star-white.png" alt="">
                                             <?php }
                                         } ?>
                                     </div>

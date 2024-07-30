@@ -22,7 +22,7 @@
                         <div class="star">
                             <input class="check-stars-input" type="radio" name="stars" value="<?php echo($i)?>" id="star<?php echo($i)?>" required>
                             <label class="form-check-label" for="star<?php echo($i)?>">
-                                <img class="NewReview-star" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/review/Star-white.png" alt="" id="startImg<?php echo($i)?>">
+                                <img class="NewReview-star" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/pages/reviews/Star-white.png" alt="" id="startImg<?php echo($i)?>">
                             </label>
                         </div>
                     <?php } ?>

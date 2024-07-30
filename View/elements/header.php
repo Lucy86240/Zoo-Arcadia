@@ -22,16 +22,16 @@
                     <div class="navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/">Accueil</a>
+                                <a class="nav-link <?php if($_SERVER['REQUEST_URI']=='/') echo('active') ?>" id="home" aria-current="page" href="/">Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php if($optionPage==true){echo("../");}?>services">Nos services</a>
+                                <a class="nav-link <?php if($_SERVER['REQUEST_URI']=='/services') echo('active') ?>" id="services" href="<?php if($optionPage==true){echo("../");}?>services">Nos services</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="<?php if($optionPage==true){echo("../");}?>habitats">Nos habitats</a>
+                                <a class="nav-link <?php if($_SERVER['REQUEST_URI']=='/habitats') echo('active') ?> text-white" id="housings" href="<?php if($optionPage==true){echo("../");}?>habitats">Nos habitats</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="<?php if($optionPage==true){echo("../");}?>contact">Contact</a>
+                                <a class="nav-link <?php if($_SERVER['REQUEST_URI']=='/contact') echo('active') ?> text-white" id="contact" href="<?php if($optionPage==true){echo("../");}?>contact">Contact</a>
                             </li>
                                 <li class="nav-item dropdown <?php permission(['connected']) ?>">
                                     <a class="nav-link connected-link" id="dropdown-toggle" href="#" role="button" aria-expanded="false">

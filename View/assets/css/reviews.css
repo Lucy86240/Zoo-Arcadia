@@ -203,7 +203,7 @@
 .reviews{
     background-color: var(--white);
     .top{
-        background-color: var(--green);
+        background-color: var(--white);
     }
     h1{
         text-align: center;
@@ -439,6 +439,9 @@
                         }
                         .img-valid, .img-moderate, .img-delete{
                             filter: brightness(0) saturate(100%) invert(89%) sepia(0%) saturate(1021%) hue-rotate(62deg) brightness(102%) contrast(84%);
+                        }
+                        .img-valid:hover, .img-moderate:hover, .img-delete:hover{
+                            cursor: pointer;
                         }
 
                         .check-validate-review:checked + label img{

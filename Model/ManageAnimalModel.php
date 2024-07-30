@@ -40,7 +40,7 @@ function countAnimals($justVisibleAnimal, int $id_housing){
      * @param $portraitAccept si les images en portrait sont acceptées (par défaut true)
      * @return $animals array of animals
      */
-    function FindAnimalsByHousing(int $id_housing, int $nbAnimals=-1, int $currentPage, int $justVisibleAnimal=1,bool $portraitAccept=true){
+    function findAnimalsByHousing(int $id_housing, int $nbAnimals=-1, int $currentPage, int $justVisibleAnimal=1,bool $portraitAccept=true){
         try{
             $animals = [];
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);

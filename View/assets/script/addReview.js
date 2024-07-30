@@ -11,16 +11,16 @@ popup(dialogNR,triggerNR,dismissTriggerNR)
     starsInput[i].addEventListener('click', ()=> {
       for(let j=0; j<starsInput.length;j++){
         if(window.location.href==(SITE_URL+'/avis') ||window.location.href==(SITE_URL+'/') ){
-          starsImg[j].src="View/assets/img/general/review/Star-white.png";
+          starsImg[j].src="View/assets/img/general/pages/reviews/Star-white.png";
         }else{
-          starsImg[j].src="../View/assets/img/general/review/Star-white.png";
+          starsImg[j].src="../View/assets/img/general/pages/reviews/Star-white.png";
         }
       }
       for(let j=0; j<=i; j++){
         if(window.location.href==(SITE_URL+'/avis')){
-          starsImg[j].src="View/assets/img/general/review/Star-gold.png";
+          starsImg[j].src="View/assets/img/general/pages/reviews/Star-gold.png";
         }else{
-          starsImg[j].src="../View/assets/img/general/review/Star-gold.png";
+          starsImg[j].src="../View/assets/img/general/pages/reviews/Star-gold.png";
         }
       }
     })

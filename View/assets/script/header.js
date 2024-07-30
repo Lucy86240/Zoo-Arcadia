@@ -1,29 +1,35 @@
-//Pour une mise en page différente après le scroll
+//Pour une mise en page différente de la page d'accueil après le scroll
 
 const container = document.querySelector("#container-fluid")
 const dropdown = document.querySelector("#dropdown-menu")
 
 let scroll = false
 
-//&& window.location.href== SITE_URL+'/'
-
-window.onscroll = function(){
-    if (window.scrollY > 1 && scroll===false){
-        container.classList.add("scroll");
-        dropdown.classList.add("scroll");
-        container.classList.remove("top");
-        dropdown.classList.remove("top");
-        
-        scroll = true
+if(window.location.href==(SITE_URL)){
+    window.onscroll = function(){
+        if (window.scrollY > 1 && scroll===false){
+            container.classList.add("scroll");
+            dropdown.classList.add("scroll");
+            container.classList.remove("top");
+            dropdown.classList.remove("top");
+            
+            scroll = true
+        }
+        else if (window.scrollY <= 1){
+            container.classList.add("top");
+            dropdown.classList.add("top");
+            container.classList.remove("scroll");
+            dropdown.classList.remove("scroll");
+            scroll = false
+        }
     }
-    else if (window.scrollY <= 1){
-        container.classList.add("top");
-        dropdown.classList.add("top");
-        container.classList.remove("scroll");
-        dropdown.classList.remove("scroll");
-        scroll = false
-    }
+}else{
+    container.classList.add("scroll");
+    dropdown.classList.add("scroll");
+    container.classList.remove("top");
+    dropdown.classList.remove("top");
 }
+
 
 //affiche le sous-menu de l'espace utilisateur
 const userMenu = document.querySelector("#dropdown-toggle");
@@ -92,8 +98,3 @@ accountConnected.addEventListener('mouseout', ()=>{
 
     text.classList.add('none');
 })
-
-//page courrante en bleu
-
-
-

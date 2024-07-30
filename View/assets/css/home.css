@@ -354,6 +354,9 @@
 .home-reviews{
     width:100vw;
     padding-bottom: 10vh;
+    a{
+        text-decoration: none;
+    }
     .home-review{
         border-radius: 20px;
         
@@ -379,6 +382,11 @@
         }
         .btn-edit{
             background-color: var(--blue) !important;
+        }
+    }
+    .home-button-review{
+        #popup-review{
+            margin-right : 50px;
         }
     }
 }
@@ -419,9 +427,6 @@
 /*styles specials desktop*/
 @media only screen and (min-width: 576px){
     .home-reviews{
-        a{
-            text-decoration: none;
-        }
         background: linear-gradient(var(--blue), var(--beige));
         h2{
             padding-top:10vh;

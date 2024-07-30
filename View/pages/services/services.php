@@ -1,5 +1,5 @@
 <section class="services">
-    <div style="height:80px; background-color:var(--green);"> </div>
+    <div class="head"> </div>
     <div class="title">
         <p>Pour vous accompagner nous vous proposons</p>
         <h1>les services </h1>

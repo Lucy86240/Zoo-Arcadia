@@ -16,7 +16,7 @@
     <h2 class="text-center text-white home-housings-title-mobile">Nos habitats</h2>
     <div class="home-housings-container">
         <?php
-            $housings = AllHousingsView(false,true,1,3,1,0);
+            $housings = allHousingsView(false,true,1,3,1,0);
             foreach($housings as $housing){
                 $animal1 = $housing["animals"][0];
                 $animal2 = $housing["animals"][1];
@@ -96,12 +96,12 @@
             <p class="h-review-date">visite du <?php echo($review["dateVisite"]);?></p>
             <div class="home-review-stars">
             <?php for($i=0;$i<$review["note"];$i++){ ?>
-                <img class="start" src="View/assets/img/general/review/Star-gold.png" alt="Etoile">
+                <img class="start" src="View/assets/img/general/pages/reviews/Star-gold.png" alt="Etoile">
             <?php } 
             if($review["note"]<NOTE_MAX){
                 $notStart=NOTE_MAX-$review["note"];
                 for($i=0;$i<$notStart;$i++){ ?>
-                    <img class="start" src="View/assets/img/general/review/Star-white.png" alt="">
+                    <img class="start" src="View/assets/img/general/pages/reviews/Star-white.png" alt="">
                 <?php }
             } ?>
             </div>
@@ -117,12 +117,12 @@
             <p class="h-review-date">visite du <?php echo($review["dateVisite"]);?></p>
             <div class="home-review-stars">
                 <?php for($i=0;$i<$review["note"];$i++){ ?>
-                    <img class="start" src="View/assets/img/general/review/Star-gold.png" alt="Etoile">
+                    <img class="start" src="View/assets/img/general/pages/reviews/Star-gold.png" alt="Etoile">
                 <?php } 
                 if($review["note"]<NOTE_MAX){
                     $notStart=NOTE_MAX-$review["note"];
                     for($i=0;$i<$notStart;$i++){ ?>
-                        <img class="start" src="View/assets/img/general/review/Star-white.png" alt="">
+                        <img class="start" src="View/assets/img/general/pages/reviews/Star-white.png" alt="">
                     <?php }
                 } ?>
             </div>

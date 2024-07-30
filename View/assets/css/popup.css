@@ -59,6 +59,7 @@
           font-weight :normal;
           text-align: center;
         }
+      }
         form{
           display : flex;
           flex-direction: column;
@@ -79,6 +80,9 @@
             .stars{
               .check-stars-input{
                 display: none;
+              }
+              .NewReview-star:hover{
+                cursor: pointer;
               }
               display: flex;
               flex-direction: row;
@@ -115,8 +119,8 @@
           box-shadow: 2px 1px 1px black;
           cursor: pointer;
         }
-      }
     }
+    
   
   /* hidden dialog*/
   .c-dialog[aria-hidden="true"] {

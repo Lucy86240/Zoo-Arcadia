@@ -4,7 +4,7 @@ require_once "Route.php";
 
 // ($url,parametre dans l'url, $title, $pathHtml, $authorize, $pathController)
 $allRoutes = array(
-    new Route('',false,'Accueil','View/pages/home.php',[],'Controller/AllController.php'),
+    new Route('',false,'Accueil','View/pages/home.php',[],'Controller/HomeController.php'),
     new Route('avis',true,'Avis','View/pages/reviews/reviews.php',[],'Controller/ManageReview.php'),
     new Route('avis',false,'Avis','View/pages/reviews/reviews.php',[],'Controller/ManageReview.php'),
     new Route('services',false,'Services','View/pages/services/services.php',[],'Controller/ManageService.php'),

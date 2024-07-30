@@ -86,12 +86,12 @@
         border-radius: 50%;
         padding:3px 8px;
         box-shadow: 2px 1px 1px black;
-      }
-      .close:hover{
+    }
+    .close:hover{
         background-color: red;
         box-shadow: 2px 1px 1px black;
         cursor: pointer;
-      }
+    }
 }
 
 /*version mobile*/
