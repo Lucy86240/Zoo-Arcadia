@@ -12,12 +12,12 @@ include_once "Model/MedicalReport.php";
 function countAnimals($justVisibleAnimal, int $id_housing){
     $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
     if($justVisibleAnimal==0 || $justVisibleAnimal==1){
-        $visible = "isVisible = ".$justVisibleAnimal." ";
+        $visible = "WHERE isVisible = ".$justVisibleAnimal." ";
     }
     else{
-        $visible = "isVisible = 1 AND isVisible = 0 ";
+        $visible = "";
     }
-    $request = 'SELECT count(*) FROM animals WHERE '.$visible;
+    $request = 'SELECT count(*) FROM animals '.$visible;
     if($id_housing >0) $request." id_housing = .".$id_housing;
 
     $stmt = $pdo->prepare($request);
@@ -119,8 +119,8 @@ function AnimalsExtract(int $justVisibleAnimal, int $nbAnimals, int $currentPage
         }
         else{
             $stmt = $pdo->prepare('SELECT * FROM animals ORDER BY id_animal ASC LIMIT :limit');
+            $stmt->bindParam(":limit", $nbAnimals, PDO::PARAM_INT);
         }      
-        $stmt->bindParam(":limit", $nbAnimals, PDO::PARAM_INT);
         //$stmt->setFetchMode(PDO::FETCH_CLASS,'Animal');
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
@@ -326,6 +326,40 @@ function deleteAnimalRequest(int $id){
     }
     catch(error $e){
         echo("problème avec les données");
+    }
+}
+
+function archiveAnimalRequest(int $id){
+    try{
+        //on vérifie que le service existe et qu'il y a une modification à faire
+        if(animalExistById($id)){
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+            $stmt = $pdo->prepare('UPDATE animals SET isVisible = 0 WHERE id_animal = :id');
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+        return "success";
+    }
+    catch(error $e){
+        echo('erreur bd');
+        return "error";
+    }
+}
+
+function unarchiveAnimalRequest(int $id){
+    try{
+        //on vérifie que le service existe et qu'il y a une modification à faire
+        if(animalExistById($id)){
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+            $stmt = $pdo->prepare('UPDATE animals SET isVisible = 1 WHERE id_animal = :id');
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+        return "success";
+    }
+    catch(error $e){
+        echo('erreur bd');
+        return "error";
     }
 }
 

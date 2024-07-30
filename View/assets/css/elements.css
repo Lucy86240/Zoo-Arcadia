@@ -72,7 +72,7 @@ button{
 }
 
 .btn-brown:hover,.btn-blue:hover, .btn-green:hover, .btn-DarkGreen:hover, .btn-beige:hover, .btn-red:hover,
-.btn-previous:hover, .btn-next:hover,  .button-delete:hover{
+.btn-previous:hover, .btn-next:hover,  .button-confirm:hover{
     opacity:0.8;
     cursor : pointer;
     -webkit-transform: scale(1.1);
@@ -96,9 +96,7 @@ button{
             }
             @media only screen and (min-width: 576px){
                 width : 95px;
-            }
-
-            
+            }     
             text-align: center;
             background-color: var(--brown);
             color : var(--white);
@@ -147,7 +145,7 @@ button{
 
 /*popup de suppression*/
 
-.popup-delete{
+.popup-confirm{
     position: absolute;
     flex: 1;
     margin: auto;
@@ -164,10 +162,13 @@ button{
     p{
         color : var(--white) !important;
     }
-    .delete-choice{
+    span{
+        color : var(--green) !important;
+    }
+    .confirm-choice{
         display: flex;
         justify-content: center;
-        .button-delete{
+        .button-confirm{
             background-color : red;
             color : var(--white);
             margin : 20px;

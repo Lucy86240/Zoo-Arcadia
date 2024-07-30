@@ -1,73 +1,111 @@
 <section class="animal">
     <div class="<?php if(isset($theme) && $theme!=null) echo($theme); else echo("theme-beige");?> layout">
-        <div class="box-backoffice">
-            <!-- Boite à outil de l'animal
-                - éditer l'animal v
-                - supprimer l'animal v
-                - l'archiver
-            -->
-            <div class="box-general">
-                <!-- icon pour modifier l'animal-->
-                <a class="icon UpdateAnimal" href="maj_animal/?id=<?php echo($animal['id'])?>">
-                    <div class="bgc-img-box"><img class="img-box editAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/edit.svg" alt="Modifier l'animal"></div>
-                    <span class="legend">Modifier</span>
-                </a>
-                <div class="icon">
-                    <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/archive.svg" alt="Archiver l'animal"></div>
-                    <span class="legend">Archiver</span>
+        <div class="barre-backoffice">
+            <div class="box-backoffice <?php permission(['connected']);?>">
+                <!-- Boite à outil de l'animal
+                    - éditer l'animal v
+                    - supprimer l'animal v
+                    - l'archiver
+                -->
+                <div class="box-general <?php permission(['Administrateur.rice']);?>">
+                    <!-- icon pour modifier l'animal-->
+                    <a class="icon UpdateAnimal" href="maj_animal/?id=<?php echo($animal['id'])?>">
+                        <div class="bgc-img-box"><img class="img-box editAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/edit.svg" alt="Modifier l'animal"></div>
+                        <span class="legend">Modifier</span>
+                    </a>
+                    <!-- icon archivage (seulement si l'animal est visible-->
+                    <div class="icon popupDesktop <?php if($animal['isVisible']==0) echo('none');?>">
+                        <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/archive.svg" alt="Archiver l'animal"></div>
+                        <span class="legend">Archiver</span>
+                    </div>
+                    <!-- le popup d'archivage s'affichant quand l'icone est cliquée-->
+                    <div class="none c-dialog dialog-popup-js">
+                        <div class="fond"> </div>
+                        <form class="popup popup-confirm" method="POST">
+                                <span class="Entete">Archivage</span>
+                                <p>Etes vous sûr de vouloir archiver l'animal : "<?php echo($animal['name'].'" de race "'.$animal['breed']);?>" ?</p>
+                                <span>L'animal ne sera plus visible auprès des visiteurs et ne sera plus accessible depuis les habitats.</span>
+                                <span>Vous pourrez toujours le consulter depuis la liste des animaux.</span>
+                                <div class="confirm-choice">
+                                    <input type="submit" name="ValidationArchiveAnimal<?php echo($animal['id']);?>" value="Oui" class="button-confirm">
+                                    <button class="button btn-green">Non</button>
+                                </div>
+                        </form>
+                    </div>
+                    <!-- icon désarchivage (seulement si l'animal est non-visible-->
+                    <div class="icon popupDesktop <?php if($animal['isVisible']==1) echo('none');?>">
+                        <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/unarchive.svg" alt="Désrchiver l'animal"></div>
+                        <span class="legend">Désarchiver</span>
+                    </div>
+                    <!-- le popup d'archivage s'affichant quand l'icone est cliquée-->
+                    <div class="none c-dialog dialog-popup-js">
+                        <div class="fond"> </div>
+                        <form class="popup popup-confirm" method="POST">
+                                <span class="Entete">Désarchivage</span>
+                                <p>Etes vous sûr de vouloir désarchiver l'animal : "<?php echo($animal['name'].'" de race "'.$animal['breed']);?>" ?</p>
+                                <span>L'animal sera à nouveau visible auprès des visiteurs et accessible depuis les habitats.</span>
+                                <div class="confirm-choice">
+                                    <input type="submit" name="ValidationUnarchiveAnimal<?php echo($animal['id']);?>" value="Oui" class="button-confirm">
+                                    <button class="button btn-green">Non</button>
+                                </div>
+                        </form>
+                    </div>
+                    <div class="icon popupDesktop">
+                        <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer l'animal"></div>
+                        <span class="legend">Supprimer</span>
+                    </div>
+                    <!-- le popup de suppression s'affichant quand la poubelle est cliquée-->
+                    <div class="none c-dialog dialog-popup-js">
+                        <div class="fond"> </div>
+                        <form class="popup popup-confirm" method="POST">
+                                <span class="Entete">Suppression</span>
+                                <p>Etes vous sûr de vouloir supprimer l'animal : "<?php echo($animal['name'].'" de race "'.$animal['breed']);?>" ?</p>
+                                <div class="confirm-choice">
+                                    <input type="submit" name="ValidationDeleteAnimal<?php echo($animal['id']);?>" value="Oui" class="button-confirm">
+                                    <button class="button btn-green">Non</button>
+                                </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="icon deleteDesktop">
-                    <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer l'animal"></div>
-                    <span class="legend">Supprimer</span>
+                <!-- Boite à outil des repas
+                    - donner à manger
+                    - voir ses repas
+                -->
+                <div class="box-feed">
+                    <div class="icon">
+                        <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>repas_animal/?animal=<?php echo($animal['id']); ?>">
+                            <div class="bgc-img-box"><img class="img-box mealsAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/meals.svg" alt="Visualiser les repas"></div>
+                            <span class="legend">Repas</span>
+                        </a>
+                    </div>
+                    <div class="icon <?php permission(['Administrateur.rice','Employé.e']);?>">
+                        <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>nourrir/?animal=<?php echo($animal['id']); ?>">
+                            <div class="bgc-img-box"><img class="img-box feedAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/feed.svg" alt="Nourrir"></div>
+                            <span class="legend">Nourrir</span>
+                        </a>
+                    </div>
                 </div>
-                <!-- le popup de suppression s'affichant quand la poubelle est cliquée-->
-                <div class="none c-dialog dialog-delete-js">
-                    <div class="fond"> </div>
-                    <form class="popup popup-delete" method="POST">
-                            <span class="Entete">Suppression</span>
-                            <p>Etes vous sûr de vouloir supprimer l'animal : "<?php echo($animal['name'].'" de race "'.$animal['breed']);?>" ?</p>
-                            <div class="delete-choice">
-                                <input type="submit" name="ValidationDeleteAnimal<?php echo($animal['id']);?>" value="Oui" class="button-delete">
-                                <button class="button btn-green">Non</button>
-                            </div>
-                    </form>
+                <!-- Boite à outil pour les comptes rendus médicaux
+                    - rédiger un compte rendu
+                    - voir les comptes rendus
+                -->
+                <div class="box-cure <?php permission(['Administrateur.rice','Vétérinaire']);?>">
+                    <div class="icon">
+                        <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>rapport_medicaux_animal/?animal=<?php echo($animal['id']); ?>">
+                            <div class="bgc-img-box"><img class="img-box reportMedicalAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Visualiser les rapports médicaux"></div>
+                            <span class="legend">Rapport médicaux</span>
+                        </a>
+                    </div>
+                    <div class="icon">
+                        <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>nouveau_rapport/?animal=<?php echo($animal['id']); ?>">
+                            <div class="bgc-img-box"><img class="img-box newReportAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un rapport médical"></div>
+                            <span class="legend">Nouveau rapport</span>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <!-- Boite à outil des repas
-                - donner à manger
-                - voir ses repas
-            -->
-            <div class="box-feed">
-                <div class="icon">
-                    <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>repas_animal/?animal=<?php echo($animal['id']); ?>">
-                        <div class="bgc-img-box"><img class="img-box mealsAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/meals.svg" alt="Visualiser les repas"></div>
-                        <span class="legend">Repas</span>
-                    </a>
-                </div>
-                <div class="icon">
-                    <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>nourrir/?animal=<?php echo($animal['id']); ?>">
-                        <div class="bgc-img-box"><img class="img-box feedAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/feed.svg" alt="Nourrir"></div>
-                        <span class="legend">Nourrir</span>
-                    </a>
-                </div>
-            </div>
-            <!-- Boite à outil pour les comptes rendus médicaux
-                - rédiger un compte rendu
-                - voir les comptes rendus
-            -->
-            <div class="box-cure">
-                <div class="icon">
-                    <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>rapport_medicaux_animal/?animal=<?php echo($animal['id']); ?>">
-                        <div class="bgc-img-box"><img class="img-box reportMedicalAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Visualiser les rapports médicaux"></div>
-                        <span class="legend">Rapport médicaux</span>
-                    </a>
-                </div>
-                <div class="icon">
-                    <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>nouveau_rapport/?animal=<?php echo($animal['id']); ?>">
-                        <div class="bgc-img-box"><img class="img-box newReportAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un rapport médical"></div>
-                        <span class="legend">Nouveau rapport</span>
-                    </a>
-                </div>
+            <div class="<?php if($animal['isVisible']==1) echo('none') ?>">
+                <span class=" notVisible">Archivé</span>
             </div>
         </div>
         <div class="title">
@@ -136,4 +174,4 @@
     </div>
 </section>
 <script src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/script/animal.js"></script>
-<script src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/script/delete.js"></script>
+<script src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/script/popupConfirm.js"></script>

@@ -3,46 +3,60 @@
         margin : 6vw;
         padding : 2vw;
         border-radius: 20px;
-
-        .box-backoffice{
-            .c-dialog__box{
-                height: 65vh;
-            }
-            .box-general, .box-feed, .box-cure{
-                display: flex; 
-                .icon{
-                    .img-box{
-                        width : 25px;
-                    }
-                    .bgc-img-box{
-                        padding : 5px;
-                    }
-                    span{
-                        display: none;
-                    }
+        .barre-backoffice{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .box-backoffice{
+                .c-dialog__box{
+                    height: 65vh;
                 }
-                .icon:hover{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    width: 32px;
-                    .bgc-img-box{
-                        width: 32px;
-                        border-radius: 50%;
-                        cursor : pointer;
+                .box-general, .box-feed, .box-cure{
+                    display: flex; 
+                    a{
+                        margin-top : -2px;
+                    }
+                    .icon{
                         .img-box{
-                            width : 30px;
+                            width : 25px;
+                        }
+                        .bgc-img-box{
+                            padding : 5px;
+                        }
+                        span{
+                            display: none;
                         }
                     }
-                    span{
-                        display:inline;
-                        font-size: 8px;
-                        margin-top : 2px;
-                        font-weight: bold;
+                    .icon:hover{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        width: 32px;
+                        .bgc-img-box{
+                            width: 32px;
+                            border-radius: 50%;
+                            cursor : pointer;
+                            .img-box{
+                                width : 30px;
+                            }
+                        }
+                        span{
+                            display:inline;
+                            font-size: 8px;
+                            margin-top : 2px;
+                            font-weight: bold;
+                        }               
                     }
-                }  
+                }
+                
             }
-            
+            .notVisible{
+                color : red;
+                font-weight: bold;
+                font-size : 30px;
+                padding : 2px;
+                border : red dashed;
+            }
         }
         .title{
             display: flex;
@@ -172,10 +186,15 @@
         .body{
                 display: flex;
                 .images{
-                    width : 50%;
-                    .imgAnimal{
-                        max-width : 80%;
-                        max-height : 90%;
+                    width : 45vw;
+                    .img-container{
+                        width : 36vw;
+                        height: 28vw;
+                        margin-left : 10%;
+                        .imgAnimal{
+                            max-width : 100%;
+                            max-height : 100%;
+                        }
                     }
                 }
                 .description{
@@ -211,13 +230,21 @@
             margin-top : 2vh;
         }
         .body{
-            .imgAnimal{
-                width : 90%;
+            .img-container{
+                width: 95vw;
+                height : 50vw;
+                margin-left : -5vw;
+                .imgAnimal{
+                    max-width : 90%;
+                    max-height : 90%;
+                }
             }
         }
         .pagination{
             width : 90%;
             margin-left : 5%;
+            margin-top : -2%;
+            margin-bottom : 6%;
         }
     }
 }

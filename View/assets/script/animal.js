@@ -139,5 +139,3 @@ for(let i=0; i<input.length;i++){
             newBreed[i].classList.add('none');}
     })
 }
-
-//dans update passage à la photo suivante

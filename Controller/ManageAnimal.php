@@ -9,7 +9,7 @@ function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport){
             "name" => $animalObject->getName(),
             "housing" => $animalObject->getHousing(),
             "breed" => $animalObject->getBreed(),
-            "IsVisible" => $animalObject->getIsVisible(),
+            "isVisible" => $animalObject->getIsVisible(),
         );
         if($animalObject->getLastMedicalReport() != null){
             $animal['LastMedicalReport'] = array(
@@ -96,8 +96,36 @@ function deleteAnimal(int $id, string $name){
     
 }
 
+function archiveAnimal(&$animal){
+    //on recupère le nom du bouton à cliquer pour supprimer le service
+    $nameButton = "ValidationArchiveAnimal".$animal['id'];
+    //si on a cliqué sur le bouton
+    if(isset($_POST[$nameButton]) && $_POST[$nameButton]!=null){
+        //suppression dans la base de données
+        archiveAnimalRequest($animal['id']);
+        $_POST[$nameButton]=null; 
+        $animal = changeAnimalObjectToAssociatif(findAnimalById($animal['id']), true);
+    } 
+    
+}
+function unarchiveAnimal(&$animal){
+    //on recupère le nom du bouton à cliquer pour supprimer le service
+    $nameButton = "ValidationUnarchiveAnimal".$animal['id'];
+    //si on a cliqué sur le bouton
+    if(isset($_POST[$nameButton]) && $_POST[$nameButton]!=null){
+        //suppression dans la base de données
+        unarchiveAnimalRequest($animal['id']);
+        $_POST[$nameButton]=null;
+        $animal = changeAnimalObjectToAssociatif(findAnimalById($animal['id']), true);
+    } 
+    
+}
 
 
-    $animals= animalsView(1,1,1,1);
+
+
+    $animals= animalsView(2,1,1,1);
     $animal = $animals[0];
     deleteAnimal($animal['id'],$animal['name']);
+    archiveAnimal($animal);
+    unarchiveAnimal($animal);
