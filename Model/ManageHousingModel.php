@@ -67,3 +67,17 @@
         }
     }
 
+    function listNameIdAllHousings(){
+        try{
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+            $stmt = $pdo->prepare('SELECT name, id_housing FROM housings');
+            $stmt->execute();
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
+        }
+        catch(Error $e){
+            echo "Désolée";
+            return '';
+        }
+    }
+

@@ -5,9 +5,11 @@
         border-radius: 20px;
 
         .box-backoffice{
-
+            .c-dialog__box{
+                height: 65vh;
+            }
             .box-general, .box-feed, .box-cure{
-                display: flex;
+                display: flex; 
                 .icon{
                     .img-box{
                         width : 25px;
@@ -38,8 +40,9 @@
                         margin-top : 2px;
                         font-weight: bold;
                     }
-                }   
+                }  
             }
+            
         }
         .title{
             display: flex;
@@ -73,6 +76,7 @@
                 }
             }
         }
+        
     }
     .theme-beige{
         background-color: var(--beige);
@@ -170,26 +174,28 @@
                 .images{
                     width : 50%;
                     .imgAnimal{
-                        width : 80%;
-                    }
-                    .pagination{
-                        margin-left : 10%;
-                        width: 80%;
-                        @media only screen and (max-width: 780px){
-                            .previous-img, .next-img{
-                                width : 28px;
-                            }
-                            .next-text, .previous-text{
-                                width: 74px;
-                                font-size : 14px;
-                            }
-                        }
+                        max-width : 80%;
+                        max-height : 90%;
                     }
                 }
                 .description{
                     width: 50%;
                 }
+        }
+        .pagination{
+            margin-left : 10%;
+            width: 80%;
+            @media only screen and (max-width: 780px){
+                .previous-img, .next-img{
+                    width : 28px;
+                    height: 28px;
+                }
+                .next-text, .previous-text{
+                    width: 74px;
+                    font-size : 14px;
+                }
             }
+        }
     }
 }
         
@@ -205,12 +211,13 @@
             margin-top : 2vh;
         }
         .body{
-            .imgAnimal, .pagination{
+            .imgAnimal{
                 width : 90%;
             }
-            .pagination{
-                margin-left : 5%;
-            }
+        }
+        .pagination{
+            width : 90%;
+            margin-left : 5%;
         }
     }
 }

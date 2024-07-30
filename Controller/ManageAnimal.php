@@ -1,6 +1,7 @@
 <?php
 
 include_once "Model/ManageAnimalModel.php";
+include_once 'Model/ManageHousingModel.php';
 
 function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport){
         $animal = array(
@@ -41,6 +42,7 @@ function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport){
             $img= array(
                 "path" => $animalObject->getImage($i)->getPath(),
                 "description" => $animalObject->getImage($i)->getDescription(),
+                "id" => $animalObject->getImage($i)->getId(),
             );
             array_push($animal['images'],$img);
         }
@@ -48,6 +50,7 @@ function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport){
             $img= array(
                 "path" => IMG_DEFAULT_ANIMAL,
                 "description" => 'pas de photo disponible',
+                "id" => 0,
             );
             array_push($animal['images'],$img);
         }
@@ -92,6 +95,8 @@ function deleteAnimal(int $id, string $name){
     } 
     
 }
+
+
 
     $animals= animalsView(1,1,1,1);
     $animal = $animals[0];

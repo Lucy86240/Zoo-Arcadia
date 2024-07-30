@@ -15,6 +15,7 @@ $allRoutes = array(
     new Route('nouveau_rapport',true,'Nouveau rapport','View/pages/medicalReports/addMedicalReport.php',[],'Controller/ManageMedicalReports.php'),
     new Route('repas',true,'Repas','View/pages/food/foodAnimal.php',[],'Controller/ManageFood.php'),
     new Route('nourrir',true,'Nourrir','View/pages/food/addFood.php',[],'Controller/ManageFood.php'),
+    new Route('maj_animal',true,'Mise à jour animal','View/pages/animal/updateAnimal.php',[],'Controller/updateAnimal.php'),
 );
 
 define('ALL_ROUTES',$allRoutes);

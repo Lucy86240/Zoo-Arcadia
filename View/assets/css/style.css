@@ -5,11 +5,12 @@
 @import url('elements.css');
 @import url('home.css');
 @import url('connected.css');
-@import url('popup.css');
 @import url('reviews.css');
 @import url('services.css');
 @import url('addService.css');
 @import url('animal.css');
+@import url('updateAnimal.css');
+@import url('popup.css');
 
 
 
@@ -44,7 +45,7 @@ h3{
     }
 }
 
-p,a,span,label,input, textarea, button,th,td,h4{
+p,a,span,label,input, textarea, button,th,td,h4, select{
     font-family: var(--font_sans_serif);
     @media only screen and (max-width: 576px){
         font-size: 14px;

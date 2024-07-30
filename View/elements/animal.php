@@ -7,10 +7,11 @@
                 - l'archiver
             -->
             <div class="box-general">
-                <div class="icon">
+                <!-- icon pour modifier l'animal-->
+                <a class="icon UpdateAnimal" href="maj_animal/?id=<?php echo($animal['id'])?>">
                     <div class="bgc-img-box"><img class="img-box editAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/edit.svg" alt="Modifier l'animal"></div>
                     <span class="legend">Modifier</span>
-                </div>
+                </a>
                 <div class="icon">
                     <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/archive.svg" alt="Archiver l'animal"></div>
                     <span class="legend">Archiver</span>

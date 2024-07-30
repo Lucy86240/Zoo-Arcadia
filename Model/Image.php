@@ -72,7 +72,7 @@ function searchIdImage(string $type, int $id_type, bool $icon){
                 $table = "images_services";
                 $name_id = "id_service";
         }
-        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
         $request = 'SELECT images.id_image FROM '.$table.' JOIN images ON '.$table.'.id_image = images.id_image WHERE '.$table.'.'.$name_id.' = ';
         $stmt = $pdo->prepare($request.' :id_type and images.icon = :icon');
         $stmt->bindParam(":id_type", $id_type, PDO::PARAM_INT);
@@ -87,9 +87,24 @@ function searchIdImage(string $type, int $id_type, bool $icon){
     }
 }
 
+function searchPathById(int $id){
+    try{
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        $stmt = $pdo->prepare('SELECT path FROM images WHERE id_image = :id');
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch()["path"];
+
+    }
+    catch(error $e){
+        echo("problème avec les données");
+        return 0;
+    }
+}
+
 function imageExistById(int $id){
     try{
-        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
         $stmt = $pdo->prepare('SELECT id_image FROM images WHERE id_image = :id');
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -130,7 +145,7 @@ function validIcon($file){
  * @param string $type : 'services' , 'housings', 'animals'
  * @param int $id_type : l'id du service / habitat ou animal concerné
  * @param Image $image : l'image à enregistrer
- * @return void
+ * @return string : success ou error
  */
 function addImgRequest(string $type, int $id_type, Image $image){
     try{
@@ -138,7 +153,7 @@ function addImgRequest(string $type, int $id_type, Image $image){
         $description = $image->getDescription();
         $icon = $image->getIcon();
         $portrait = $image->getportrait();
-        $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
         $stmt = $pdo->prepare('insert into images (path, description, icon, portrait) VALUES (:path, :description, :icon, :portrait)');
         $stmt->bindParam(":path", $path, PDO::PARAM_STR);
         $stmt->bindParam(":description", $description, PDO::PARAM_STR);
@@ -156,15 +171,19 @@ function addImgRequest(string $type, int $id_type, Image $image){
             case "services" : 
                 $table = "images_services";
                 $name_id = "id_service";
+                break;
             case"animals":
                 $table = "images_animals";
                 $name_id = "id_animal";
+                break;
             case "housings":
                 $table = "images_housings";
                 $name_id = "id_housing";
+                break;
             default :
                 $table = "images_services";
                 $name_id = "id_service";
+                break;
         }
 
         $request = 'insert into '.$table.' ('.$name_id.', id_image)';
@@ -172,9 +191,11 @@ function addImgRequest(string $type, int $id_type, Image $image){
         $stmt->bindParam(":id_type", $id_type, PDO::PARAM_INT);
         $stmt->bindParam(":id_image", $res['id_image'], PDO::PARAM_INT);
         $stmt->execute();
+        return "success";
     }
     catch(error $e){
         echo("problème avec les données");
+        return "error";
     }
 }
 
@@ -182,7 +203,7 @@ function updateImageRequest(int $id, string $path, string $description, bool $po
 
     try{
         if(imageExistById($id)){
-            $pdo = new PDO('mysql:host=localhost;dbname=arcadia_zoo','root','');
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
             $stmt = $pdo->prepare('UPDATE images SET path = :path, description = :description, portrait = :portrait  WHERE id_image = :id');
             $stmt->bindParam(":id", $id, PDO::PARAM_INT);
             $stmt->bindParam(":path", $path, PDO::PARAM_STR);
@@ -196,4 +217,19 @@ function updateImageRequest(int $id, string $path, string $description, bool $po
         echo('erreur bd');
     }
 
+}
+
+function deleteImageRequest(int $id){
+    try{
+        if(imageExistById($id)){
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+            $stmt = $pdo->prepare('DELETE FROM images WHERE id_image = :id');
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+    }
+    catch(error $e)
+    {
+        echo('erreur bd');
+    }
 }

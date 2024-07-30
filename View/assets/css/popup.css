@@ -69,8 +69,9 @@
             margin-left: 5vw;
             margin-right: 5vw;
             margin-bottom : 1vh;
-            textarea, input[type="text"], .stars{
+            textarea, input[type="text"], select, .stars{
               width : 40vw;
+              border-radius: 20px;
             }
             textarea{
               height: 20vh;

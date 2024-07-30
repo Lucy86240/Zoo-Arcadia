@@ -3,7 +3,12 @@
 include_once "Model/Animal.php";
 include_once "Model/MedicalReport.php";
 
-
+/**
+ * Summary of countAnimals : indique le nombre d'animal présent dans un habitat
+ * @param mixed $justVisibleAnimal : si 0 = animal archivé (non visible par les visiteurs), 1 : visible, 2 : tous
+ * @param int $id_housing : identifiant de l'habitat des animaux à compter
+ * @return mixed
+ */
 function countAnimals($justVisibleAnimal, int $id_housing){
     $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
     if($justVisibleAnimal==0 || $justVisibleAnimal==1){
@@ -201,11 +206,91 @@ function findAnimalById(int $id){
     }
 }
 
+/**
+ * Summary of animalExistById : indique si un animal a l'identifiant mis en paramètre
+ * @param int $id
+ * @return bool
+ */
 function animalExistById(int $id){
     $animal = findAnimalById($id);
     if($animal == null) return false;
     else return true;
 }
+
+/**
+ * Summary of listAllBreeds : retourne la liste de toutes les races de la base de données sous forme de tableau associatif
+ * @return array|string
+ */
+function listAllBreeds(){
+    try{
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        $stmt = $pdo->prepare('SELECT * FROM breeds');
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
+    catch(Error $e){
+        echo "Désolée";
+        return '';
+    }
+}
+
+/**
+ * Summary of breedExist
+ * @param string $breed
+ * @return int : retourne -1 s'il n'existe pas, -2 en cas de problème de base de données sinon retourne l'id
+ *  */
+function breedExistByName(string $breed){
+    try{
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        $stmt = $pdo->prepare('SELECT id_breed FROM breeds WHERE label = :breed');
+        $stmt->bindParam(":breed", $breed, PDO::PARAM_STR);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($res == null) return -1;
+        else return $res['id_breed'];
+    }
+    catch(error $e){
+        echo('erreur de bd');
+        return -2;
+    }
+}
+
+function breedExistById(int $id){
+    try{
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        $stmt = $pdo->prepare('SELECT * FROM breeds WHERE id_breed = :breed');
+        $stmt->bindParam(":breed", $id, PDO::PARAM_STR);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($res == null) return false;
+        else return true;
+    }
+    catch(error $e){
+        echo('erreur de bd');
+        return true;
+    }
+}
+
+/**
+ * Summary of addBreedRequest : ajoute une race à la base de donnée
+ * @param string $newBreed : nom de la race à ajouter
+ * @return int : retourne l'id de la nouvelle race créée
+ */
+function addBreedRequest(string $newBreed){
+    //vérifie que la race n'existe pas
+    if(breedExistByName($newBreed)==-1){
+        //on ajoute la race
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        $stmt = $pdo->prepare('insert into breeds (label) VALUES (:label)');
+        $stmt->bindParam(":label", $newBreed, PDO::PARAM_STR);
+        $stmt->execute();
+        return breedExistByName($newBreed);
+    }else{
+        return breedExistByName($newBreed);
+    }
+}
+
 
 /**
  * Summary of deleteServiceRequest : supprime un service dans la base de données
@@ -241,5 +326,41 @@ function deleteAnimalRequest(int $id){
     }
     catch(error $e){
         echo("problème avec les données");
+    }
+}
+
+function updateAnimalRequest(int $id,string $name, int $housing, int $breed){
+    try{
+        //on vérifie que le service existe et qu'il y a une modification à faire
+        if(animalExistById($id)){
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+            //on adapte la requête suivant la/les modifications à effectuer
+            //si on modifie l'intitulé et la description
+            if($name != '0' ){
+                $stmt = $pdo->prepare('UPDATE animals SET name = :name WHERE id_animal = :id');
+                $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+                $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+                $stmt->execute();
+            }
+
+            if($housing > 0){
+                $stmt = $pdo->prepare('UPDATE animals SET housing = :housing WHERE id_animal = :id');
+                $stmt->bindParam(":housing", $housing, PDO::PARAM_INT);
+                $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+                $stmt->execute();
+            }
+
+            if(breedExistById($breed)>0){
+                $stmt = $pdo->prepare('UPDATE animals SET breed = :breed WHERE id_animal = :id');
+                $stmt->bindParam(":breed", $breed, PDO::PARAM_INT);
+                $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+                $stmt->execute();
+            }
+        }
+        return "success";
+    }
+    catch(error $e){
+        echo('erreur bd');
+        return "error";
     }
 }
