@@ -124,8 +124,5 @@ function unarchiveAnimal(&$animal){
 
 
 
-    $animals= animalsView(2,1,1,1);
-    $animal = $animals[0];
-    deleteAnimal($animal['id'],$animal['name']);
-    archiveAnimal($animal);
-    unarchiveAnimal($animal);
+    //$animals= animalsView(2,1,1,1);
+   // $animal = $animals[0];

@@ -96,7 +96,7 @@ const nbSlideViewAnimals = 1*elementsPerAnimals;
 const showSlidesAnimal = (firstSlide) => {
     let slideIndex = firstSlide;
 
-    //on vérifie que la slide est incluse dans dans slides
+    //on vérifie que la slide est incluse dans les slides
     if (slideIndex >= slidesAnimals.length) {slideIndex = 0;}
     if (slideIndex < 0) {slideIndex = slidesAnimals.length-1;}
 

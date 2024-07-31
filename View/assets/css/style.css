@@ -46,7 +46,7 @@ h3{
     }
 }
 
-p,a,span,label,input, textarea, button,th,td,h4, select{
+p,a,span, li,label,input, textarea, button,th,td,h4, select{
     font-family: var(--font_sans_serif);
     @media only screen and (max-width: 576px){
         font-size: 14px;

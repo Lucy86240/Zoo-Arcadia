@@ -1,6 +1,5 @@
 <?php
     include_once "Model/ManageHousingModel.php";
-    include_once "Model/ManageAnimalModel.php";
 
 /**
  * Retourne un tableau associatif avec au moins tout les noms des habitats
@@ -56,6 +55,7 @@ function allHousingsView(bool $id=false, bool $description=true, int $nbImgs=-1,
                 $housing["animals"] =[];
                 foreach($animalsObject as $animalObject){
                     $animal = array(
+                        "id" => $animalObject->getId(),
                         "name" => $animalObject->getName(),
                         "breed" => $animalObject->getBreed(),
                         "IsVisible" => $animalObject->getIsVisible(),

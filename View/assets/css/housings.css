@@ -39,7 +39,100 @@
                 }
             }
         }
-        @media only screen and (min-width: 576px){
+    }
+    .housing{
+        padding-top : 90px;
+        h2{
+            text-align: center;
+            margin-bottom : 50px;
+        }
+        .housing-detail{
+            .images-container{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .imgHousing{
+                    border-radius: 20px;
+                }
+                .rounds{
+                    justify-content: center !important;
+                    .round:hover{
+                        cursor: pointer;
+                    }
+                }
+
+            }
+            .description{
+                border-radius: 20px;
+                padding : 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                p{
+                    text-align: center;
+                }
+            }
+        }
+        .list-animals{
+            margin : 80px 0 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .search{
+                margin : 30px 0 30px 0;
+                display: flex;
+                background-color:var(--white);
+                border-radius: 20px;
+                width: 280px;
+                input{
+                    background-color: var(--white);
+                    margin : 5px 0 5px 0;
+                    width : 250px;
+                    border-radius: 20px;
+                    padding: 5px;
+                    border : none;
+                }
+                input:focus{
+                    outline : none;
+                }
+                .searchIcon{
+                    width: 30px;
+                }
+            }
+            ul{
+                display: grid;
+                li{
+                    text-align: center;
+                    label:hover{
+                        cursor: pointer;
+                    }
+                    input{
+                        display: none;
+                    }
+                }
+            }
+            .messageNoResult{
+                background-color: #cb1a1a;
+                border-radius: 20px;
+                padding:5px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                span{
+                    margin : 5px;
+                    text-align: center;
+                }
+                img{
+                    width: 20vw;
+                }
+            }
+        }
+        .animal{
+            padding-top : 10px;
+        }
+    }
+    @media only screen and (min-width: 576px){
+        .hero{
             .hero-housings{
                 display: grid;
                 grid-template-columns: repeat(5, 1fr);
@@ -51,7 +144,32 @@
                 }
             }
         }
-        @media only screen and (max-width: 576px){
+        .housing{
+            .housing-detail{
+                display: flex;
+                justify-content: center;
+                .images-container{
+                    width : 35vw;
+                    height: 22vw; 
+                    .imgHousing{
+                        max-width : 30vw;
+                        max-height : 20vw;
+                    }
+                }
+                .description{
+                    width : 35vw;
+                    height: 22vw;
+                }
+            }
+            .list-animals{
+                ul{
+                    grid-template-columns: repeat(4,20vw);
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 576px){
+        .hero{
             .title{
                 h2{
                     display: none;
@@ -59,6 +177,8 @@
             }
             .hero-housings{
                 .hero-housing{
+                    margin-left: auto;
+                    margin-right: auto;
                     width: 70vw !important;
                     height : 40vh !important;
                     img{
@@ -68,8 +188,51 @@
                 }
             }
         }
+        .housing{
+            .images-container{
+                margin-left:auto;
+                margin-right:auto;
+                width : 90vw;
+                .imgHousing{
+                    max-width : 80vw;
+                    max-height : 80vw;
+                }
+            }
+            .description{
+                margin-left:auto;
+                margin-right:auto;
+                width : 80vw;
+            }
+            .list-animals{
+                ul{
+                    grid-template-columns: repeat(2, 40vw);
+                }
+            }
+        }
+
     }
-    .housing{
-        padding-top : 90px;
+    .theme-brown{
+        background-color: var(--brown);
+        h2{
+            color : var(--white);
+        }
+        .housing-detail{
+            .description{
+                color : var(--brown);
+                background-color: var(--beige);
+            }
+        }
+        .list-animals{
+            color : var(--white);
+            .search{
+                input{
+                    color : var(--brown);
+                }
+                .searchIcon{
+                    filter : var(--filter_brown);
+                }
+            }
+
+        }
     }
 }

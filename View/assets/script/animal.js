@@ -89,7 +89,6 @@ function nbResult(filter, list){
             count++;
         }
     }
-    console.log(count);
     return count;
 }
 

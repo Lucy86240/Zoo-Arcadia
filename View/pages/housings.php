@@ -30,10 +30,10 @@
                     $height_img = '7vw';
                 }
                 else{
-                    $width_div = 70/count($housings).'vw';
-                    $height_div = (70/count($housings)/3*4).'vw';
-                    $width_img = (70/count($housings)-1).'vw';
-                    $height_img = ((70/count($housings))/3*2).'vw';
+                    $width_div = 68/count($housings).'vw';
+                    $height_div = (68/count($housings)/3*4).'vw';
+                    $width_img = (68/count($housings)-1).'vw';
+                    $height_img = ((68/count($housings))/3*2).'vw';
                 }
                 // @media only screen and (min-width: 576px){ 
                 ?>
@@ -49,32 +49,68 @@
     <!-- habitats détaillés-->
     <?php $count=0;
     foreach($housings as $housing){ ?>
-        <section id="housing-<?php echo($housing['id']) ?>" class = "housing">
-            <h3><?php echo($housing['name']) ?></h3>
-            <div>
-                <div class="img-container">
-
+        <section id="housing-<?php echo($housing['id']) ?>" class = "housing theme-brown">
+            <h2><?php echo($housing['name']) ?></h2>
+            <div class="housing-detail">
+                <div class="images-container">
+                    <?php for($i=0; $i<count($housing['images']); $i++){?>
+                        <div class="<?php if($i>0) echo('none') ?> img-container js-slideHousing<?php echo($count) ?>">
+                            <img class="imgHousing" src="<?php if(isset($optionPage) && $optionPage){echo("../");} echo($housing['images'][$i]['path']);?>" alt="<?php echo($housing['images'][$i]['description']);?>">
+                        </div>
+                    <?php } ?>
+                    <div class="rounds rounds-white">
+                        <?php $lenght = count($housing['images']);
+                        if($lenght > 1){
+                        for($i=0;$i<$lenght;$i++){ ?>
+                            <div class="round round<?php echo($count) ?> <?php if($i==0) echo('round-selected') ?>"> </div>  
+                        <?php } }
+                        ?>
+                    </div>
                 </div>
                 <div class="description">
                     <p><?php echo($housing['description']); ?></p>
                 </div>
             </div>
             <div class="list-animals">
-                <h4>Vous pouvez m'y retrouver :</h4>
-                <input type="search">
-                <ul>
-                    <li>Nom - Race</li>
-                </ul>
-                <div class="pagination">
-
+                <h3>Vous pouvez m'y retrouver :</h3>
+                <div class="search">
+                    <input type="text" class="searchAnimal" placeholder="Lion">
+                    <img class="searchIcon" src="View/assets/img/general/icons/search.svg">
+                </div>
+                <form method="POST" action="#animal<?php echo($housing['id'])?>">
+                    <ul class="animalList">
+                        <?php 
+                        foreach($housing['animals'] as $animal){ ?>
+                        <li> 
+                            <input type="radio" name="animal<?php echo($housing['id'])?>" id="animal<?php echo($housing['id'].'-'.$i);?>" value="<?php echo($animal['id']);?>"> 
+                            <label for="animal<?php echo($housing['id'].'-'.$i);?>">
+                                <?php echo($animal['name'].' - '.$animal['breed']) ?>
+                            </label>
+                        </li>
+                        <?php $i++; } ?>
+                    </ul>
+                </form>
+                <script>
+                $('input[type=radio]').on('change', function() {
+                    $(this).closest("form").submit();
+                })
+                </script>
+                <div class="messageNoResult">
                 </div>
             </div>
-            <div animal>
-
-            </div>
-            <button>Retour aux habitats</button>
+            <section class="animal" id="animal<?php echo($housing['id'])?>">
+                <?php 
+                if(isset($_POST['animal'.$housing['id']])){
+                    include "Controller/ManageAnimal.php";
+                    $animal = animalById($_POST['animal'.$housing['id']],false);
+                    deleteAnimal($animal['id'],$animal['name']);
+                    archiveAnimal($animal);
+                    unarchiveAnimal($animal);
+                    include "View/elements/animal.php";
+                }?>
         </section>
-
+        <button>Retour aux habitats</button>
+        </section>
     <?php   $count++;
     } ?>
     <script src="View/assets/script/housings.js"></script>

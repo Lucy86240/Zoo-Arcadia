@@ -66,7 +66,7 @@
                 <a class="js-slideAnimal" href="">Découvrir</a>
             </div>
     <?php }}?>
-    <div class="rounds">
+    <div class="rounds rounds-beige">
         <?php $lenght = count($housings)*3;
         for($i=0;$i<$lenght;$i++){ ?>
             <div class="round"> </div>  

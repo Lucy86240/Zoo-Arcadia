@@ -184,3 +184,49 @@ button{
     }
 }
 
+/*rounds pour carrousels*/
+
+.rounds{
+    margin-top : 15px;
+    margin-bottom : 15px;
+    margin-left:20px;
+    margin-right: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    .round{
+        border-radius: 50%;
+        @media only screen and (max-width: 576px){
+            width : 5vw;
+            height: 5vw;
+            margin : 5px;
+        }
+        @media only screen and (min-width: 576px){
+            width: 25px;
+            height: 25px;
+            margin : 5px;
+        }
+    }
+
+}
+
+.rounds-beige{
+    .round{
+        background-color: var(--beige);
+        border : 1px solid var(--dark_green);
+        filter:drop-shadow(1px 1px);
+    }
+    .round-selected{
+        background-color: var(--dark_green);
+    }
+}
+
+.rounds-white{
+    .round{
+        background-color: var(--white);
+        border : 1px solid var(grey);
+        filter:drop-shadow(1px 1px);
+    }
+    .round-selected{
+        background-color: var(--beige);
+    }
+}
