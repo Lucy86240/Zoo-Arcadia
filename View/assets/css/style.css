@@ -1,16 +1,17 @@
 @import url('custom.css');
 @import url('reset.css');
 @import url('header.css');
+@import url('connected.css');
 @import url('footer.css');
 @import url('elements.css');
+@import url('popup.css');
 @import url('home.css');
-@import url('connected.css');
 @import url('reviews.css');
 @import url('services.css');
 @import url('addService.css');
 @import url('animal.css');
 @import url('updateAnimal.css');
-@import url('popup.css');
+@import url('housings.css');
 
 
 
@@ -75,12 +76,16 @@ p,a,span,label,input, textarea, button,th,td,h4, select{
     color : var(--brown);
 }
 
-.E404{
-    .head{
-        width:50%;
-        height: 80px;
-        background-color: var(--brown);
+.head{
+    @media only screen and (max-width: 576px){
+        height: 40px;
     }
+    @media only screen and (min-width: 576px){
+        height : 80px;
+    }
+}
+
+.E404{
     margin-bottom:10px;
     img{
         margin-top : 2vh;

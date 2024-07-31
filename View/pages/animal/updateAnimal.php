@@ -1,5 +1,5 @@
 <section class="updateAnimal">
-    <div style = "height : 90px;"> </div>
+    <div class="head"> </div>
     <?php $optionPage=true;?>
     <form class="formUpdateAnimal" method="POST" enctype = "multipart/form-data">
         <h1 class="title">Modification de l'animal en cours</h1>

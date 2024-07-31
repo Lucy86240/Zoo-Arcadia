@@ -14,10 +14,12 @@
 function allHousingsView(bool $id=false, bool $description=true, int $nbImgs=-1, int $nbAnimals=0, int $justVisibleAnimals=1, bool $portraitAccept=true){
         $housingsObject = AllHousings($portraitAccept);
         $housings = [];
-        $id = 0;
+        $id=0;
         foreach($housingsObject as $housingObject){ 
             $housing = array(
                 "name" => $housingObject->getName(),
+                "color" => $housingObject->getcolorTheme(),
+                "id" => $housingObject->getId(),
             );
             if($description == true){
                 $housing["description"] = $housingObject->getDescription();

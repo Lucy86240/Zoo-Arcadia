@@ -18,9 +18,6 @@
         <?php
             $housings = allHousingsView(false,true,1,3,1,0);
             foreach($housings as $housing){
-                $animal1 = $housing["animals"][0];
-                $animal2 = $housing["animals"][1];
-                $animal3 = $housing["animals"][2];
                 ?>
                 <div class="home-housing-container">
                     <div class="home-img-font js-slide"> 
@@ -28,18 +25,27 @@
                         <div><img class="home-housing-img rounded-circle " src="<?php echo($housing["images"][0]["path"]); ?>" alt="<?php echo($housing["images"][0]["description"]);?>"></div>
                     </div>
 
-                    <div class="home-img-font js-slide">
-                        <div><img class="home-animal-img rounded-circle home-housing-animal1" src="<?php echo($animal1["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal1["imagesAnimals"][0]["descriptionAnimals"]); ?>"></div>
-                        <div class="home-title-animal1-position none"><span class="text-center home-animal-title"><?php echo($animal1["name"]); ?></span></div>
-                    </div>
-                    <div class="home-img-font js-slide">
-                        <img class="home-animal-img rounded-circle home-housing-animal2" src="<?php echo($animal2["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal2["imagesAnimals"][0]["descriptionAnimals"]); ?>">
-                        <div class="home-title-animal2-position none"><span class="text-center home-animal-title"><?php echo($animal2["name"]); ?></span></div>
-                    </div>
-                    <div class="home-img-font js-slide">
-                        <img class="home-animal-img rounded-circle home-housing-animal3" src="<?php echo($animal3["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal3["imagesAnimals"][0]["descriptionAnimals"]); ?>">
-                        <div class="home-title-animal3-position none"><span class="text-center home-animal-title"><?php echo($animal3["name"]); ?></span></div>
-                    </div>
+                    <?php if(isset($housing["animals"][0])){
+                        $animal1 = $housing["animals"][0];?>
+                        <div class="home-img-font js-slide">
+                            <div><img class="home-animal-img rounded-circle home-housing-animal1" src="<?php echo($animal1["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal1["imagesAnimals"][0]["descriptionAnimals"]); ?>"></div>
+                            <div class="home-title-animal1-position none"><span class="text-center home-animal-title"><?php echo($animal1["name"]); ?></span></div>
+                        </div>
+                    <?php }
+                    if(isset($housing["animals"][1])){
+                        $animal2 = $housing["animals"][1];?>
+                        <div class="home-img-font js-slide">
+                            <img class="home-animal-img rounded-circle home-housing-animal2" src="<?php echo($animal2["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal2["imagesAnimals"][0]["descriptionAnimals"]); ?>">
+                            <div class="home-title-animal2-position none"><span class="text-center home-animal-title"><?php echo($animal2["name"]); ?></span></div>
+                        </div>
+                    <?php }
+                    if(isset($housing["animals"][2])){
+                    $animal3 = $housing["animals"][2];?>
+                        <div class="home-img-font js-slide">
+                            <img class="home-animal-img rounded-circle home-housing-animal3" src="<?php echo($animal3["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal3["imagesAnimals"][0]["descriptionAnimals"]); ?>">
+                            <div class="home-title-animal3-position none"><span class="text-center home-animal-title"><?php echo($animal3["name"]); ?></span></div>
+                        </div>
+                    <?php } ?>
                 </div>
             <?php } ?>
         

@@ -139,9 +139,6 @@
 /*styles specials for desktop*/
 @media only screen and (min-width: 576px){
     .services{
-        .head{
-            height : 80px;
-        }
         background-color: var(--brown);
         .title{
             color :var(--white);
@@ -204,9 +201,6 @@
 /*styles specials for mobile*/
 @media only screen and (max-width: 576px){
     .services{
-        .head{
-            height: 40px;
-        }
         .title{
             p{
                 display : none;

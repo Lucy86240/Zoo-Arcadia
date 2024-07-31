@@ -1,9 +1,6 @@
 .newService{
     background-color: var(--brown);
     padding-bottom : 20px;
-    .head{
-        padding-top : 80px;
-    }
     h3{
         color : var(--white);
         text-align: center;
