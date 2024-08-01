@@ -1,3 +1,137 @@
 <section class="medicalReportsAnimal">
+    <?php $optionPage = true ?>
+    <div style="height:90px;"> </div>
 
+    <!-- icons permettant la navigation vers d'autres éléments clés-->
+    <div class="buttons">
+        <div class="icon js-animal <?php if($animal==null) echo("none"); ?>">
+            <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/article.svg" alt="Voir la fiche de l'animal"></div>
+            <span class="legend">Voir la fiche de l'animal</span>
+        </div>
+        <div class="icon">
+            <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/list.svg" alt="Voir la liste des animaux"></div>
+            <span class="legend">Voir la liste de tous les animaux</span>
+        </div>
+        <div class="icon">
+            <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un compte rendu"></div>
+                <span class="legend">Ajouter un compte rendu</span>
+            </div>
+        <div class="icon">
+            <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Voir la liste de tous les comptes rendus"></div>
+            <span class="legend">Voir la liste de tous les comptes rendus confondus</span>
+        </div>
+    </div>
+
+    <!-- fiche de l'animal lié aux rapports-->
+    <div class="none c-dialog js-animal-popup">
+        <div class="fond"> </div>
+        <div class="popup c-dialog__box animalContainer">
+            <div class="Entete">
+                <h3 class="dialog-title">Fiche détaillée de l'animal</h3>
+                <button class="close buttonCloseAnimal" type="button" aria-label="Fermer" title="Fermer rapport">x</button>
+            </div>
+        <?php 
+            $theme = "theme-blue";
+            $btn = "white";
+            include_once "View/elements/animal.php"; ?>
+        </div>
+    </div>
+    <?php if($animal != null && isset($animal['reports'])){?>
+
+        <!-- rapport détaillé-->
+        <?php for($i=0; $i<count($animal['reports']);$i++){ ?>
+            <div class="none c-dialog reportView">
+                <div class="fond"> </div>
+                <div class="popup c-dialog__box reportViewContainer">
+                    <div class="Entete">
+                        <h3 class="dialog-title">Rapport du <?php echo($animal['reports'][$i]['date']); ?></h3>
+                        <button class="close buttonCloseReport" type="button" aria-label="Fermer" title="Fermer rapport">x</button>
+                    </div>
+                    <div class="body">
+                        <div class="element">
+                            <span>Nom du vétérinaire : </span>
+                            <p><?php echo($animal['reports'][$i]['veterinarian']); ?></p>
+                        </div>
+                        <div class="element">
+                            <span>Etat de santé : </span>
+                            <p><?php echo($animal['reports'][$i]['health']); ?></p>
+                        </div>
+                        <div class="element">
+                            <span>Détail : </span>
+                            <p><?php echo($animal['reports'][$i]['comment']); ?></p>
+                        </div>
+                        <div class="element">
+                            <span>Nourriture proposée : </span>
+                            <p><?php echo($animal['reports'][$i]['food']); ?></p>
+                        </div>
+                        <div class="element">
+                            <span>Grammage : </span>
+                            <p><?php echo($animal['reports'][$i]['weightFood']); ?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
+        <!-- tableau des rapports-->
+        <table>
+            <caption>
+                <div class="entete">
+                    <img class="illustration" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/pages/medicalReports/veterinaire.png" alt="">
+                    <div class="title">
+                        <h1>Rapports médicaux :</h1> 
+                        </br>
+                        <h2><?php echo('['.$animal['id'].'] '.$animal['name'].' - '.$animal['breed']); ?></h2>
+                    </div>
+                </div>
+                <form class="filter" method="POST">
+                        <span class="title">Filtre :</span>
+                        <div>
+                            <div>
+                                <label for="limit">Limité à </label>
+                                <input type="number" name="limit" min="1" max="<?php echo(count($animal['reports']));?>" placeholder="<?php echo(count($animal['reports']));?>">
+                                <span>/ <?php echo(count($animal['reports']));?> comptes rendus </span>
+                            </div>
+                            <div>
+                                <label for="dateStart">De </label>
+                                <input type="date" name="dateStart">
+                                <label for="dateEnd">à </label>
+                                <input type="date" name="dateEnd">
+                            </div>
+                        </div>
+                        <input class="btn-DarkGreen" type="submit" value="Appliquer" name="choices">
+                </form>
+            </caption>
+            <thead>
+                <tr>
+                    <th scope="col"> <h3>Date</h3> </th>
+                    <th scope="col"> <h3>Vétérinaire</h> </th>
+                    <th scope="col"> <h3>Santé</h3> </th>
+                    <th scope="col"> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php for($i=0; $i<count($animal['reports']);$i++){ ?>
+                    <tr>
+                        <th scope="row"><?php echo($animal['reports'][$i]['date']); ?></th>
+                        <td><?php echo($animal['reports'][$i]['veterinarian']); ?></td>
+                        <td><?php echo($animal['reports'][$i]['health']); ?></td>
+                        <td class="reportLink">En savoir plus</td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    <?php }
+
+    //cas où l'animal n'a pas encore de compte rendu
+    else if(!isset($animal['reports']) && $animal!=null){
+        ?><p class="error"> <?php echo($animal['name'].' ('.$animal['breed'].") n'a pas encore de compte rendu médical."); ?> </p> <?php
+    }
+
+    //cas où l'id de l'animal n'existe pas
+    else{
+        ?><p class="error"> <?php echo("Une erreur s'est produite : nous ne trouvons pas l'animal"); ?> </p> <?php
+    } ?>
+
+    <script src="../View/assets/script/medicalReportsAnimal.js"></script>
 </section>

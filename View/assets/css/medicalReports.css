@@ -1,0 +1,164 @@
+/* espacement */
+
+.medicalReportsAnimal{
+    background-color: var(--blue);
+    padding-bottom : 30px;
+    th,td{
+        color : var(--white);
+    }
+    h1,h2{
+        color : var(--green);
+    }
+
+    .reportView{
+        .body{
+            display: flex;
+            flex-direction: column;
+            height: 40vh;
+            justify-content: space-between;
+            margin-left: 10px;
+            .element{
+                display: flex;
+                span{
+                    font-weight: bold ;
+                    padding-right: 10px;
+                }
+            }
+        }
+
+    }
+    .buttons{
+        display: flex;
+        justify-content: flex-start;
+        .icon{
+            display: flex;
+            margin : 5px;
+            .bgc-img-box{
+                background-color: var(--green);
+                padding : 2px;
+                border-radius: 50%;
+                .img-box{
+                    filter: brightness(0) saturate(100%) invert(18%) sepia(10%) saturate(3714%) hue-rotate(178deg) brightness(92%) contrast(87%);
+                }
+            }
+            span{
+                display: none;
+            }
+        }
+        .icon:hover{
+            cursor: pointer;
+            display: flex;
+            margin : 5px;
+            .bgc-img-box{
+                background-color: var(--dark_green);
+                border-radius: 50% 0 0 50%;
+                .img-box{
+                    filter: brightness(0) saturate(100%) invert(87%) sepia(29%) saturate(114%) hue-rotate(5deg) brightness(110%) contrast(105%);
+                }
+            }
+            span{
+                display : flex;
+                align-items: center;
+                background-color: var(--dark_green);
+                padding : 2px;
+                border-radius: 0 20px 20px 0;
+                color : var(--white);
+            }
+        }
+    }
+    .animalContainer{
+        .Entete{
+            margin-bottom : 5px;
+        }
+        .animal{
+            .layout{
+                margin : 0;
+            }
+        }
+    }
+    table {
+        table-layout: fixed;
+        width: 90%;
+        margin-left : 5%;
+        border-collapse: collapse;
+        border: 3px solid var(--white);
+
+        caption{
+            margin: 20px;
+            .entete{
+                display: flex;
+                justify-content: center;
+            }
+            .filter{
+                    margin : 10px 0 10px 0;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    background-color: var(--green);
+                    padding : 5px;
+                    border-radius : 20px;
+                    border : 2px solid var(--dark_green);
+                    color : var(--blue);
+                    .title{
+                        font-weight: bold;
+                    }
+                    .btn-DarkGreen{
+                        margin : 5px 0 5px 0;
+                    }
+                    input{
+                        border-radius: 20px;
+                        padding : 2px;
+                    }
+            }
+        }
+
+        thead th:nth-child(1) {
+            width: 20%;
+        }
+    
+        thead th:nth-child(2) {
+            width: 20%;
+        }
+    
+        thead th:nth-child(3) {
+            width: 35%;
+        }
+    
+        thead th:nth-child(4) {
+            width: 15%;
+        }
+    
+        th,td {
+            padding: 20px;
+        }
+        .reportLink{
+            text-decoration: underline var(--white);
+        }
+        .reportLink:hover{
+            cursor:pointer;
+        }
+    }
+    .error{
+        text-align: center;
+        color : var(--white); 
+    }
+}
+
+@media only screen and (max-width: 556px){
+    .medicalReportsAnimal{
+        .illustration{
+            display: none;
+        }
+    }
+}
+
+@media only screen and (min-width: 556px){
+    .medicalReportsAnimal{
+        .illustration{
+            width : 8vw;
+        }
+        .title{
+            padding-left : 30px;
+        }
+    }
+}

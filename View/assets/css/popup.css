@@ -100,9 +100,9 @@
           }
         }
   
-        button{
+        .close{
           position : absolute;
-          top : -2vh;
+          top : -3vh;
           right : -1vw;
           background-color: var(--green);
           font-size: 25px;
@@ -113,7 +113,7 @@
           box-shadow: 2px 1px 1px black;
           border : var(--green);
         }
-        button:hover{
+        .close:hover{
           background-color: red;
           border :red;
           box-shadow: 2px 1px 1px black;

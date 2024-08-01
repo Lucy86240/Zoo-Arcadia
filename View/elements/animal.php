@@ -9,7 +9,7 @@
                 -->
                 <div class="box-general <?php permission(['Administrateur.rice']);?>">
                     <!-- icon pour modifier l'animal-->
-                    <a class="icon UpdateAnimal" href="maj_animal/?id=<?php echo($animal['id'])?>">
+                    <a class="icon UpdateAnimalIcon" href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>maj_animal/?id=<?php echo($animal['id'])?>">
                         <div class="bgc-img-box"><img class="img-box editAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/edit.svg" alt="Modifier l'animal"></div>
                         <span class="legend">Modifier</span>
                     </a>
