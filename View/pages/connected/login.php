@@ -25,10 +25,14 @@
                     </div>
                     <div class="element">
                         <label for="password">Votre mot de passe : </label>
-                        <input type="password" name="password" id="password" minlength="12" required>
+                        <input type="password" name="password" id="password" required>
                     </div>
-                    <p class="<?php if(!passwordError()) echo('none');?>">
+                    <p class="<?php if(!passwordError() || (isset($_SESSION['blocked']) && $_SESSION['blocked']==1)) echo('none');?>">
                         Votre mail ou votre mot de passe est incorrect</p>
+                    <p class="<?php if(isset($_SESSION['blocked']) && $_SESSION['blocked']==0) echo('none'); ?>">
+                        Vous avez fait plus de 3 mots de passe erronés. </br>
+                        Votre accès est bloqué. Veuillez contacter l'admin pour vous débloquer.
+                    </p>
                     <div class="form-submit">
                         <input type="submit" value="Connexion" name="login" class="button btn-green" />
                     </div>

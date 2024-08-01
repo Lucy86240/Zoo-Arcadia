@@ -1,7 +1,6 @@
 <script src = "View/assets/script/home.js" defer></script>
 
 <!--HERO-->
-
 <section class="home-hero background">
     <h1>Zoo Arcadia</h1>
     <p class="text-center">Niché au coeur d'une forêt de pins de 20 hectares, 

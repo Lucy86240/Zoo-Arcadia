@@ -9,6 +9,8 @@ Class User{
     private string $first_name;
     private string $last_name;
 
+    private bool $blocked;
+
     public function getUsername():string{
         return $this->username;
     }
@@ -38,6 +40,13 @@ Class User{
     }
     public function setLastName(string $lastName){
         $this->last_name = $lastName;
+    }
+
+    public function getBlocked(){
+        return $this->blocked;
+    }
+    public function setBlocked(bool $blocked){
+        $this->blocked = $blocked;
     }
 
 

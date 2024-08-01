@@ -48,7 +48,7 @@
       .Entete{
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: center;
         margin-bottom : 8vh;
         padding : 4px;
         background-color: var(--white);

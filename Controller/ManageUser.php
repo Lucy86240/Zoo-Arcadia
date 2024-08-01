@@ -2,31 +2,54 @@
 
 include_once "Model/ManageUserModel.php";
 
+/**
+ * Summary of verifiedLogin : indique si l'identifiant et mot de passe saisis correspondent
+ * @return bool 
+ */
 function verifiedLogin(){
     if(isset($_POST['login'])){
-        if(isset($_POST['user']) && isset($_POST['password'])){
+        if(verifiedBlocked($_POST['user'])){
+            $_POST['login']=null;
+            $_SESSION['passwordError']=true;
+        }
+        else if(isset($_POST['user']) && isset($_POST['password'])){
             if(verifiedLoginInput($_POST['user'], $_POST['password'])){
                 $_SESSION['passwordError']=false;
+                if(isset($_SESSION['nbError'][$_POST['user']])) $_SESSION['nbError'][$_POST['user']]=0;
                 return true;
             }
             else{
                 $_POST['login']=null;
                 $_SESSION['passwordError']=true;
+                if(!isset($_SESSION['nbError'][$_POST['user']])) $_SESSION['nbError'][$_POST['user']]=1;
+                else $_SESSION['nbError'][$_POST['user']]++;
+                if($_SESSION['nbError'][$_POST['user']]>2) blocUser($_POST['user']);
                 return false;
             }
         }
     }
+    return false;
 }
 
+/**
+ * Summary of passwordError : return true si l'utilisateur a fait un mauvais mot de passe
+ * @return bool 
+ */
 function passwordError(){
     if (isset($_POST['close-login'])){
         $_SESSION['passwordError']=false;
         $_SESSION['openLogin']=false;
         $_POST['close-login']=null;
+        $_SESSION['blocked']=0;
     }
     if(isset($_SESSION['passwordError'])) return $_SESSION['passwordError'];
     else return false;
 }
+
+/**
+ * Summary of logout : déconnecte l'utilisateur
+ * @return void
+ */
 function logout(){
     if(isset($_POST['logout'])){
         $_SESSION['mail']='';
@@ -35,7 +58,7 @@ function logout(){
     }
 }
 
-/**Cette fonction ecrit 'none' si le role de l'utilisateur est différent de ceux passés en paramètres
+/**affiche 'none' si le role de l'utilisateur est différent de ceux passés en paramètres
  * $permissions est un tableau (possibilités : 'connected', 'Administrateur.rice', 'Vétérinaire', 'Employé.e','disconnect')
  */
 function permission($permissions){
@@ -53,6 +76,10 @@ function permission($permissions){
 
 }
 
+/**
+ * Summary of isConnected : indique si l'utilisateur est connecté
+ * @return bool
+ */
 function isConnected():bool{
     if((isset($_SESSION['role']) && $_SESSION['role']!='')) return true;
     else return false;
