@@ -1,5 +1,5 @@
 <section class="animal">
-    <div class="<?php if(isset($theme) && $theme!=null) echo($theme); else echo("theme-beige");?> layout">
+    <div class="<?php if(isset($theme) && $theme!=null) echo($theme); else echo("theme-beige"); if(isset($reverse) && $reverse) echo(' reverse');?> layout">
         <div class="barre-backoffice">
             <div class="box-backoffice <?php permission(['connected']);?>">
                 <!-- Boite à outil de l'animal

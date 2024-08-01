@@ -50,7 +50,7 @@
             <?php } ?>
         
     </div>
-    <div class="button"><button type="button" class="btn btn-green">En voir plus...</button></div>
+    <a href="habitats" class="button"><button type="button" class="btn btn-green">En voir plus...</button></a>
 </section>
 
 <!-- animals for mobile -->
@@ -88,7 +88,7 @@
             <h3 class = "cb"><?php echo($service["name"]); ?></h3>
         </div>
     <?php } ?>
-    <div class="button"><button type="button" class="btn btn-green mt-5">En savoir plus...</button></div>
+    <a href="services" class="button"><button type="button" class="btn btn-green mt-5">En savoir plus...</button></a>
 </section>
 
 <section class = "home-reviews">

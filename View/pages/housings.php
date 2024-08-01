@@ -1,10 +1,10 @@
-<section class="housings">
+<section class="housings theme-brown">
     <div class="head"></div>
     <?php $housings = allHousingsView(false,true,-1,-1,1,1); ?>
     <div class="hero">
         <div class="title">
             <h2>Respectueux de leur écosystème naturel nous permettons à nos animaux de s’épanouir au coeur de </h2>
-            <h1>nos différents habitats</h1>
+            <h1>Nos différents habitats</h1>
         </div>
         <div class="hero-housings">
             <?php $count=0; 
@@ -48,8 +48,10 @@
     </div>
     <!-- habitats détaillés-->
     <?php $count=0;
-    foreach($housings as $housing){ ?>
-        <section id="housing-<?php echo($housing['id']) ?>" class = "housing theme-brown">
+    foreach($housings as $housing){
+        if($count%2 != 0) $reverse=true;
+        else $reverse=false; ?>
+        <section id="housing-<?php echo($housing['id']) ?>" class = "housing <?php if($reverse==true) echo('reverse'); ?>">
             <h2><?php echo($housing['name']) ?></h2>
             <div class="housing-detail">
                 <div class="images-container">
@@ -69,6 +71,11 @@
                 </div>
                 <div class="description">
                     <p><?php echo($housing['description']); ?></p>
+                </div>
+            </div>
+            <div class="comments">
+                <div class="comment">
+                    <p>ici commentaires du veto</p>
                 </div>
             </div>
             <div class="list-animals">
@@ -95,8 +102,7 @@
                     $(this).closest("form").submit();
                 })
                 </script>
-                <div class="messageNoResult">
-                </div>
+                <div class="none messageNoResult"></div>
             </div>
             <section class="animal" id="animal<?php echo($housing['id'])?>">
                 <?php 
@@ -109,7 +115,10 @@
                     include "View/elements/animal.php";
                 }?>
         </section>
-        <button>Retour aux habitats</button>
+        <a href="habitats" class="button back"><button type="button" class="btn btn-beige">
+            <img src="View/assets/img/general/icons/arrow_upward.svg">
+            Retour aux habitats
+        </button></a>
         </section>
     <?php   $count++;
     } ?>

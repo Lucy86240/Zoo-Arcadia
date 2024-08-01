@@ -1,13 +1,8 @@
 .housings{
-    background-color: var(--beige);
     .hero{
-        background: linear-gradient(var(--beige), var(--brown));
-        h1,h2,h3{
-            color : var(--brown);
-        }
         .title{
             text-align: center;
-            padding : 30px 0 40px 0;
+            padding : 50px 0 40px 0;
         }
         .hero-housings{
             width : 90vw;
@@ -19,10 +14,8 @@
             }
             .hero-housing{
                 margin : 2vh 1vw 0 2vh;
-                background-color: var(--beige);
                 padding : 1vw;
                 border-radius: 20px;
-                box-shadow: 3px 1px 1px var(--brown);
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -32,11 +25,7 @@
                 }
             }
             .hero-housing:hover{
-                background-color: var(--dark_green);
                 cursor: pointer;
-                h3{
-                    color : var(--white);
-                }
             }
         }
     }
@@ -130,6 +119,9 @@
         .animal{
             padding-top : 10px;
         }
+        .button{
+            text-decoration: none;
+        }
     }
     @media only screen and (min-width: 576px){
         .hero{
@@ -174,6 +166,9 @@
                 h2{
                     display: none;
                 }
+                h1{
+                    padding : 5vh 0 5vh 0;
+                }
             }
             .hero-housings{
                 .hero-housing{
@@ -211,28 +206,72 @@
         }
 
     }
-    .theme-brown{
-        background-color: var(--brown);
-        h2{
-            color : var(--white);
-        }
+    .reverse{
         .housing-detail{
-            .description{
-                color : var(--brown);
-                background-color: var(--beige);
+            flex-direction: row-reverse;
+        }
+    }
+}
+.theme-brown{
+    background-color: var(--brown);
+    .head{
+        background-color: var(--beige);
+    }
+    .hero{
+        background: linear-gradient(var(--beige), var(--brown));
+        h2, h3{
+            color : var(--brown);
+        }
+        @media only screen and (max-width: 576px){
+            h1{
+                background-color: var(--brown) !important;
+                color : var(--white);
             }
         }
-        .list-animals{
-            color : var(--white);
-            .search{
-                input{
-                    color : var(--brown);
-                }
-                .searchIcon{
-                    filter : var(--filter_brown);
-                }
+        @media only screen and (min-width: 576px){
+            h1{
+                color : var(--brown) ;
             }
+        }
 
+        .hero-housing{
+            background-color: var(--beige);
+            box-shadow: 3px 1px 1px var(--brown);
+        }
+        .hero-housing:hover{
+            background-color: var(--dark_green);
+            h3{
+                color : var(--white);
+            }
+        }
+    }
+    h2{
+        color : var(--white);
+    }
+    .housing-detail{
+        .description{
+            color : var(--brown);
+            background-color: var(--beige);
+        }
+    }
+    .list-animals{
+        color : var(--white);
+        .search{
+            input{
+                color : var(--brown);
+            }
+            .searchIcon{
+                filter : var(--filter_brown);
+            }
+        }
+
+    }
+    .back{
+        button{
+        color:var(--brown);
+        img{
+            filter: var(--filter_brown);
+        }
         }
     }
 }

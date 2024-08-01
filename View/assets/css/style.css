@@ -81,7 +81,7 @@ p,a,span, li,label,input, textarea, button,th,td,h4, select{
         height: 40px;
     }
     @media only screen and (min-width: 576px){
-        height : 80px;
+        height : 75px;
     }
 }
 

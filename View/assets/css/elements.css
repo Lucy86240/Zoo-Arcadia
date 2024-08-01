@@ -6,6 +6,7 @@
     display: flex;
     justify-content: right;
     margin-right:5vw;
+    text-decoration: none;
 }
 
 button{
@@ -125,7 +126,7 @@ button{
     .bp-brown, .bn-brown{
         .previous-text, .next-text{
             filter:drop-shadow(1px 1px #000000);
-            color:var(--white);
+            color:var(--white) !important;
             background-color: var(--brown);
         }
     }

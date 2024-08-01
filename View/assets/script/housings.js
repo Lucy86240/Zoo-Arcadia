@@ -63,7 +63,7 @@ for(let i=0; i<inputSearch.length;i++){
                 }
             }
         if(nbResult(filter,liSearch)==0){
-           // messageNoResult[i].classList.remove('none');
+            messageNoResult[i].classList.remove('none');
             title=document.createElement('span')
             title.textContent = 'Oups'
             messageNoResult[i].append(title)
@@ -75,7 +75,7 @@ for(let i=0; i<inputSearch.length;i++){
             messageNoResult[i].append(msg)
         }
         else{
-           // messageNoResult[i].classList.add('none');
+            messageNoResult[i].classList.add('none');
         }
     })
 }

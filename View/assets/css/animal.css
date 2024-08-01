@@ -95,7 +95,7 @@
     .theme-beige{
         background-color: var(--beige);
         h2,h3,h4,p,span,a{
-            color : var(--brown);
+            color : var(--brown) !important;
             text-decoration: none;
         }
         .box-general, .box-feed, .box-cure{
@@ -181,6 +181,11 @@
             justify-content: flex-start;
             .box-general, .box-feed, .box-cure{
                 margin-right : 5vw;
+            }
+        }
+        .reverse{
+            .body{
+                flex-direction: row-reverse;
             }
         }
         .body{
