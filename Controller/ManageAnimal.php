@@ -20,7 +20,7 @@ function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport){
         );
         if($animalObject->getLastMedicalReport() != null){
             $animal['LastMedicalReport'] = array(
-                "date" => $animalObject->getLastMedicalReport()['date'],
+                "date" => date("d/m/Y",strtotime($animalObject->getLastMedicalReport()['date'])),
                 "health" => $animalObject->getLastMedicalReport()['health'],
                 "food" => $animalObject->getLastMedicalReport()['food'],
                 "weightFood" => $animalObject->getLastMedicalReport()['weight_of_food'],

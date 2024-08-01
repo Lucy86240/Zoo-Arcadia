@@ -36,6 +36,8 @@
             include_once "View/elements/animal.php"; ?>
         </div>
     </div>
+
+    <!-- liste des rapports et rapports détaillés-->
     <?php if($animal != null && isset($animal['reports'])){?>
 
         <!-- rapport détaillé-->
@@ -73,7 +75,7 @@
             </div>
         <?php } ?>
 
-        <!-- tableau des rapports-->
+        <!-- tableau des rapports et filtres-->
         <table>
             <caption>
                 <div class="entete">
@@ -84,19 +86,20 @@
                         <h2><?php echo('['.$animal['id'].'] '.$animal['name'].' - '.$animal['breed']); ?></h2>
                     </div>
                 </div>
+                <!-- filtres -->
                 <form class="filter" method="POST">
                         <span class="title">Filtre :</span>
                         <div>
                             <div>
-                                <label for="limit">Limité à </label>
+                                <label for="limit">Limité aux </label>
                                 <input type="number" name="limit" min="1" max="<?php echo(count($animal['reports']));?>" placeholder="<?php echo(count($animal['reports']));?>">
-                                <span>/ <?php echo(count($animal['reports']));?> comptes rendus </span>
+                                <span> derniers comptes rendus / <?php echo(count($animal['reports']));?>  </span>
                             </div>
                             <div>
                                 <label for="dateStart">De </label>
-                                <input type="date" name="dateStart">
+                                <input type="date" name="dateStart" id="dateStart" value="<?php echo(defaultValue('dateStart'));?>">
                                 <label for="dateEnd">à </label>
-                                <input type="date" name="dateEnd">
+                                <input type="date" name="dateEnd" id="dateEnd" value="<?php echo(defaultValue('dateEnd'));?>">
                             </div>
                         </div>
                         <input class="btn-DarkGreen" type="submit" value="Appliquer" name="choices">
@@ -113,7 +116,7 @@
             <tbody>
                 <?php for($i=0; $i<count($animal['reports']);$i++){ ?>
                     <tr>
-                        <th scope="row"><?php echo($animal['reports'][$i]['date']); ?></th>
+                        <th scope="row"><?php echo(date("d/m/Y",strtotime($animal['reports'][$i]['date']))); ?></th>
                         <td><?php echo($animal['reports'][$i]['veterinarian']); ?></td>
                         <td><?php echo($animal['reports'][$i]['health']); ?></td>
                         <td class="reportLink">En savoir plus</td>
