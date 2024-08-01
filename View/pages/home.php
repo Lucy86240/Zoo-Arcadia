@@ -19,29 +19,29 @@
             $housings = allHousingsView(false,true,1,3,1,0);
             foreach($housings as $housing){
                 ?>
-                <div class="home-housing-container">
-                    <div class="home-img-font js-slide"> 
+                <div class="home-housing-container js-slide">
+                    <div class="home-img-font"> 
                         <div class="home-title-housing-position"><h3 class="text-brown text-center home-housing-title"><?php echo($housing["name"]); ?></h3></div>
                         <div><img class="home-housing-img rounded-circle " src="<?php echo($housing["images"][0]["path"]); ?>" alt="<?php echo($housing["images"][0]["description"]);?>"></div>
                     </div>
 
                     <?php if(isset($housing["animals"][0])){
                         $animal1 = $housing["animals"][0];?>
-                        <div class="home-img-font js-slide">
+                        <div class="home-img-font">
                             <div><img class="home-animal-img rounded-circle home-housing-animal1" src="<?php echo($animal1["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal1["imagesAnimals"][0]["descriptionAnimals"]); ?>"></div>
                             <div class="home-title-animal1-position none"><span class="text-center home-animal-title"><?php echo($animal1["name"]); ?></span></div>
                         </div>
                     <?php }
                     if(isset($housing["animals"][1])){
                         $animal2 = $housing["animals"][1];?>
-                        <div class="home-img-font js-slide">
+                        <div class="home-img-font">
                             <img class="home-animal-img rounded-circle home-housing-animal2" src="<?php echo($animal2["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal2["imagesAnimals"][0]["descriptionAnimals"]); ?>">
                             <div class="home-title-animal2-position none"><span class="text-center home-animal-title"><?php echo($animal2["name"]); ?></span></div>
                         </div>
                     <?php }
                     if(isset($housing["animals"][2])){
                     $animal3 = $housing["animals"][2];?>
-                        <div class="home-img-font js-slide">
+                        <div class="home-img-font">
                             <img class="home-animal-img rounded-circle home-housing-animal3" src="<?php echo($animal3["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal3["imagesAnimals"][0]["descriptionAnimals"]); ?>">
                             <div class="home-title-animal3-position none"><span class="text-center home-animal-title"><?php echo($animal3["name"]); ?></span></div>
                         </div>
@@ -57,18 +57,21 @@
 <section class="animals-mobile">
     <h2>Plus de 1200 animaux à découvrir</h2>
     <?php 
+    $nbAnimals=0;
     foreach($housings as $housing){
         for($i=0;$i<3;$i++){
-            $animal = $housing["animals"][$i]; ?>
-            <div class = "animal-mobile js-slideAnimal">
-                <h3 class="js-slideAnimal"><?php echo($animal["name"]); ?></h3>
-                <img class="img-animal-mobile js-slideAnimal" src="<?php echo($animal["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal["imagesAnimals"][0]["descriptionAnimals"]); ?>">
-                <a class="js-slideAnimal" href="">Découvrir</a>
-            </div>
-    <?php }}?>
+            if(isset($housing["animals"][$i])){
+                $nbAnimals++;
+                $animal = $housing["animals"][$i]; ?>
+                <div class = "animal-mobile js-slideAnimal">
+                    <h3><?php echo($animal["name"]); ?></h3>
+                    <img class="img-animal-mobile" src="<?php echo($animal["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal["imagesAnimals"][0]["descriptionAnimals"]); ?>">
+                    <a href="">Découvrir</a>
+                </div>
+    <?php }}}?>
     <div class="rounds rounds-beige">
-        <?php $lenght = count($housings)*3;
-        for($i=0;$i<$lenght;$i++){ ?>
+        <?php
+        for($i=0;$i<$nbAnimals;$i++){ ?>
             <div class="round"> </div>  
         <?php }
         ?>
