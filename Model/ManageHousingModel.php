@@ -59,7 +59,7 @@
             $stmt->bindParam(":name", $name, PDO::PARAM_STR);
             $stmt->execute();
             $housing = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $housing;
+            return $housing[0];
         }
         catch(Error $e){
             echo "Désolée";

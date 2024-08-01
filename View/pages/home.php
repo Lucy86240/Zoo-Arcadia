@@ -49,7 +49,7 @@
             <?php } ?>
         
     </div>
-    <a href="habitats" class="button"><button type="button" class="btn btn-green">En voir plus...</button></a>
+    <a href="habitats"  class="button"><button type="button" class="btn btn-green">En voir plus...</button></a>
 </section>
 
 <!-- animals for mobile -->

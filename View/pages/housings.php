@@ -87,32 +87,28 @@
                 <form method="POST" action="#animal<?php echo($housing['id'])?>">
                     <ul class="animalList">
                         <?php 
-                        foreach($housing['animals'] as $animal){ ?>
+                        foreach($housing['animals'] as $animalList){ ?>
                         <li> 
-                            <input type="radio" name="animal<?php echo($housing['id'])?>" id="animal<?php echo($housing['id'].'-'.$i);?>" value="<?php echo($animal['id']);?>"> 
+                            <input type="radio" name="animal<?php echo($housing['id'])?>" id="animal<?php echo($housing['id'].'-'.$i);?>" value="<?php echo($animalList['id']);?>"> 
                             <label for="animal<?php echo($housing['id'].'-'.$i);?>">
-                                <?php echo($animal['name'].' - '.$animal['breed']) ?>
+                                <?php echo($animalList['name'].' - '.$animalList['breed']) ?>
                             </label>
                         </li>
                         <?php $i++; } ?>
                     </ul>
                 </form>
-                <script>
-                $('input[type=radio]').on('change', function() {
-                    $(this).closest("form").submit();
-                })
-                </script>
                 <div class="none messageNoResult"></div>
             </div>
             <section class="animal" id="animal<?php echo($housing['id'])?>">
                 <?php 
-                if(isset($_POST['animal'.$housing['id']])){
+                if(isset($_POST['animal'.$housing['id']]) || isset($_SESSION['animal'.$housing['id']])){
                     include "Controller/ManageAnimal.php";
-                    $animal = animalById($_POST['animal'.$housing['id']],false);
-                    deleteAnimal($animal['id'],$animal['name']);
-                    archiveAnimal($animal);
-                    unarchiveAnimal($animal);
-                    include "View/elements/animal.php";
+                    //si on a cliqué sur un animal
+                    if(isset($_POST['animal'.$housing['id']])) $id=$_POST['animal'.$housing['id']];
+                    // si on avait cliqué sur un animal
+                    else $id=$_SESSION['animal'.$housing['id']];
+                    //on affiche l'animal
+                    echoAnimal($id);
                 }?>
         </section>
         <a href="habitats" class="button back"><button type="button" class="btn btn-beige">

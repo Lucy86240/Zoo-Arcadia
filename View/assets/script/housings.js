@@ -79,3 +79,8 @@ for(let i=0; i<inputSearch.length;i++){
         }
     })
 }
+
+//on valide automatique lors du clique sur un animal
+$('input[type=radio]').on('change', function() {
+    $(this).closest("form").submit();
+})

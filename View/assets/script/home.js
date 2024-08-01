@@ -138,3 +138,5 @@ if(slidesAnimals.length > nbSlideViewAnimals){
     slideIndex=showSlidesAnimal(slideIndex);
     changeSlideAutoAnimal();
 }
+
+
