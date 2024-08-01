@@ -21,8 +21,8 @@
                     <!-- le popup d'archivage s'affichant quand l'icone est cliquée-->
                     <div class="none c-dialog dialog-popup-js">
                         <div class="fond"> </div>
-                        <form class="popup popup-confirm" method="POST">
-                                <span class="Entete">Archivage</span>
+                        <form class="popup-confirm" method="POST">
+                                <p class="entete">Archivage</p>
                                 <p>Etes vous sûr de vouloir archiver l'animal : "<?php echo($animal['name'].'" de race "'.$animal['breed']);?>" ?</p>
                                 <span>L'animal ne sera plus visible auprès des visiteurs et ne sera plus accessible depuis les habitats.</span>
                                 <span>Vous pourrez toujours le consulter depuis la liste des animaux.</span>
@@ -40,8 +40,8 @@
                     <!-- le popup d'archivage s'affichant quand l'icone est cliquée-->
                     <div class="none c-dialog dialog-popup-js">
                         <div class="fond"> </div>
-                        <form class="popup popup-confirm" method="POST">
-                                <span class="Entete">Désarchivage</span>
+                        <form class="popup-confirm" method="POST">
+                                <p class="entete">Désarchivage</p>
                                 <p>Etes vous sûr de vouloir désarchiver l'animal : "<?php echo($animal['name'].'" de race "'.$animal['breed']);?>" ?</p>
                                 <span>L'animal sera à nouveau visible auprès des visiteurs et accessible depuis les habitats.</span>
                                 <div class="confirm-choice">
@@ -57,8 +57,8 @@
                     <!-- le popup de suppression s'affichant quand la poubelle est cliquée-->
                     <div class="none c-dialog dialog-popup-js">
                         <div class="fond"> </div>
-                        <form class="popup popup-confirm" method="POST">
-                                <span class="Entete">Suppression</span>
+                        <form class="popup-confirm" method="POST">
+                                <p class="entete">Suppression</p>
                                 <p>Etes vous sûr de vouloir supprimer l'animal : "<?php echo($animal['name'].'" de race "'.$animal['breed']);?>" ?</p>
                                 <div class="confirm-choice">
                                     <input type="submit" name="ValidationDeleteAnimal<?php echo($animal['id']);?>" value="Oui" class="button-confirm">

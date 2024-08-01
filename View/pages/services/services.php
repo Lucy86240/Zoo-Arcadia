@@ -18,8 +18,8 @@
                 <!-- le popup de suppression s'affichant quand la poubelle est cliquée-->
                 <div class="none c-dialog dialog-popup-js">
                     <div class="fond"> </div>
-                    <form class="popup popup-confirm" method="POST">
-                            <span class="Entete">Suppression</span>
+                    <form class="popup-confirm" method="POST">
+                            <p class="entete">Suppression</p>
                             
                             <p>Etes vous sûr de vouloir supprimer le service : "<?php echo($service['name']);?>" ?</p>
                             <div class="confirm-choice">

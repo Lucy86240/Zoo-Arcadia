@@ -136,3 +136,49 @@
     }
   }
 }
+
+/*popup de confirmation*/
+
+.popup-confirm{
+  position: absolute;
+  flex: 1;
+  margin: auto;
+  padding: 5px;
+  background-color: var(--blue);
+  box-shadow: 2px 1px 1px black;
+  color: var(--white) !important;
+  border-radius: 20px;
+  width : 50%;
+  height: 40%;
+  left : 50%;
+  top : 50%;
+  transform: translate(-50%,-50%);
+  .entete{
+    background-color: var(--white);
+    padding : 5px;
+    border-radius: 20px;
+    margin-bottom : 15px;
+    color : var(--blue) !important;
+    text-align: center;
+  }
+  p{
+      color : var(--white) !important;
+  }
+  span{
+      color : var(--green) !important;
+  }
+  .confirm-choice{
+      display: flex;
+      justify-content: center;
+      .button-confirm{
+          background-color : red;
+          color : var(--white);
+          margin : 20px;
+          padding-left : 10px;
+          padding-right: 10px;
+          border-radius: 20px;
+          border: red;
+          box-shadow: 3px 1px 1px brown;
+      }
+  }
+}

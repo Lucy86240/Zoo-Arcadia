@@ -94,9 +94,12 @@
     }
     .theme-beige{
         background-color: var(--beige);
-        h2,h3,h4,p,span,a{
+        h2,h3,h4,a{
             color : var(--brown) !important;
             text-decoration: none;
+        }
+        span, p{
+            color : var(--brown);
         }
         .box-general, .box-feed, .box-cure{
             .icon{
