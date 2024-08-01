@@ -102,7 +102,7 @@
             <section class="animal" id="animal<?php echo($housing['id'])?>">
                 <?php 
                 if(isset($_POST['animal'.$housing['id']]) || isset($_SESSION['animal'.$housing['id']])){
-                    include "Controller/ManageAnimal.php";
+                    include_once "Controller/ManageAnimal.php";
                     //si on a cliqué sur un animal
                     if(isset($_POST['animal'.$housing['id']])) $id=$_POST['animal'.$housing['id']];
                     // si on avait cliqué sur un animal

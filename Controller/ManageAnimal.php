@@ -10,6 +10,7 @@ include_once 'Model/ManageHousingModel.php';
  * @return array
  */
 function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport){
+    if(animalExistById(($animalObject->getId()))){
         $animal = array(
             "id" => $animalObject->getId(),
             "name" => $animalObject->getName(),
@@ -20,14 +21,12 @@ function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport){
         if($animalObject->getLastMedicalReport() != null){
             $animal['LastMedicalReport'] = array(
                 "date" => $animalObject->getLastMedicalReport()['date'],
-                
                 "health" => $animalObject->getLastMedicalReport()['health'],
                 "food" => $animalObject->getLastMedicalReport()['food'],
                 "weightFood" => $animalObject->getLastMedicalReport()['weight_of_food'],
                 "comment" => $animalObject->getLastMedicalReport()['comment'],
             );
             $animal['LastMedicalReport']["veterinarian"] = findNameofUser($animalObject->getLastMedicalReport()['veterinarian']);
-
         }
         if($allReport == true && $animalObject->getLastMedicalReport() != null){
             $animal['reports'] = [];
@@ -60,7 +59,9 @@ function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport){
             );
             array_push($animal['images'],$img);
         }
-    return $animal;
+        return $animal;
+    }
+    else return [];
 }
 
 /**
