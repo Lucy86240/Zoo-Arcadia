@@ -68,7 +68,7 @@
                         </div>
                         <div class="element">
                             <span>Grammage : </span>
-                            <p><?php echo($animal['reports'][$i]['weightFood']); ?></p>
+                            <p><?php echo($animal['reports'][$i]['weight_of_food']); ?></p>
                         </div>
                     </div>
                 </div>
@@ -92,8 +92,10 @@
                         <div>
                             <div>
                                 <label for="limit">Limité aux </label>
-                                <input type="number" name="limit" min="1" max="<?php echo(count($animal['reports']));?>" placeholder="<?php echo(count($animal['reports']));?>">
-                                <span> derniers comptes rendus / <?php echo(count($animal['reports']));?>  </span>
+                                <?php   if(defaultValue('dateStart')=='') $default = count($animal['reports']);
+                                        else $default = defaultValue('dateStart'); ?>
+                                <input type="number" name="limit" min="1" max="<?php echo($animal['numberReports']) ?>" placeholder="<?php echo($default);?>">
+                                <span> derniers comptes rendus / <?php echo($animal['numberReports']) ?>  </span>
                             </div>
                             <div>
                                 <label for="dateStart">De </label>
@@ -102,7 +104,10 @@
                                 <input type="date" name="dateEnd" id="dateEnd" value="<?php echo(defaultValue('dateEnd'));?>">
                             </div>
                         </div>
-                        <input class="btn-DarkGreen" type="submit" value="Appliquer" name="choices">
+                        <div class="confirmChoices">
+                            <input class="btn-DarkGreen" type="submit" value="Appliquer" name="choices">
+                            <button class="buttonFilter btn-red">Annuler le filtre</button>
+                        </div>
                 </form>
             </caption>
             <thead>

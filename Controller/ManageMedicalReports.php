@@ -2,53 +2,31 @@
 
 include_once "Controller/ManageAnimal.php";
 
-function urlFilter(){
-    $url ='';
-    if(isset($_POST['choices']) && isset($_POST['limit'])){
-        $url.='&limit='.$_POST['limit'];
-    }
-    else if(isset($_GET['limit'])){
-        $url.='&limit='.$_GET['limit'];
-    }
-    if(isset($_POST['choices']) && isset($_POST['dateStart'])){
-        $url.='&dateDebut='.$_POST['dateStart'];
-    }
-    else if(isset($_GET['dateDebut'])){
-        $url.='&dateDebut='.$_GET['dateDebut'];
-    }
-    if(isset($_POST['choices']) && isset($_POST['dateEnd'])){
-        $url.='&dateFin='.$_POST['dateEnd'];
-    }
-    else if(isset($_GET['dateFin'])){
-        $url.='&dateFin='.$_GET['dateFin'];
-    }
-    return $url;
-}
-
 /**
  * Summary of filterExist indique si un filtre est appliqué
  * @return bool
  */
 function filterExist(){
-    if(isset($_GET['dateDebut']) || isset($_GET['dateFin']) || isset($_GET['limit']) ||
-    isset($_POST['dateEnd']) || isset($_POST['dateStart']) || isset($_POST['limit'])) return true;
+    if(isset($_POST['dateEnd']) || isset($_POST['dateStart']) || isset($_POST['limit'])) return true;
     else return false;
 }
 
-function defaultValue($filter){
+/**
+ * Summary of defaultValue : retourne la valeur de l'input suivant ce qui a été validé préalablement
+ * @param string $filter : valeurs possibles : limit dateStart dateEnd
+ * @return mixed
+ */
+function defaultValue(string $filter){
     if($filter=="limit"){
         if(isset($_POST['choices']) && isset($_POST['limit'])) return $_POST['limit'];
-        else if(isset($_GET['limit'])) return $_GET['limit'];
         else return '';
     }
     if($filter=="dateStart"){
         if(isset($_POST['choices']) && isset($_POST['dateStart'])) return $_POST['dateStart'];
-        else if(isset($_GET['dateDebut'])) return $_GET['dateDebut'];
         else return '';
     }
     if($filter=='dateEnd'){
         if(isset($_POST['choices']) && isset($_POST['dateEnd'])) return $_POST['dateEnd'];
-        else if(isset($_GET['dateFin'])) return $_GET['dateFin'];
         else return '';
     }
 }
@@ -65,27 +43,18 @@ function initialFilter(&$dateStart, &$dateEnd, &$limit){
     if(isset($_POST['choices']) && isset($_POST['limit'])){
         $limit= $_POST['limit'];
     }
-    else if(isset($_GET['limit'])){
-        $limit = $_GET['limit'];
-    }
 
     if(isset($_POST['choices']) && isset($_POST['dateStart'])){
         $dateStart = $_POST['dateStart'];
-    }
-    else if(isset($_GET['dateDebut'])){
-        $dateStart = $_GET['dateDebut'];
     }
 
     if(isset($_POST['choices']) && isset($_POST['dateEnd'])){
         $dateEnd = $_POST['dateEnd'];
     }
-    else if(isset($_GET['dateFin'])){
-        $dateEnd = $_GET['dateFin'];
-    }
 }
 
 /**
- * Summary of animalFilter
+ * Summary of animalFilter : renvoi un tableau associatif de l'animal selon les filtres médicaux
  * @param mixed $animal : le tableau associatif de l'animal dont les rapports sont à filtrer
  * @param mixed $dateStart : la date de début des rapports (null si pas de filtre)
  * @param mixed $dateEnd : la date de fin des rapports (null si pas de filtre)
@@ -96,26 +65,17 @@ function animalFilter($animal, $dateStart, $dateEnd, $limit){
 
     $animalFilter = animalById($animal['id'],false);
     $animalFilter['reports'] = [];
-
-    if($dateStart != null && $dateEnd != null){
-        foreach($animal['reports'] as $medicalReport){
-            if($medicalReport['date'] >= $dateStart && 
-            $medicalReport['date'] <= $dateEnd) 
-                array_push($animalFilter['reports'],$medicalReport);
-        }
-    }
-    else if($dateStart !=null){
-        foreach($animal['reports'] as $medicalReport){
-            if($medicalReport['date'] >= $dateStart) array_push($animalFilter['reports'],$medicalReport);
-        }
-    }
-    else{
-        foreach($animal['reports'] as $medicalReport){
-            if($medicalReport['date'] <= $dateStart) array_push($animalFilter['reports'],$medicalReport);
-        }
-    }
-    if($limit != null){
-
+    $reports = medicalReportWithFilter($animal['id'],$dateStart,$dateEnd, $limit);
+    foreach($reports as $reportRequest){
+        $report = array(
+            'date' => $reportRequest['date'],
+            'health' => $reportRequest['health'],
+            'food' => $reportRequest['food'],
+            'weight_of_food' => $reportRequest['weight_of_food'],
+            'comment' => $reportRequest['comment'],
+            'veterinarian' => findNameofUser($reportRequest['veterinarian'])
+        );
+        array_push($animalFilter['reports'],$report);
     }
 
     return $animalFilter;

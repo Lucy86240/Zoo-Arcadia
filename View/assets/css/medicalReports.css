@@ -91,9 +91,6 @@
             }
             .filter{
                     margin : 10px 0 10px 0;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
                     background-color: var(--green);
                     padding : 5px;
                     border-radius : 20px;
@@ -102,12 +99,19 @@
                     .title{
                         font-weight: bold;
                     }
-                    .btn-DarkGreen{
-                        margin : 5px 0 5px 0;
-                    }
-                    input{
+                    input[type="date"], input[type="number"]{
                         border-radius: 20px;
                         padding : 2px;
+                    }
+                    input[type="submit"]{
+                        margin : 5px 10px 5px 0;
+                        padding : 10px;
+                        width : 150px;
+                    }
+                    .buttonFilter{
+                        margin : 5px 10px 5px 0;
+                        padding : 8px;
+                        width : 150px;
                     }
             }
         }
@@ -159,6 +163,11 @@
         }
         .title{
             padding-left : 30px;
+        }
+        .filter{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
     }
 }

@@ -291,6 +291,38 @@ function addBreedRequest(string $newBreed){
     }
 }
 
+/**
+ * Summary of medicalReportWithFilter
+ * @param int $id : id de l'animal
+ * @param mixed $dateStart : la date la plus ancienne des rapports souhaitées (peut être null)
+ * @param mixed $dateEnd : la date la plus récente des rapports souhaitées (peut être null)
+ * @param mixed $limit : le nombre de retour souhaité (peut être null)
+ * @return array
+ */
+function medicalReportWithFilter(int $id,$dateStart,$dateEnd, $limit){
+    try{
+        if($dateStart != '') $dateStartRequest = ' AND date >= \''.$dateStart.'\'';
+        else $dateStartRequest = '';
+
+        if($dateEnd != '') $dateEndRequest =' AND date <= \''.$dateEnd.'\'';
+        else $dateEndRequest = '';
+
+        if($limit != '') $limitRequest = ' LIMIT '.$limit;
+        else $limitRequest = '';
+
+        $request = 'SELECT * FROM reports_veterinarian WHERE animal = '.$id.$dateStartRequest.$dateEndRequest.' ORDER BY date DESC'.$limitRequest;
+
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        $stmt = $pdo->prepare($request);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
+    catch(error $e){
+        return [];
+    }
+}
+
 
 /**
  * Summary of deleteServiceRequest : supprime un service dans la base de données
