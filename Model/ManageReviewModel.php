@@ -229,15 +229,6 @@ function ModerateReview(int $review){
 }
 
 /**
- * Summary of now : retourne la date du jour
- * @return string
- */
-function now(){
-    $now = date('Y-m-d',time());
-    return $now;
-}
-
-/**
  * Summary of addReviewRequest : permet d'ajouter un avis à la base de données
  * @param Review $review : avis à ajouter
  * @return bool : retourne false si l'avis n'a pas été ajouté

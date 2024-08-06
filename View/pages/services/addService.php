@@ -13,7 +13,7 @@
                     </div>
                     <div class="element">
                         <label for="NewServiceDescription">Description :</label>
-                        <div></di><textarea name="NewServiceDescription" id="NewServiceDescription" maxlength="255" required></textarea>
+                        <div><textarea name="NewServiceDescription" id="NewServiceDescription" maxlength="255" required></textarea>
                         <p>Max 255 caractères</p></div>
                     </div>
                 </div>

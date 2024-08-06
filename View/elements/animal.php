@@ -96,7 +96,7 @@
                             <span class="legend">Rapport médicaux</span>
                         </a>
                     </div>
-                    <div class="icon">
+                    <div class="icon <?php permission(['Vétérinaire']);?>">
                         <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>nouveau_rapport/?animal=<?php echo($animal['id']); ?>">
                             <div class="bgc-img-box"><img class="img-box newReportAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un rapport médical"></div>
                             <span class="legend">Nouveau rapport</span>
@@ -153,7 +153,7 @@
                     </div>
                     <div class="element"> 
                         <p> <span>Son grammage :</span> 
-                        <?php echo($animal['LastMedicalReport']['weightFood']); ?></p>
+                        <?php echo($animal['LastMedicalReport']['weight_of_food']); ?></p>
                     </div>
                     <div class="element">
                         <p> <span>Détail de son état :</span>

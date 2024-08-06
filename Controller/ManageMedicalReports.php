@@ -82,6 +82,53 @@ function animalFilter($animal, $dateStart, $dateEnd, $limit){
 
 }
 
+function addReport($animal){
+    if(isset($_POST['addReport']) && $_POST['addReport']!=null){
+        $problem = false;
+        if(isset($_POST['dateNewReport'])){
+            $date=$_POST['dateNewReport'];
+        }
+        else{
+            $problem = true;
+        }
+        if(isset($_POST['searchAnimalNewReport'])){
+            $id_animal = $_POST['searchAnimalNewReport'];
+        }
+        else{
+            $id_animal =$animal['id'];
+        }
+        if(isset($_POST['healthNewReport'])){
+            $healthNewReport = $_POST['healthNewReport'];
+        }
+        else{
+            $problem=true;
+        }
+        if(isset($_POST['commentNewReport'])){
+            $commentNewReport = $_POST['commentNewReport'];
+        }
+        else{
+            $commentNewReport = null;
+        }
+        if(isset($_POST['foodNewReport'])){
+            $foodNewReport = $_POST['foodNewReport'];
+        }
+        else{
+            $problem = true;
+        }
+        if(isset($_POST['weightFoodNewReport'])){
+            $weightFoodNewReport = $_POST['weightFoodNewReport'];
+        }
+        else{
+            $problem = true;
+        }
+        echo($problem);
+        if(!$problem){
+            addMedicalReportRequest($id_animal, $_SESSION['mail'],$date, $healthNewReport,$commentNewReport,$foodNewReport,$weightFoodNewReport);
+            $_POST['addReport']=null;
+        }
+    }
+}
+
 $animal = null;
 $filter = null;
 
@@ -94,6 +141,7 @@ if(isset($_GET['animal'])){
         initialFilter($dateStart, $dateEnd, $limit);
         $animal = animalFilter($animal, $dateStart, $dateEnd, $limit);
     }
+    addReport($animal);
 }
 else
 {

@@ -27,7 +27,7 @@
         }
 
     }
-    .buttons{
+    .icons{
         display: flex;
         justify-content: flex-start;
         .icon{
@@ -41,9 +41,6 @@
                     filter: brightness(0) saturate(100%) invert(18%) sepia(10%) saturate(3714%) hue-rotate(178deg) brightness(92%) contrast(87%);
                 }
             }
-            span{
-                display: none;
-            }
         }
         .icon:hover{
             cursor: pointer;
@@ -51,19 +48,26 @@
             margin : 5px;
             .bgc-img-box{
                 background-color: var(--dark_green);
-                border-radius: 50% 0 0 50%;
+                border-radius: 50% 50% 50% 0 ;
                 .img-box{
                     filter: brightness(0) saturate(100%) invert(87%) sepia(29%) saturate(114%) hue-rotate(5deg) brightness(110%) contrast(105%);
                 }
             }
-            span{
-                display : flex;
-                align-items: center;
-                background-color: var(--dark_green);
-                padding : 2px;
-                border-radius: 0 20px 20px 0;
-                color : var(--white);
-            }
+        }
+    }
+    .legend{
+        display : flex;
+        align-items: center;
+        background-color: var(--dark_green);
+        padding : 4px;
+        border-radius: 0 20px 20px 20px;
+        width : 60%;
+        color : var(--white);
+    }
+    .newReport{
+        height : 70%;
+        #listAnimals{
+            width: 40vw;
         }
     }
     .animalContainer{

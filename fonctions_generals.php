@@ -17,3 +17,12 @@ function rrmdir($dir) {
         rmdir($dir);
     }
 }
+
+/**
+ * Summary of now : retourne la date du jour
+ * @return string
+ */
+function now(){
+    $now = date('Y-m-d',time());
+    return $now;
+}

@@ -4,6 +4,24 @@ include_once "Model/Animal.php";
 include_once "Model/MedicalReport.php";
 
 /**
+ * Summary of listAllAnimals retourne la liste de tous les animaux
+ * @return mixed
+ */
+function listAllAnimals(){
+    try{
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        $stmt = $pdo->prepare('SELECT animals.name, breeds.label, animals.id_animal FROM animals JOIN breeds ON animals.breed = breeds.id_breed');
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        if($stmt->execute()){
+            return $stmt->fetchAll();    
+        }
+        else return [];
+    }
+    catch(error $e){
+        return [];
+    }
+}
+/**
  * Summary of countAnimals : indique le nombre d'animal présent dans un habitat
  * @param mixed $justVisibleAnimal : si 0 = animal archivé (non visible par les visiteurs), 1 : visible, 2 : tous
  * @param int $id_housing : identifiant de l'habitat des animaux à compter
@@ -321,6 +339,64 @@ function medicalReportWithFilter(int $id,$dateStart,$dateEnd, $limit){
     catch(error $e){
         return [];
     }
+}
+
+
+function reportExist($id,$veto,$date,$healthNewReport,$commentNewReport,$foodNewReport,$weightFoodNewReport){
+    try{
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        if($commentNewReport == null){
+            $stmt = $pdo->prepare('SELECT * FROM reports_veterinarian 
+            WHERE animal = :id AND veterinarian = :veterinarian AND date=:date AND health=:health AND food=:food AND weight_of_food=:weight_of_food');
+        }
+        else{
+            $stmt = $pdo->prepare('SELECT * FROM reports_veterinarian 
+            WHERE comment = :comment AND animal = :id AND veterinarian = :veterinarian AND date=:date AND health=:health AND food=:food AND weight_of_food=:weight_of_food');
+            $stmt->bindParam(":comment", $commentNewReport, PDO::PARAM_STR);
+        }
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->bindParam(":veterinarian", $veto, PDO::PARAM_STR);
+        $stmt->bindParam(":date", $date, PDO::PARAM_STR);
+        $stmt->bindParam(":health", $healthNewReport, PDO::PARAM_STR);
+        $stmt->bindParam(":food", $foodNewReport, PDO::PARAM_STR);
+        $stmt->bindParam(":weight_of_food", $weightFoodNewReport, PDO::PARAM_STR);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        if($stmt->execute()){
+            if($stmt->fetch() == null) return false;
+            else return true;
+        }
+    }
+    catch(error $e){
+        return true;
+    }
+}
+function addMedicalReportRequest($id_animal,$veto, $date,$healthNewReport,$commentNewReport,$foodNewReport,$weightFoodNewReport){
+        //vérifie que la race n'existe pas
+        try{
+            if(reportExist($id_animal,$veto,$date,$healthNewReport,$commentNewReport,$foodNewReport,$weightFoodNewReport)==false){
+                $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+                if($commentNewReport!=null){
+                    $stmt = $pdo->prepare('insert into reports_veterinarian (comment,animal,veterinarian,date,health,food,weight_of_food) 
+                    VALUES (:comment,:animal,:veterinarian,:date,:health,:food,:weight_of_food)');
+                    $stmt->bindParam(":comment", $commentNewReport, PDO::PARAM_STR);
+                }
+                else{
+                    $stmt = $pdo->prepare('insert into reports_veterinarian (animal,veterinarian,date,health,food,weight_of_food) 
+                    VALUES (:animal,:veterinarian,:date,:health,:food,:weight_of_food)');
+                }
+                $stmt->bindParam(":animal", $id_animal, PDO::PARAM_INT);
+                $stmt->bindParam(":veterinarian", $veto, PDO::PARAM_STR);
+                $stmt->bindParam(":date", $date, PDO::PARAM_STR);
+                $stmt->bindParam(":health", $healthNewReport, PDO::PARAM_STR);
+                $stmt->bindParam(":food", $foodNewReport, PDO::PARAM_STR);
+                $stmt->bindParam(":weight_of_food", $weightFoodNewReport, PDO::PARAM_STR);
+                $stmt->execute();
+            }
+        }
+        catch(error $e)
+        {
+
+        }
 }
 
 

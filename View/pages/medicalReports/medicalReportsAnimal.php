@@ -1,25 +1,30 @@
 <section class="medicalReportsAnimal">
     <?php $optionPage = true ?>
-    <div style="height:90px;"> </div>
+    <div class="head"> </div>
 
     <!-- icons permettant la navigation vers d'autres éléments clés-->
-    <div class="buttons">
+    <div class="icons">
         <div class="icon js-animal <?php if($animal==null) echo("none"); ?>">
             <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/article.svg" alt="Voir la fiche de l'animal"></div>
-            <span class="legend">Voir la fiche de l'animal</span>
         </div>
         <div class="icon">
             <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/list.svg" alt="Voir la liste des animaux"></div>
-            <span class="legend">Voir la liste de tous les animaux</span>
         </div>
-        <div class="icon">
+        <div class="icon <?php permission(['Vétérinaire']);?>" id="popupNewReport">
             <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un compte rendu"></div>
-                <span class="legend">Ajouter un compte rendu</span>
-            </div>
+        </div>
         <div class="icon">
             <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Voir la liste de tous les comptes rendus"></div>
-            <span class="legend">Voir la liste de tous les comptes rendus confondus</span>
         </div>
+    </div>
+    <div class="legends">
+        <span class="legend none">Voir la fiche de l'animal</span>
+        <span class="legend none">Voir la liste de tous les animaux</span>
+        <span class="legend none">Ajouter un compte rendu</span>
+        <span class="legend none">Voir la liste de tous les comptes rendus confondus</span>
+    </div>
+    <div id="newReport-JS">
+        <?php include_once "View/pages/medicalReports/addMedicalReport.php";?>
     </div>
 
     <!-- fiche de l'animal lié aux rapports-->
@@ -140,6 +145,6 @@
     else{
         ?><p class="error"> <?php echo("Une erreur s'est produite : nous ne trouvons pas l'animal"); ?> </p> <?php
     } ?>
-
+    <script src="../View/assets/script/popup.js"></script>
     <script src="../View/assets/script/medicalReportsAnimal.js"></script>
 </section>
