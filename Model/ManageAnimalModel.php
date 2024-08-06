@@ -22,6 +22,35 @@ function listAllAnimals(){
     }
 }
 /**
+ * Summary of listAnimalsWithFilter
+ * @param array $breeds : list des id des races acceptées
+ * @return array
+ */
+function listAnimalsWithFilter(array $breeds){
+    try{
+        $breedsRequest = '';
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        if($breeds != []){
+            $breedsRequest = 'WHERE animals.breeds = '.$breeds[0];
+            if(count($breeds)>1){
+                for($i=1;$i<count($breeds);$i++){
+                    $breedsRequest = ' OR animals.breeds = '.$breeds[$i];
+                }
+            }
+        }
+        $stmt = $pdo->prepare('SELECT animals.name, breeds.label, animals.id_animal FROM animals JOIN breeds ON animals.breed = breeds.id_breed '.$breedsRequest);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        if($stmt->execute()){
+            return $stmt->fetchAll();    
+        }
+        else return [];
+    }
+    catch(error $e){
+        return [];
+    }
+}
+
+/**
  * Summary of countAnimals : indique le nombre d'animal présent dans un habitat
  * @param mixed $justVisibleAnimal : si 0 = animal archivé (non visible par les visiteurs), 1 : visible, 2 : tous
  * @param int $id_housing : identifiant de l'habitat des animaux à compter
@@ -308,97 +337,6 @@ function addBreedRequest(string $newBreed){
         return breedExistByName($newBreed);
     }
 }
-
-/**
- * Summary of medicalReportWithFilter
- * @param int $id : id de l'animal
- * @param mixed $dateStart : la date la plus ancienne des rapports souhaitées (peut être null)
- * @param mixed $dateEnd : la date la plus récente des rapports souhaitées (peut être null)
- * @param mixed $limit : le nombre de retour souhaité (peut être null)
- * @return array
- */
-function medicalReportWithFilter(int $id,$dateStart,$dateEnd, $limit){
-    try{
-        if($dateStart != '') $dateStartRequest = ' AND date >= \''.$dateStart.'\'';
-        else $dateStartRequest = '';
-
-        if($dateEnd != '') $dateEndRequest =' AND date <= \''.$dateEnd.'\'';
-        else $dateEndRequest = '';
-
-        if($limit != '') $limitRequest = ' LIMIT '.$limit;
-        else $limitRequest = '';
-
-        $request = 'SELECT * FROM reports_veterinarian WHERE animal = '.$id.$dateStartRequest.$dateEndRequest.' ORDER BY date DESC'.$limitRequest;
-
-        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-        $stmt = $pdo->prepare($request);
-        $stmt->execute();
-        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $res;
-    }
-    catch(error $e){
-        return [];
-    }
-}
-
-
-function reportExist($id,$veto,$date,$healthNewReport,$commentNewReport,$foodNewReport,$weightFoodNewReport){
-    try{
-        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-        if($commentNewReport == null){
-            $stmt = $pdo->prepare('SELECT * FROM reports_veterinarian 
-            WHERE animal = :id AND veterinarian = :veterinarian AND date=:date AND health=:health AND food=:food AND weight_of_food=:weight_of_food');
-        }
-        else{
-            $stmt = $pdo->prepare('SELECT * FROM reports_veterinarian 
-            WHERE comment = :comment AND animal = :id AND veterinarian = :veterinarian AND date=:date AND health=:health AND food=:food AND weight_of_food=:weight_of_food');
-            $stmt->bindParam(":comment", $commentNewReport, PDO::PARAM_STR);
-        }
-        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-        $stmt->bindParam(":veterinarian", $veto, PDO::PARAM_STR);
-        $stmt->bindParam(":date", $date, PDO::PARAM_STR);
-        $stmt->bindParam(":health", $healthNewReport, PDO::PARAM_STR);
-        $stmt->bindParam(":food", $foodNewReport, PDO::PARAM_STR);
-        $stmt->bindParam(":weight_of_food", $weightFoodNewReport, PDO::PARAM_STR);
-        $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        if($stmt->execute()){
-            if($stmt->fetch() == null) return false;
-            else return true;
-        }
-    }
-    catch(error $e){
-        return true;
-    }
-}
-function addMedicalReportRequest($id_animal,$veto, $date,$healthNewReport,$commentNewReport,$foodNewReport,$weightFoodNewReport){
-        //vérifie que la race n'existe pas
-        try{
-            if(reportExist($id_animal,$veto,$date,$healthNewReport,$commentNewReport,$foodNewReport,$weightFoodNewReport)==false){
-                $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-                if($commentNewReport!=null){
-                    $stmt = $pdo->prepare('insert into reports_veterinarian (comment,animal,veterinarian,date,health,food,weight_of_food) 
-                    VALUES (:comment,:animal,:veterinarian,:date,:health,:food,:weight_of_food)');
-                    $stmt->bindParam(":comment", $commentNewReport, PDO::PARAM_STR);
-                }
-                else{
-                    $stmt = $pdo->prepare('insert into reports_veterinarian (animal,veterinarian,date,health,food,weight_of_food) 
-                    VALUES (:animal,:veterinarian,:date,:health,:food,:weight_of_food)');
-                }
-                $stmt->bindParam(":animal", $id_animal, PDO::PARAM_INT);
-                $stmt->bindParam(":veterinarian", $veto, PDO::PARAM_STR);
-                $stmt->bindParam(":date", $date, PDO::PARAM_STR);
-                $stmt->bindParam(":health", $healthNewReport, PDO::PARAM_STR);
-                $stmt->bindParam(":food", $foodNewReport, PDO::PARAM_STR);
-                $stmt->bindParam(":weight_of_food", $weightFoodNewReport, PDO::PARAM_STR);
-                $stmt->execute();
-            }
-        }
-        catch(error $e)
-        {
-
-        }
-}
-
 
 /**
  * Summary of deleteServiceRequest : supprime un service dans la base de données

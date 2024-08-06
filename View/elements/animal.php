@@ -96,7 +96,7 @@
                             <span class="legend">Rapport médicaux</span>
                         </a>
                     </div>
-                    <div class="icon <?php permission(['Vétérinaire']);?>">
+                    <div class="icon <?php //permission(['Vétérinaire']);?>">
                         <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>nouveau_rapport/?animal=<?php echo($animal['id']); ?>">
                             <div class="bgc-img-box"><img class="img-box newReportAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un rapport médical"></div>
                             <span class="legend">Nouveau rapport</span>

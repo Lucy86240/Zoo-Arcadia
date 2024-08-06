@@ -1,4 +1,4 @@
-<section class="medicalReportsAnimal">
+<section class="medicalReports medicalReportsAnimal">
     <?php $optionPage = true ?>
     <div class="head"> </div>
 
@@ -10,12 +10,12 @@
         <div class="icon">
             <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/list.svg" alt="Voir la liste des animaux"></div>
         </div>
-        <div class="icon <?php permission(['Vétérinaire']);?>" id="popupNewReport">
+        <div class="icon <?php //permission(['Vétérinaire']);?>" id="popupNewReport">
             <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un compte rendu"></div>
         </div>
-        <div class="icon">
+        <a class="icon" href="../rapport_medicaux">
             <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Voir la liste de tous les comptes rendus"></div>
-        </div>
+        </a>
     </div>
     <div class="legends">
         <span class="legend none">Voir la fiche de l'animal</span>
@@ -146,5 +146,6 @@
         ?><p class="error"> <?php echo("Une erreur s'est produite : nous ne trouvons pas l'animal"); ?> </p> <?php
     } ?>
     <script src="../View/assets/script/popup.js"></script>
+    <script src="../View/assets/script/medicalReports.js"></script>
     <script src="../View/assets/script/medicalReportsAnimal.js"></script>
 </section>

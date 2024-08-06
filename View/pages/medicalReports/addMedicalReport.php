@@ -20,7 +20,7 @@
                     <ul class="animals" id="listAnimals">
                         <?php foreach($animalsListUpdate as $animalListUpdate){ ?>
                             <li class="form-check none">
-                                <input class="form-check-input" type="radio" name="searchAnimalNewReport" id="searchAnimalNewReport<?php echo($animalListUpdate['id_animal']);?>" value="<?php echo($animalListUpdate['id_animal']);?>">
+                                <input class="form-check-input" type="radio" name="searchAnimalNewReport" id="searchAnimalNewReport<?php echo($animalListUpdate['id_animal']);?>" value="<?php echo($animalListUpdate['id_animal']);?>" required>
                                 <label class="form-check-label" for="searchAnimalNewReport<?php echo($animalListUpdate['id_animal']);?>">
                                     <?php echo($animalListUpdate['name'].' - '.$animalListUpdate['label']) ?>
                                 </label>

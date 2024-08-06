@@ -8,7 +8,7 @@ include_once "Animal.php";
 Class MedicalReport{
     private int $id_report;
     private int $animal;
-    private int $veterinarian;
+    private string $veterinarian;
     private $date;
     private string $health;
     private string $food;
@@ -22,20 +22,6 @@ Class MedicalReport{
     public function getIdAnimal(){
         return $this->animal;
     }
-    public function getAnimal(){
-        try{
-            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-            $stmt = $pdo->prepare('SELECT * FROM animals WHERE id_animal = :id');
-            $stmt->bindParam(":id", $this->animal, PDO::PARAM_INT);
-            $stmt->execute();
-            $animal = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $animal;
-        }
-        catch(error $e)
-        {
-            return "inconnue";
-        }
-    }
 
     public function setIdAnimal(int $animal){
         $this->animal = $animal;
@@ -47,8 +33,8 @@ Class MedicalReport{
     public function getVeterinarian(){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-            $stmt = $pdo->prepare('SELECT * FROM users WHERE id_user = :id');
-            $stmt->bindParam(":id", $this->veterinarian, PDO::PARAM_INT);
+            $stmt = $pdo->prepare('SELECT mail, first_name, last_name FROM users WHERE mail = :id');
+            $stmt->bindParam(":id", $this->veterinarian, PDO::PARAM_STR);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             return $user;

@@ -1,6 +1,6 @@
 /* espacement */
 
-.medicalReportsAnimal{
+.medicalReports{
     background-color: var(--blue);
     padding-bottom : 30px;
     th,td{
@@ -81,7 +81,6 @@
         }
     }
     table {
-        table-layout: fixed;
         width: 90%;
         margin-left : 5%;
         border-collapse: collapse;
@@ -102,42 +101,35 @@
                     color : var(--blue);
                     .title{
                         font-weight: bold;
+                        width:55px;
                     }
-                    input[type="date"], input[type="number"]{
-                        border-radius: 20px;
-                        padding : 2px;
+                    .bodyFilter{
+                        input[type="date"], input[type="number"], input[type="text"] {
+                            border-radius: 20px;
+                            padding : 2px;
+                        }
                     }
-                    input[type="submit"]{
-                        margin : 5px 10px 5px 0;
-                        padding : 10px;
-                        width : 150px;
+                    .confirmChoices{
+                        width: 160px;
+                        input[type="submit"]{
+                            margin : 5px 10px 5px 0;
+                            padding : 10px;
+                            width : 150px;
+                        }
+                        .buttonFilter{
+                            margin : 5px 10px 5px 0;
+                            padding : 8px;
+                            width : 150px;
+                        }
                     }
-                    .buttonFilter{
-                        margin : 5px 10px 5px 0;
-                        padding : 8px;
-                        width : 150px;
-                    }
+
             }
         }
-
-        thead th:nth-child(1) {
-            width: 20%;
-        }
-    
-        thead th:nth-child(2) {
-            width: 20%;
-        }
-    
-        thead th:nth-child(3) {
-            width: 35%;
-        }
-    
-        thead th:nth-child(4) {
-            width: 15%;
-        }
-    
-        th,td {
-            padding: 20px;
+        thead{
+            text-align: left;
+            th{
+                padding-left: 15px;
+            }
         }
         .reportLink{
             text-decoration: underline var(--white);
@@ -153,15 +145,27 @@
 }
 
 @media only screen and (max-width: 556px){
-    .medicalReportsAnimal{
+    .medicalReports{
         .illustration{
+            display: none;
+        }
+        .reportLink{
+            align-content: center;
+            span{
+                display: none;
+            }
+            img{
+                filter: var(--filter_white);
+            }
+        }
+        .health{
             display: none;
         }
     }
 }
 
 @media only screen and (min-width: 556px){
-    .medicalReportsAnimal{
+    .medicalReports{
         .illustration{
             width : 8vw;
         }
@@ -172,6 +176,57 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+        .reportLink{
+            img{
+                display: none;
+            }
+        }
+    }
+}
+
+.medicalReportsAnimal{
+    table {
+        table-layout: fixed;
+        th,td {
+            padding: 20px;
+        }
+        thead th:nth-child(1) {
+            width: 20%;
+        }
+    
+        thead th:nth-child(2) {
+            width: 20%;
+        }
+    
+        thead th:nth-child(3) {
+            width: 35%;
+        }
+    
+        thead th:nth-child(4) {
+            width: 15%;
+        }
+    }
+}
+
+.allMedicalReports{
+    table {
+        td{
+            padding: 10px;
+        }
+        .filter{
+            .searchFilter{
+                display: flex;
+                .titleFilter{
+                    width: 16%;
+                }
+                .selected{
+                    width: 42%
+                }
+                .searchElements{
+                    width: 42%;
+                }
+            }
         }
     }
 }

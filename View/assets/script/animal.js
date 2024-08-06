@@ -113,16 +113,13 @@ for(let i=0; i<input.length;i++){
                     li[j].classList.add('none');
                 }
             }
-            console.log('moins 5')
             messageResult[i].classList.add('none');
         }
         else{
             if(filter != ""){
-                console.log('+5 if')
                 messageResult[i].classList.remove('none');
             }
             else{
-                console.log('+5 else')
                 messageResult[i].classList.add('none');
             } 
         }
