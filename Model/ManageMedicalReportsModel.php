@@ -113,7 +113,50 @@ function allReportsRequest($breeds,$animals,$veto,$dateStart,$dateEnd, $first, $
             }
             else return [];
         }
-        else return [];
+        else{
+            $request="WHERE";
+            if($veto!=null){
+                $request.=" (veterinarian=\"".$veto[0]."\"";
+                for($i=1;$i<count($veto);$i++){
+                    $request .= " OR veterinarian=\"".$veto[$i]."\"";
+                }
+                $request.=')';
+            }
+            if($dateStart != null){
+                if($request!='WHERE') $request.=" AND";
+                $request .= " date >= \"".$dateStart."\"";
+            }
+            if($dateEnd != null){
+                if($request!='WHERE') $request.=" AND";
+                $request .= " date <= \"".$dateEnd."\"";
+            }
+            if($breeds!=null){
+                if($request != "WHERE") $request.=" AND";
+                $request.=" (animals.breed=".$breeds[0];
+                for($i=1;$i<count($breeds);$i++){
+                    $request.=" OR animals.breed=".$breeds[$i];
+                }
+                $request .= ')';
+                echo($request);
+                $stmt = $pdo->prepare('SELECT reports_veterinarian.* FROM reports_veterinarian JOIN animals ON reports_veterinarian.animal = animals.id_animal '.$request.' ORDER BY date DESC LIMIT :limit');
+                $stmt->bindParam(":limit", $nbReports, PDO::PARAM_INT);
+                $stmt->setFetchMode(PDO::FETCH_CLASS,'MedicalReport');
+                if($stmt->execute()){
+                    return $stmt->fetchAll();
+                }
+                else return [];
+            }
+            else{
+                $stmt = $pdo->prepare('SELECT * FROM reports_veterinarian '.$request.' ORDER BY date DESC LIMIT :limit');
+                $stmt->bindParam(":limit", $nbReports, PDO::PARAM_INT);
+                $stmt->setFetchMode(PDO::FETCH_CLASS,'MedicalReport');
+                if($stmt->execute()){
+                    return $stmt->fetchAll();
+                }
+                else return [];
+
+            }
+        }
     }
     catch(error $e){
         return [];

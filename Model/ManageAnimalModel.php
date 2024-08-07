@@ -31,10 +31,10 @@ function listAnimalsWithFilter(array $breeds){
         $breedsRequest = '';
         $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
         if($breeds != []){
-            $breedsRequest = 'WHERE animals.breeds = '.$breeds[0];
+            $breedsRequest = 'WHERE animals.breed = '.$breeds[0];
             if(count($breeds)>1){
                 for($i=1;$i<count($breeds);$i++){
-                    $breedsRequest = ' OR animals.breeds = '.$breeds[$i];
+                    $breedsRequest .= ' OR animals.breed = '.$breeds[$i];
                 }
             }
         }

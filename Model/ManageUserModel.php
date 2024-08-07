@@ -122,3 +122,18 @@ function findNameOfUser(string $id) : string{
         return '';
     }
 }
+
+function listOfUserByRole(int $role){
+    try{
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        $stmt = $pdo->prepare('SELECT first_name, last_name, mail FROM users 
+        WHERE role = :role');
+        $stmt->bindValue(":role", $role,PDO::PARAM_STR);
+        $stmt->execute();
+        return  $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch(error $e){
+        echo("erreur de bd");
+        return '';
+    }
+}

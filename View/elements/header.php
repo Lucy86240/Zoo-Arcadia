@@ -41,7 +41,7 @@
                                     </a>
                                     <ul class="dropdown-menu none top" id="dropdown-menu">
                                         <li><a class="dropdown-item" href="#">Tableau de bord</a></li>
-                                        <li><a class="dropdown-item" href="#">Comptes-rendus vétérinaires</a></li>
+                                        <li><a class="dropdown-item <?php permission(['Administrateur.rice','vétérinaire']); ?>" href="rapport_medicaux">Comptes-rendus vétérinaires</a></li>
                                         <li><a class="dropdown-item" href="#">Animaux</a></li>
                                         <li><a class="dropdown-item <?php permission(['Administrateur.rice']); ?>" href="#">Horaires du zoo</a></li>
                                         <li><a class="dropdown-item <?php permission(['Administrateur.rice','Employé.e']); ?>" href="avis">Avis</a></li>

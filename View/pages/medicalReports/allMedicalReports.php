@@ -70,7 +70,7 @@
             </div>
             <!-- filtres -->
             <form class="filter" method="POST">
-                <span class="title">Filtre :</span>
+                <span class="title">Filtres</span>
                 <div class="bodyFilter">
                     <div class="searchFilter">
                         <div class="titleFilter">
@@ -79,66 +79,59 @@
                         </div>
                         <div class="selected">
                             <span>Sélectionnées :</span>
-                            <p id="breedSelectedAll">Toutes</p>
-                            <ul class="breeds" id="listBreedSelected">
-                                <?php foreach($breeds as $breed){ ?>
-                                    <li class="form-check none js-liBreedsSelected">
-                                        <input class="form-check-input js-checkboxBreedSelected" type="checkbox" name="filterBreedSelect" id="breedSelect<?php echo($breed['id_breed']);?>">
-                                        <label class="form-check-label" for="BreedSelect<?php echo($breed['id_breed']); ?>">
+                            <p id="breedsSelectedAll">Toutes</p>
+                            <ul class="breeds" id="listBreedsSelected">
+                                <?php $i=0;
+                                foreach($breeds as $breed){ ?>
+                                    <li class="form-check <?php if(defaultValueCheckbox('breedSelected'.$i)!='checked') echo('none'); ?> js-liBreedsSelected">
+                                        <input class="form-check-input js-checkboxBreedsSelected" type="checkbox" name="breedSelected<?php echo($i);?>" id="breedSelected<?php echo($i);?>" value="<?php echo($breed['id_breed']) ?>" <?php echo(defaultValueCheckbox('breedSelected'.$i)); ?>>
+                                        <label class="form-check-label" for="breedSelect<?php echo($i); ?>">
                                             <?php echo($breed['label']) ?>
                                         </label>
                                     </li>
-                                <?php } ?>
+                                <?php $i++;} ?>
                             </ul>
                         </div>
-                        <div = class="searchElements">
-                            <input type="text" class="filterSearch" id="filterBreedSearch" autocomplete="off">
-                            <ul class="breeds" id="listBreed">
-                                <?php foreach($breeds as $breed){ ?>
+                        <div class="searchElements">
+                            <input type="text" class="filterSearch" name="filterBreedsSearch" id="filterBreedsSearch" placeholder="chercher" autocomplete="off">
+                            <ul class="Breeds" id="listBreeds">
+                                <?php $i=0;
+                                foreach($breeds as $breed){ ?>
                                     <li class="form-check none">
-                                        <input class="form-check-input js-checkboxBreedSearch" type="checkbox" name="filterBreed" id="breed<?php echo($breed['id_breed']);?>">
-                                        <label class="form-check-label" for="Breed<?php echo($breed['id_breed']); ?>">
-                                            <?php echo($breed['label']) ?>
+                                        <input class="form-check-input js-checkboxBreedsSearch" type="checkbox" name="breed<?php echo($i);?>" id="breed<?php echo($i);?>" <?php echo(defaultValueCheckbox('breedSelected'.$i)); ?>>
+                                        <label class="form-check-label" for="breed<?php echo($i); ?>">
+                                            <?php  echo($breed['label']) ?>
                                         </label>
                                     </li>
-                                <?php } ?>
+                                <?php $i++;} ?>
                             </ul>
-                            <p class="MessageResult none" id="msgBreedSearch">Trop de résultats possibles... veuillez affiner</p>
+                            <p class="MessageResult none" id="msgBreedsSearch">Trop de résultats possibles... veuillez affiner</p>
                         </div>
                     </div>
                     <div class="element">
-                        <label for="filterAnimalSearch">Animal :</label>
-                        <input type="text" class="filterAnimal" id="filterAnimalSearch" autocomplete="off">
-                        <?php $breeds=[];
-                        $animalsListFilter = listAnimalsWithFilter($breeds);?>
-                    </div>
-                    <div class="element">
-                        <div> </div>
-                        <ul class="animals" id="listAnimal">
-                            <?php foreach($animalsListFilter as $animalListFilter){ ?>
-                                <li class="form-check none">
-                                    <input class="form-check-input" type="checkbox" name="filterAnimal" id="animal<?php echo($animalListFilter['id_animal']);?>" value="<?php echo($animalListFilter['id_animal']);?>">
-                                    <label class="form-check-label" for="animal<?php echo($animalListFilter['id_animal']);?>">
-                                        <?php echo($animalListFilter['name'].' - '.$animalListFilter['label']) ?>
+                        <span class="titleFilter">Vétérinaires :</span>
+                        <ul>
+                            <?php $i=0;
+                            foreach($veterinarians as $veto){ ?>
+                                <li class="form-check">
+                                    <input class="form-check-input js-vetoCheckbox" type="checkbox" name="veto<?php echo($i);?>" id="veto<?php echo($i);?>" value="<?php echo($veto['mail']) ?>" <?php echo(defaultValueCheckbox('veto'.$i)) ?>>
+                                    <label class="form-check-label" for="veto<?php echo($i); ?>">
+                                        <?php  echo($veto['first_name'].' '.$veto['last_name']) ?>
                                     </label>
                                 </li>
-                            <?php }?>
-                            <p class="MessageResult none" id="msgAnimalSearch">Trop de résultats possibles... veuillez affiner</p>
+                            <?php $i++;} ?>
                         </ul>
                     </div>
-                    <div>
-                            véto
-                    </div>
-                    <div>
+                    <div class="elementDate">
                         <label for="dateStart">De </label>
-                        <input type="date" name="dateStart" id="dateStart" value="<?php //echo(defaultValue('dateStart'));?>">
+                        <input type="date" name="dateStart" id="dateStart" value="<?php echo(defaultValueDate('dateStart'));?>">
                         <label for="dateEnd">à </label>
-                        <input type="date" name="dateEnd" id="dateEnd" value="<?php // echo(defaultValue('dateEnd'));?>">
+                        <input type="date" name="dateEnd" id="dateEnd" value="<?php  echo(defaultValueDate('dateEnd'));?>">
                     </div>
                 </div>
                 <div class="confirmChoices">
                     <input class="btn-DarkGreen" type="submit" value="Appliquer" name="choices">
-                    <button class="buttonFilter btn-red">Annuler le filtre</button>
+                    <button class="buttonFilter btn-red" id="cancelFilter">Annuler le filtre</button>
                 </div>
             </form>
         </caption>

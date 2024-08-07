@@ -1,32 +1,13 @@
-    // Declare variables
-    const input = document.getElementById('filterBreedSearch');
-    const ul = document.getElementById('listBreed');
-    const messageResult = document.getElementById('msgBreedSearch');
-    const max=10;
-
-search(input, ul, messageResult,max,false,true)
-
 function passListSearchOfListSelected(checkboxSelectedInput,checkboxSelectedLi,checkboxSearchInput,allText){
-    function allSelected(checkboxSelectedLi,allText){
-        selected = false;
-        let i=0;
-        while(i<checkboxSelectedLi.length || selected == false){
-            if(checkboxSelectedLi[i].classList.contains('none') == false) selected=true;
-            i++;
-        }
-        if(selected) allText.classList.add('none')
-        else allText.classList.remove('none')
-    }
     nbSelected=0;
-
     for(let i=0; i<checkboxSearchInput.length;i++){
         checkboxSearchInput[i].addEventListener('click', ()=>{
             if(checkboxSearchInput[i].checked == true){
                 nbSelected++;
                 checkboxSelectedInput[i].checked = true;
                 checkboxSelectedLi[i].classList.remove('none');
-                if(nbSelected>0) allText.classList.add('none')
-                else allText.classList.remove('none')
+                if(nbSelected>0) allText.classList.add('none');
+                else allText.classList.add('none');
             } 
 
         })
@@ -38,30 +19,43 @@ function passListSearchOfListSelected(checkboxSelectedInput,checkboxSelectedLi,c
                 nbSelected--;
                 checkboxSearchInput[i].checked = false;
                 checkboxSelectedLi[i].classList.add('none');
-                if(nbSelected>0) allText.classList.add('none')
-                else allText.classList.remove('none')
+                if(nbSelected>0) allText.classList.add('none');
+                else allText.classList.add('none');
             } 
         })
     }
 }
 
+// Declare variables
+    const input = document.getElementById('filterBreedsSearch');
+    const ul = document.getElementById('listBreeds');
+    const messageResult = document.getElementById('msgBreedsSearch');
+    const max=10;
 
-const checkboxSelectedInput = document.querySelectorAll(".js-checkboxBreedSelected");
+search(input, ul, messageResult,max,false,true);
+
+const checkboxSelectedInput = document.querySelectorAll(".js-checkboxBreedsSelected");
 const checkboxSelectedLi = document.querySelectorAll(".js-liBreedsSelected");
-const checkboxSearchInput = document.querySelectorAll(".js-checkboxBreedSearch");
-const allBreed = document.getElementById('breedSelectedAll')
-passListSearchOfListSelected(checkboxSelectedInput,checkboxSelectedLi,checkboxSearchInput,allBreed)
+const checkboxSearchInput = document.querySelectorAll(".js-checkboxBreedsSearch");
+const allBreed = document.getElementById('breedsSelectedAll');
+passListSearchOfListSelected(checkboxSelectedInput,checkboxSelectedLi,checkboxSearchInput,allBreed);
 
+const cancelFilter = document.getElementById('cancelFilter')
+const vetoCheckbox = document.querySelectorAll('.js-vetocheckbox')
+const dateStart = document.getElementById('dateStart')
+const dateEnd = document.getElementById('dateEnd')
 
+cancelFilter.addEventListener('click',()=>{
+    for(i=0;i<checkboxSearchInput.length;i++){
+        checkboxSearchInput[i].checked = false;
+        checkboxSelectedInput[i].checked = false;
+        checkboxSelectedLi[i].classList.add('none');
+    }
+    for(i=0;i<vetoCheckbox.length;i++){
+        vetoCheckbox.checked = true;
+    }
+    dateStart.value='';
+    dateEnd.value='';
+})
 
-
-
-
-    // Declare variables
-    const inputA = document.getElementById('filterAnimalSearch');
-    const ulA = document.getElementById('listAnimal');
-    const messageResultA = document.getElementById('msgAnimalSearch');
-    const maxA=10;
-    
-search(inputA, ulA, messageResultA,maxA,true,false)
 

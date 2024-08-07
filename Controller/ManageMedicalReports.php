@@ -74,5 +74,56 @@ function allReports($breeds,$animals,$veto,$dateStart,$dateEnd, $first, $nbRepor
     return $reports;
 }
 
+function filter(&$reports){
+    if(isset($_POST['choices'])){
+
+        //filtre des races
+        $breeds=[];
+        $lenght = count(listAllBreeds());
+        for($i=0;$i<$lenght;$i++){
+            if(isset($_POST['breedSelected'.$i])){
+                array_push($breeds,$_POST['breedSelected'.$i]);
+            }
+        }
+        if($breeds==[]) $breeds=null;
+
+        //filtre des vétérinaires
+        $lenght = count(listOfUserByRole(2));
+        $all=true;
+        $veterinarians = [];
+        for($i=0;$i<$lenght;$i++){
+            if(isset($_POST['veto'.$i])) array_push($veterinarians,$_POST['veto'.$i]);
+            else $all=false;
+        }
+        if($all==true) $veterinarians = null;
+
+        if(isset($_POST['dateStart']) && $_POST['dateStart']!='') $dateStart=$_POST['dateStart'];
+        else $dateStart=null;
+
+        if(isset($_POST['dateEnd']) && $_POST['dateEnd']!='') $dateEnd=$_POST['dateEnd'];
+        else $dateEnd=null;
+
+        $reports=allReports($breeds,null,$veterinarians,$dateStart,$dateEnd,null,30);
+    }
+}
+
+function defaultValueCheckbox(string $filter){
+    if(isset($_POST[$filter])) return 'checked';
+    else{
+        if(!isset($_POST['choices'])){
+            if(substr($filter,0,4)=="veto") return 'checked';
+            else return '';
+        }
+        else return '';
+    }
+}
+
+function defaultValueDate(string $filter){
+    if(isset($_POST[$filter])) return $_POST[$filter];
+    else return '';
+}
+
 $reports=allReports(null,null,null,null,null,null,30);
 addReport(null,$reports,null,null,null,null,null,null,30);
+$veterinarians = listOfUserByRole(2);
+filter($reports);

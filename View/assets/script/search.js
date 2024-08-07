@@ -30,6 +30,7 @@ function search(input, ul, messageResult,max,checkedAlways,checkedNever){
             }
         }
         if(nbResult(filter,li) <= max){
+
             for (let j = 0; j < li.length; j++) {
                 const label = li[j].getElementsByTagName("label")[0];
                 const txtValue = label.textContent || label.innerText;
@@ -53,6 +54,7 @@ function search(input, ul, messageResult,max,checkedAlways,checkedNever){
             } 
         }
         if(filter == "" || nbResult(filter,li)>max){
+            console.log('i')
             for(let k=0; k<li.length;k++){
                 const checkbox = li[k].getElementsByTagName("input")[0];
                 if(checkbox.checked==false || checkedAlways==false || (checkedNever && checkbox.checked==true))

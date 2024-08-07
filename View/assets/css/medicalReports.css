@@ -101,12 +101,31 @@
                     color : var(--blue);
                     .title{
                         font-weight: bold;
-                        width:55px;
+                        width:70px;
                     }
                     .bodyFilter{
+                        text-align:left;
                         input[type="date"], input[type="number"], input[type="text"] {
                             border-radius: 20px;
                             padding : 2px;
+                            color: var(--blue);
+                        }
+                        input[type="checkbox"]:checked, input[type="radio"]:checked {
+                            accent-color : var(--blue);
+                        }
+                        .searchFilter, .element, .elementDate{
+                            margin : 18px 0px 18px 0px;
+                        }
+                        .titleFilter{
+                            color: var(--blue);
+                            font-weight: bold;
+                            font-style: italic;
+                        }
+                        .selected{
+                            border: 1px solid var(--blue);
+                            border-radius: 10px;
+                            margin : 0 5px 5px 5px;
+                            padding : 5px;
                         }
                     }
                     .confirmChoices{
@@ -151,6 +170,7 @@
         }
         .reportLink{
             align-content: center;
+            align-items: center;
             span{
                 display: none;
             }
@@ -160,6 +180,24 @@
         }
         .health{
             display: none;
+        }
+    }
+    .allMedicalReports{
+        .filter{
+            .title{
+                text-align: center;
+            }
+            .searchFilter{
+                .titleFilter, .searchElements, input[type="text"]{
+                    width: 100%;
+                }
+                .selected{
+                    width: 92%;
+                }
+            }
+            .selected{
+                margin-right: 5px;
+            }
         }
     }
 }
@@ -176,10 +214,34 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            .element{
+                display: flex;
+            }
         }
         .reportLink{
             img{
                 display: none;
+            }
+        }
+    }
+    .allMedicalReports{
+        table {
+            .filter{
+                .searchFilter{
+                    display: flex;
+                    .titleFilter{
+                        width: 20%;
+                    }
+                    .selected{
+                        width: 40%
+                    }
+                    .searchElements{
+                        width: 40%;
+                        input[type="text"]{
+                            width:100%;
+                        }
+                    }
+                }
             }
         }
     }
@@ -213,20 +275,6 @@
     table {
         td{
             padding: 10px;
-        }
-        .filter{
-            .searchFilter{
-                display: flex;
-                .titleFilter{
-                    width: 16%;
-                }
-                .selected{
-                    width: 42%
-                }
-                .searchElements{
-                    width: 42%;
-                }
-            }
         }
     }
 }
