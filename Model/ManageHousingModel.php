@@ -4,6 +4,7 @@
     include_once "Model/Animal.php";
     include_once "Model/ManageAnimalModel.php";
     include_once "Model/Image.php";
+    include_once "Model/CommentHousing.php";
     function AllHousings(bool $portraitAccept=true){
         try{
             $housings = [];
@@ -81,3 +82,21 @@
         }
     }
 
+function commentHousing(int $housing,$archive){
+    try{
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        $request='';
+        if($archive==1 || $archive==0){
+            $request=' AND archive='.$archive;
+        }
+        $stmt = $pdo->prepare('SELECT * FROM comments_housing_veto WHERE housing= :housing'.$request);
+        $stmt->bindParam(':housing',$housing,PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_CLASS,'CommentHousing');
+        return $res;
+    }
+    catch(Error $e){
+        echo "Désolée";
+        return '';
+    }
+}

@@ -75,7 +75,9 @@
             </div>
             <div class="comments">
                 <div class="comment">
-                    <p>ici commentaires du veto</p>
+                    <?php foreach($housing['comments'] as $comment){ 
+                        echo($comment['comment']);?>
+                    <?php }?>
                 </div>
             </div>
             <div class="list-animals">
