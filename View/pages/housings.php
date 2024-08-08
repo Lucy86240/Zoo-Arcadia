@@ -76,17 +76,21 @@
             <div class="comments <?php permission(['connected']) ?>">
                 <div class="headerComments">
                     <div class="icons">
-                        <a class="icon" href="comments">
+                        <a class="icon js-iconComments" href="comments">
                             <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Voir la liste de tous les commentaires"></div>
                         </a>
-                        <div class="icon popupDesktop">
+                        <div class="icon js-iconComments js-iconAddComments" id_housing="<?php echo($housing['id']) ?>">
                             <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un commentaire">
                         </div>
                     </div>
                     <div class="title"><h3>Commentaires des vétérinaires</h3></div>
                 </div>
-                <div class="<?php if(!(count($housing['comments']) < 1)) echo('none');?>">
-                  <span>Les vétérinaires n'ont déposé aucun commentaire actif.</span>
+                <div class="legendsComments">
+                    <span class="js-legendComments none">Voir tous les commentaires archivés</span>
+                    <span class="js-legendComments none">Ajouter un commentaire</span>
+                </div>
+                <div class="comment <?php if(!(count($housing['comments']) < 1)) echo('none');?>">
+                    <span>Les vétérinaires n'ont déposé aucun commentaire actif.</span>
                 </div>
                 <?php foreach($housing['comments'] as $comment){ ?>
                     <div class="comment">
@@ -158,5 +162,18 @@
         </section>
     <?php   $count++;
     } ?>
+
+    <div id="addComment" class="none c-dialog">
+        <div class="fond"></div>
+        <div role="document" class="c-dialog__box popup">
+            <div class="Entete">
+                <h3 class="dialog-title">Nouveau commentaire</h3>
+                <button class="close" type="button" aria-label="Fermer" title="Fermer nouveau commentaire" data-dismiss="dialog">x</button>
+            </div>
+        <?php include_once "View/pages/comments/addComments.php"?>
+    </div>
     <script src="View/assets/script/housings.js"></script>
+    <script src="View/assets/script/popup.js"></script>
+    <script src="View/assets/script/popupConfirm.js"></script>
+
 </section>

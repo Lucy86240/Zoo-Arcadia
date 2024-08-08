@@ -55,6 +55,7 @@ function logout(){
         $_SESSION['mail']='';
         $_SESSION['role']='';
         $_SESSION['firstName']='';
+        $_SESSION['lastName']='';
     }
 }
 

@@ -22,7 +22,7 @@ function userExist(string $user){
 function verifiedLoginInput(string $mailInput, string $passwordInput){
     try{
         $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-        $stmt = $pdo->prepare('SELECT users.password, users.first_name, users.role, roles.label, users.blocked FROM users 
+        $stmt = $pdo->prepare('SELECT users.password, users.first_name, users.last_name, users.role, roles.label, users.blocked FROM users 
         JOIN roles ON users.role = roles.id_role WHERE mail = :username');
         $stmt->bindValue(":username", $mailInput,PDO::PARAM_STR);
         $stmt->execute();
@@ -32,6 +32,7 @@ function verifiedLoginInput(string $mailInput, string $passwordInput){
             if($res['blocked']==0){
                 $_SESSION['mail']=$mailInput;
                 $_SESSION['firstName']=$res['first_name'];
+                $_SESSION['lastName']=$res['last_name'];
                 $_SESSION['role'] = $res['label']; 
             }   
             return true;
