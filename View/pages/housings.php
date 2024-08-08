@@ -73,17 +73,55 @@
                     <p><?php echo($housing['description']); ?></p>
                 </div>
             </div>
-            <div class="comments">
-                <div class="comment">
-                    <?php foreach($housing['comments'] as $comment){ 
-                        echo($comment['comment']);?>
-                    <?php }?>
+            <div class="comments <?php permission(['connected']) ?>">
+                <div class="headerComments">
+                    <div class="icons">
+                        <a class="icon" href="comments">
+                            <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Voir la liste de tous les commentaires"></div>
+                        </a>
+                        <div class="icon popupDesktop">
+                            <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un commentaire">
+                        </div>
+                    </div>
+                    <div class="title"><h3>Commentaires des vétérinaires</h3></div>
                 </div>
+                <div class="<?php if(!(count($housing['comments']) < 1)) echo('none');?>">
+                  <span>Les vétérinaires n'ont déposé aucun commentaire actif.</span>
+                </div>
+                <?php foreach($housing['comments'] as $comment){ ?>
+                    <div class="comment">
+                        <div class="icons">
+                            <div class="icon">
+                                <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/archive.svg" alt="Archiver le commentaire">
+                            </div>
+                            <div class="icon popupDesktop">
+                                <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer le commentaire">
+                            </div>
+                        </div>
+                        <span><?php echo("\"".$comment['comment']."\"");?></span>
+                        <div class="footerComment">
+                            <span><?php echo($comment['date']);?></span>
+                            <span><?php echo($comment['veterinarian']);?></span>
+                        </div>
+                    </div>
+                    <!-- le popup de suppression s'affichant quand la poubelle est cliquée-->
+                    <div class="none c-dialog dialog-popup-js">
+                        <div class="fond"> </div>
+                        <form class="popup-confirm" method="POST">
+                                <p class="entete">Suppression</p>
+                                <p>Etes vous sûr de vouloir supprimer le commentaire : "<?php echo($comment['comment']."\"") ?></p>
+                                <div class="confirm-choice">
+                                    <input type="submit" name="ValidationDeleteComment<?php echo($comment['idComment']);?>" value="Oui" class="button-confirm">
+                                    <button class="button btn-green">Non</button>
+                                </div>
+                        </form>
+                    </div>
+                <?php }?>
             </div>
             <div class="list-animals">
                 <h3>Vous pouvez m'y retrouver :</h3>
                 <div class="search">
-                    <input type="text" class="searchAnimal" placeholder="Lion">
+                    <input type="text" class="searchAnimal" placeholder="chercher">
                     <img class="searchIcon" src="View/assets/img/general/icons/search.svg">
                 </div>
                 <form method="POST" action="#animal<?php echo($housing['id'])?>">

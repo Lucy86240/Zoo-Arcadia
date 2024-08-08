@@ -86,7 +86,7 @@ function allHousingsView(bool $id=false, bool $description=true, int $nbImgs=-1,
                 $comment=array(
                     "idComment" => $commentObject->getId(),
                     "comment" => $commentObject->getComment(),
-                    "date" => $commentObject->getDate(),
+                    "date" => date("d/m/Y",strtotime($commentObject->getDate())),
                     "veterinarian" => findNameOfUser($commentObject->getVeterinarian()),
                 );
                 array_push($housing['comments'],$comment);
