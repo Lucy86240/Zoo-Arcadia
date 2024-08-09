@@ -78,7 +78,7 @@
                         <a class="icon js-iconComments" href="commentaires_habitats">
                             <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Voir la liste de tous les commentaires"></div>
                         </a>
-                        <div class="<?php //permission(['vétérinaire']);?> icon js-iconComments js-iconAddComments" id_housing="<?php echo($housing['id']) ?>">
+                        <div class="<?php permission(['vétérinaire']);?> icon js-iconComments js-iconAddComments" id_housing="<?php echo($housing['id']) ?>">
                             <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un commentaire">
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                             <div class="icon js-iconArchive" id_comment="<?php echo($comment['idComment']) ?>">
                                 <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/archive.svg" alt="Archiver le commentaire">
                             </div>
-                            <div class="icon popupDesktop deleteIcon" id_comment="<?php echo($comment['idComment']) ?>">
+                            <div class="<?php permission(['vétérinaire']);?> icon popupDesktop deleteIcon" id_comment="<?php echo($comment['idComment']) ?>">
                                 <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer le commentaire">
                             </div>
                         </div>
