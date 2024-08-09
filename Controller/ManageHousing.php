@@ -197,6 +197,17 @@ function changeStatusComment(&$housings, &$comments){
     }
 }
 
+function defaultValueCheckbox(string $checkbox){
+    if(isset($_POST['filter']) && isset($_POST[$checkbox])) return 'checked';
+    if(!isset($_POST['filter'])) return 'checked';
+    return '';
+}
+
+function defaultValueDate(string $date){
+    if(isset($_POST['filter']) && isset($_POST[$date])) return $_POST[$date];
+    return '';
+}
+
 $housings = allHousingsView(false,true,-1,-1,1,1);
 $comments = allCommentswithFilter(null,null,null,null);
 addComment($housings,$comments);

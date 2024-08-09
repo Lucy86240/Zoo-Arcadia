@@ -33,7 +33,7 @@
                     $count=0;
                     foreach($housings as $housing){ ?>
                         <div>
-                            <input type="checkbox" name="housing<?php echo($count) ?>" id="housing<?php echo($count) ?>" value="<?php echo($housing['id_housing']) ?>">
+                            <input type="checkbox" name="housing<?php echo($count) ?>" id="housing<?php echo($count) ?>" value="<?php echo($housing['id_housing']) ?>" <?php echo(defaultValueCheckbox('housing'.$count)); ?>>
                             <label for="housing<?php echo($count) ?>"> <?php echo($housing['name']);?> </label>
                         </div>
                     <?php $count++; } ?>
@@ -43,20 +43,20 @@
                 <span>Statut : </span>
                 <div>
                     <div>
-                        <input type="checkbox" name="archive" id="archive">
+                        <input type="checkbox" name="archive" id="archive" <?php echo(defaultValueCheckbox("archive")); ?>>
                         <label for="archive">Archivé </label>
                     </div>
                     <div>
-                        <input type="checkbox" name="unarchive" id="unarchive">
+                        <input type="checkbox" name="unarchive" id="unarchive" <?php echo(defaultValueCheckbox("unarchive")); ?>>
                         <label for="unarchive">Actif </label>
                     </div>
                 </div>
             </div>
             <div class="elementDate">
                 <label for="dateStart">De </label>
-                <input type="date" name="dateStart" id="dateStart" >
+                <input type="date" name="dateStart" id="dateStart" value="">
                 <label for="dateEnd">à </label>
-                <input type="date" name="dateEnd" id="dateEnd">
+                <input type="date" name="dateEnd" id="dateEnd" value="">
             </div>
         </div>
         <div class="confirmChoices">
