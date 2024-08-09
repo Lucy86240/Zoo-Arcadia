@@ -277,4 +277,7 @@
             padding: 10px;
         }
     }
+    .pagination{
+        margin : 20px 10% 20px 10%;
+    }
 }

@@ -13,7 +13,7 @@
         <div class="icon <?php //permission(['Vétérinaire']);?>" id="popupNewReport">
             <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un compte rendu"></div>
         </div>
-        <a class="icon" href="../rapport_medicaux">
+        <a class="icon" href="../rapports_medicaux">
             <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Voir la liste de tous les comptes rendus"></div>
         </a>
     </div>

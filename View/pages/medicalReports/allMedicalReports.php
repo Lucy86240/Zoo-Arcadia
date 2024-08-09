@@ -1,5 +1,4 @@
 <section class="medicalReports allMedicalReports">
-    <?php $optionPage = false ?>
     <div class="head"> </div>
 
         <!-- icons permettant la navigation vers d'autres éléments clés-->
@@ -69,7 +68,7 @@
                 </div>
             </div>
             <!-- filtres -->
-            <form class="filter" method="POST">
+            <form class="filter" method="POST" action ="<?php if($optionPage){echo("../");}?>rapports_medicaux">
                 <span class="title">Filtres</span>
                 <div class="bodyFilter">
                     <div class="searchFilter">
@@ -83,8 +82,8 @@
                             <ul class="breeds" id="listBreedsSelected">
                                 <?php $i=0;
                                 foreach($breeds as $breed){ ?>
-                                    <li class="form-check <?php if(defaultValueCheckbox('breedSelected'.$i)!='checked') echo('none'); ?> js-liBreedsSelected">
-                                        <input class="form-check-input js-checkboxBreedsSelected" type="checkbox" name="breedSelected<?php echo($i);?>" id="breedSelected<?php echo($i);?>" value="<?php echo($breed['id_breed']) ?>" <?php echo(defaultValueCheckbox('breedSelected'.$i)); ?>>
+                                    <li class="form-check <?php if(defaultValueCheckbox('breedSelected'.$i,$breed['id_breed'])!='checked') echo('none'); ?> js-liBreedsSelected">
+                                        <input class="form-check-input js-checkboxBreedsSelected" type="checkbox" name="breedSelected<?php echo($i);?>" id="breedSelected<?php echo($i);?>" value="<?php echo($breed['id_breed']) ?>" <?php echo(defaultValueCheckbox('breedSelected'.$i,$breed['id_breed'])); ?>>
                                         <label class="form-check-label" for="breedSelect<?php echo($i); ?>">
                                             <?php echo($breed['label']) ?>
                                         </label>
@@ -98,7 +97,7 @@
                                 <?php $i=0;
                                 foreach($breeds as $breed){ ?>
                                     <li class="form-check none">
-                                        <input class="form-check-input js-checkboxBreedsSearch" type="checkbox" name="breed<?php echo($i);?>" id="breed<?php echo($i);?>" <?php echo(defaultValueCheckbox('breedSelected'.$i)); ?>>
+                                        <input class="form-check-input js-checkboxBreedsSearch" type="checkbox" name="breed<?php echo($i);?>" id="breed<?php echo($i);?>" <?php echo(defaultValueCheckbox('breedSelected'.$i,$breed['id_breed'])); ?>>
                                         <label class="form-check-label" for="breed<?php echo($i); ?>">
                                             <?php  echo($breed['label']) ?>
                                         </label>
@@ -114,7 +113,7 @@
                             <?php $i=0;
                             foreach($veterinarians as $veto){ ?>
                                 <li class="form-check">
-                                    <input class="form-check-input js-vetoCheckbox" type="checkbox" name="veto<?php echo($i);?>" id="veto<?php echo($i);?>" value="<?php echo($veto['mail']) ?>" <?php echo(defaultValueCheckbox('veto'.$i)) ?>>
+                                    <input class="form-check-input js-vetoCheckbox" type="checkbox" name="veto<?php echo($i);?>" id="veto<?php echo($i);?>" value="<?php echo($veto['mail']) ?>" <?php echo(defaultValueCheckbox('veto'.$i,$veto['mail'])) ?>>
                                     <label class="form-check-label" for="veto<?php echo($i); ?>">
                                         <?php  echo($veto['first_name'].' '.$veto['last_name']) ?>
                                     </label>
@@ -131,7 +130,7 @@
                 </div>
                 <div class="confirmChoices">
                     <input class="btn-DarkGreen" type="submit" value="Appliquer" name="choices">
-                    <button class="buttonFilter btn-red" id="cancelFilter">Annuler le filtre</button>
+                    <form method="POST" action ="<?php if($optionPage){echo("../");}?>rapports_medicaux"><input class="buttonFilter btn-red" type="submit" id="cancelFilter" value="Annuler filtre" name="cancelFilter"></form>
                 </div>
             </form>
         </caption>
@@ -159,6 +158,27 @@
             <?php } ?>
         </tbody>
     </table>
+    <nav>
+        <ul class="pagination">
+            <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
+            <li class=" <?php echo(($currentPage == 1) ? "hidden" : "");?>">
+                <a href="<?php urlOption($currentPage -1, $optionPage) ?>" class="btn-previous bp-green">
+                    <img class="previous-img" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/previous_green.png" alt="Bouton précédent">
+                    <p class="previous-text">Précédent</p> 
+                </a>   
+            </li>
+
+            <li><p class="page-green">Page <?php echo($currentPage); ?> / <?php echo($pages); ?></p></li>
+
+            <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
+            <li class=" <?php echo(($currentPage == $pages) ? "hidden" : "");?>">
+                <a href="<?php urlOption($currentPage + 1, $optionPage)?>" class="btn-next bn-green">
+                    <p class="next-text">Suivant</p> 
+                    <img class="next-img" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/next_green.png" alt="Bouton suivant">
+                </a>    
+            </li> 
+        </ul>
+    </nav>
     <script src="../View/assets/script/search.js"></script>
     <script src="../View/assets/script/popup.js"></script>
     <script src="../View/assets/script/medicalReports.js"></script>

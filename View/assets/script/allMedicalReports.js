@@ -58,4 +58,19 @@ cancelFilter.addEventListener('click',()=>{
     dateEnd.value='';
 })
 
+//supprimer les filtres
+const form = document.querySelector('.filter')
+const submit = form.querySelector('.btn-DarkGreen')
 
+cancelFilter.addEventListener('click', ()=> {
+    for(let m=0; m<checkboxSelectedInput.length; m++){
+        checkboxSelectedInput[m].checked = false;
+        checkboxSearchInput[m].checked = false;
+        checkboxSelectedInput[m].classList.add('none');
+    }
+    for(let n=0; n<vetoCheckbox.length;n++){
+        vetoCheckbox[n].checked=true;
+    }
+    dateStart.value='';
+    dateEnd.value='';
+});
