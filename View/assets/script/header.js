@@ -58,9 +58,11 @@ userMenu.addEventListener("click", ()=>{
 const triggerCo = document.querySelector('#popup-login'); 
 const dialogCo = document.getElementById('login-dialog');
 
-triggerCo.addEventListener('click',()=>{
+if(triggerCo != null){
+    triggerCo.addEventListener('click',()=>{
     dialogCo.classList.remove('none');
-})
+    })
+}
 
 //déconnexion
 const accountConnected = document.querySelector('.account-connected');

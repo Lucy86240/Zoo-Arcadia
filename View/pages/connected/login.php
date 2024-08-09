@@ -7,9 +7,12 @@
                 <span class="logoutText none">Déconnexion</span>
             </button>
         </form>
-        <span id="popup-login" aria-haspopup="dialog" aria-controls="dialog"><?php if(!isset($_SESSION['firstName']) || empty($_SESSION['firstName'])) echo('Me connecter'); 
-            else echo($_SESSION['firstName']);  
-        ?></span>
+        <?php if(!isset($_SESSION['firstName']) || empty($_SESSION['firstName'])){ ?>
+            <span id="popup-login" aria-haspopup="dialog" aria-controls="dialog"> Me connecter </span>
+        <?php }
+        else{ ?>
+            <span><?php echo($_SESSION['firstName']) ?></span>
+        <?php } ?>
         <div id="login-dialog" role="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-desc" aria-modal="true" tabindex="-1" class="c-dialog <?php if(!passwordError()) echo('none');?>">
             <div class="fond"></div>
             <div role="document" class="c-dialog__box popup">
