@@ -3,10 +3,10 @@
 
         <!-- icons permettant la navigation vers d'autres éléments clés-->
     <div class="icons">
-        <div class="icon">
+        <a class="icon" href="<?php if($optionPage){echo("../");}?>animaux">
             <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/list.svg" alt="Voir la liste des animaux"></div>
-        </div>
-        <div class="icon <?php //permission(['Vétérinaire']);?>" id="popupNewReport">
+        </a>
+        <div class="icon <?php permission(['Vétérinaire']);?>" id="popupNewReport">
             <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un compte rendu"></div>
         </div>
     </div>

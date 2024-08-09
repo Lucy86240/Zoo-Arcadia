@@ -19,6 +19,7 @@ $allRoutes = array(
     new Route('repas',true,'Repas','View/pages/food/foodAnimal.php',['connected'],'Controller/ManageFood.php'),
     new Route('nourrir',true,'Nourrir','View/pages/food/addFood.php',['administrateur.trice','Employé.e'],'Controller/ManageFood.php'),
     new Route('maj_animal',true,'Mise à jour animal','View/pages/animal/updateAnimal.php',['administrateur.trice'],'Controller/updateAnimal.php'),
+    new Route('animaux',false,'Animaux','View/pages/animal/allAnimals.php',[],'Controller/ManageAnimal.php'),
 );
 
 define('ALL_ROUTES',$allRoutes);
