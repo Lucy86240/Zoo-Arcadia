@@ -46,6 +46,7 @@
                                         <li><a class="dropdown-item <?php permission(['Administrateur.rice']); ?>" href="#">Horaires du zoo</a></li>
                                         <li><a class="dropdown-item <?php permission(['Administrateur.rice','Employé.e']); ?>" href="avis">Avis</a></li>
                                         <li><a class="dropdown-item <?php permission(['Employé.e']); ?>" href="#">Nourrir un animal</a></li>
+                                        <li><a class="dropdown-item" href="commentaires_habitats">Commentaires des habitats</a></li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item <?php permission(['Administrateur.rice']); ?>" href="#">Comptes utilisateurs</a></li>
                                     </ul>

@@ -26,44 +26,6 @@ do {
     
 } while (housingExist==true);
 
-//icons commentaires
-
-const iconComments = document.querySelectorAll('.js-iconComments');
-const legendComments = document.querySelectorAll('.js-legendComments');
-
-for(let i=0; i<iconComments.length;i++){
-    iconComments[i].addEventListener("mouseover",()=>{
-        legendComments[i].classList.remove('none');
-        //legendComments[i].style='margin-left:'+i*40+'px';
-    })
-    iconComments[i].addEventListener("mouseout",()=>{
-        legendComments[i].classList.add('none');
-    })
-}
-
-//nouveau commentaire
-const iconsAddComment = document.querySelectorAll('.js-iconAddComments')
-const addComment = document.getElementById('addComment')
-const close = addComment.querySelector('.close')
-const select = addComment.querySelector('#addCommentsHousing')
-
-
-for(let j=0;j<iconsAddComment.length;j++){
-    iconsAddComment[j].addEventListener('click',()=>{
-        addComment.classList.remove('none');
-        id=iconsAddComment[j].getAttribute('id_housing')
-        for (let i=0; i < select.options.length; i++){
-            if (select.options[i].value == id){
-                select.options[i].selected = true;
-            }
-        }
-    })
-}
-
-close.addEventListener('click',()=>{
-    addComment.classList.add('none')
-})
-
 //recherche d'un animal suivant la saisie
 
     // Declare variables

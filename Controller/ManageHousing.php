@@ -97,3 +97,110 @@ function allHousingsView(bool $id=false, bool $description=true, int $nbImgs=-1,
         }            
     return $housings;
 }
+
+function allCommentswithFilter($housing,$dateStart,$dateEnd,$status){
+    $commentsObject = allCommentsRequest($housing,$dateStart,$dateEnd,$status);
+    $comments=[];
+    foreach($commentsObject as $commentObject){
+        $comment=array(
+            "idComment" => $commentObject->getId(),
+            "comment" => $commentObject->getComment(),
+            "date" => date("d/m/Y",strtotime($commentObject->getDate())),
+            "veterinarian" => findNameOfUser($commentObject->getVeterinarian()),
+            "housing" => findHousingNameById($commentObject->getHousing()),
+            "archive" => $commentObject->getArchive(),
+            );
+        array_push($comments,$comment);
+    }
+    return $comments;
+}
+
+function filterComments(&$comments){
+    if(isset($_POST['filter'])){
+        
+        $dateStart=null;
+        $dateEnd=null;
+        $status=null;
+        
+        $lenght = count(listNameIdAllHousings());
+        $housings = [];
+        for($i=0;$i<$lenght;$i++){
+            if(isset($_POST['housing'.$i])) array_push($housings,$_POST['housing'.$i]);
+        }
+        if($housings==[]) $housings=null;
+
+        if(isset($_POST['dateStart'])) $dateStart = $_POST['dateStart'];
+
+        if(isset($_POST['dateEnd'])) $dateStart = $_POST['dateEnd'];
+
+        if(isset($_POST['archive']) && isset($_POST['unarchive'])) $status = 2;
+        else if(isset($_POST['archive'])) $status = 1;
+        else if(isset($_POST['unarchive'])) $status = 0;
+
+        $comments = allCommentswithFilter($housings,$dateStart,$dateEnd,$status);
+    }
+    else{
+        $comments = allCommentswithFilter(null,null,null,null);
+    }
+}
+
+function deleteComment(&$housings, &$comments){
+    $delete = false;
+    foreach($comments as $comment){
+        if(isset($_POST['ValidationDeleteComment'.$comment['idComment']])){
+            deleteCommentRequest($comment['idComment']);
+            $delete = true;
+        }
+    }
+    if($delete){
+        $housings = allHousingsView(false,true,-1,-1,1,1);
+        filterComments($comments);
+    }
+}
+
+function addComment(&$housings, &$comments){
+    if(isset($_POST['addComment'])){
+        if(isset($_POST['addCommentsHousing']) && isset($_POST['addCommentComment'])){
+            addCommentRequest($_SESSION['mail'],now(),$_POST['addCommentsHousing'],$_POST['addCommentComment']);
+            $housings = allHousingsView(false,true,-1,-1,1,1);
+            filterComments($comments);
+        }
+    }
+}
+
+function changeStatusComment(&$housings, &$comments){
+    
+    // archivage d'un commentaire
+    $archive = false;
+    foreach($comments as $comment){
+        if(isset($_POST['ValidationArchiveComment'.$comment['idComment']])){
+            changeStatusCommentRequest($comment['idComment'],1);
+            $archive = true;
+        }
+    }
+    if($archive){
+        $housings = allHousingsView(false,true,-1,-1,1,1);
+        filterComments($comments);
+    }
+
+    //statut actif d'un commentaire
+    $unarchive = false;
+    foreach($comments as $comment){
+        if(isset($_POST['ValidationUnarchiveComment'.$comment['idComment']])){
+            changeStatusCommentRequest($comment['idComment'],0);
+            $unarchive = true;
+        }
+    }
+    if($unarchive){
+        $housings = allHousingsView(false,true,-1,-1,1,1);
+        filterComments($comments);
+    }
+}
+
+$housings = allHousingsView(false,true,-1,-1,1,1);
+$comments = allCommentswithFilter(null,null,null,null);
+addComment($housings,$comments);
+filterComments($comments);
+deleteComment($housings, $comments);
+changeStatusComment($housings, $comments);
+

@@ -11,6 +11,7 @@ $allRoutes = array(
     new Route('nouveau_service',false,'Nouveau service','View/pages/services/addService.php',['administrateur.trice'],'Controller/ManageService.php'),
     new Route('animal',false,'Habitats','View/elements/animal.php',[],'Controller/ManageAnimal.php'),
     new Route('habitats',false,'Habitats','View/pages/housings.php',[],'Controller/ManageHousing.php'),
+    new Route('commentaires_habitats',false,'Com habitats','View/pages/commentsVetoHousing/allComments.php',['Connected'],'Controller/ManageHousing.php'),
     new Route('rapport_medicaux_animal',true,'Rapport Médicaux','View/pages/medicalReports/medicalReportsAnimal.php',['Vétérinaire','administrateur.trice'],'Controller/ManageMedicalReportsAnimal.php'),
     new Route('rapport_medicaux',true,'Rapport Médicaux','View/pages/medicalReports/allMedicalReports.php',['Vétérinaire','administrateur.trice'],'Controller/ManageMedicalReports.php'),
     new Route('rapport_medicaux',false,'Rapport Médicaux','View/pages/medicalReports/allMedicalReports.php',['Vétérinaire','administrateur.trice'],'Controller/ManageMedicalReports.php'),

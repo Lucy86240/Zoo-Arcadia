@@ -1,6 +1,5 @@
 <section class="housings theme-brown">
     <div class="head"></div>
-    <?php $housings = allHousingsView(false,true,-1,-1,1,1); ?>
     <div class="hero">
         <div class="title">
             <h2>Respectueux de leur écosystème naturel nous permettons à nos animaux de s’épanouir au coeur de </h2>
@@ -73,20 +72,20 @@
                     <p><?php echo($housing['description']); ?></p>
                 </div>
             </div>
-            <div class="comments <?php permission(['connected']) ?>">
+            <div class="commentsVeto <?php permission(['connected']) ?>">
                 <div class="headerComments">
                     <div class="icons">
-                        <a class="icon js-iconComments" href="comments">
+                        <a class="icon js-iconComments" href="commentaires_habitats">
                             <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Voir la liste de tous les commentaires"></div>
                         </a>
-                        <div class="icon js-iconComments js-iconAddComments" id_housing="<?php echo($housing['id']) ?>">
+                        <div class="<?php //permission(['vétérinaire']);?> icon js-iconComments js-iconAddComments" id_housing="<?php echo($housing['id']) ?>">
                             <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un commentaire">
                         </div>
                     </div>
                     <div class="title"><h3>Commentaires des vétérinaires</h3></div>
                 </div>
                 <div class="legendsComments">
-                    <span class="js-legendComments none">Voir tous les commentaires archivés</span>
+                    <span class="js-legendComments none">Voir tous les commentaires</span>
                     <span class="js-legendComments none">Ajouter un commentaire</span>
                 </div>
                 <div class="comment <?php if(!(count($housing['comments']) < 1)) echo('none');?>">
@@ -95,32 +94,22 @@
                 <?php foreach($housing['comments'] as $comment){ ?>
                     <div class="comment">
                         <div class="icons">
-                            <div class="icon">
+
+                            <div class="icon js-iconArchive" id_comment="<?php echo($comment['idComment']) ?>">
                                 <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/archive.svg" alt="Archiver le commentaire">
                             </div>
-                            <div class="icon popupDesktop">
+                            <div class="icon popupDesktop deleteIcon" id_comment="<?php echo($comment['idComment']) ?>">
                                 <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer le commentaire">
                             </div>
                         </div>
                         <span><?php echo("\"".$comment['comment']."\"");?></span>
                         <div class="footerComment">
-                            <span><?php echo($comment['date']);?></span>
-                            <span><?php echo($comment['veterinarian']);?></span>
+                            <span>le <?php echo($comment['date']);?></span>
+                            <span>de <?php echo($comment['veterinarian']);?></span>
                         </div>
                     </div>
-                    <!-- le popup de suppression s'affichant quand la poubelle est cliquée-->
-                    <div class="none c-dialog dialog-popup-js">
-                        <div class="fond"> </div>
-                        <form class="popup-confirm" method="POST">
-                                <p class="entete">Suppression</p>
-                                <p>Etes vous sûr de vouloir supprimer le commentaire : "<?php echo($comment['comment']."\"") ?></p>
-                                <div class="confirm-choice">
-                                    <input type="submit" name="ValidationDeleteComment<?php echo($comment['idComment']);?>" value="Oui" class="button-confirm">
-                                    <button class="button btn-green">Non</button>
-                                </div>
-                        </form>
-                    </div>
                 <?php }?>
+                <div id="js-confirm"> </div>
             </div>
             <div class="list-animals">
                 <h3>Vous pouvez m'y retrouver :</h3>
@@ -170,10 +159,11 @@
                 <h3 class="dialog-title">Nouveau commentaire</h3>
                 <button class="close" type="button" aria-label="Fermer" title="Fermer nouveau commentaire" data-dismiss="dialog">x</button>
             </div>
-        <?php include_once "View/pages/comments/addComments.php"?>
+        <?php include_once "View/pages/commentsVetoHousing/addComments.php"?>
     </div>
     <script src="View/assets/script/housings.js"></script>
     <script src="View/assets/script/popup.js"></script>
     <script src="View/assets/script/popupConfirm.js"></script>
+    <script src="View/assets/script/commentVetoHousing.js"></script>
 
 </section>
