@@ -91,7 +91,7 @@
                 -->
                 <div class="box-cure <?php permission(['Administrateur.rice','Vétérinaire']);?>">
                     <div class="icon">
-                        <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>rapport_medicaux_animal/?animal=<?php echo($animal['id']); ?>">
+                        <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>rapports_medicaux_animal/?animal=<?php echo($animal['id']); ?>">
                             <div class="bgc-img-box"><img class="img-box reportMedicalAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Visualiser les rapports médicaux"></div>
                             <span class="legend">Rapport médicaux</span>
                         </a>

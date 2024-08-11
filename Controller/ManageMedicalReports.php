@@ -222,7 +222,7 @@ if((isset($_GET['page']) && !empty($_GET['page']))&& !isset($_POST['choices'])){
 $reports=null;
 $pages=null;
 $nbReports=0;
-$perPage=2;
+$perPage=20;
 $first=null;
 
 displayReports($currentPage,$perPage,$reports,$pages,$nbReports,$first);
