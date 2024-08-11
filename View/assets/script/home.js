@@ -71,22 +71,42 @@ const showSlides = (slides, firstSlide, nbSlideView) => {
 
 //change la slide automatiquement
 const changeSlideAuto = (slideIndex, slides, nbSlide) => {
-    setInterval( () => {
+    timer = setInterval( () => {
         slideIndex +=nbSlideViewHousing;
         slideIndex=showSlides(slides,slideIndex,nbSlide);
     },durationSlide)
+
+    return timer;
+
 }
-function carrouselHousing(){
-    //lancement des fonctions
-    if(slidesHousing.length > nbSlideViewHousing){
-        slideIndex=showSlides(slidesHousing,slideIndex,nbSlideViewHousing);
-        changeSlideAuto(slideIndex,slidesHousing,nbSlideViewHousing);
+
+function stopCarrouselHousing(){
+    for(i=0; i<slidesHousing.length;i++){
+        slidesHousing[i].classList.remove('none');
     }
 }
-if(window.innerWidth>576){
-    carrouselHousing();
+
+let actif = false;
+if(slidesHousing.length > nbSlideViewHousing && window.innerWidth > 576){
+    slideIndex=showSlides(slidesHousing,slideIndex,nbSlideViewHousing);
+    timer = changeSlideAuto(slideIndex,slidesHousing,nbSlideViewHousing);
+    actif = true
 }
-window.addEventListener("resize", carrouselHousing);
+
+window.addEventListener("resize", ()=>{
+    if(actif==false && slidesHousing.length > nbSlideViewHousing && window.innerWidth > 576){       
+        slideIndex=showSlides(slidesHousing,slideIndex,nbSlideViewHousing);
+        timer = changeSlideAuto(slideIndex,slidesHousing,nbSlideViewHousing);
+        actif = true
+    }
+    else{
+        if(actif==true && window.innerWidth < 576){
+            clearInterval(timer);
+            stopCarrouselHousing();
+            actif = false
+        }
+    }
+});
 
 
 /*carrousel animaux mobile*/
