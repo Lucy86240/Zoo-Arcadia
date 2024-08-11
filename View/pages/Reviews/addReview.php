@@ -3,7 +3,7 @@
         <img class="edit-review" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/edit_square.png" alt="">
         Donner mon avis
     </button>
-    <div id="new-review-dialog" role="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-desc" aria-modal="true" aria-hidden="true" tabindex="-1" class="c-dialog">
+    <div id="new-review-dialog" class="c-dialog none">
         <div class="fond"></div>
         <div role="document" class="c-dialog__box popup">
             <div class="Entete">
