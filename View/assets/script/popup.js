@@ -7,3 +7,11 @@ function popup(dialog, trigger, dismissTrigger){
     dialog.classList.add('none');
   })
 }
+
+function popupConfirm(icon,popup){
+  for(let i=0; i<icon.length; i++){
+    icon[i].addEventListener('click',() => {
+        popup[i].classList.remove('none');
+    });
+  }
+}

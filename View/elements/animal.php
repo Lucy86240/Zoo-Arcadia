@@ -14,12 +14,12 @@
                         <span class="legend">Modifier</span>
                     </a>
                     <!-- icon archivage (seulement si l'animal est visible-->
-                    <div class="icon popupDesktop <?php if($animal['isVisible']==0) echo('none');?>">
+                    <div class="icon iconArchive <?php if($animal['isVisible']==0) echo('none');?>">
                         <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/archive.svg" alt="Archiver l'animal"></div>
                         <span class="legend">Archiver</span>
                     </div>
                     <!-- le popup d'archivage s'affichant quand l'icone est cliquée-->
-                    <div class="none c-dialog dialog-popup-js">
+                    <div class="none c-dialog popupArchive dialog-popup-js">
                         <div class="fond"> </div>
                         <form class="popup-confirm" method="POST">
                                 <p class="entete">Archivage</p>
@@ -33,12 +33,12 @@
                         </form>
                     </div>
                     <!-- icon désarchivage (seulement si l'animal est non-visible-->
-                    <div class="icon popupDesktop <?php if($animal['isVisible']==1) echo('none');?>">
+                    <div class="icon iconUnarchive <?php if($animal['isVisible']==1) echo('none');?>">
                         <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/unarchive.svg" alt="Désrchiver l'animal"></div>
                         <span class="legend">Désarchiver</span>
                     </div>
                     <!-- le popup d'archivage s'affichant quand l'icone est cliquée-->
-                    <div class="none c-dialog dialog-popup-js">
+                    <div class="none c-dialog popupUnarchive">
                         <div class="fond"> </div>
                         <form class="popup-confirm" method="POST">
                                 <p class="entete">Désarchivage</p>
@@ -50,12 +50,12 @@
                                 </div>
                         </form>
                     </div>
-                    <div class="icon popupDesktop">
+                    <div class="icon iconDelete">
                         <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer l'animal"></div>
                         <span class="legend">Supprimer</span>
                     </div>
                     <!-- le popup de suppression s'affichant quand la poubelle est cliquée-->
-                    <div class="none c-dialog dialog-popup-js">
+                    <div class="none c-dialog popupDelete">
                         <div class="fond"> </div>
                         <form class="popup-confirm" method="POST">
                                 <p class="entete">Suppression</p>
@@ -96,7 +96,7 @@
                             <span class="legend">Rapport médicaux</span>
                         </a>
                     </div>
-                    <div class="icon <?php //permission(['Vétérinaire']);?>">
+                    <div class="icon <?php permission(['Vétérinaire']);?>">
                         <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>nouveau_rapport/?animal=<?php echo($animal['id']); ?>">
                             <div class="bgc-img-box"><img class="img-box newReportAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un rapport médical"></div>
                             <span class="legend">Nouveau rapport</span>
@@ -173,5 +173,5 @@
         </div>
     </div>
 </section>
+<script src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/script/popup.js"></script>
 <script src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/script/animal.js"></script>
-<script src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/script/popupConfirm.js"></script>

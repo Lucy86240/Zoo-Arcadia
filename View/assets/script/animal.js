@@ -1,3 +1,23 @@
+/* gestion des popup*/
+const iconDelete = document.querySelectorAll('.iconDelete')
+const popupDelete = document.querySelectorAll('.popupDelete')
+if(iconDelete != null){
+    popupConfirm(iconDelete,popupDelete)
+}
+
+const iconArchive = document.querySelectorAll('.iconArchive')
+const popupArchive = document.querySelectorAll('.popupArchive')
+if(iconArchive != null){
+    popupConfirm(iconArchive,popupArchive)
+}
+
+const iconUnarchive = document.querySelectorAll('.iconUnarchive')
+const popupUnarchive = document.querySelectorAll('.popupUnarchive')
+if(iconUnarchive != null){
+    popupConfirm(iconUnarchive,popupUnarchive)
+}
+
+
 /*carrousel photo de l'animal*/
 
 // initialisation des variables

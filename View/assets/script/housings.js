@@ -1,3 +1,6 @@
+/* popup */
+
+
 /*carrousel photos d'un habitant*/
 count=0;
 housingExist = false

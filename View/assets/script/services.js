@@ -1,5 +1,8 @@
 
-
+// popup
+const iconDelete = document.querySelectorAll('.iconDelete')
+const popupDelete = document.querySelectorAll('.popupDelete')
+popupConfirm(iconDelete,popupDelete)
 
 
 //apparition du formulaire de modification

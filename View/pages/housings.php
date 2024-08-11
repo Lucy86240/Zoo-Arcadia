@@ -161,9 +161,8 @@
             </div>
         <?php include_once "View/pages/commentsVetoHousing/addComments.php"?>
     </div>
-    <script src="View/assets/script/housings.js"></script>
     <script src="View/assets/script/popup.js"></script>
-    <script src="View/assets/script/popupConfirm.js"></script>
+    <script src="View/assets/script/housings.js"></script>
     <script src="View/assets/script/commentVetoHousing.js"></script>
 
 </section>

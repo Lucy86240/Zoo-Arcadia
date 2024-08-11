@@ -13,10 +13,10 @@
             <div class = "box-backOffice <?php permission(['Employé.e','Administrateur.rice']); ?>">
                 <div class="bgc-img-box"><img class="img-box editServiceD" src="View/assets/img/general/icons/edit.svg" alt="Modifier service"></div>
                 <!-- bouton de suppression seulement pour admin-->
-                <a href="#" class="bgc-img-box popupDesktop <?php permission(['Administrateur.rice']); ?>"><img class="img-box" src="View/assets/img/general/icons/delete.svg" alt="Supprimer service"></a>
+                <a href="#" class="bgc-img-box iconDelete <?php permission(['Administrateur.rice']); ?>"><img class="img-box" src="View/assets/img/general/icons/delete.svg" alt="Supprimer service"></a>
                 
                 <!-- le popup de suppression s'affichant quand la poubelle est cliquée-->
-                <div class="none c-dialog dialog-popup-js">
+                <div class="none c-dialog popupDelete">
                     <div class="fond"> </div>
                     <form class="popup-confirm" method="POST">
                             <p class="entete">Suppression</p>
@@ -78,6 +78,6 @@
             </button>
         </a>
     </div>
+    <script src="View/assets/script/popup.js"></script>
     <script src="View/assets/script/services.js"></script>
-    <script src="View/assets/script/popupConfirm.js"></script>
 </section>
