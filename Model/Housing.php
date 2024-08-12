@@ -7,7 +7,6 @@ class Housing{
     private int $id_housing;
     private string $name;
     private string $description;
-    private string $theme_color;
     private $images=[];
 
     /*public function __construct(int $id,string $name, string $description){
@@ -34,14 +33,6 @@ class Housing{
 
     public function setDescription(string $description){
         $this->description = $description;
-    }
-
-    public function getcolorTheme(){
-        return $this->theme_color;
-    }
-
-    public function setcolortheme(string $theme_color){
-        $this->theme_color = $theme_color;
     }
 
     public function setImage(int $indice, $img){

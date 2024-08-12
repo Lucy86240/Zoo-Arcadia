@@ -1,4 +1,4 @@
-.updateAnimal, .newAnimal{
+.updateAnimal, .newAnimal, .newHousing{
     margin-top : 10px;
     h1{
         padding : 30px;
@@ -26,6 +26,11 @@
                 input, select{
                     border-radius: 20px;
                     width: 20vw;
+                }
+                textarea{
+                    border-radius: 20px;
+                    width: 40vw;
+                    height: 20vh;
                 }
             }
             .addImg{
@@ -67,7 +72,7 @@
             .bgc-icon:hover{
                 cursor: pointer;
             }
-            .imgUpdateAnimal, .imgNewAnimal{
+            .imgUpdateAnimal, .imgNewAnimal, .imgNewHousing{
                 max-width: 100px;
                 max-height: 100px;
                 border-radius: 20px;
@@ -120,7 +125,7 @@
     }
 }
 
-.updateAnimal, .newAnimal{
+.updateAnimal, .newAnimal, .newHousing{
     background-color: var(--beige);
     color : var(--brown);
 

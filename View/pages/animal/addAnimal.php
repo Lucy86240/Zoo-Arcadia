@@ -2,7 +2,7 @@
     <div class="head"> </div>
     <?php $optionPage=true;?>
     <form class="formNewAnimal" method="POST" enctype = "multipart/form-data">
-        <h1 class="title">Ajout d'un animal en cours</h1>
+        <h1 class="title">Ajout d'un animal</h1>
         <div class="elements">
             <div class="elements-input">
                 <div class="element">

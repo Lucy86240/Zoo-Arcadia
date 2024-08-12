@@ -60,11 +60,12 @@
             $stmt->bindParam(":name", $name, PDO::PARAM_STR);
             $stmt->execute();
             $housing = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $housing[0];
+            if ($housing != null) return $housing[0];
+            else null;
         }
         catch(Error $e){
             echo "Désolée";
-            return new Housing();
+            return null;
         }
     }
 
@@ -94,6 +95,43 @@
         catch(Error $e){
             echo "Désolée";
             return '';
+        }
+    }
+
+    function housingExist(Housing $housing){
+        $name = $housing->getName();
+        if (FindHousingByName($name) != null) return true;
+        else return false;
+    }
+
+    function addHousingRequest(Housing $housing,&$id){
+        try{
+            if(housingExist($housing)==false){
+                //ajoute les éléments dans la table housing
+                $name = $housing->getName();
+                $description = $housing->getDescription();
+                $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+                $stmt = $pdo->prepare('insert into housings (name, description) VALUES (:name, :description)');
+                $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+                $stmt->bindParam(":description", $description, PDO::PARAM_STR);
+                $stmt->execute();
+    
+                //recherche l'id de l'habitat créé
+                $stmt = $pdo->prepare('SELECT id_housing FROM housings WHERE name = :name and description = :description');
+                $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+                $stmt->bindParam(":description", $description, PDO::PARAM_STR);
+                $stmt->execute();
+                $res = $stmt->fetch(PDO::FETCH_ASSOC);
+                $id = $res['id_housing'];
+                return 'success';
+            }
+            else{
+                return 'error';
+            }
+        }
+        catch(error $e){
+            echo("problème avec les données");
+            return 'error';
         }
     }
 

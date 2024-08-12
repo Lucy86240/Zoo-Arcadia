@@ -17,7 +17,6 @@ function allHousingsView(bool $id=false, bool $description=true, int $nbImgs=-1,
         foreach($housingsObject as $housingObject){ 
             $housing = array(
                 "name" => $housingObject->getName(),
-                "color" => $housingObject->getcolorTheme(),
                 "id" => $housingObject->getId(),
             );
             if($description == true){

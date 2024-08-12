@@ -44,6 +44,10 @@
                 <?php $count++; 
             } ?>
         </div>
+        <a href="nouvel_habitat" class="back add <?php permission(['Administrateur.rice']); ?>"><button type="button" class="btn btn-beige">
+                <img src="View/assets/img/general/icons/emoji_nature.svg">
+                Ajouter un habitat
+            </button></a>
     </div>
     <!-- habitats détaillés-->
     <?php $count=0;
@@ -132,7 +136,7 @@
                 </form>
                 <div class="none messageNoResult"></div>
             </div>
-            <a href="nouvel_animal/?housing=<?php echo($housing['id']) ?>" class="back addAnimal"><button type="button" class="btn btn-beige">
+            <a href="nouvel_animal/?housing=<?php echo($housing['id']) ?>" class="back add <?php permission(['Administrateur.rice']); ?>"><button type="button" class="btn btn-beige">
                 <img src="View/assets/img/general/icons/emoji_nature.svg">
                 Ajouter un animal
             </button></a>
@@ -148,7 +152,7 @@
                     echoAnimal($id);
                 }?>
         </section>
-        <a href="habitats" class="button back"><button type="button" class="btn btn-beige">
+        <a href="habitats" class="button back "><button type="button" class="btn btn-beige">
             <img src="View/assets/img/general/icons/arrow_upward.svg">
             Retour aux habitats
         </button></a>
