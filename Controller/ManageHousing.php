@@ -11,7 +11,7 @@
  * @param $justVisibleAnimals 1: animaux visibles, 0: animaux non visibles, 2: tous
  * @param $portraitAccept si les images en portrait sont acceptées (par défaut true)
  */
-function allHousingsView(bool $id=false, bool $description=true, int $nbImgs=-1, int $nbAnimals=0, int $justVisibleAnimals=1, bool $portraitAccept=true){
+function allHousingsView(bool $description=true, int $nbImgs=-1, int $nbAnimals=0, int $justVisibleAnimals=1, bool $portraitAccept=true){
         $housingsObject = AllHousings($portraitAccept);
         $housings = [];
         $id=0;
@@ -36,6 +36,7 @@ function allHousingsView(bool $id=false, bool $description=true, int $nbImgs=-1,
                 $img= array(
                     'path' => $housingObject->getImage($i)->getPath(),
                     'description' => $housingObject->getImage($i)->getDescription(),
+                    'id' => $housingObject->getImage($i)->getId(),
                 );
                 array_push($housing['images'],$img);
             }
@@ -43,6 +44,7 @@ function allHousingsView(bool $id=false, bool $description=true, int $nbImgs=-1,
                 $img= array(
                     'path' => IMG_DEFAULT_HOUSING,
                     'description' => "photo indisponible",
+                    'id' => 0,
                 );
                 array_push($housing['images'],$img);
             }
@@ -98,6 +100,20 @@ function allHousingsView(bool $id=false, bool $description=true, int $nbImgs=-1,
     return $housings;
 }
 
+function housingArrayAssociation(int $id){
+    $housings = allHousingsView(true,-1,-1,1,1);
+    $i=0;
+    $notfind=true;
+    while($notfind && $i<count($housings)){
+        if($housings[$i]['id']==$id) $notfind = false;
+        else $i++;
+    }
+
+    if($notfind==false) $housing = $housings[$i];
+    else $housing = [];
+    return $housing;
+}
+
 function allCommentswithFilter($housing,$dateStart,$dateEnd,$status){
     $commentsObject = allCommentsRequest($housing,$dateStart,$dateEnd,$status);
     $comments=[];
@@ -130,7 +146,7 @@ function deleteHousing(&$housings){
             deleteHousingRequest($housing['id']);
         }
     }
-    $housings = allHousingsView(false,true,-1,-1,1,1);
+    $housings = allHousingsView(true,-1,-1,1,1);
 }
 
 function filterComments(&$comments){
@@ -171,7 +187,7 @@ function deleteComment(&$housings, &$comments){
         }
     }
     if($delete){
-        $housings = allHousingsView(false,true,-1,-1,1,1);
+        $housings = allHousingsView(true,-1,-1,1,1);
         filterComments($comments);
     }
 }
@@ -180,7 +196,7 @@ function addComment(&$housings, &$comments){
     if(isset($_POST['addComment'])){
         if(isset($_POST['addCommentsHousing']) && isset($_POST['addCommentComment'])){
             addCommentRequest($_SESSION['mail'],now(),$_POST['addCommentsHousing'],$_POST['addCommentComment']);
-            $housings = allHousingsView(false,true,-1,-1,1,1);
+            $housings = allHousingsView(true,-1,-1,1,1);
             filterComments($comments);
         }
     }
@@ -197,7 +213,7 @@ function changeStatusComment(&$housings, &$comments){
         }
     }
     if($archive){
-        $housings = allHousingsView(false,true,-1,-1,1,1);
+        $housings = allHousingsView(true,-1,-1,1,1);
         filterComments($comments);
     }
 
@@ -210,7 +226,7 @@ function changeStatusComment(&$housings, &$comments){
         }
     }
     if($unarchive){
-        $housings = allHousingsView(false,true,-1,-1,1,1);
+        $housings = allHousingsView(true,-1,-1,1,1);
         filterComments($comments);
     }
 }
@@ -226,7 +242,7 @@ function defaultValueDate(string $date){
     return '';
 }
 
-$housings = allHousingsView(false,true,-1,-1,1,1);
+$housings = allHousingsView(true,-1,-1,1,1);
 $comments = allCommentswithFilter(null,null,null,null);
 deleteHousing($housings);
 addComment($housings,$comments);

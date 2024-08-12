@@ -139,6 +139,33 @@
         }
     }
 
+    function updateHousingRequest(int $id,$name,$description){
+        try{
+            //on vérifie que l'habitat existe et qu'il y a une modification à faire
+            if(housingExistById($id)){
+                $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+                if($name != '0' ){
+                    $stmt = $pdo->prepare('UPDATE housings SET name = :name WHERE id_housing = :id');
+                    $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+                    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+                    $stmt->execute();
+                }
+    
+                if($description != '0'){
+                    $stmt = $pdo->prepare('UPDATE housings SET description = :description WHERE id_housing = :id');
+                    $stmt->bindParam(":description", $description, PDO::PARAM_STR);
+                    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+                    $stmt->execute();
+                }
+            }
+            return "success";
+        }
+        catch(error $e){
+            echo('erreur bd');
+            return "error";
+        }
+    }
+
     function deleteHousingRequest($id){
         try{
             if(housingExistById($id)){

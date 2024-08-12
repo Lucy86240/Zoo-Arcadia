@@ -1,4 +1,4 @@
-.updateAnimal, .newAnimal, .newHousing{
+.updateAnimal,.updateHousing, .newAnimal, .newHousing{
     margin-top : 10px;
     h1{
         padding : 30px;
@@ -72,7 +72,7 @@
             .bgc-icon:hover{
                 cursor: pointer;
             }
-            .imgUpdateAnimal, .imgNewAnimal, .imgNewHousing{
+            .imgUpdateAnimal, .imgNewAnimal, .imgUpdateHousing, .imgNewHousing{
                 max-width: 100px;
                 max-height: 100px;
                 border-radius: 20px;
@@ -125,10 +125,14 @@
     }
 }
 
-.updateAnimal, .newAnimal, .newHousing{
+.updateAnimal, .newAnimal, .newHousing, .updateHousing{
     background-color: var(--beige);
     color : var(--brown);
 
+    input[type="text"],textarea{
+        color : var(--borwn);
+    }
+    
     .addImg{
         background-color: var(--dark_green);
         span, input, label, p{

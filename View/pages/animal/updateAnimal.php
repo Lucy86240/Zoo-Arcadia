@@ -63,7 +63,8 @@
             </div>
             <div class="imgs">
                 <h2>Photos de l'animal</h2>
-                <?php if($animal['images'][0]['id']==0) { ?> <p>l'animal n'a aucune photo</p>
+                <?php if($animal['images'][0]['id']==0) { ?> 
+                    <p>l'animal n'a aucune photo</p>
                 <?php } else{
                     for($i=0; $i<count($animal['images']); $i++){?>
                         <div class="img-container">
