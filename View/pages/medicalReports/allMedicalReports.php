@@ -6,7 +6,7 @@
         <a class="icon" href="<?php if($optionPage){echo("../");}?>animaux">
             <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/list.svg" alt="Voir la liste des animaux"></div>
         </a>
-        <div class="icon <?php permission(['Vétérinaire']);?>" id="popupNewReport">
+        <div class="icon <?php //permission(['Vétérinaire']);?>" id="popupNewReport">
             <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un compte rendu"></div>
         </div>
     </div>
@@ -14,8 +14,15 @@
         <span class="legend none">Voir la liste de tous les animaux</span>
         <span class="legend none">Ajouter un compte rendu</span>
     </div>
-    <div id="newReport-JS">
-        <?php include_once "View/pages/medicalReports/addMedicalReport.php";?>
+    <div class="none c-dialog" id="dialogNewReport">
+        <div class="fond"></div>
+        <div role="document" class="c-dialog__box popup newReport">
+            <div class="entete">
+                <h3 class="dialog-title">Nouveau rapport médical</h3>
+                <button class="close" id="closeNewReport" type="button">x</button>
+            </div>
+            <?php include_once "View/pages/medicalReports/addMedicalReport.php";?>
+        </div>
     </div>
 
     <!-- liste des rapports et rapports détaillés-->

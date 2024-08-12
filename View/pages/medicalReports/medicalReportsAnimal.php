@@ -23,8 +23,15 @@
         <span class="legend none">Ajouter un compte rendu</span>
         <span class="legend none">Voir la liste de tous les comptes rendus confondus</span>
     </div>
-    <div id="newReport-JS">
+    <div class="none c-dialog" id="dialogNewReport">
+        <div class="fond"></div>
+        <div role="document" class="c-dialog__box popup newReport">
+            <div class="entete">
+                <h3 class="dialog-title">Nouveau rapport médical</h3>
+                <button class="close" id="closeNewReport" type="button">x</button>
+            </div>
         <?php include_once "View/pages/medicalReports/addMedicalReport.php";?>
+        </div>
     </div>
 
     <!-- fiche de l'animal lié aux rapports-->

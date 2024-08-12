@@ -1,10 +1,4 @@
-    <div class="none c-dialog" id="dialogNewReport">
-        <div class="fond"></div>
-        <div role="document" class="c-dialog__box popup newReport">
-            <div class="entete">
-                <h3 class="dialog-title">Nouveau rapport médical</h3>
-                <button class="close" id="closeNewReport" type="button">x</button>
-            </div>
+
             <form method="POST" action="">
                 <div class="element">
                     <label for="dateNewReport">Date : </label>
@@ -55,5 +49,3 @@
                     <input type="submit" value="Soumettre" name="addReport" class="button btn-green" />
                 </div>
             </form>
-        </div>
-    </div>
