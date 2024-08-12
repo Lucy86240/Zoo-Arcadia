@@ -7,7 +7,7 @@
             <div class="elements-input">
                 <div class="element">
                     <label for="newAnimalHousing">Habitat :</label>
-                    <select name="newAnimalHousing" id="newAnimalHousing">
+                    <select name="newAnimalHousing" id="newAnimalHousing" required>
                         <?php $housings = listNameIdAllHousings(); ?>
                         <?php if(isset($_GET['housing'])){ ?>
                             <option value="<?php echo($_GET['housing']); ?>"> <?php echo(findHousingNameById($_GET['housing'])); ?> </option>

@@ -1,0 +1,50 @@
+.allAnimals{
+    .animals{
+        display : flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .animal{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            margin : 5px;
+            padding : 5px;
+            width : 130px;
+            img{
+                max-width: 115px;
+                max-height: 80px;
+                border-radius: 20px;
+            }
+            p{
+                text-align: center;
+            }
+        }
+    }
+}
+
+.green{
+    background-color: var(--green);
+    color : var(--blue);
+}
+
+.brown{
+    background-color: var(--brown);
+    color : var(--beige);
+}
+
+.beige{
+    background-color: var(--beige);
+    color : var(--brown);
+}
+
+.blue{
+    background-color: var(--blue);
+    color : var(--white);
+}
+
+.dark_green{
+    background-color: var(--dark_green);
+    color : var(--white);
+}

@@ -23,7 +23,7 @@ $allRoutes = array(
     new Route('maj_animal',true,'Mise à jour animal','View/pages/animal/updateAnimal.php',['administrateur.trice'],'Controller/updateAnimal.php'),
     new Route('nouvel_animal',true,'Nouvel animal','View/pages/animal/addAnimal.php',['administrateur.trice'],'Controller/addAnimal.php'),
     new Route('nouvel_animal',false,'Nouvel animal','View/pages/animal/addAnimal.php',['administrateur.trice'],'Controller/addAnimal.php'),
-    new Route('animaux',false,'Animaux','View/pages/animal/allAnimals.php',[],'Controller/ManageAnimal.php'),
+    new Route('animaux',false,'Animaux','View/pages/animal/allAnimals.php',[],'Controller/ManageAllAnimals.php'),
 );
 
 define('ALL_ROUTES',$allRoutes);

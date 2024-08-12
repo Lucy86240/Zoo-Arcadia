@@ -98,6 +98,25 @@
         }
     }
 
+    function listIdAllHousings(){
+        try{
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+            $stmt = $pdo->prepare('SELECT id_housing FROM housings');
+            $stmt->execute();
+
+            $temp = $stmt->fetchAll(PDO::FETCH_NUM);
+            $res=[];
+            for($i=0;$i<count($temp);$i++){
+                array_push($res,$temp[$i][0]);
+            }
+            return $res;
+        }
+        catch(Error $e){
+            echo "Désolée";
+            return '';
+        }
+    }
+
     function housingExist(Housing $housing){
         $name = $housing->getName();
         if (FindHousingByName($name) != null) return true;
