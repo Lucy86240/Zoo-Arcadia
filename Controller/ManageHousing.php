@@ -1,5 +1,6 @@
 <?php
     include_once "Model/ManageHousingModel.php";
+    include_once "Controller/ManageAnimal.php";
 
 /**
  * Retourne un tableau associatif avec au moins tout les noms des habitats
@@ -114,6 +115,24 @@ function allCommentswithFilter($housing,$dateStart,$dateEnd,$status){
     return $comments;
 }
 
+function deleteHousing(&$housings){
+    foreach($housings as $housing){
+        if(isset($_POST['ValidationDeleteHousing'.$housing['id']])){
+            // on supprime les animaux de l'habitat (photos et BD)
+            $animals = findAnimalsByHousing($housing['id'],-1,0,2,1);
+            foreach($animals as $animal){
+                deleteAnimalWithoutForm($animal);
+            }
+            //on supprime les photos 
+            $path = "View/assets/img/housings/".$housing['id'];
+            rrmdir($path);
+            //on supprime l'habitat de la BD 
+            deleteHousingRequest($housing['id']);
+        }
+    }
+    $housings = allHousingsView(false,true,-1,-1,1,1);
+}
+
 function filterComments(&$comments){
     if(isset($_POST['filter'])){
         
@@ -209,6 +228,7 @@ function defaultValueDate(string $date){
 
 $housings = allHousingsView(false,true,-1,-1,1,1);
 $comments = allCommentswithFilter(null,null,null,null);
+deleteHousing($housings);
 addComment($housings,$comments);
 filterComments($comments);
 deleteComment($housings, $comments);

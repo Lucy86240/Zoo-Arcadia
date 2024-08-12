@@ -37,12 +37,23 @@
                 // @media only screen and (min-width: 576px){ 
                 ?>
                 <!-- habitat type polaroïde -->
-                <a href="#<?php echo("housing-".$housing['id'])?>" style = "width : <?php echo($width_div) ?>; height : <?php echo($height_div) ?>;}"class="hero-housing <?php echo($option); ?>">
-                    <img style = "max-width : <?php echo($width_img) ?>; max-height : <?php echo($height_img) ?>;" src="<?php echo($housing['images'][0]['path'])?>" alt="<?php echo($housing['images'][0]['description'])?>">
-                    <h3><?php echo($housing['name'])?></h3>
-                </a>
+                <div class="heroHousingWithBox <?php echo($option); ?>" >
+                    <div class="icons">
+                        <a class="icon UpdateHousingIcon" href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>maj_habitat/?id=<?php echo($housing['id'])?>">
+                            <div class="bgc-img-box"><img class="img-box editHousing" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/edit.svg" alt="Modifier l'habitat"></div>
+                        </a>
+                        <div class="icon deleteIconHousing" id_housing="<?php echo($housing['id'])?>" name_housing="<?php echo($housing['name'])?>" nb_animal="<?php echo(count($housing['animals'])) ?>">
+                            <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer l'habitat"></div>
+                        </div>
+                    </div>
+                    <a href="#<?php echo("housing-".$housing['id'])?>" style = "width : <?php echo($width_div) ?>; height : <?php echo($height_div) ?>;}" class="hero-housing">
+                        <img style = "max-width : <?php echo($width_img) ?>; max-height : <?php echo($height_img) ?>;" src="<?php echo($housing['images'][0]['path'])?>" alt="<?php echo($housing['images'][0]['description'])?>">
+                        <h3><?php echo($housing['name'])?></h3>
+                    </a>
+                </div>
                 <?php $count++; 
             } ?>
+            <div id="js-confirm"></div>
         </div>
         <a href="nouvel_habitat" class="back add <?php permission(['Administrateur.rice']); ?>"><button type="button" class="btn btn-beige">
                 <img src="View/assets/img/general/icons/emoji_nature.svg">

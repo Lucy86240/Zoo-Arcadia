@@ -50,12 +50,12 @@
                                 </div>
                         </form>
                     </div>
-                    <div class="icon iconDelete">
+                    <div class="icon iconDeleteAnimal">
                         <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer l'animal"></div>
                         <span class="legend">Supprimer</span>
                     </div>
                     <!-- le popup de suppression s'affichant quand la poubelle est cliquée-->
-                    <div class="none c-dialog popupDelete">
+                    <div class="none c-dialog popupDeleteAnimal">
                         <div class="fond"> </div>
                         <form class="popup-confirm" method="POST">
                                 <p class="entete">Suppression</p>

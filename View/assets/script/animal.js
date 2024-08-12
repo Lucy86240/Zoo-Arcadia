@@ -1,8 +1,8 @@
 /* gestion des popup*/
-const iconDelete = document.querySelectorAll('.iconDelete')
-const popupDelete = document.querySelectorAll('.popupDelete')
-if(iconDelete != null){
-    popupConfirm(iconDelete,popupDelete)
+const iconDeleteAnimal = document.querySelectorAll('.iconDeleteAnimal')
+const popupDeleteAnimal = document.querySelectorAll('.popupDeleteAnimal')
+if(iconDeleteAnimal != null){
+    popupConfirm(iconDeleteAnimal,popupDeleteAnimal)
 }
 
 const iconArchive = document.querySelectorAll('.iconArchive')

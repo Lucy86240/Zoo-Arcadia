@@ -119,6 +119,15 @@ function deleteAnimal(int $id, string $name, $id_housing){
     
 }
 
+function deleteAnimalWithoutForm(Animal $animal){
+        //suppression dans la base de données
+        deleteAnimalRequest($animal->getId());
+        //suppression des images
+        $path = "View/assets/img/animals/".$animal->getId().'-'.$animal->getname().'/';
+        rrmdir($path);
+        $_SESSION['animal'.$animal->getIdHousing()] = null;
+}
+
 function archiveAnimal(&$animal){
     //on recupère le nom du bouton à cliquer pour supprimer le service
     $nameButton = "ValidationArchiveAnimal".$animal['id'];

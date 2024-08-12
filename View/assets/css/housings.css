@@ -12,20 +12,29 @@
             a{
                 text-decoration: none;
             }
-            .hero-housing{
+            .heroHousingWithBox{
                 margin : 2vh 1vw 0 2vh;
-                padding : 1vw;
                 border-radius: 20px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: space-around;
-                h3{
-                    text-align: center;
+                .icons{
+                    display: flex;
+                    padding : 5px;
+                    .bgc-img-box{
+                        padding : 2px;
+                    }
                 }
-            }
-            .hero-housing:hover{
-                cursor: pointer;
+                .hero-housing{
+                    padding : 1vw;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: space-around;
+                    h3{
+                        text-align: center;
+                    }
+                }
+                .hero-housing:hover{
+                    cursor: pointer;
+                }
             }
         }
     }
@@ -161,6 +170,9 @@
             .list-animals{
                 ul{
                     grid-template-columns: repeat(4,20vw);
+                    li{
+                        margin-top : 5px;
+                    }
                 }
             }
         }
@@ -239,15 +251,36 @@
             }
         }
 
-        .hero-housing{
+        .heroHousingWithBox{
             background-color: var(--beige);
             box-shadow: 3px 1px 1px var(--brown);
+            .icons{
+                .img-box{
+                    filter: var(--filter_brown);
+                }
+            }
         }
-        .hero-housing:hover{
+        .heroHousingWithBox:hover{
             background-color: var(--dark_green);
             h3{
                 color : var(--white);
             }
+            .icons{
+                .img-box{
+                    filter: var(--filter_green);
+                }
+            }
+            .icon:hover{
+                cursor: pointer;
+                .bgc-img-box{
+                    background-color: var(--brown);
+                    border-radius: 50%;
+                    .img-box{
+                        filter: var(--filter_white);
+                    }
+                }
+            }
+
         }
     }
     h2{

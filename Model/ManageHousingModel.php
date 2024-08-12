@@ -103,6 +103,10 @@
         if (FindHousingByName($name) != null) return true;
         else return false;
     }
+    function housingExistById(int $id){
+        if (FindHousingById($id) != null) return true;
+        else return false;
+    }
 
     function addHousingRequest(Housing $housing,&$id){
         try{
@@ -132,6 +136,37 @@
         catch(error $e){
             echo("problème avec les données");
             return 'error';
+        }
+    }
+
+    function deleteHousingRequest($id){
+        try{
+            if(housingExistById($id)){
+                $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+
+                //on cherche toutes les images associées à l'habitat
+                $stmt = $pdo->prepare('SELECT id_image FROM images_housings WHERE id_housing = :id');
+                $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+                $stmt->execute();
+                $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+                //on supprime toutes les images
+                if($res != null){
+                    foreach ($res as $id_image){
+                        $stmt = $pdo->prepare('DELETE FROM images WHERE id_image = :id');
+                        $stmt->bindParam(":id", $id_image['id_image'], PDO::PARAM_INT);
+                        $stmt->execute();
+                    }
+                }
+    
+                //on supprime l'habitat
+                $stmt = $pdo->prepare('DELETE FROM housings WHERE id_housing = :id');
+                $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+                $stmt->execute();
+            }
+        }
+        catch(error $e){
+            echo("problème avec les données");
         }
     }
 

@@ -1,5 +1,18 @@
 /* popup */
-
+// suppression habitat
+const deleteIconHousing = document.querySelectorAll(".deleteIconHousing");
+for(let k=0;k<deleteIconHousing.length;k++){
+    deleteIconHousing[k].addEventListener('click',()=>{
+        
+        id=deleteIconHousing[k].getAttribute('id_housing')
+        nameHousing=deleteIconHousing[k].getAttribute('name_housing')
+        nbAnimal=deleteIconHousing[k].getAttribute('nb_animal')
+        submitContent = 'ValidationDeleteHousing'+id
+        titleContent = 'Suppression'
+        parContent = "Etes vous sûr de vouloir supprimer l'habitat : \""+nameHousing+"\" ? Cela supprimera également les "+nbAnimal+" animaux qui y sont présents."
+        createConfirm(titleContent,parContent,submitContent)
+    })
+}
 
 /*carrousel photos d'un habitant*/
 count=0;
