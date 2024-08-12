@@ -264,6 +264,30 @@ function animalExistById(int $id){
     else return true;
 }
 
+function animalExist(Animal $animal){
+    try{
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        $stmt = $pdo->prepare('SELECT * FROM animals WHERE name = :name and breed = :breed and housing = :housing and isVisible = :visible');
+        $name = $animal->getName();
+        $stmt->bindParam(":name",$name,PDO::PARAM_STR);
+        $breed = $animal->getIdBreed();
+        $stmt->bindParam(":breed", $breed, PDO::PARAM_INT);
+        $housing = $animal->getIdHousing();
+        $stmt->bindParam(":housing", $housing, PDO::PARAM_INT);
+        $visible = $animal->getIsVisible();
+        $stmt->bindParam(":visible", $visible, PDO::PARAM_BOOL);
+        $stmt->setFetchMode(PDO::FETCH_CLASS,'Animal');
+
+        if($stmt->execute()){
+            if ($stmt->fetch() != null) return true;
+            else return false;
+        }
+    }
+    catch(error $e){
+        return true;
+    }
+}
+
 /**
  * Summary of listAllBreeds : retourne la liste de toutes les races de la base de données sous forme de tableau associatif
  * @return array|string
@@ -372,6 +396,40 @@ function deleteAnimalRequest(int $id){
     }
     catch(error $e){
         echo("problème avec les données");
+    }
+}
+
+function addAnimalRequest(Animal $animal,&$id){
+    try{
+        if(!animalExist($animal)){
+            //ajoute les éléments dans la table animal
+            $name = $animal->getName();
+            $breed = $animal->getIdBreed();
+            $housing = $animal->getIdHousing();
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+            $stmt = $pdo->prepare('insert into animals (name, breed, housing) VALUES (:name, :breed, :housing)');
+            $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+            $stmt->bindParam(":breed", $breed, PDO::PARAM_INT);
+            $stmt->bindParam(":housing", $housing, PDO::PARAM_INT);
+            $stmt->execute();
+
+            //recherche l'id de l'animal créé
+            $stmt = $pdo->prepare('SELECT id_animal FROM animals WHERE name = :name and breed = :breed and housing = :housing');
+            $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+            $stmt->bindParam(":breed", $breed, PDO::PARAM_INT);
+            $stmt->bindParam(":housing", $housing, PDO::PARAM_INT);
+            $stmt->execute();
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            $id = $res['id_animal'];
+            return 'success';
+        }
+        else{
+            return 'error';
+        }
+    }
+    catch(error $e){
+        echo("problème avec les données");
+        return 'error';
     }
 }
 

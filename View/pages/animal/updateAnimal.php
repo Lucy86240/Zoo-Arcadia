@@ -97,5 +97,5 @@
             </div>
         <?php } ?>
     <?php }?>
-    <script src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/script/animal.js"></script>
+    <script src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/script/updateAddAnimal.js"></script>
 </section>

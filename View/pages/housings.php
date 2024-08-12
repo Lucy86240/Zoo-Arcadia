@@ -132,6 +132,10 @@
                 </form>
                 <div class="none messageNoResult"></div>
             </div>
+            <a href="nouvel_animal/?housing=<?php echo($housing['id']) ?>" class="back addAnimal"><button type="button" class="btn btn-beige">
+                <img src="View/assets/img/general/icons/emoji_nature.svg">
+                Ajouter un animal
+            </button></a>
             <section class="animal" id="animal<?php echo($housing['id'])?>">
                 <?php 
                 if(isset($_POST['animal'.$housing['id']]) || isset($_SESSION['animal'.$housing['id']])){

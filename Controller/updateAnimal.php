@@ -47,13 +47,14 @@ function updateAnimal(&$animal){
         //on ajoute la nouvelle photo
         $namePhoto = 'UpdateAnimalPhoto'.$id;
         if(isset($_FILES[$namePhoto]) && $_FILES[$namePhoto]['name'] !=''){
-            var_dump($_FILES[$namePhoto]);
             //on vérifie que l'image soit valide
             $msgImg = validImg($_FILES[$namePhoto]);
             if(validImg($_FILES[$namePhoto]) == null){
                 // on déplace la nouvelle photo
                 $name_file = explode('.',$_FILES[$namePhoto]['name']);
                 $extension = end($name_file);
+                $pathImg='View/assets/img/animals/'.$id.'-'.$name;
+                if(!file_exists( $pathImg )) mkdir($pathImg);
                 $path = 'View/assets/img/animals/'.$id.'-'.$name.'/'.$name.'-'.time().'.'.$extension;
                 if(move_uploaded_file($_FILES[$namePhoto]['tmp_name'],$path)==false){
                     $msgImgSave='error';
