@@ -42,7 +42,7 @@
                                     <ul class="dropdown-menu none top" id="dropdown-menu">
                                         <li><a class="dropdown-item" href="#">Tableau de bord</a></li>
                                         <li><a class="dropdown-item <?php permission(['Administrateur.rice','vétérinaire']); ?>" href="rapports_medicaux">Comptes-rendus vétérinaires</a></li>
-                                        <li><a class="dropdown-item" href="#">Animaux</a></li>
+                                        <li><a class="dropdown-item" href="animaux">Animaux</a></li>
                                         <li><a class="dropdown-item <?php permission(['Administrateur.rice']); ?>" href="#">Horaires du zoo</a></li>
                                         <li><a class="dropdown-item <?php permission(['Administrateur.rice','Employé.e']); ?>" href="avis">Avis</a></li>
                                         <li><a class="dropdown-item <?php permission(['Employé.e']); ?>" href="#">Nourrir un animal</a></li>

@@ -25,15 +25,21 @@ function allAnimals(){
     return $animals;
 }
 
-function colorhousing(int $id){
-    $colors=["beige","blue","green","brown","dark_green"];
-    $housings= listIdAllHousings();
-    $i=array_search($id,$housings);
-    if($i%5==0) return $colors[4];
-    if($i%4==0) return $colors[3];
-    if($i%3==0) return $colors[2];
-    if($i%2==0) return $colors[1];
-    else return $colors[0];
+function defaultValueCheckbox(string $filter, $value){
+    if(isset($_POST[$filter])) return 'checked';
+    else{
+        if(!isset($_POST['choices'])){
+            if(substr($filter,0,13)=="breedSelected"){
+                if(isset($_SESSION['allAnimals_filterBreeds'])){
+                    $ind = array_search($value,$_SESSION['allAnimals_filterBreeds'],true);
+                    if(isset($_SESSION['allAnimals_filterBreeds'][$ind]) && $_SESSION['allAnimals_filterBreeds'][$ind]==$value) return 'checked';
+                    else return '';
+                } 
+                else return '';
+            }
+        }
+        else return '';
+    }
 }
 
 $animals = allAnimals();

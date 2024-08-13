@@ -1,31 +1,3 @@
-function passListSearchOfListSelected(checkboxSelectedInput,checkboxSelectedLi,checkboxSearchInput,allText){
-    nbSelected=0;
-    for(let i=0; i<checkboxSearchInput.length;i++){
-        checkboxSearchInput[i].addEventListener('click', ()=>{
-            if(checkboxSearchInput[i].checked == true){
-                nbSelected++;
-                checkboxSelectedInput[i].checked = true;
-                checkboxSelectedLi[i].classList.remove('none');
-                if(nbSelected>0) allText.classList.add('none');
-                else allText.classList.add('none');
-            } 
-
-        })
-    }
-    
-    for(let i=0; i<checkboxSelectedInput.length;i++){
-        checkboxSelectedInput[i].addEventListener('click', ()=>{
-            if(checkboxSelectedInput[i].checked == false){
-                nbSelected--;
-                checkboxSearchInput[i].checked = false;
-                checkboxSelectedLi[i].classList.add('none');
-                if(nbSelected>0) allText.classList.add('none');
-                else allText.classList.add('none');
-            } 
-        })
-    }
-}
-
 // Declare variables
     const input = document.getElementById('filterBreedsSearch');
     const ul = document.getElementById('listBreeds');

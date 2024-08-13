@@ -41,6 +41,7 @@ button{
     color: var(--blue);
     border-radius : 20px;
     font-weight: bold;
+    border : 0px;
     box-shadow: 3px 1px 1px var(--dark_green);
 }
 
