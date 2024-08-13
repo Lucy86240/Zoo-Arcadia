@@ -23,25 +23,72 @@ function listAllAnimals(){
 }
 /**
  * Summary of listAnimalsWithFilter
- * @param array $breeds : list des id des races acceptées
+ * @param array $breeds : liste des id des races acceptées
+ * @param array $housings : liste des id des habitats acceptés
+ * @param mixed $isVisible : 0 archivé, 1 visible, autre les 2
+ * @param mixed $sort : 'housing' par habitats, 'breed' par races
  * @return array
  */
-function listAnimalsWithFilter(array $breeds){
+function listAnimalsWithFilter(array $breeds, array $housings, $isVisible, $sort, $first, $nbAnimals, &$total){
     try{
-        $breedsRequest = '';
+        $request='';
+        if($breeds!=[] || $housings!=[] || $isVisible==0 || $isVisible==1) $request = 'WHERE ';
         $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
         if($breeds != []){
-            $breedsRequest = 'WHERE animals.breed = '.$breeds[0];
+            $request .= 'animals.breed = '.$breeds[0];
             if(count($breeds)>1){
                 for($i=1;$i<count($breeds);$i++){
-                    $breedsRequest .= ' OR animals.breed = '.$breeds[$i];
+                    $request .= ' OR animals.breed = '.$breeds[$i];
                 }
             }
         }
-        $stmt = $pdo->prepare('SELECT animals.name, breeds.label, animals.id_animal FROM animals JOIN breeds ON animals.breed = breeds.id_breed '.$breedsRequest);
-        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        if($housings != []){
+            if($request!="WHERE ") $request .= " AND ";
+            $request .= 'animals.housing = '.$housings[0];
+            if(count($housings)>1){
+                for($i=1;$i<count($housings);$i++){
+                    $request .= ' OR animals.housing = '.$housings[$i];
+                }
+            }
+        }
+        if($isVisible==0 || $isVisible==1){
+            if($request!="WHERE ") $request .= " AND ";
+            $request .= 'animals.isVisible = '.$isVisible;
+        }
+
+        $offset = '';
+        if($first != null) $offset=' OFFSET '.$first;
+
+        if($sort=='housing'){
+            $sortRequest="animals.housing";
+        }else if($sort=="breed"){
+            $sortRequest = "breeds.label";
+        }else{
+            $sortRequest="animals.id_animal DESC";
+        }
+        $stmt = $pdo->prepare('SELECT animals.* FROM animals JOIN breeds ON animals.breed = breeds.id_breed '.$request.' ORDER BY '.$sortRequest.' LIMIT :limit'.$offset);
+        $stmt->bindParam(':limit',$nbAnimals,PDO::PARAM_INT);
+        $stmt->setFetchMode(PDO::FETCH_CLASS,'Animal');
         if($stmt->execute()){
-            return $stmt->fetchAll();    
+            $animals= $stmt->fetchAll();   
+            foreach($animals as $animal){
+                $stmt = $pdo->prepare('SELECT images.id_image, images.path, images.description, images.icon, images.portrait 
+                FROM images_animals JOIN images ON images_animals.id_image = images.id_image  WHERE id_animal = :id');
+                $id = $animal->getId();
+                $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+                $stmt->setFetchMode(PDO::FETCH_CLASS,'Image');
+                if ($stmt->execute())
+                {
+                    while($image = $stmt->fetch()){
+                        $animal->addImage($image);
+                    }
+                }
+            } 
+            $stmt = $pdo->prepare('SELECT count(*) FROM animals JOIN breeds ON animals.breed = breeds.id_breed '.$request);
+            $stmt->execute();
+            $total=$stmt->fetch()[0];
+
+            return $animals;
         }
         else return [];
     }

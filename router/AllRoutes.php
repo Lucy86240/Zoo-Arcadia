@@ -24,6 +24,7 @@ $allRoutes = array(
     new Route('nouvel_animal',true,'Nouvel animal','View/pages/animal/addAnimal.php',['administrateur.trice'],'Controller/addAnimal.php'),
     new Route('nouvel_animal',false,'Nouvel animal','View/pages/animal/addAnimal.php',['administrateur.trice'],'Controller/addAnimal.php'),
     new Route('animaux',false,'Animaux','View/pages/animal/allAnimals.php',[],'Controller/ManageAllAnimals.php'),
+    new Route('animaux',true,'Animaux','View/pages/animal/allAnimals.php',[],'Controller/ManageAllAnimals.php'),
 );
 
 define('ALL_ROUTES',$allRoutes);

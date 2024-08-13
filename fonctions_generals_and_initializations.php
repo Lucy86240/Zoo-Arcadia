@@ -26,3 +26,8 @@ function now(){
     $now = date('Y-m-d',time());
     return $now;
 }
+
+/*$_SESSION['allAnimals_filterBreeds']=[];
+$_SESSION['allAnimals_filterhousings']=[];
+$_SESSION['allAnimals_filterIsVisible']=2;
+$_SESSION['allAnimals_sort']=null;*/

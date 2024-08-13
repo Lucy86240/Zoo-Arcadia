@@ -1,7 +1,7 @@
 <section class="allAnimals">
     <div class="head"></div>
     <h1>Nos animaux</h1>
-    <form id="choices" method="POST" action="">
+    <form id="choices" method="POST" action ="<?php if($optionPage){echo("../");}?>animaux">
         <div class="choices">
             <div id="filter">
                 <h2>filtres</h2>
@@ -10,7 +10,7 @@
                             <label for="filterBreedSearch"><h3>Races :</h3></label>
                             <?php $breeds = listAllBreeds(); ?>
                         </div>
-                        <div class="housings">
+                        <div class="breedsForm">
                             <div class="selected">
                                 <span>Sélectionnées :</span>
                                 <p id="breedsSelectedAll">Toutes</p>
@@ -50,7 +50,7 @@
                         $count=0;
                         foreach($housings as $housing){ ?>
                             <div class="checkbox">
-                                <input type="checkbox" name="housing<?php echo($count);?>" id="housing<?php echo($count);?>" value="<?php echo($housing['id_housing']) ?>">
+                                <input type="checkbox" name="housing<?php echo($count);?>" id="housing<?php echo($count);?>" value="<?php echo($housing['id_housing']) ?>" <?php echo(defaultValueCheckbox('housing'.$count,$housing['id_housing'])); ?>>
                                 <label for="housing<?php echo($count);?>">
                                     <?php echo($housing['name']);?>
                                 </label>
@@ -63,11 +63,11 @@
                     <h3>Statut :</h3>
                     <ul>
                         <li>
-                            <input type="checkbox" name="visible" id="visible" value="1" >
+                            <input type="checkbox" name="visible" id="visible" value="1" <?php echo(defaultValueCheckbox('visible',1)); ?>>
                             <label for="visible">Visible</label>
                         </li>
                         <li>
-                            <input type="checkbox" name="archive" id="archive" value="0" >
+                            <input type="checkbox" name="archive" id="archive" value="0" <?php echo(defaultValueCheckbox('archive',1)); ?>>
                             <label for="archive">Archivé</label>
                         </li>
                     </ul>
@@ -77,15 +77,15 @@
                 <h2>Trie</h2>
                 <ul>
                     <li>
-                        <input type="radio" name="sort" id="popular" value="popular">
+                        <input type="radio" name="sort" id="popular" value="popular" <?php echo(defaultValueCheckbox('sort','popular')); ?>>
                         <label for="popular">Popularité</label>
                     </li>
                     <li>
-                        <input type="radio" name="sort" id="breed" value="breed">
+                        <input type="radio" name="sort" id="breed" value="breed" <?php echo(defaultValueCheckbox('sort','breed')); ?>>
                         <label for="breed">Races</label>
                     </li>
                     <li>
-                        <input type="radio" name="sort" id="housing" value="housing">
+                        <input type="radio" name="sort" id="housing" value="housing" <?php echo(defaultValueCheckbox('sort','housing')); ?>>
                         <label for="housing">Habitats</label>
                     </li>
                 </ul>
@@ -93,16 +93,35 @@
         </div>
         <div class="confirmChoices">
             <input class="btn-green" type="submit" value="Appliquer" name="choices">
-            <form method="POST" action ="<?php if($optionPage){echo("../");}?>"><input class="buttonFilter btn-red" type="submit" id="cancelFilter" value="Annuler filtre" name="cancelFilter"></form>
+            <form method="POST" action ="<?php if($optionPage){echo("../");}?>animaux"><input class="buttonFilter btn-red" type="submit" id="cancelFilter" value="Annuler filtre" name="cancelFilter"></form>
         </div>
     </form>
     <div class="animals">
         <?php foreach($animals as $animal){?>
             <div class="animal beige">
-                <img src="<?php echo($animal["photo"]['path']); ?>" alt="<?php echo($animal["photo"]['description']); ?>">
+                <img src="<?php if($optionPage){echo("../");}echo($animal["photo"]['path']); ?>" alt="<?php if($optionPage){echo("../");} echo($animal["photo"]['description']); ?>">
                 <p><?php echo($animal['name'].' - '.$animal['breed']) ?></p>
             </div>
         <?php } ?>
+    </div>
+    <div class="pagination">
+            <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
+            <div class=" <?php echo(($currentPage == 1) ? "hidden" : "");?>">
+                <a href="<?php urlOption($currentPage -1, $optionPage) ?>" class="btn-previous bp-green">
+                    <img class="previous-img" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/previous_green.png" alt="Bouton précédent">
+                    <p class="previous-text">Précédent</p> 
+                </a>   
+        </div>
+
+            <div><p class="page-green">Page<?php if($pages>1)echo('s')?> <?php echo($currentPage); ?> / <?php echo($pages); ?></p></div>
+
+            <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
+            <div class=" <?php echo(($currentPage == $pages) ? "hidden" : "");?>">
+                <a href="<?php urlOption($currentPage + 1, $optionPage)?>" class="btn-next bn-green">
+                    <p class="next-text">Suivant</p> 
+                    <img class="next-img" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/next_green.png" alt="Bouton suivant">
+                </a>    
+        </div> 
     </div>
     <script src="View/assets/script/search.js"></script>
     <script src="View/assets/script/allAnimals.js"></script>
