@@ -96,14 +96,27 @@
             <form method="POST" action ="<?php if($optionPage){echo("../");}?>animaux"><input class="buttonFilter btn-red" type="submit" id="cancelFilter" value="Annuler filtre" name="cancelFilter"></form>
         </div>
     </form>
-    <div class="animals">
-        <?php foreach($animals as $animal){?>
-            <div class="animal beige">
+    <section id="animalSelected">
+        <?php 
+        if(isset($_POST['animalSelected']) || isset($_SESSION['allAnimals_animalSelected'])){
+            include_once "Controller/ManageAnimal.php";
+            if(isset($_POST['animalSelected'])) $id=$_POST['animalSelected'];
+            else $id=$_SESSION['allAnimals_animalSelected'];
+            //on affiche l'animal
+            echoAnimal($id,'allAnimals');
+        }?>
+    </section>
+    <form class="animals" action="#animalSelected" method="POST">
+        <?php $i=0;
+         foreach($animals as $animal){?>
+            <input class="animalButton" type="radio" name="animalSelected" id="animal<?php echo($i);?>" value="<?php echo($animal['id']);?>"> 
+            <label for="animal<?php echo($i);?>" class="animal beige">
                 <img src="<?php if($optionPage){echo("../");}echo($animal["photo"]['path']); ?>" alt="<?php if($optionPage){echo("../");} echo($animal["photo"]['description']); ?>">
                 <p><?php echo($animal['name'].' - '.$animal['breed']) ?></p>
-            </div>
-        <?php } ?>
-    </div>
+            </label>
+            <?php $i++;
+        } ?>
+    </form>
     <div class="pagination">
             <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
             <div class=" <?php echo(($currentPage == 1) ? "hidden" : "");?>">

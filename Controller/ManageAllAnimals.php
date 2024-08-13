@@ -111,6 +111,7 @@ function declareFilter(&$breeds, &$housings, &$isVisible, &$sort, &$first){
         $_SESSION['allAnimals_filterhousings']=[];
         $_SESSION['allAnimals_filterIsVisible']=2;
         $_SESSION['allAnimals_sort'] = null;
+        $_SESSION['allAnimals_animalSelected']=null;
     }
 }
 
@@ -144,3 +145,4 @@ $nbAnimals=0;
 declareFilter($breeds, $housings, $isVisible, $sort, $first);
 $animals = allAnimals($breeds, $housings, $isVisible, $sort, $first, $perPage,$nbAnimals);
 $pages = ceil($nbAnimals / $perPage);
+if(isset($_POST['animalSelected'])) $_SESSION['allAnimals_animalSlected']=$_POST['animalSelected'];

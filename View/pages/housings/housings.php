@@ -160,7 +160,7 @@
                     // si on avait cliqué sur un animal
                     else $id=$_SESSION['animal'.$housing['id']];
                     //on affiche l'animal
-                    echoAnimal($id);
+                    echoAnimal($id,'housings');
                 }?>
         </section>
         <a href="habitats" class="button back "><button type="button" class="btn btn-beige">

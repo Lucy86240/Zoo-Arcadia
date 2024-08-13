@@ -153,12 +153,13 @@ function unarchiveAnimal(&$animal){
     
 }
 
-function echoAnimal($id){
+function echoAnimal($id,$page){
     //on cherche mes info de l'animal
     $animal = animalById($id,false);
     //on trouve l'id de son habitat et on sauve l'animal via une variable de session (pour pages habitats)
     $housing=FindHousingByName($animal['housing']);
-    $_SESSION['animal'.$housing["id_housing"]] = $animal['id'];
+    if($page=='housings') $_SESSION['animal'.$housing["id_housing"]] = $animal['id'];
+    if($page=='allAnimals') $_SESSION['allAnimals_animalSelected'] = $animal['id'];
 
     //on permet la suppression / l'archivage / le désarchivage
     deleteAnimal($animal['id'],$animal['name'],$housing["id_housing"]);

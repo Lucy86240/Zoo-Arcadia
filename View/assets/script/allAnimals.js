@@ -29,3 +29,8 @@ const checkboxSelectedLi = document.querySelectorAll(".js-liBreedsSelected");
 const checkboxSearchInput = document.querySelectorAll(".js-checkboxBreedsSearch");
 const allBreed = document.getElementById('breedsSelectedAll');
 passListSearchOfListSelected(checkboxSelectedInput,checkboxSelectedLi,checkboxSearchInput,allBreed);
+
+//on valide automatique lors du clique sur un animal
+$('.animalButton').on('click', function() {
+    $(this).closest(".animals").submit();
+})
