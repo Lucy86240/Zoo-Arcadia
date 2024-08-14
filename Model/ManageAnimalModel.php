@@ -2,6 +2,7 @@
 
 include_once "Model/Animal.php";
 include_once "Model/MedicalReport.php";
+include_once "Model/FedAnimal.php";
 
 /**
  * Summary of listAllAnimals retourne la liste de tous les animaux
@@ -271,6 +272,7 @@ function findAnimalById(int $id){
 
         if($stmt->execute()){
             $animal = $stmt->fetch();
+
             //add images
             $id = $animal->getId();
             $stmt2 = $pdo->prepare('SELECT images.id_image, images.path, images.description, images.icon, images.portrait 
@@ -283,17 +285,32 @@ function findAnimalById(int $id){
                     $animal->addImage($image);
                 }
             }
-            $request = 'SELECT * FROM reports_veterinarian WHERE animal = '.$id.' ORDER BY date DESC';
-            $stmt3 = $pdo->prepare($request);
-            $stmt2->setFetchMode(PDO::FETCH_CLASS,'MedicalReport');
+
+            //add medical reports
+            $stmt3 = $pdo->prepare('SELECT * FROM reports_veterinarian WHERE animal = :id ORDER BY date DESC');
+            $stmt3->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmt3->setFetchMode(PDO::FETCH_CLASS,'MedicalReport');
             if ($stmt3->execute())
             {
                 while($report = $stmt3->fetch()){
                     $animal->addMedicalReport($report);
                 }
             }
+
+            //add foods
+
+            $stmt4 = $pdo->prepare('SELECT * FROM fed_animals WHERE animal = :id ORDER BY date DESC');
+            $stmt4->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmt4->setFetchMode(PDO::FETCH_CLASS,'FedAnimal');
+            if ($stmt4->execute())
+            {
+                while($food = $stmt4->fetch()){
+                    $animal->addFood($food);
+                }
+            }
+
+            return $animal;
         }
-        return $animal;
     }
     catch(error $e){
 

@@ -1,13 +1,155 @@
 /* espacement */
 
-.medicalReports{
-    background-color: var(--blue);
-    padding-bottom : 30px;
-    th,td{
-        color : var(--white);
+.medicalReports, .foodAnimal{
+    .themeBlue{
+        padding-bottom : 30px;
+        background-color: var(--blue);
+        th,td{
+            color : var(--white);
+        }
+        h1,h2{
+            color : var(--green);
+        }
+        .icons{
+            .icon{
+                .bgc-img-box{
+                    background-color: var(--green);
+                    .img-box{
+                        filter: var(--filter_blue);
+                    }
+                }
+            }
+        }
+        .icon:hover{
+            .bgc-img-box{
+                background-color: var(--dark_green);
+                .img-box{
+                    filter: var(--filter_white);
+                }
+            }
+        }
+        .legend{
+            background-color: var(--dark_green);
+            color : var(--white);
+        }
+        table {
+            border: 3px solid var(--white);
+            caption{
+                .filter{
+                    background-color: var(--green);
+                    border : 2px solid var(--dark_green);
+                    color : var(--blue);
+                    .bodyFilter{
+                        input[type="date"], input[type="number"], input[type="text"] {
+                            color: var(--blue);
+                        }
+                        input[type="checkbox"]:checked, input[type="radio"]:checked {
+                            accent-color : var(--blue);
+                        }
+                        .titleFilter{
+                            color: var(--blue);
+                        }
+                        .selected{
+                            border: 1px solid var(--blue);
+                        }
+                    }
+                }
+            }
+            .reportLink{
+                text-decoration: underline var(--white);
+            }
+        }
+        #notFoundFood{
+            color: var(--white);
+        }
+        .error{
+            color : var(--white); 
+        }
+        @media only screen and (max-width: 556px){
+            .medicalReports{
+                .reportLink{
+                    img{
+                        filter: var(--filter_white);
+                    }
+                }
+            }
+        }
     }
-    h1,h2{
-        color : var(--green);
+
+    .themeBeige{
+        padding-bottom : 30px;
+        background-color: var(--beige);
+        th,td{
+            color : var(--dark_green);
+        }
+        h1,h2{
+            color : var(--brown);
+        }
+        .icons{
+            .icon{
+                .bgc-img-box{
+                    background-color: var(--dark_green);
+                    .img-box{
+                        filter: var(--filter_beige);
+                    }
+                }
+            }
+        }
+        .icon:hover{
+            .bgc-img-box{
+                background-color: var(--green);
+                .img-box{
+                    filter: var(--filter_brown);
+                }
+            }
+        }
+        .legend{
+            background-color: var(--green);
+            color : var(--brown);
+        }
+        table {
+            border: 3px solid var(--dark_green);
+            caption{
+                .filter{
+                    background-color: var(--dark_green);
+                    border : 2px solid var(--green);
+                    color : var(--white);
+                    .bodyFilter{
+                        input[type="date"], input[type="number"], input[type="text"] {
+                            color: var(--dark_green);
+                            background-color: var(--white);
+                        }
+                        input[type="checkbox"]:checked, input[type="radio"]:checked {
+                            accent-color : var(--green);
+                        }
+                        .titleFilter{
+                            color: var(--white);
+                        }
+                        .selected{
+                            border: 1px solid var(--white);
+                        }
+                    }
+                }
+            }
+            .reportLink{
+                text-decoration: underline var(--white);
+            }
+        }
+        #notFoundFood{
+            color: var(--brown);
+        }
+        .error{
+            color : var(--brown); 
+        }
+        @media only screen and (max-width: 556px){
+            .medicalReports{
+                .reportLink{
+                    img{
+                        filter: var(--filter_white);
+                    }
+                }
+            }
+        }
     }
 
     .reportView{
@@ -34,12 +176,8 @@
             display: flex;
             margin : 5px;
             .bgc-img-box{
-                background-color: var(--green);
                 padding : 2px;
                 border-radius: 50%;
-                .img-box{
-                    filter: brightness(0) saturate(100%) invert(18%) sepia(10%) saturate(3714%) hue-rotate(178deg) brightness(92%) contrast(87%);
-                }
             }
         }
         .icon:hover{
@@ -47,24 +185,18 @@
             display: flex;
             margin : 5px;
             .bgc-img-box{
-                background-color: var(--dark_green);
                 border-radius: 50% 50% 50% 0 ;
-                .img-box{
-                    filter: brightness(0) saturate(100%) invert(87%) sepia(29%) saturate(114%) hue-rotate(5deg) brightness(110%) contrast(105%);
-                }
             }
         }
     }
     .legend{
         display : flex;
         align-items: center;
-        background-color: var(--dark_green);
         padding : 4px;
         border-radius: 0 20px 20px 20px;
         width : 60%;
-        color : var(--white);
     }
-    .newReport{
+    .newReport, .fed{
         height : 70%;
         #listAnimals{
             width: 40vw;
@@ -84,7 +216,6 @@
         width: 90%;
         margin-left : 5%;
         border-collapse: collapse;
-        border: 3px solid var(--white);
 
         caption{
             margin: 20px;
@@ -94,11 +225,8 @@
             }
             .filter{
                     margin : 10px 0 10px 0;
-                    background-color: var(--green);
                     padding : 5px;
                     border-radius : 20px;
-                    border : 2px solid var(--dark_green);
-                    color : var(--blue);
                     .title{
                         font-weight: bold;
                         width:70px;
@@ -108,21 +236,15 @@
                         input[type="date"], input[type="number"], input[type="text"] {
                             border-radius: 20px;
                             padding : 2px;
-                            color: var(--blue);
-                        }
-                        input[type="checkbox"]:checked, input[type="radio"]:checked {
-                            accent-color : var(--blue);
                         }
                         .searchFilter, .element, .elementDate{
                             margin : 18px 0px 18px 0px;
                         }
                         .titleFilter{
-                            color: var(--blue);
                             font-weight: bold;
                             font-style: italic;
                         }
                         .selected{
-                            border: 1px solid var(--blue);
                             border-radius: 10px;
                             margin : 0 5px 5px 5px;
                             padding : 5px;
@@ -150,21 +272,24 @@
                 padding-left: 15px;
             }
         }
-        .reportLink{
-            text-decoration: underline var(--white);
+        tr{
+            padding : 5px;
         }
         .reportLink:hover{
             cursor:pointer;
         }
     }
+    #notFoundFood{
+        text-align: center;
+        font-size : 40px;
+    }
     .error{
         text-align: center;
-        color : var(--white); 
     }
 }
 
 @media only screen and (max-width: 556px){
-    .medicalReports{
+    .medicalReports, .foodAnimal{
         .illustration{
             display: none;
         }
@@ -178,11 +303,11 @@
                 filter: var(--filter_white);
             }
         }
-        .health{
+        .health, .food{
             display: none;
         }
     }
-    .allMedicalReports{
+    .allMedicalReports, .allFood{
         .filter{
             .title{
                 text-align: center;
@@ -199,11 +324,14 @@
                 margin-right: 5px;
             }
         }
+        .employee{
+            display:'none';
+        }
     }
 }
 
 @media only screen and (min-width: 556px){
-    .medicalReports{
+    .medicalReports, .foodAnimal{
         .illustration{
             width : 8vw;
         }
@@ -224,7 +352,7 @@
             }
         }
     }
-    .allMedicalReports{
+    .allMedicalReports, .allFood{
         table {
             .filter{
                 .searchFilter{
@@ -271,7 +399,7 @@
     }
 }
 
-.allMedicalReports{
+.allMedicalReports, .allFood{
     table {
         td{
             padding: 10px;

@@ -1,6 +1,6 @@
 <?php
 
-include_once "Controller/ManageMedicalReports.php";
+include_once "Controller/ManageFood.php";
 
 /**
  * Summary of filterExist indique si un filtre est appliqué
@@ -64,18 +64,18 @@ function initialFilter(&$dateStart, &$dateEnd, &$limit){
 function animalFilter($animal, $dateStart, $dateEnd, $limit){
 
     $animalFilter = animalById($animal['id'],false,false);
-    $animalFilter['reports'] = [];
-    $reports = medicalReportWithFilter($animal['id'],$dateStart,$dateEnd, $limit);
-    foreach($reports as $reportRequest){
-        $report = array(
-            'date' => $reportRequest['date'],
-            'health' => $reportRequest['health'],
-            'food' => $reportRequest['food'],
-            'weight_of_food' => $reportRequest['weight_of_food'],
-            'comment' => $reportRequest['comment'],
-            'veterinarian' => findNameofUser($reportRequest['veterinarian'])
+    $animalFilter['foods'] = [];
+    $foods = foodWithFilter($animal['id'],$dateStart,$dateEnd, $limit);
+    var_dump($foods);
+    foreach($foods as $foodRequest){
+        $food = array(
+            'date' => $foodRequest->getDate(),
+            'hour' => $foodRequest->getHour(),
+            'food' => $foodRequest->getFood(),
+            'weight' => $foodRequest->getWeight(),
+            'employee' => findNameofUser($foodRequest->getIdEmployee())
         );
-        array_push($animalFilter['reports'],$report);
+        array_push($animalFilter['foods'],$food);
     }
 
     return $animalFilter;
@@ -86,7 +86,7 @@ $animal = null;
 $filter = null;
 
 if(isset($_GET['animal'])){
-    $animal=animalById($_GET['animal'],true,true);
+    $animal=animalById($_GET['animal'],false,true);
     if(filterExist()){
         $dateStart = null;
         $dateEnd = null;
@@ -94,8 +94,8 @@ if(isset($_GET['animal'])){
         initialFilter($dateStart, $dateEnd, $limit);
         $animal = animalFilter($animal, $dateStart, $dateEnd, $limit);
     }
-    $reports=null;
-    addReport($animal,$reports,20,0);
+    $foods=null;
+    addFood($animal,$reports,50,0);
 }
 else
 {

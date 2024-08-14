@@ -112,7 +112,7 @@ button{
         }
     }
     
-    .page-brown, .page-blue, .page-white, .page-green{
+    .page-brown, .page-blue, .page-white, .page-green, .page-darkGreen{
         font-weight: bold;
         margin-left : 15px;
         margin-right : 15px;
@@ -129,6 +129,10 @@ button{
     }
     .page-green{
         color : var(--green);
+    }
+
+    .page-darkGreen{
+        color : var(--dark_green);
     }
     
     .bp-brown, .bn-brown{

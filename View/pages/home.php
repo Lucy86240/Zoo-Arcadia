@@ -15,7 +15,7 @@
     <h2 class="text-center text-white home-housings-title-mobile">Nos habitats</h2>
     <div class="home-housings-container">
         <?php
-            $housings = allHousingsView(false,true,1,3,1,0);
+            $housings = allHousingsView(false,1,3,1,0);
             foreach($housings as $housing){
                 ?>
                 <div class="home-housing-container js-slide">

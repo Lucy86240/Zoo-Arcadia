@@ -5,7 +5,7 @@
     </button>
     <div id="new-review-dialog" class="c-dialog none">
         <div class="fond"></div>
-        <div role="document" class="c-dialog__box popup">
+        <div role="document" class="c-dialog__box themeBlue popup">
             <div class="Entete">
                 <h3 class="dialog-title">Mon avis</h3>
                 <button class="close" type="button" aria-label="Fermer" title="Fermer nouvel avis" data-dismiss="dialog">x</button>

@@ -14,6 +14,7 @@ Class Animal{
     private $images=[];
 
     private $medicalReports=[];
+    private $foods=[];
 
     public function getId(){
         return $this->id_animal;
@@ -126,5 +127,29 @@ Class Animal{
 
     public function countImages(){
         return count($this->images);
+    }
+
+    public function setFoods(int $indice, $food){
+        $this->foods[$indice]=$food;
+    }
+
+    public function getFoods(int $id){
+        if($id<count($this->foods)){
+            return $this->foods[$id];
+        }
+        else{
+            return new FedAnimal();
+        }
+    }
+    public function getLastFoods(){
+        if ($this->countFoods() <1) return null;
+        return $this->foods[0];
+    }
+    public function addFood($food){
+        array_push($this->foods,$food);
+    }
+
+    public function countFoods(){
+        return count($this->foods);
     }
 }

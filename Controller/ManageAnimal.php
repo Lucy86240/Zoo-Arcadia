@@ -9,7 +9,7 @@ include_once 'Model/ManageHousingModel.php';
  * @param bool $allReport : true si l'on souhaite que le tableau contienne tous les rapports médicaux
  * @return array
  */
-function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport){
+function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport, bool $foods){
     if(animalExistById(($animalObject->getId()))){
         $animal = array(
             "id" => $animalObject->getId(),
@@ -17,29 +17,30 @@ function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport){
             "housing" => $animalObject->getHousing(),
             "breed" => $animalObject->getBreed(),
             "isVisible" => $animalObject->getIsVisible(),
-            "numberReports" => $animalObject->countMedicalReports()
+            "numberReports" => $animalObject->countMedicalReports(),
+            "numberFoods" => $animalObject->countFoods()
         );
         if($animalObject->getLastMedicalReport() != null){
             $animal['LastMedicalReport'] = array(
-                "date" => date("d/m/Y",strtotime($animalObject->getLastMedicalReport()['date'])),
-                "health" => $animalObject->getLastMedicalReport()['health'],
-                "food" => $animalObject->getLastMedicalReport()['food'],
-                "weight_of_food" => $animalObject->getLastMedicalReport()['weight_of_food'],
-                "comment" => $animalObject->getLastMedicalReport()['comment'],
+                "date" => date("d/m/Y",strtotime($animalObject->getLastMedicalReport()->getDate())),
+                "health" => $animalObject->getLastMedicalReport()->getHealth(),
+                "food" => $animalObject->getLastMedicalReport()->getFood(),
+                "weight_of_food" => $animalObject->getLastMedicalReport()->getWeightOfFood(),
+                "comment" => $animalObject->getLastMedicalReport()->getComment(),
             );
-            $animal['LastMedicalReport']["veterinarian"] = findNameofUser($animalObject->getLastMedicalReport()['veterinarian']);
+            $animal['LastMedicalReport']["veterinarian"] = findNameofUser($animalObject->getLastMedicalReport()->getIdVeterinarian());
         }
         if($allReport == true && $animalObject->getLastMedicalReport() != null){
             $animal['reports'] = [];
             for($i=0; $i<$animalObject->countMedicalReports();$i++){
                 $report = array(
-                    "date" => $animalObject->getMedicalReport($i)['date'],
-                    "health" => $animalObject->getMedicalReport($i)['health'],
-                    "food" => $animalObject->getMedicalReport($i)['food'],
-                    "weightFood" => $animalObject->getMedicalReport($i)['weight_of_food'],
-                    "comment" => $animalObject->getMedicalReport($i)['comment'],
+                    "date" => $animalObject->getMedicalReport($i)->getDate(),
+                    "health" => $animalObject->getMedicalReport($i)->getHealth(),
+                    "food" => $animalObject->getMedicalReport($i)->getFood(),
+                    "weightFood" => $animalObject->getMedicalReport($i)->getWeightOfFood(),
+                    "comment" => $animalObject->getMedicalReport($i)->getComment(),
                 );
-                $report['veterinarian']= findNameofUser($animalObject->getMedicalReport($i)['veterinarian']);
+                $report['veterinarian']= findNameofUser($animalObject->getMedicalReport($i)->getIdVeterinarian());
                 array_push($animal['reports'],$report);
             }
         }
@@ -60,6 +61,20 @@ function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport){
             );
             array_push($animal['images'],$img);
         }
+
+        if($foods){
+            $animal['foods'] = [];
+            for($i=0; $i<$animalObject->countFoods();$i++){
+                $food = array(
+                    "date" => $animalObject->getFoods($i)->getDate(),
+                    "hour" => $animalObject->getFoods($i)->getHour(),
+                    "food" => $animalObject->getFoods($i)->getFood(),
+                    "weight" => $animalObject->getFoods($i)->getWeight(),
+                );
+                $food['employee']= findNameofUser($animalObject->getFoods($i)->getIdEmployee());
+                array_push($animal['foods'],$food);
+            }
+        }
         return $animal;
     }
     else return [];
@@ -77,7 +92,7 @@ function animalsView(int $justVisibleAnimal, int $nbAnimals, int $currentPage, b
     $animalsObject = animalsExtract($justVisibleAnimal,$nbAnimals,$currentPage,$medicalDetail);
     $animals = [];
     foreach($animalsObject as $animalObject){
-        if($animalObject != null) $animal = changeAnimalObjectToAssociatif($animalObject, false);
+        if($animalObject != null) $animal = changeAnimalObjectToAssociatif($animalObject, false,false);
         else $animal=null;
         array_push($animals,$animal);
     }
@@ -91,9 +106,10 @@ function animalsView(int $justVisibleAnimal, int $nbAnimals, int $currentPage, b
  * @param mixed $allReport : true si l'on souhaite avoir les avis médicaux
  * @return array|null
  */
-function animalById(int $id, $allReport){
+function animalById(int $id, $allReport, $foods){
     $animalObject=findAnimalById($id);
-    if($animalObject!=null) $animal = changeAnimalObjectToAssociatif($animalObject, $allReport);
+    //var_dump($animalObject);
+    if($animalObject!=null) $animal = changeAnimalObjectToAssociatif($animalObject, $allReport, $foods);
     else $animal = null;
     return $animal;
 }
@@ -136,7 +152,7 @@ function archiveAnimal(&$animal){
         //suppression dans la base de données
         archiveAnimalRequest($animal['id']);
         $_POST[$nameButton]=null; 
-        $animal = changeAnimalObjectToAssociatif(findAnimalById($animal['id']), true);
+        $animal = changeAnimalObjectToAssociatif(findAnimalById($animal['id']), true, true);
     } 
     
 }
@@ -148,14 +164,15 @@ function unarchiveAnimal(&$animal){
         //suppression dans la base de données
         unarchiveAnimalRequest($animal['id']);
         $_POST[$nameButton]=null;
-        $animal = changeAnimalObjectToAssociatif(findAnimalById($animal['id']), true);
+        $animal = changeAnimalObjectToAssociatif(findAnimalById($animal['id']), true,true);
     } 
     
 }
 
 function echoAnimal($id,$page){
     //on cherche mes info de l'animal
-    $animal = animalById($id,false);
+    $animal = animalById($id,false,false);
+    //var_dump($animal);
     //on trouve l'id de son habitat et on sauve l'animal via une variable de session (pour pages habitats)
     $housing=FindHousingByName($animal['housing']);
     if($page=='housings') $_SESSION['animal'.$housing["id_housing"]] = $animal['id'];

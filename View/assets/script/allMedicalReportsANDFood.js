@@ -2,7 +2,7 @@
     const input = document.getElementById('filterBreedsSearch');
     const ul = document.getElementById('listBreeds');
     const messageResult = document.getElementById('msgBreedsSearch');
-    const max=10;
+    const max=15;
 
 search(input, ul, messageResult,max,false,true);
 

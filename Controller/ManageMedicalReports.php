@@ -55,7 +55,7 @@ function addReport($animal, &$reports, $perPage, $first){
 function changeReportObjectToAssociatif(MedicalReport $reportObject){
     return array(
         "veterinarian" => $reportObject->getVeterinarian(),
-        "animal" => animalById($reportObject->getIdAnimal(),false),
+        "animal" => animalById($reportObject->getIdAnimal(),false,false),
         "date" => date("d/m/Y",strtotime($reportObject->getDate())),
         "health" => $reportObject->getHealth(),
         "comment" => $reportObject->getComment(),

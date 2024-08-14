@@ -18,7 +18,76 @@
       height: 150%;
     }  
   }
+  .themeBlue{
+    background-color: var(--blue);
+    box-shadow: 2px 1px 1px black;
+    color : var(--white);
+    .popup{
+      .Entete{
+        background-color: var(--white);
+        color : var(--blue) !important;
+      }
+      form{   
+        textarea, input[type="text"], input[type="date"], select, input[type="time"]{
+          background-color: var(--white);
+          color: var(--blue);
+          border: 1px solid dark;
+        } 
+        .form-submit{
+          input {
+            border: var(--dark_green);
+          }
+        }
+      }
+    }
+    .close{
+      background-color: var(--green);
+      color : var(--blue);
+      box-shadow: 2px 1px 1px black;
+      border : var(--green);
+    }
+    .close:hover{
+      background-color: red;
+      border :red;
+      box-shadow: 2px 1px 1px black;
+    }
+  }
 
+  .themeBeige{
+    background-color: var(--beige);
+    box-shadow: 2px 1px 1px var(--brown);
+    color : var(--brown);
+    .popup{
+      .Entete{
+        background-color: var(--brown);
+        color : var(--beige) !important;
+      }
+        form{   
+          textarea, input[type="text"], input[type="date"], select, input[type="time"]{
+            border : 1px solid var(--brown);
+            background-color: var(--white);
+            color : var(--brown);
+          } 
+          .form-submit{
+            input {
+              border: var(--dark_green);
+            }
+          }
+        }
+  
+        .close{
+          background-color: var(--dark_green);
+          box-shadow: 2px 1px 1px black;
+          border : var(--green);
+          color : var(--beige);
+        }
+        .close:hover{
+          background-color: red;
+          border :red;
+          box-shadow: 2px 1px 1px black;
+        }
+    }
+  }
   
   /* dialog box*/
   .c-dialog__box {
@@ -30,9 +99,7 @@
     height: 60vh;
     margin: auto;
     padding: 5px;
-    background-color: var(--blue);
-    box-shadow: 2px 1px 1px black;
-    color : var(--white);
+
     border-radius: 20px;
     .img{
       display: flex;
@@ -51,9 +118,7 @@
         justify-content: center;
         margin-bottom : 8vh;
         padding : 4px;
-        background-color: var(--white);
         border-radius: 20px;
-        color : var(--blue) !important;
   
         h3{
           font-weight :normal;
@@ -70,7 +135,7 @@
             margin-left: 5vw;
             margin-right: 5vw;
             margin-bottom : 1vh;
-            textarea, input[type="text"], input[type="date"], select, .stars{
+            textarea, input[type="text"], input[type="date"], select, .stars, input[type="time"]{
               width : 40vw;
               border-radius: 20px;
             }
@@ -94,9 +159,6 @@
             justify-content: center;
             margin-bottom : 2vh;
             margin-top: 8vh;
-            input {
-              border: var(--dark_green);
-            }
           }
         }
   
@@ -104,19 +166,12 @@
           position : absolute;
           top : -3vh;
           right : -1vw;
-          background-color: var(--green);
           font-size: 25px;
-          color : var(--blue);
           font-weight: bold;
           border-radius: 50%;
           padding:3px 8px;
-          box-shadow: 2px 1px 1px black;
-          border : var(--green);
         }
         .close:hover{
-          background-color: red;
-          border :red;
-          box-shadow: 2px 1px 1px black;
           cursor: pointer;
         }
     }

@@ -3,20 +3,22 @@ links = document.querySelectorAll('.reportLink');
 reports = document.querySelectorAll('.reportView');
 closes = document.querySelectorAll('.buttonCloseReport');
 
-for(let i=0; i<links.length; i++){
-    links[i].addEventListener('click', ()=>{
-        for(let j=0; j<reports.length;j++){
-            reports[j].classList.add('none');
-        }
-        reports[i].classList.remove('none');
-    })
-}
-
-//ferme le détail d'un rapport
-for(let i=0; i<closes.length;i++){
-    closes[i].addEventListener('click',()=>{
-        reports[i].classList.add('none');
-    })
+if(links != null){
+    for(let i=0; i<links.length; i++){
+        links[i].addEventListener('click', ()=>{
+            for(let j=0; j<reports.length;j++){
+                reports[j].classList.add('none');
+            }
+            reports[i].classList.remove('none');
+        })
+    }
+    
+    //ferme le détail d'un rapport
+    for(let i=0; i<closes.length;i++){
+        closes[i].addEventListener('click',()=>{
+            reports[i].classList.add('none');
+        })
+    }
 }
 
 //affiche la légende de l'icone au survol
@@ -34,17 +36,26 @@ for(let i=0; i<icons.length;i++){
     })
 }
 
-//affiche le popup d'un nouveau rapport
+//affiche le popup d'un nouveau rapport / nourrir
 
-const dialogNR = document.getElementById('dialogNewReport');
-const triggerNR = document.querySelector('#popupNewReport'); 
-const dismissTriggerNR = dialogNR.querySelector('#closeNewReport');
-//const dialogNr = document.querySelector("#newReport-JS");
-popup(dialogNR,triggerNR,dismissTriggerNR)
+let dialogNR = document.getElementById('dialogNewReport');
+if(dialogNR != null){
+    const triggerNR = document.querySelector('#popupNewReport'); 
+    const dismissTriggerNR = dialogNR.querySelector('#closeNewReport');
+    popup(dialogNR,triggerNR,dismissTriggerNR)
+} 
+else{
+    dialogNR = document.getElementById('dialogFed');
+    const triggerNR = document.querySelector('#popupFed'); 
+    const dismissTriggerNR = dialogNR.querySelector('#closeFed');
+    popup(dialogNR,triggerNR,dismissTriggerNR)
+}
+
 
 //Nouveau rapport : affichage de la liste des animaux
     // Declare variables
-    const searchAnimal = document.querySelector('#animalNewReport');
+    let searchAnimal = document.querySelector('#animalNewReport');
+    if(searchAnimal == null) searchAnimal = document.querySelector('#animalFed');
     const list = document.querySelector('#listAnimals');
     const msg = document.querySelector('#msgListAnimals');
 
