@@ -26,7 +26,7 @@
         </div>
         <div class="none c-dialog" id="dialogNewReport">
             <div class="fond"></div>
-            <div role="document" class="c-dialog__box popup newReport">
+            <div role="document" class="c-dialog__box themeBlue popup newReport">
                 <div class="entete">
                     <h3 class="dialog-title">Nouveau rapport médical</h3>
                     <button class="close" id="closeNewReport" type="button">x</button>
@@ -38,7 +38,7 @@
         <!-- fiche de l'animal lié aux rapports-->
         <div class="none c-dialog js-animal-popup">
             <div class="fond"> </div>
-            <div class="popup c-dialog__box animalContainer">
+            <div class="popup c-dialog__box animalContainer themeBlue">
                 <div class="Entete">
                     <h3 class="dialog-title">Fiche détaillée de l'animal</h3>
                     <button class="close buttonCloseAnimal" type="button" aria-label="Fermer" title="Fermer rapport">x</button>
@@ -57,7 +57,7 @@
             <?php for($i=0; $i<count($animal['reports']);$i++){ ?>
                 <div class="none c-dialog reportView">
                     <div class="fond"> </div>
-                    <div class="popup c-dialog__box reportViewContainer">
+                    <div class="popup c-dialog__box reportViewContainer themeBlue">
                         <div class="Entete">
                             <h3 class="dialog-title">Rapport du <?php echo($animal['reports'][$i]['date']); ?></h3>
                             <button class="close buttonCloseReport" type="button" aria-label="Fermer" title="Fermer rapport">x</button>

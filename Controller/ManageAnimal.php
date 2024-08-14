@@ -37,7 +37,7 @@ function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport, b
                     "date" => $animalObject->getMedicalReport($i)->getDate(),
                     "health" => $animalObject->getMedicalReport($i)->getHealth(),
                     "food" => $animalObject->getMedicalReport($i)->getFood(),
-                    "weightFood" => $animalObject->getMedicalReport($i)->getWeightOfFood(),
+                    "weight_of_food" => $animalObject->getMedicalReport($i)->getWeightOfFood(),
                     "comment" => $animalObject->getMedicalReport($i)->getComment(),
                 );
                 $report['veterinarian']= findNameofUser($animalObject->getMedicalReport($i)->getIdVeterinarian());

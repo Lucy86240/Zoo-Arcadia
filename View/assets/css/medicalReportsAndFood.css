@@ -288,6 +288,59 @@
     }
 }
 
+.newReportPage{
+    background-color: var(--blue);
+    color : var(--white);
+    textarea, input[type="text"], input[type="date"], input[type="time"]{
+        background-color: var(--white);
+        color : var(--blue);
+    }
+}
+
+.fedAnimalPage{
+    background-color: var(--brown);
+    color : var(--beige);
+    textarea, input[type="text"], input[type="date"], input[type="time"]{
+        background-color: var(--white);
+        color : var(--brown);
+    }
+}
+.newReportPage, .fedAnimalPage{
+    h1,h2{
+        text-align: center;
+    }
+    h2{
+        margin-bottom : 20px;
+    }
+    
+    display : flex;
+    flex-direction: column;
+
+    .element{
+        display: flex;
+        justify-content: space-between;
+        margin-left: 5vw;
+        margin-right: 5vw;
+        margin-bottom : 1vh;
+        textarea, input[type="text"], input[type="date"], input[type="time"]{
+            width : 40vw;
+            border-radius: 20px;
+        }
+        textarea{
+            height: 20vh;
+        }  
+    }
+    .form-submit{
+        display:flex;
+        justify-content: center;
+        margin-bottom : 2vh;
+        margin-top: 8vh;
+        .button{
+            padding : 15px;
+        }
+    }
+}
+
 @media only screen and (max-width: 556px){
     .medicalReports, .foodAnimal{
         .illustration{

@@ -1,34 +1,36 @@
 
-            <form method="POST" action="">
+            <form method="POST" action="" class="newReportPage">
+                <?php if(substr($_SERVER['REQUEST_URI'],0,18)!='/rapports_medicaux'){ ?>
+                <div class="head"></div>
+                    <h1>Nouveau rapport médical de </h1>
+                    <h2><?php echo($animal['name'].' - '.$animal['breed']) ?></h2>
+                <?php }?>
                 <div class="element">
                     <label for="dateNewReport">Date : </label>
                     <input type="date" name="dateNewReport" id="dateNewReport" value="<?php echo(now());?>">
                 </div>
-                <div class="element">
-                    <label for="animalNewReport">Animal :</label>
-                    <input type="text" class="animalNewReport" id="animalNewReport" value="<?php if(isset($animal['name'])) echo($animal['name'].' - '.$animal['breed']);?>" placeholder="par défaut : <?php if(isset($animal['name'])) echo($animal['name'].' - '.$animal['breed']);?>"autocomplete="off">
-                    <?php $animalsListUpdate = listAllAnimals();?>
-                </div>
-                <div class="element">
-                    <div> </div>
-                    <ul class="animals" id="listAnimals">
-                        <?php foreach($animalsListUpdate as $animalListUpdate){ ?>
-                            <li class="form-check none">
-                                <input class="form-check-input" type="radio" name="searchAnimalNewReport" id="searchAnimalNewReport<?php echo($animalListUpdate['id_animal']);?>" value="<?php echo($animalListUpdate['id_animal']);?>" required>
-                                <label class="form-check-label" for="searchAnimalNewReport<?php echo($animalListUpdate['id_animal']);?>">
-                                    <?php echo($animalListUpdate['name'].' - '.$animalListUpdate['label']) ?>
-                                </label>
-                            </li>
-                        <?php }?>
-                        <p class="MessageResult none" id="msgListAnimals">Trop de résultats possibles... veuillez affiner</p>
-                    </ul>
+                <?php if(substr($_SERVER['REQUEST_URI'],0,18)=='/rapports_medicaux'){ ?>
+                    <div class="element">
+                        <label for="animalNewReport">Animal :</label>
+                        <input type="text" class="animalNewReport" id="animalNewReport" value="<?php if(isset($animal['name'])) echo($animal['name'].' - '.$animal['breed']);?>" placeholder="par défaut : <?php if(isset($animal['name'])) echo($animal['name'].' - '.$animal['breed']);?>"autocomplete="off">
+                        <?php $animalsListUpdate = listAllAnimals();?>
+                    </div>
+                    <div class="element">
+                        <div> </div>
+                        <ul class="animals" id="listAnimals">
+                            <?php foreach($animalsListUpdate as $animalListUpdate){ ?>
+                                <li class="form-check none">
+                                    <input class="form-check-input" type="radio" name="searchAnimalNewReport" id="searchAnimalNewReport<?php echo($animalListUpdate['id_animal']);?>" value="<?php echo($animalListUpdate['id_animal']);?>" required>
+                                    <label class="form-check-label" for="searchAnimalNewReport<?php echo($animalListUpdate['id_animal']);?>">
+                                        <?php echo($animalListUpdate['name'].' - '.$animalListUpdate['label']) ?>
+                                    </label>
+                                </li>
+                            <?php }?>
+                            <p class="MessageResult none" id="msgListAnimals">Trop de résultats possibles... veuillez affiner</p>
+                        </ul>
+                    </div>
+                <?php } ?>
 
-                </div>
-
-                <!--
-                    animal -> par défaut get
-                    veto -> utilisateur connecté
--->
                 <div class="element">
                     <label for="healthNewReport">Etat de santé :</label>
                     <input type="text" name="healthNewReport" id="healthNewReport" required />
@@ -47,5 +49,9 @@
                 </div>
                 <div class="form-submit">
                     <input type="submit" value="Soumettre" name="addReport" class="button btn-green" />
+                    <?php if(substr($_SERVER['REQUEST_URI'],0,18)!='/rapports_medicaux'){ ?>
+                        <a href="../habitats" class="button btn-beige">Retour aux habitats</a>
+                        <a href="../animaux" class="button btn-beige">Retour aux animaux</a>  
+                    <?php } ?>
                 </div>
             </form>

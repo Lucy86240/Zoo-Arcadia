@@ -16,7 +16,7 @@
         </div>
         <div class="none c-dialog" id="dialogNewReport">
             <div class="fond"></div>
-            <div role="document" class="c-dialog__box popup newReport">
+            <div role="document" class="c-dialog__box popup themeBlue newReport">
                 <div class="entete">
                     <h3 class="dialog-title">Nouveau rapport médical</h3>
                     <button class="close" id="closeNewReport" type="button">x</button>

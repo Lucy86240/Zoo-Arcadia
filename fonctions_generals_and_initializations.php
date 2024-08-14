@@ -27,6 +27,11 @@ function now(){
     return $now;
 }
 
+function nowHour(){
+    $now = date('H:i',time());
+    return $now;
+}
+
 /*$_SESSION['allAnimals_filterBreeds']=[];
 $_SESSION['allAnimals_filterhousings']=[];
 $_SESSION['allAnimals_filterIsVisible']=2;
