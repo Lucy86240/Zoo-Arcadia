@@ -77,6 +77,7 @@ function urlWithoutParameters(){
     return false;
 }
 
+const nameLog = document.querySelector('.js-nameLog')
 accountConnected.addEventListener('mouseover', ()=>{
     if (urlWithoutParameters()){
         accountConnected.src = "View/assets/img/general/header/logout.svg";
@@ -84,10 +85,10 @@ accountConnected.addEventListener('mouseover', ()=>{
     else{
         accountConnected.src = "../View/assets/img/general/header/logout.svg";
     }
-    
     if(nameLog.innertHTML != 'Me connecter'){
         text.classList.remove('none');
         text.style = 'color: red; font-size: 12px;';
+        nameLog.style = 'color: red;';
     }
 })
 accountConnected.addEventListener('mouseout', ()=>{
@@ -99,4 +100,5 @@ accountConnected.addEventListener('mouseout', ()=>{
     }
 
     text.classList.add('none');
+    nameLog.style = 'color: var(--brown)';
 })
