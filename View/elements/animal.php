@@ -11,12 +11,12 @@
                     <!-- icon pour modifier l'animal-->
                     <a class="icon UpdateAnimalIcon" href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>maj_animal/?id=<?php echo($animal['id'])?>">
                         <div class="bgc-img-box"><img class="img-box editAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/edit.svg" alt="Modifier l'animal"></div>
-                        <span class="legend">Modifier</span>
+                        <span class="legendAnimal">Modifier</span>
                     </a>
                     <!-- icon archivage (seulement si l'animal est visible-->
                     <div class="icon iconArchive <?php if($animal['isVisible']==0) echo('none');?>">
                         <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/archive.svg" alt="Archiver l'animal"></div>
-                        <span class="legend">Archiver</span>
+                        <span class="legendAnimal">Archiver</span>
                     </div>
                     <!-- le popup d'archivage s'affichant quand l'icone est cliquée-->
                     <div class="none c-dialog popupArchive dialog-popup-js">
@@ -27,7 +27,7 @@
                                 <span>L'animal ne sera plus visible auprès des visiteurs et ne sera plus accessible depuis les habitats.</span>
                                 <span>Vous pourrez toujours le consulter depuis la liste des animaux.</span>
                                 <div class="confirm-choice">
-                                    <input type="submit" name="ValidationArchiveAnimal<?php echo($animal['id']);?>" value="Oui" class="button-confirm">
+                                    <input type="submit" name="ValidationArchiveAnimal<?php echo($animal['id']);?>" value="Oui" class="button-confirm js-archive">
                                     <button class="button btn-green">Non</button>
                                 </div>
                         </form>
@@ -35,7 +35,7 @@
                     <!-- icon désarchivage (seulement si l'animal est non-visible-->
                     <div class="icon iconUnarchive <?php if($animal['isVisible']==1) echo('none');?>">
                         <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/unarchive.svg" alt="Désrchiver l'animal"></div>
-                        <span class="legend">Désarchiver</span>
+                        <span class="legendAnimal">Désarchiver</span>
                     </div>
                     <!-- le popup d'archivage s'affichant quand l'icone est cliquée-->
                     <div class="none c-dialog popupUnarchive">
@@ -52,7 +52,7 @@
                     </div>
                     <div class="icon iconDeleteAnimal">
                         <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer l'animal"></div>
-                        <span class="legend">Supprimer</span>
+                        <span class="legendAnimal">Supprimer</span>
                     </div>
                     <!-- le popup de suppression s'affichant quand la poubelle est cliquée-->
                     <div class="none c-dialog popupDeleteAnimal">
@@ -75,13 +75,13 @@
                     <div class="icon">
                         <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>repas_animal/?animal=<?php echo($animal['id']); ?>">
                             <div class="bgc-img-box"><img class="img-box mealsAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/meals.svg" alt="Visualiser les repas"></div>
-                            <span class="legend">Repas</span>
+                            <span class="legendAnimal">Repas</span>
                         </a>
                     </div>
                     <div class="icon <?php permission(['Administrateur.rice','Employé.e']);?>">
                         <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>nourrir/?animal=<?php echo($animal['id']); ?>">
                             <div class="bgc-img-box"><img class="img-box feedAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/feed.svg" alt="Nourrir"></div>
-                            <span class="legend">Nourrir</span>
+                            <span class="legendAnimal">Nourrir</span>
                         </a>
                     </div>
                 </div>
@@ -93,13 +93,13 @@
                     <div class="icon">
                         <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>rapports_medicaux_animal/?animal=<?php echo($animal['id']); ?>">
                             <div class="bgc-img-box"><img class="img-box reportMedicalAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Visualiser les rapports médicaux"></div>
-                            <span class="legend">Rapport médicaux</span>
+                            <span class="legendAnimal">Rapport médicaux</span>
                         </a>
                     </div>
                     <div class="icon <?php //permission(['Vétérinaire']);?>">
                         <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>nouveau_rapport/?animal=<?php echo($animal['id']); ?>">
                             <div class="bgc-img-box"><img class="img-box newReportAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un rapport médical"></div>
-                            <span class="legend">Nouveau rapport</span>
+                            <span class="legendAnimal">Nouveau rapport</span>
                         </a>
                     </div>
                 </div>

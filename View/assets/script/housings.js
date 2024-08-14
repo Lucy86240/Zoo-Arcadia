@@ -14,7 +14,7 @@ for(let k=0;k<deleteIconHousing.length;k++){
     })
 }
 
-/*carrousel photos d'un habitant*/
+/*carrousel photos d'un habitat*/
 count=0;
 housingExist = false
 do {
@@ -100,3 +100,4 @@ for(let i=0; i<inputSearch.length;i++){
 $('input[type=radio]').on('change', function() {
     $(this).closest("form").submit();
 })
+

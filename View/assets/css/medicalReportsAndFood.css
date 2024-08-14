@@ -78,7 +78,7 @@
 
     .themeBeige{
         padding-bottom : 30px;
-        background-color: var(--beige);
+        background: linear-gradient(var(--beige), var(--brown));
         th,td{
             color : var(--dark_green);
         }
@@ -109,6 +109,7 @@
         }
         table {
             border: 3px solid var(--dark_green);
+            background-color: var(--beige);
             caption{
                 .filter{
                     background-color: var(--dark_green);
@@ -298,7 +299,7 @@
 }
 
 .fedAnimalPage{
-    background-color: var(--brown);
+    background: linear-gradient(var(--beige), var(--brown));
     color : var(--beige);
     textarea, input[type="text"], input[type="date"], input[type="time"]{
         background-color: var(--white);

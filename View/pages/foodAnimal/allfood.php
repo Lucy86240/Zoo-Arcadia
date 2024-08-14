@@ -4,16 +4,16 @@
 
             <!-- icons permettant la navigation vers d'autres éléments clés-->
         <div class="icons">
-            <a class="icon" href="<?php if($optionPage){echo("../");}?>animaux">
+            <a class="icon js-icon" href="<?php if($optionPage){echo("../");}?>animaux">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/list.svg" alt="Voir la liste des animaux"></div>
             </a>
-            <div class="icon <?php //permission(['Vétérinaire']);?>" id="popupFed">
+            <div class="icon js-icon <?php //permission(['Vétérinaire']);?>" id="popupFed">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Nourrir un animal"></div>
             </div>
         </div>
         <div class="legends">
-            <span class="legend none">Voir la liste de tous les animaux</span>
-            <span class="legend none">Nourrir un animal</span>
+            <span class="legend js-legend none">Voir la liste de tous les animaux</span>
+            <span class="legend js-legend none">Nourrir un animal</span>
         </div>
         <div class="none c-dialog" id="dialogFed">
             <div class="fond"></div>
@@ -137,7 +137,7 @@
                     </a>   
                 </li>
 
-                <li><p class="page-darkGreen">Page <?php echo($currentPage); ?> / <?php echo($pages); ?></p></li>
+                <li><p class="page-green">Page <?php echo($currentPage); ?> / <?php echo($pages); ?></p></li>
 
                 <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
                 <li class=" <?php echo(($currentPage == $pages) ? "hidden" : "");?>">

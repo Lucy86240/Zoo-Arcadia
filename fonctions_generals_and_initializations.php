@@ -32,7 +32,24 @@ function nowHour(){
     return $now;
 }
 
-/*$_SESSION['allAnimals_filterBreeds']=[];
-$_SESSION['allAnimals_filterhousings']=[];
-$_SESSION['allAnimals_filterIsVisible']=2;
-$_SESSION['allAnimals_sort']=null;*/
+$pageHousing = false;
+if(substr($_SERVER['REQUEST_URI'],0,9)=='/habitats') $pageHousing = true;
+
+if($pageHousing == false){
+    include_once "Model/ManageHousingModel.php";
+    $listOfHousings = listIdAllHousings();
+    for($i=0;$i<count($listOfHousings);$i++){
+        $_SESSION['animal'.$listOfHousings[$i]]=null;
+    }
+}
+
+$pageAllAnimals=false;
+if(substr($_SERVER['REQUEST_URI'],0,8)=='/animaux') $pageAllAnimals = true;
+
+if($pageAllAnimals == false){
+    $_SESSION['allAnimals_filterBreeds']=[];
+    $_SESSION['allAnimals_filterhousings']=[];
+    $_SESSION['allAnimals_filterIsVisible']=2;
+    $_SESSION['allAnimals_sort']=null;
+    $_SESSION['allAnimals_animalSelected']=null;
+}

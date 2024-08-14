@@ -127,3 +127,12 @@
     background-color: var(--beige);
     color : var(--brown);
 }
+
+.archive{
+    filter : brightness(0.80);
+    background-color: var(--beige);
+    color : var(--brown);
+    span{
+        color : red;
+    }
+}

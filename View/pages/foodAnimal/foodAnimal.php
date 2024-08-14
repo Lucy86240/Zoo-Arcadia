@@ -5,24 +5,24 @@
 
         <!-- icons permettant la navigation vers d'autres éléments clés-->
         <div class="icons">
-            <div class="icon js-animal <?php if($animal==null) echo("none"); ?>">
+            <div class="icon js-icon js-animal <?php if($animal==null) echo("none"); ?>">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/article.svg" alt="Voir la fiche de l'animal"></div>
             </div>
-            <a class="icon" href="../animaux">
+            <a class="icon js-icon" href="../animaux">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/list.svg" alt="Voir la liste des animaux"></div>
             </a>
-            <div class="icon <?php //permission(['Employé.e']);?>" id="popupFed">
+            <div class="icon js-icon <?php //permission(['Employé.e']);?>" id="popupFed">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un compte rendu"></div>
             </div>
-            <a class="icon" href="../repas">
+            <a class="icon js-icon" href="../repas">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Voir la liste de tous les comptes rendus"></div>
             </a>
         </div>
         <div class="legends">
-            <span class="legend none">Voir la fiche de l'animal</span>
-            <span class="legend none">Voir la liste de tous les animaux</span>
-            <span class="legend none">Nourrir l'animal</span>
-            <span class="legend none">Voir la liste de tous les repas confondus</span>
+            <span class="legend js-legend none">Voir la fiche de l'animal</span>
+            <span class="legend js-legend none">Voir la liste de tous les animaux</span>
+            <span class="legend js-legend none">Nourrir l'animal</span>
+            <span class="legend js-legend none">Voir la liste de tous les repas confondus</span>
         </div>
         <div class="none c-dialog" id="dialogFed">
             <div class="fond"></div>

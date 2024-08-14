@@ -3,16 +3,16 @@
         <div class="head"> </div>
             <!-- icons permettant la navigation vers d'autres éléments clés-->
         <div class="icons">
-            <a class="icon" href="<?php if($optionPage){echo("../");}?>animaux">
+            <a class="icon js-icon" href="<?php if($optionPage){echo("../");}?>animaux">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/list.svg" alt="Voir la liste des animaux"></div>
             </a>
-            <div class="icon <?php //permission(['Vétérinaire']);?>" id="popupNewReport">
+            <div class="icon js-icon <?php //permission(['Vétérinaire']);?>" id="popupNewReport">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un compte rendu"></div>
             </div>
         </div>
         <div class="legends">
-            <span class="legend none">Voir la liste de tous les animaux</span>
-            <span class="legend none">Ajouter un compte rendu</span>
+            <span class="legend js-legend none">Voir la liste de tous les animaux</span>
+            <span class="legend js-legend none">Ajouter un compte rendu</span>
         </div>
         <div class="none c-dialog" id="dialogNewReport">
             <div class="fond"></div>

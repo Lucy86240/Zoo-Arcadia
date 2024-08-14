@@ -23,8 +23,8 @@ if(links != null){
 
 //affiche la légende de l'icone au survol
 
-icons = document.querySelectorAll(".icon");
-legends = document.querySelectorAll(".legend");
+icons = document.querySelectorAll(".js-icon");
+legends = document.querySelectorAll(".js-legend");
 
 for(let i=0; i<icons.length;i++){
     icons[i].addEventListener("mouseover",()=>{

@@ -9,6 +9,10 @@ const iconArchive = document.querySelectorAll('.iconArchive')
 const popupArchive = document.querySelectorAll('.popupArchive')
 if(iconArchive != null){
     popupConfirm(iconArchive,popupArchive)
+    const archive = document.querySelectorAll('.js-archive') 
+    for(let g=0; g<archive.length;g++){
+        archive[g].addEventListener('click',location.reload);
+    }
 }
 
 const iconUnarchive = document.querySelectorAll('.iconUnarchive')

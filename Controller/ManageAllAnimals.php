@@ -10,6 +10,7 @@ function allAnimals($breeds, $housings, $isVisible, $sort, $first, $perPage, &$n
         $animal['name'] = $animalObject->getName();
         $animal['breed'] = $animalObject->getBreed();
         $animal['housing'] = $animalObject->getIdHousing();
+        $animal['isVisible'] = $animalObject->getIsVisible();
         $animal['photo'] = $animalObject->getImage(0);
         if($animalObject->countImages()>0){
             $animal['photo']=[];

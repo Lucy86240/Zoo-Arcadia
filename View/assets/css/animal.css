@@ -95,11 +95,11 @@
     .theme-beige{
         background-color: var(--beige);
         h2,h3,h4,a{
-            color : var(--brown) !important;
+            color : var(--brown);
             text-decoration: none;
         }
         span, p{
-            color : var(--brown);
+            color : var(--brown) !important;
         }
         .box-general, .box-feed, .box-cure{
             .icon{

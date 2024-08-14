@@ -144,7 +144,7 @@ function deleteAnimalWithoutForm(Animal $animal){
         $_SESSION['animal'.$animal->getIdHousing()] = null;
 }
 
-function archiveAnimal(&$animal){
+function archiveAnimal(&$animal,&$housings){
     //on recupère le nom du bouton à cliquer pour supprimer le service
     $nameButton = "ValidationArchiveAnimal".$animal['id'];
     //si on a cliqué sur le bouton
@@ -153,6 +153,11 @@ function archiveAnimal(&$animal){
         archiveAnimalRequest($animal['id']);
         $_POST[$nameButton]=null; 
         $animal = changeAnimalObjectToAssociatif(findAnimalById($animal['id']), true, true);
+        if($housings != null){
+            $housing=FindHousingByName($animal['housing']);
+            $_SESSION['animal'.$housing["id_housing"]] = null;
+            $housings = allHousingsView(true,-1,-1,1,1);
+        }
     } 
     
 }
@@ -169,20 +174,38 @@ function unarchiveAnimal(&$animal){
     
 }
 
-function echoAnimal($id,$page){
+function echoAnimal($id,$page,&$elements){
     //on cherche mes info de l'animal
     $animal = animalById($id,false,false);
     //var_dump($animal);
     //on trouve l'id de son habitat et on sauve l'animal via une variable de session (pour pages habitats)
     $housing=FindHousingByName($animal['housing']);
-    if($page=='housings') $_SESSION['animal'.$housing["id_housing"]] = $animal['id'];
-    if($page=='allAnimals') $_SESSION['allAnimals_animalSelected'] = $animal['id'];
+    if($page=='housings'){
+        if($animal['isVisible']==1){
+            $_SESSION['animal'.$housing["id_housing"]] = $animal['id'];
+            //on permet la suppression / l'archivage / le désarchivage
+            deleteAnimal($animal['id'],$animal['name'],$housing["id_housing"]);
+            archiveAnimal($animal,$elements);
+            unarchiveAnimal($animal);
+            //on affiche les infos
+            include "View/elements/animal.php";
+        }
+        else {
+            $_SESSION['animal'.$housing["id_housing"]] = null;
+        }
+    }
 
-    //on permet la suppression / l'archivage / le désarchivage
-    deleteAnimal($animal['id'],$animal['name'],$housing["id_housing"]);
-    archiveAnimal($animal);
-    unarchiveAnimal($animal);
+    if($page=='allAnimals'){
+        $_SESSION['allAnimals_animalSelected'] = $animal['id'];
+            //on permet la suppression / l'archivage / le désarchivage
+        deleteAnimal($animal['id'],$animal['name'],$housing["id_housing"]);
+        $element = null;
+        archiveAnimal($animal,$element);
+        unarchiveAnimal($animal);
 
-    //on affiche les infos
-    include "View/elements/animal.php";
+        //on affiche les infos
+        include "View/elements/animal.php";
+    } 
+
+
 }
