@@ -139,4 +139,6 @@
     </div>
     <script src="View/assets/script/search.js"></script>
     <script src="View/assets/script/allAnimals.js"></script>
+    <script src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/script/popup.js"></script>
+    <script src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/script/animal.js"></script>
 </section>

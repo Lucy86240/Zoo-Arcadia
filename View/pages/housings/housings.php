@@ -183,5 +183,6 @@
     <script src="View/assets/script/popup.js"></script>
     <script src="View/assets/script/housings.js"></script>
     <script src="View/assets/script/commentVetoHousing.js"></script>
+    <script src="View/assets/script/animal.js"></script>
 
 </section>

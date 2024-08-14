@@ -113,7 +113,7 @@
             <h3><?php echo($animal['breed']); ?></h3>
         </div>
         <div class="body">
-            <div class="images">
+            <div class="images" id_animal="<?php echo($animal['id']); ?>">
                 <?php for($i=0; $i<count($animal['images']); $i++){?>
                     <div class="img-container js-slideAnimal">
                         <img class="imgAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");} echo($animal['images'][$i]['path']);?>" alt="<?php echo($animal['images'][$i]['description']);?>">
@@ -173,5 +173,3 @@
         </div>
     </div>
 </section>
-<script src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/script/popup.js"></script>
-<script src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/script/animal.js"></script>

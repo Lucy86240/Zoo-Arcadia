@@ -157,4 +157,5 @@
     <script src="../View/assets/script/popup.js"></script>
     <script src="../View/assets/script/medicalReportsANDFood.js"></script>
     <script src="../View/assets/script/medicalReportsAnimalANDFood.js"></script>
+    <script src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/script/animal.js"></script>
 </section>
