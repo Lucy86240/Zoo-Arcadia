@@ -7,6 +7,8 @@ class Housing{
     private int $id_housing;
     private string $name;
     private string $description;
+    private int $popularityRange;
+    private int $numberOfClics;
     private $images=[];
 
     /*public function __construct(int $id,string $name, string $description){
@@ -33,6 +35,22 @@ class Housing{
 
     public function setDescription(string $description){
         $this->description = $description;
+    }
+
+    public function getPopularityRange():int{
+        return $this->popularityRange;
+    }
+
+    public function setPopularityRange($range){
+        $this->popularityRange = $range;
+    }
+
+    public function getNumberOfClics():int{
+        return $this->numberOfClics;
+    }
+
+    public function setNumberOfClics($clics){
+        $this->numberOfClics=$clics;
     }
 
     public function setImage(int $indice, $img){

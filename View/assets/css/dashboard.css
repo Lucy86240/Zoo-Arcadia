@@ -1,0 +1,293 @@
+#dashboard{
+    background-color: var(--white);
+    h1{
+        margin : 10px;
+        color: var(--dark_green);
+        text-align: center;
+    }
+    .container{
+        display: flex;
+    }
+    #popular{
+        border : 3px solid var(--beige);
+        border-radius: 20px;
+        position : relative;
+        h2{
+            position: absolute;
+            color : var(--brown);
+        }
+        .housing{
+            border-radius: 50%;
+            position: absolute;
+            .bgc-name{
+                position: absolute;
+                left : 10%;
+                top : 90%;
+                z-index: 3;
+                padding: 5px;
+                background-color:  var(--brown);
+                border-radius: 10px;
+                span{
+                    font-weight: bold;
+                    color:var(--white);
+                }
+            }
+            .bgc-numberClics{
+                position: absolute;
+                z-index: 2;
+                background-color:  rgba(250,255,241,0.3);
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                span{
+                    font-weight: bold;
+                }
+            }
+            img{
+                z-index: 1;
+                border-radius: 50%;
+            }
+        }
+    }
+    .displayTiles{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    #tiles,.tiles{
+        .tile{
+            width: 150px;
+            height: 150px;
+            margin : 5px;
+            padding : 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            text-decoration: none;
+            span{
+                text-align: center;
+                font-weight: bold;
+            }
+        }
+        .tile:hover{
+            cursor: pointer;
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+        #stats{
+            #statsTile{
+                background-color: #FFD15B;
+                filter:drop-shadow(1px 1px #FFC344);
+                color : #FD4755;
+                img{
+                    filter : brightness(0) saturate(100%) invert(55%) sepia(38%) saturate(827%) hue-rotate(332deg) brightness(98%) contrast(106%);
+                }
+            }
+            #headStatsTile{
+                display: flex;
+                align-items: center;
+                h2{
+                    text-align: center;
+                    color:var(--brown);
+                }
+            }
+            ul{
+                margin-left : 10px;
+                #headerUl{
+                    color : var(--dark_green);
+                }
+                ol{
+                    display: flex;
+                    padding : 10px 10px 10px 0;
+                    .order{
+                        position: relative;
+                        margin :0 15px 0 15px;
+                        img{
+                            position: absolute;
+                            left : -10px;
+                            top : -10px;
+                            width: 40px;
+                            z-index: 4;
+                        }
+                        span{
+                            z-index:6;
+                            position: absolute;
+                        }
+                    }
+                    .text{
+                        margin-left : 35px;
+                        .breed{
+                            font-style: italic;
+                        }
+                    }
+                }
+            }
+        }
+        #usersTile{
+            background-color: var(--green);
+            filter:drop-shadow(1px 1px var(--dark_green));
+            color : var(--blue);
+            img{
+                filter : var(--filter_blue);
+            }
+        }
+        #timeTile{
+            background-color: var(--dark_green);
+            filter:drop-shadow(1px 1px black);
+            color : var(--white);
+            img{
+                filter : var(--filter_white);
+            }
+        }
+        #animalsTile{
+            background-color: var(--brown);
+            filter:drop-shadow(1px 1px black);
+            color : var(--beige);
+        }
+        #reviewsTile{
+            background-color: var(--blue);
+            filter:drop-shadow(1px 1px black);
+            color : var(--beige);
+            img{
+                filter : var(--filter_beige);
+            }
+        }
+        #fedTile{
+            background-color: var(--green);
+            filter:drop-shadow(1px 1px var(--dark_green));
+            color : var(--brown);
+            img{
+                filter : var(--filter_brown);
+            }
+        }
+        #reportsTile{
+            background-color: var(--blue);
+            filter:drop-shadow(1px 1px black);
+            color : var(--green);
+        }
+        #commentsTile{
+            background-color: var(--dark_green);
+            filter:drop-shadow(1px 1px black);
+            color : var(--beige);
+            img{
+                filter : var(--filter_beige);
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 576px){
+    #dashboard{
+        .container{
+            display: flex;
+        }
+        #popular{
+            margin : 5px;
+            width: 440px;
+            height: 440px;
+            h2{
+                left : 300px;
+                top : 10px;
+            }
+            .housing{
+                width : 110px;
+                img, .bgc-numberClics{
+                    width: 100px;
+                    height: 100px;
+                }
+            }
+            #number1{
+                left:172px;
+                top: 100px;
+            }
+            #number2{
+                left: 40px;
+                top : 150px;
+            }
+            #number3{
+                left: 305px;
+                top : 190px;
+            }
+            #podium{
+                max-width: 440px;
+                max-height: 440px;
+            }
+        }
+        .tilesTemp{
+            width: 440px !important;
+        }
+        #tiles, .tiles{
+            width: 70vw;
+            .tile{
+                width: 150px;
+                height: 150px;
+                img{
+                    width : 100px;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 808px){
+    #dashboard{
+        .container{
+            display: flex;
+            flex-direction: column;
+        }
+        #popular, #tiles, .tiles{
+            margin : 0 auto 0 auto;
+        }
+    }
+}
+@media only screen and (max-width: 576px){
+    #dashboard{
+        .tilesTemp{
+            width:300px;
+        }
+        #popular{
+            width: 300px;
+            height: 300px;
+            h2{
+                left : 180px;
+                top : 10px;
+            }
+            .housing{
+                width : 100px;
+                img, .bgc-numberClics{
+                    width: 80px;
+                    height: 80px;
+                }
+            }
+            #number1{
+                left:110px;
+                top: 65px;
+            }
+            #number2{
+                left: 22px;
+                top : 100px;
+            }
+            #number3{
+                left: 202px;
+                top : 120px;
+            }
+            #podium{
+                max-width: 300px;
+                max-height: 300px;
+            }
+        }
+        #tiles, .tiles{
+            width: 95vw;
+            .tile{
+                width: 80px;
+                height: 80px;
+                img{
+                    width : 60px;
+                }
+            }
+        }
+    }
+}

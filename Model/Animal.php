@@ -11,6 +11,10 @@ Class Animal{
     private int $housing;
     private bool $isVisible;
 
+    private int $popularityRange;
+
+    private int $numberOfClics;
+
     private $images=[];
 
     private $medicalReports=[];
@@ -151,5 +155,21 @@ Class Animal{
 
     public function countFoods(){
         return count($this->foods);
+    }
+
+    public function getPopularityRange():int{
+        return $this->popularityRange;
+    }
+
+    public function setPopularityRange($range){
+        $this->popularityRange = $range;
+    }
+
+    public function getNumberOfClics():int{
+        return $this->numberOfClics;
+    }
+
+    public function setNumberOfClics($clics){
+        $this->numberOfClics=$clics;
     }
 }

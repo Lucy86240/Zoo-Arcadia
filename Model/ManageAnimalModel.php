@@ -566,3 +566,64 @@ function updateAnimalRequest(int $id,string $name, int $housing, int $breed){
         return "error";
     }
 }
+
+function idAnimalsOrderByPopularity(){
+    try{
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        $stmt = $pdo->prepare('SELECT id_animal, count(*) as \'clics\' FROM popularity GROUP BY id_animal ORDER BY clics DESC');
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $res=$stmt->fetchAll();
+        if($stmt->execute()) $res = $stmt->fetchAll();
+        if($res != null){
+            $request = "WHERE ";
+            for($i=0;$i<count($res);$i++){
+                if($request != "WHERE ") $request .= 'AND ';
+                $request .='id_animal!='.$res[$i]['id_animal'].' ';
+            }
+            $stmt2 = $pdo->prepare('SELECT id_animal FROM animals '.$request.' ORDER BY id_animal ASC');
+            $stmt2->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt2->execute();
+            $res2=$stmt2->fetchAll();
+            for($j=0;$j<count($res2);$j++){
+                $res2[$j]['clics']=0;
+                array_push($res,$res2[$j]);
+            }
+            return $res;
+        }
+        else return [];
+    }
+    catch(error $e){
+        return [];
+    }
+}
+
+function animalsOrderByPopularity(){
+    $popularity = idAnimalsOrderByPopularity();
+    $animals = [];
+    for($i=0;$i<count($popularity);$i++){
+        $animal = findAnimalById($popularity[$i]['id_animal']);
+        $animal->setPopularityRange($i+1);
+        $animal->setNumberOfClics($popularity[$i]['clics']);
+        array_push($animals,$animal);
+    }
+    return $animals;
+}
+
+function animalClic(int $id){
+    try{
+        //on vérifie que le service existe et qu'il y a une modification à faire
+        if(animalExistById($id)){
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+            $date = now();
+            $stmt = $pdo->prepare('insert into popularity (id_animal, date_clic) VALUES (:id, :date)');
+            $stmt->bindParam(":date", $date, PDO::PARAM_STR);
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+            return "success";
+        }
+    catch(error $e){
+        echo('erreur bd');
+        return "error";
+    }
+}

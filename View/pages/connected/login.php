@@ -15,7 +15,7 @@
         <?php } ?>
         <div id="login-dialog" role="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-desc" aria-modal="true" tabindex="-1" class="c-dialog <?php if(!passwordError()) echo('none');?>">
             <div class="fond"></div>
-            <div role="document" class="c-dialog__box popup">
+            <div role="document" class="c-dialog__box popup themeBlue">
                 <div class="Entete">
                     <h3>Me connecter</h3>
                     <form method="POST"><input class="close" type="submit" aria-label="Fermer" value="x" name="close-login" data-dismiss="dialog"></form>

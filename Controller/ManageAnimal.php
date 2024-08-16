@@ -9,7 +9,7 @@ include_once 'Model/ManageHousingModel.php';
  * @param bool $allReport : true si l'on souhaite que le tableau contienne tous les rapports médicaux
  * @return array
  */
-function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport, bool $foods){
+function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport, bool $foods, bool $popularity){
     if(animalExistById(($animalObject->getId()))){
         $animal = array(
             "id" => $animalObject->getId(),
@@ -20,6 +20,10 @@ function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport, b
             "numberReports" => $animalObject->countMedicalReports(),
             "numberFoods" => $animalObject->countFoods()
         );
+        if($popularity==true){
+            $animal['popularityRange'] = $animalObject->getPopularityRange();
+            $animal['numberClics'] = $animalObject->getNumberOfClics();
+        }
         if($animalObject->getLastMedicalReport() != null){
             $animal['LastMedicalReport'] = array(
                 "date" => date("d/m/Y",strtotime($animalObject->getLastMedicalReport()->getDate())),
@@ -80,6 +84,16 @@ function changeAnimalObjectToAssociatif(Animal $animalObject, bool $allReport, b
     else return [];
 }
 
+function animalsWithPopularity(){
+    $animalsObject = animalsOrderByPopularity();
+    $animals = [];
+    foreach($animalsObject as $animalObject){
+        $animal = changeAnimalObjectToAssociatif($animalObject,false,false,true);
+        array_push($animals,$animal);
+    }
+    return $animals;
+}
+
 /**
  * Summary of animalsView retourne un tableaux associatifs avec des informations d'animaux
  * @param int $justVisibleAnimal : indiquer si les animaux doivent être visibles (2 si peut importe)
@@ -92,7 +106,7 @@ function animalsView(int $justVisibleAnimal, int $nbAnimals, int $currentPage, b
     $animalsObject = animalsExtract($justVisibleAnimal,$nbAnimals,$currentPage,$medicalDetail);
     $animals = [];
     foreach($animalsObject as $animalObject){
-        if($animalObject != null) $animal = changeAnimalObjectToAssociatif($animalObject, false,false);
+        if($animalObject != null) $animal = changeAnimalObjectToAssociatif($animalObject, false,false,false);
         else $animal=null;
         array_push($animals,$animal);
     }
@@ -109,7 +123,7 @@ function animalsView(int $justVisibleAnimal, int $nbAnimals, int $currentPage, b
 function animalById(int $id, $allReport, $foods){
     $animalObject=findAnimalById($id);
     //var_dump($animalObject);
-    if($animalObject!=null) $animal = changeAnimalObjectToAssociatif($animalObject, $allReport, $foods);
+    if($animalObject!=null) $animal = changeAnimalObjectToAssociatif($animalObject, $allReport, $foods,false);
     else $animal = null;
     return $animal;
 }
@@ -152,7 +166,7 @@ function archiveAnimal(&$animal,&$housings){
         //suppression dans la base de données
         archiveAnimalRequest($animal['id']);
         $_POST[$nameButton]=null; 
-        $animal = changeAnimalObjectToAssociatif(findAnimalById($animal['id']), true, true);
+        $animal = changeAnimalObjectToAssociatif(findAnimalById($animal['id']), true, true,false);
         if($housings != null){
             $housing=FindHousingByName($animal['housing']);
             $_SESSION['animal'.$housing["id_housing"]] = null;
@@ -169,7 +183,7 @@ function unarchiveAnimal(&$animal){
         //suppression dans la base de données
         unarchiveAnimalRequest($animal['id']);
         $_POST[$nameButton]=null;
-        $animal = changeAnimalObjectToAssociatif(findAnimalById($animal['id']), true,true);
+        $animal = changeAnimalObjectToAssociatif(findAnimalById($animal['id']), true,true,false);
     } 
     
 }
@@ -182,6 +196,13 @@ function echoAnimal($id,$page,&$elements){
     $housing=FindHousingByName($animal['housing']);
     if($page=='housings'){
         if($animal['isVisible']==1){
+            // on ajoute un clic à l'animal
+            if((!isset($_SESSION['role']) OR $_SESSION['role']=='') AND 
+            (!isset($_SESSION['animal'.$housing["id_housing"]]) OR 
+            $_SESSION['animal'.$housing["id_housing"]]==null OR
+            (isset($_SESSION['animal'.$housing["id_housing"]]) AND $_SESSION['animal'.$housing["id_housing"]]!=$animal['id']))){
+                animalClic($animal['id']);
+            } 
             $_SESSION['animal'.$housing["id_housing"]] = $animal['id'];
             //on permet la suppression / l'archivage / le désarchivage
             deleteAnimal($animal['id'],$animal['name'],$housing["id_housing"]);
@@ -196,6 +217,13 @@ function echoAnimal($id,$page,&$elements){
     }
 
     if($page=='allAnimals'){
+        // on ajoute un clic à l'animal
+        if((!isset($_SESSION['role']) OR $_SESSION['role']=='') AND 
+        (!isset($_SESSION['allAnimals_animalSelected']) OR 
+        $_SESSION['allAnimals_animalSelected']==null OR
+        (isset($_SESSION['allAnimals_animalSelected']) AND $_SESSION['allAnimals_animalSelected']!=$animal['id']))){
+            animalClic($animal['id']);
+        } 
         $_SESSION['allAnimals_animalSelected'] = $animal['id'];
             //on permet la suppression / l'archivage / le désarchivage
         deleteAnimal($animal['id'],$animal['name'],$housing["id_housing"]);

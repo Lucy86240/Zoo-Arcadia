@@ -26,6 +26,8 @@ $allRoutes = array(
     new Route('nouvel_animal',false,'Nouvel animal','View/pages/animal/addAnimal.php',['administrateur.trice'],'Controller/addAnimal.php'),
     new Route('animaux',false,'Animaux','View/pages/animal/allAnimals.php',[],'Controller/ManageAllAnimals.php'),
     new Route('animaux',true,'Animaux','View/pages/animal/allAnimals.php',[],'Controller/ManageAllAnimals.php'),
+    new Route('dashboard',false,'Dashboard','View/pages/dashboard.php',[],'Controller/DashboardController.php'),
+    new Route('comptes_utilisateurs',false,'Comptes utilisateur','View/pages/usersBoard.php',[],'Controller/ManageUsers.php'),
 );
 
 define('ALL_ROUTES',$allRoutes);

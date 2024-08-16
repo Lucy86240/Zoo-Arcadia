@@ -40,7 +40,7 @@
                                         <img class="arrow none" id="arrow-open" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/arrow-drop-up.svg" alt="menu-open">
                                     </a>
                                     <ul class="dropdown-menu none top" id="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Tableau de bord</a></li>
+                                        <li><a class="dropdown-item" href="<?php if($optionPage){echo("../");}?>dashboard">Tableau de bord</a></li>
                                         <li><a class="dropdown-item <?php permission(['Administrateur.rice','vétérinaire']); ?>" href="<?php if($optionPage){echo("../");}?>rapports_medicaux">Comptes-rendus vétérinaires</a></li>
                                         <li><a class="dropdown-item" href="<?php if($optionPage){echo("../");}?>animaux">Animaux</a></li>
                                         <li><a class="dropdown-item <?php permission(['Administrateur.rice']); ?>" href="#">Horaires du zoo</a></li>
@@ -48,7 +48,7 @@
                                         <li><a class="dropdown-item <?php permission(['Employé.e']); ?>" href="<?php if($optionPage){echo("../");}?>repas">Nourrir un animal</a></li>
                                         <li><a class="dropdown-item" href="<?php if($optionPage){echo("../");}?>commentaires_habitats">Commentaires des habitats</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item <?php permission(['Administrateur.rice']); ?>" href="#">Comptes utilisateurs</a></li>
+                                        <li><a class="dropdown-item <?php permission(['Administrateur.rice']); ?>" href="<?php if($optionPage){echo("../");}?>comptes_utilisateurs">Comptes utilisateurs</a></li>
                                     </ul>
                                 </li>
                             <?php //} ?>
