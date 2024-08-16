@@ -1,56 +1,98 @@
 <section id="usersBoard">
-    <table>
-        <caption>
-            <div class="headerTable">
-                <img class="illustration" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/pages/food/monkey.png" alt="">
-                <div class="title">
-                    <h1>Comptes utilisateurs</h1>
-                    </br>
+    <div class="head"></div>
+    <div class="themeBeige">
+        <table>
+            <caption>
+                <div class="entete">
+                    <img class="illustration" src="View/assets/img/general/pages/usersBoard/ours.png" alt="">
+                    <div class="title">
+                        <h1>Comptes utilisateurs</h1>
+                        </br>
+                    </div>
                 </div>
-            </div>
-            <!-- filtres -->
-            <form class="filter" method="POST">
-                <span class="title">Filtre :</span>
-                <div>
-                    <label for="roleSearch">Role </label>
-                    <input type="text" name="roleSearch" id="roleSearch">
-                </div>
-            </form>
-        </caption>
-        <thead>
-            <tr>
-                <th scope="col"> <h3>Nom</h3> </th>
-                <th scope="col"> <h3>Prénom</h3> </th>
-                <th scope="col"> <h3>Mail</h3> </th>
-                <th scope="col"> <h3>Role</h3> </th>
-                <th scope="col"> </th>
-            </tr>
-                </thead>
-                <tbody>
-                    <?php foreach($accounts as $account){ ?>
-                        <tr>
+                <!-- filtres -->
+                <form class="filter" method="POST">
+                    <span class="title">Filtres :</span>
+                    <div class="bodyFilter">
+                        <div>
+                            <span>Roles : </span>
+                            <div>
+                                <?php $roles = listOfRole();
+                                $count=0;
+                                foreach($roles as $role){?>
+                                    <div>
+                                        <input class="roleCheckbox" type="checkbox" value="<?php echo($role[0]);?>" name="role<?php echo($count) ?>" id="role<?php echo($count) ?>" checked>
+                                        <label for="role<?php echo($count) ?>"><?php echo($role[0]);?></label
+                                    </div>
+                                <?php $count++; }?>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="mailSearch">Mail : </label>
+                            <input type="text" name="mailSearch" id="mailSearch">
+                        </div>
+                    </div>
+                </form>
+            </caption>
+            <thead>
+                <tr>
+                    <th scope="col"> <h3>Nom</h3> </th>
+                    <th scope="col"> <h3>Prénom</h3> </th>
+                    <th scope="col"> <h3>Mail</h3> </th>
+                    <th scope="col"> <h3>Role</h3> </th>
+                    <th scope="col"> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($accounts as $account){ ?>
+                    <?php if($_SESSION['mail']!=$account['mail']){ ?>
+                        <tr class="js-account">
                             <th scope="row"><?php echo($account['lastName']); ?></th>
                             <td><?php echo($account['firstName']); ?></td>
-                            <td><?php echo($account['mail']); ?></td>
-                            <td><?php echo($account['role']); ?></td>
+                            <td class="js-mail"><?php echo($account['mail']); ?></td>
+                            <td class="js-role"><?php echo($account['role']); ?></td>
                             <td>
-                                <?php if($account['blocked']==0){ ?>
-                                    pas bloqué
-                                <?php }
-                                else{ ?>
-                                    bloqué
-                                <?php } ?>
-                                <div class="icon">
-                                    Modifier
+                                <div class="icons">
+                                    <?php if($account['blocked']==0){ ?>
+                                        <div class="icon js-icon js-bloc" mail=<?php echo($account['mail']); ?>>
+                                            <img  src="View/assets/img/general/pages/usersBoard/cadenas-ouvert.png" alt="Bloquer compte">
+                                        </div>
+                                    <?php }
+                                    else{ ?>
+                                        <div class="icon js-icon js-unbloc" mail=<?php echo($account['mail']); ?>>
+                                            <img  src="View/assets/img/general/pages/usersBoard/cadenas.png" alt="Débloquer compte">
+                                        </div>
+                                    <?php } ?>
+                                    <div class="icon js-icon js-edit" mail=<?php echo($account['mail']); ?>>
+                                        <div class="bgc-img-box"><img class="img-box" src="View/assets/img/general/icons/edit.svg" alt="Modifier compte"></div>
+                                    </div>
+                                    <div class="icon js-icon js-delete" mail=<?php echo($account['mail']); ?>>
+                                        <div class="bgc-img-box"><img class="img-box" src="View/assets/img/general/icons/delete.svg" alt="Supprimer compte"></div>
+                                    </div>
                                 </div>
-                                <div class="icon">
-                                    Supprimer
+                                <div class="legends">
+                                    <?php if($account['blocked']==0){ ?>
+                                        <span class="legend js-legend none">Bloquer</span>
+                                    <?php }
+                                    else{ ?>
+                                        <span class="legend js-legend none">Débloquer</span>
+                                    <?php } ?>
+                                    <span class="legend js-legend none">Modifier</span>
+                                    <span class="legend js-legend none">Suppr.</span>
                                 </div>
                             </td>
-
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-
+                    <?php } ?>    
+                <?php } ?>
+            
+            </tbody>
+        </table>
+        <div class="buttons">
+            <div class="btn-green btnUser" ><span>Créer un utilisateur</span></div>
+            <div class="btn-green btnUser" ><span>Modifier mon compte</span></div>
+        </div>
+        <div id="js-confirm"></div>
+    </div>
+    <script src="View/assets/script/popup.js"></script>
+    <script src="View/assets/script/usersBoard.js"></script>
 </section>

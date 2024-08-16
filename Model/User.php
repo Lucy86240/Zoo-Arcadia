@@ -4,7 +4,7 @@
 //use \PDO;
 
 Class User{
-    private string $username;
+    private string $mail;
     private string $password;
     private string $first_name;
     private string $last_name;
@@ -12,11 +12,11 @@ Class User{
     private bool $blocked;
 
     public function getUsername():string{
-        return $this->username;
+        return $this->mail;
     }
 
     public function setUsername(string $username){
-        $this->username = $username;
+        $this->mail = $username;
     }
 
     public function getPassword():string{
@@ -54,7 +54,7 @@ Class User{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
             $stmt = $pdo->prepare('SELECT label FROM roles WHERE id_role= '.$this->role);
             $stmt->execute();
-            return  $stmt->fetch();
+            return  $stmt->fetch()['label'];
         }
         catch(error $e){
             echo("erreur de bd");

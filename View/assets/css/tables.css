@@ -1,6 +1,6 @@
 /* espacement */
 
-.medicalReports, .foodAnimal{
+.medicalReports, .foodAnimal, #usersBoard{
     .themeBlue{
         padding-bottom : 30px;
         background-color: var(--blue);
@@ -180,13 +180,21 @@
                 padding : 2px;
                 border-radius: 50%;
             }
+            img{
+                width: 30px;
+            }
         }
         .icon:hover{
             cursor: pointer;
             display: flex;
             margin : 5px;
+            -webkit-transform: scale(1.2);
+            transform: scale(1.2);
             .bgc-img-box{
                 border-radius: 50% 50% 50% 0 ;
+            }
+            img{
+                width: 30px;
             }
         }
     }
@@ -232,12 +240,13 @@
                         font-weight: bold;
                         width:70px;
                     }
+                    input[type="date"], input[type="number"], input[type="text"], select {
+                        border-radius: 20px;
+                        padding : 2px;
+                    }
                     .bodyFilter{
                         text-align:left;
-                        input[type="date"], input[type="number"], input[type="text"] {
-                            border-radius: 20px;
-                            padding : 2px;
-                        }
+
                         .searchFilter, .element, .elementDate{
                             margin : 18px 0px 18px 0px;
                         }
@@ -286,6 +295,19 @@
     }
     .error{
         text-align: center;
+    }
+    .buttons{
+        display: flex;
+        .btnUser{
+            width: 200px;
+            padding : 10px;
+            margin : 20px auto 20px auto;
+            text-align: center;
+            span{
+                color :var(--brown);
+                align-items: center;
+            }
+        }
     }
 }
 
@@ -343,7 +365,7 @@
 }
 
 @media only screen and (max-width: 556px){
-    .medicalReports, .foodAnimal{
+    .medicalReports, .foodAnimal, #usersBoard{
         .illustration{
             display: none;
         }
@@ -385,7 +407,7 @@
 }
 
 @media only screen and (min-width: 556px){
-    .medicalReports, .foodAnimal{
+    .medicalReports, .foodAnimal, #usersBoard{
         .illustration{
             width : 8vw;
         }
@@ -404,6 +426,11 @@
             img{
                 display: none;
             }
+        }
+    }
+    #usersBoard{
+        .filter{
+            justify-content: space-evenly;
         }
     }
     .allMedicalReports, .allFood{

@@ -56,3 +56,16 @@ function deblocUser(string $id){
         echo('Une erreur est survenue');
     }
 }
+
+function listOfRole(){
+    try{
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        $stmt = $pdo->prepare('SELECT label role FROM roles');
+        $stmt->execute();
+        return  $stmt->fetchAll(PDO::FETCH_NUM);
+    }
+    catch(error $e){
+        echo("erreur de bd");
+        return [];
+    }
+}

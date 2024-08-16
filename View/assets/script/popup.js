@@ -17,6 +17,12 @@ function popupConfirm(icon,popup){
 }
 
 //création d'une popup de confirmation
+/**
+ * créer une popup de confirmation (attention nécessite une div avec pour id "js-confirm")
+ * @param {*} titleContent : titre du popup
+ * @param {*} parContent : texte du popup
+ * @param {*} submitContent : name du bouton de validation 
+ */
 function createConfirm(titleContent,parContent,submitContent){
   const divConfirm = document.getElementById("js-confirm");
   divConfirm.classList.add('c-dialog')

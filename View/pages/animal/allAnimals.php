@@ -77,10 +77,6 @@
                 <h2>Trie</h2>
                 <ul>
                     <li>
-                        <input type="radio" name="sort" id="popular" value="popular" <?php echo(defaultValueCheckbox('sort','popular')); ?>>
-                        <label for="popular">Popularité</label>
-                    </li>
-                    <li>
                         <input type="radio" name="sort" id="breed" value="breed" <?php echo(defaultValueCheckbox('sort','breed')); ?>>
                         <label for="breed">Races</label>
                     </li>
