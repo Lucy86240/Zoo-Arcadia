@@ -8,7 +8,7 @@ Class User{
     private string $password;
     private string $first_name;
     private string $last_name;
-
+    private int $role;
     private bool $blocked;
 
     public function getUsername():string{
@@ -40,6 +40,26 @@ Class User{
     }
     public function setLastName(string $lastName){
         $this->last_name = $lastName;
+    }
+
+    public function getIdRole():int{
+        return $this->role;
+    }
+
+    public function setIdRole($role){
+        $this->role = $role;
+    }
+    public function getRole():string{
+        try{
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+            $stmt = $pdo->prepare('SELECT label FROM roles WHERE id_role= '.$this->role);
+            $stmt->execute();
+            return  $stmt->fetch();
+        }
+        catch(error $e){
+            echo("erreur de bd");
+            return 'inconnu';
+        }
     }
 
     public function getBlocked(){
