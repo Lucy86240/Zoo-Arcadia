@@ -6,7 +6,6 @@ const legendComments = document.querySelectorAll('.js-legendComments');
 for(let i=0; i<iconComments.length;i++){
     iconComments[i].addEventListener("mouseover",()=>{
         legendComments[i].classList.remove('none');
-        //legendComments[i].style='margin-left:'+i*40+'px';
     })
     iconComments[i].addEventListener("mouseout",()=>{
         legendComments[i].classList.add('none');

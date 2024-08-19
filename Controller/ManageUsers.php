@@ -18,4 +18,27 @@ function accountsList(){
     return $accounts;
 }
 
+function deleteAccount(&$accounts){
+    for($i=0; $i<count($accounts); $i++){
+        $name='Delete'.$accounts[$i]['mail'];
+        $name=str_replace('.','',$name);
+        if(isset($_POST[$name])) deleteUser($accounts[$i]['mail']);
+    }
+    $accounts = accountsList();
+}
+
+function blockedAccount(&$accounts){
+    for($i=0; $i<count($accounts); $i++){
+        $name='Bloc-'.$accounts[$i]['mail'];
+        $name=str_replace('.','',$name);
+
+        if(isset($_POST[$name])){
+            blocUser($accounts[$i]['mail']);
+        }
+    }
+    $accounts = accountsList();
+}
+
 $accounts = accountsList();
+deleteAccount($accounts);
+blockedAccount($accounts);

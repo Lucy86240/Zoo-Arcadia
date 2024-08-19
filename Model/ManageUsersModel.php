@@ -69,3 +69,17 @@ function listOfRole(){
         return [];
     }
 }
+
+function deleteUser(string $mail){
+    try{
+        if(userExist($mail)){
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+            $stmt = $pdo->prepare('DELETE FROM users WHERE mail = :id');
+            $stmt->bindParam(':id',$mail,PDO::PARAM_STR);
+            $stmt->execute();
+        }
+    }
+    catch(error $e){
+        echo("erreur de bd");
+    }
+}

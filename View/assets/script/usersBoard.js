@@ -27,8 +27,9 @@ for(let i=0; i<blocAccount.length;i++){
     blocAccount[i].addEventListener('click',()=>{
         titleContent = "Bloquer un compte";
         blocAccountMail = blocAccount[i].getAttribute("mail");
-        parContent = "Etes vous sûr de vouloir bloquer le compte : "+blocAccountMail+" ? L'utilisateur ne pourra plus se connecter.";
-        submitContent = "Bloc"+blocAccountMail;
+        blocAccountMail=blocAccountMail.replace('.','')
+        parContent = "Etes vous sûr de vouloir bloquer le compte : "+blocAccount[i].getAttribute("mail")+" ? L'utilisateur ne pourra plus se connecter.";
+        submitContent = "Bloc-"+blocAccountMail;
         createConfirm(titleContent,parContent,submitContent);
     })
 }
@@ -40,6 +41,7 @@ for(let i=0; i<deleteAccount.length;i++){
         titleContent = "Supprimer un compte";
         deleteAccountMail = deleteAccount[i].getAttribute("mail");
         parContent = "Etes vous sûr de vouloir supprimer le compte : "+deleteAccountMail+" ? L'utilisateur ne pourra plus se connecter et toutes les données lui étant affectées seront supprimées (repas, rapports médicaux...).";
+        deleteAccountMail=deleteAccountMail.replace('.','')
         submitContent = "Delete"+deleteAccountMail;
         createConfirm(titleContent,parContent,submitContent);
     })
