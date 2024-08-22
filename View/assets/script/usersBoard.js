@@ -167,9 +167,10 @@ function textPassword(text,id){
 /**
  * Créer le popup de création ou modification d'utilisateur
  * @param {*} mail : mail de l'utilisteur en cas de modification / '' pour création
+ * @param {*} myAccount : true s'il s'agit de la modification du compte utilisateur de la personne connectée 
 
  */
-function createPopupAccount(mail){
+function createPopupAccount(mail, myAccount){
     let divConfirm = document.getElementById("js-confirm");
     divTemp = document.createElement('div')
 
@@ -196,7 +197,10 @@ function createPopupAccount(mail){
 
     h3 = document.createElement('h3')
     h3.classList.add('dialog-title')
-    if(mail != '') h3.textContent = "Modifier un compte"
+    if(mail != ''){
+        if(!myAccount) h3.textContent = "Modifier un compte"
+        else h3.textContent = "Modifier mon compte"
+    }
     else h3.textContent = "Créer un compte"
     divEntete.append(h3)
     divDialogBox.append(divEntete)
@@ -216,8 +220,14 @@ function createPopupAccount(mail){
 
     if(mail != ''){
         id='updateAccountFirstname';
-        nameplaceholder = '.js-firstname[mail=\"'+mail+'\"]'
-        placeholder = 'Actuellement : '+document.querySelector(nameplaceholder).textContent
+        if(!myAccount){
+            nameplaceholder = document.querySelector('.js-firstname[mail=\"'+mail+'\"]')
+            placeholder = 'Actuellement : '+nameplaceholder.textContent
+        }
+        else{
+            placeholder = document.getElementById('updateMyAccount').getAttribute('firstName')
+        } 
+
         required = false
     }
     else{
@@ -232,8 +242,14 @@ function createPopupAccount(mail){
 
     if(mail != ''){
         id='updateAccountLastname';
-        nameplaceholder = '.js-lastname[mail=\"'+mail+'\"]'
-        placeholder = 'Actuellement : '+document.querySelector(nameplaceholder).textContent
+        if(!myAccount){
+            nameplaceholder = '.js-lastname[mail=\"'+mail+'\"]'
+            placeholder = 'Actuellement : '+document.querySelector(nameplaceholder).textContent
+        }
+        else{
+            placeholder = document.getElementById('updateMyAccount').getAttribute('lastName')
+        }
+
         required = false
     } 
     else{
@@ -258,10 +274,16 @@ function createPopupAccount(mail){
     select.setAttribute('name',id)
     select.setAttribute('id',id)
     if(mail != ''){
-        nameplaceholder = '.js-role[mail=\"'+mail+'\"]'
         option1 = document.createElement('option')
-        option1.textContent = document.querySelector(nameplaceholder).textContent
-        option1.value = document.querySelector(nameplaceholder).textContent
+        if(!myAccount){
+            nameplaceholder = '.js-role[mail=\"'+mail+'\"]'
+            option1.textContent = document.querySelector(nameplaceholder).textContent
+            option1.value = option1.textContent
+        }
+        else{
+            option1.textContent = document.getElementById('updateMyAccount').getAttribute('role')
+            option1.value = option1.textContent
+        }
         select.append(option1)
         for(let i=0; i < allRoles.length;i++){
             if(option1.textContent != allRoles[i]){
@@ -289,7 +311,7 @@ function createPopupAccount(mail){
 
     if(mail != ''){
         id='updateAccountMail';
-        placeholde = 'Actuellement : '+mail
+        placeholder = 'Actuellement : '+mail
         required = false
     }
     else{
@@ -420,7 +442,6 @@ function createPopupAccount(mail){
     buttonCancel.addEventListener('click',()=>{
         divTemp.remove();
     })
-
 }
 
 /**
@@ -794,6 +815,7 @@ function createPopupUnblocAccount(mail){
 
 }
 
+// débloquer un compte
 const iconsUnbloc = document.querySelectorAll('.js-unbloc')
 
 for(let i=0 ; i<iconsUnbloc.length; i++){
@@ -811,3 +833,26 @@ for(let i=0 ; i<iconsUnbloc.length; i++){
     })
     })
 }
+
+//modifier le compte de l'utilisateur connecté
+
+const updateMyAccount = document.getElementById('updateMyAccount')
+
+updateMyAccount.addEventListener('click',()=>{
+    mail = updateMyAccount.getAttribute('mail')
+    createPopupAccount(mail,true);
+    // la confirmation de mail n'apparait que si un mail est saisi
+    const inputMail = document.getElementById('updateAccountMail')
+    inputMail.addEventListener('input',()=>{
+        displayConfirmMail(inputMail)
+    })
+
+    // la légende du mot de passe n'apparait que si le focus est sur le nouveau mot de passe
+    const inputPassword = document.getElementById('updateAccountPassword')
+    displaylegendPassword(inputPassword)
+
+    //on indique si les critères sont respectés
+    inputPassword.addEventListener('input',()=>{
+        displayRespectPassword(inputPassword)
+    })
+})

@@ -89,7 +89,7 @@
         </table>
         <div class="buttons">
             <div id="btnCreateAccount" class="btn-green btnUser" ><span>Créer un utilisateur</span></div>
-            <div class="btn-green btnUser" ><span>Modifier mon compte</span></div>
+            <div class="btn-green btnUser" mail="<?php echo($_SESSION['mail'])?>" firstName = "<?php echo($_SESSION['firstName'])?>" lastName = "<?php echo($_SESSION['lastName'])?>" role = "<?php echo($_SESSION['role'])?>" id="updateMyAccount"><span>Modifier mon compte</span></div>
         </div>
         <div id="js-confirm"></div>
     </div>
