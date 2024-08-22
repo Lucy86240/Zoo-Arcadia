@@ -47,10 +47,10 @@
                 <?php foreach($accounts as $account){ ?>
                     <?php if($_SESSION['mail']!=$account['mail']){ ?>
                         <tr class="js-account">
-                            <th scope="row"><?php echo($account['lastName']); ?></th>
-                            <td><?php echo($account['firstName']); ?></td>
-                            <td class="js-mail"><?php echo($account['mail']); ?></td>
-                            <td class="js-role"><?php echo($account['role']); ?></td>
+                            <th scope="row" class="js-lastName" mail=<?php echo($account['mail']); ?>><?php echo($account['lastName']); ?></th>
+                            <td class="js-firstname" mail=<?php echo($account['mail']); ?>><?php echo($account['firstName']); ?></td>
+                            <td class="js-mail" mail=<?php echo($account['mail']); ?>><?php echo($account['mail']); ?></td>
+                            <td class="js-role" mail=<?php echo($account['mail']); ?>><?php echo($account['role']); ?></td>
                             <td>
                                 <div class="icons">
                                     <?php if($account['blocked']==0){ ?>
@@ -88,11 +88,12 @@
             </tbody>
         </table>
         <div class="buttons">
-            <div class="btn-green btnUser" ><span>Créer un utilisateur</span></div>
+            <div id="btnCreateAccount" class="btn-green btnUser" ><span>Créer un utilisateur</span></div>
             <div class="btn-green btnUser" ><span>Modifier mon compte</span></div>
         </div>
         <div id="js-confirm"></div>
     </div>
-    <script src="View/assets/script/popup.js"></script>
-    <script src="View/assets/script/usersBoard.js"></script>
 </section>
+
+<script src="View/assets/script/popup.js"></script>
+<script src="View/assets/script/usersBoard.js"></script>

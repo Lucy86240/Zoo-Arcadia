@@ -5,7 +5,7 @@
     require_once 'fonctions_generals_and_initializations.php';
     require_once 'router/router.php';
     $optionPage=optionPage($request);?> 
-    <script src="<?php if($optionPage){echo("../");}?>CONSTANTES.js"></script> 
+    <script src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>CONSTANTES.js"></script> 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <?php
     require_once 'View/elements/header.php';

@@ -28,7 +28,7 @@
         color : var(--blue) !important;
       }
       form{   
-        textarea, input[type="text"], input[type="date"], select, input[type="time"]{
+        textarea, input[type="text"], input[type="date"], select, input[type="time"], input[type="password"]{
           background-color: var(--white);
           color: var(--blue);
           border: 1px solid dark;
@@ -63,7 +63,7 @@
         color : var(--beige) !important;
       }
         form{   
-          textarea, input[type="text"], input[type="date"], select, input[type="time"]{
+          textarea, input[type="text"], input[type="date"], select, input[type="time"], input[type="password"]{
             border : 1px solid var(--brown);
             background-color: var(--white);
             color : var(--brown);
@@ -135,7 +135,7 @@
             margin-left: 5vw;
             margin-right: 5vw;
             margin-bottom : 1vh;
-            textarea, input[type="text"], input[type="date"], select, .stars, input[type="time"]{
+            textarea, input[type="text"], input[type="date"], select, .stars, input[type="time"], input[type="password"]{
               width : 40vw;
               border-radius: 20px;
             }
@@ -157,8 +157,12 @@
           .form-submit{
             display:flex;
             justify-content: center;
+            align-items: center;
             margin-bottom : 2vh;
             margin-top: 8vh;
+            input{
+              height: 50px;
+            }
           }
         }
   

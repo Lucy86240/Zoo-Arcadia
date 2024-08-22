@@ -240,7 +240,7 @@
                         font-weight: bold;
                         width:70px;
                     }
-                    input[type="date"], input[type="number"], input[type="text"], select {
+                    input[type="date"], input[type="number"], input[type="text"], select, input[type="password"] {
                         border-radius: 20px;
                         padding : 2px;
                     }
@@ -273,7 +273,6 @@
                             width : 150px;
                         }
                     }
-
             }
         }
         thead{
@@ -307,6 +306,26 @@
                 color :var(--brown);
                 align-items: center;
             }
+        }
+    }
+    #updateAccount, #createAccount, #deblocAccount{
+        height : 600px;
+        .passwordError:focus{
+            outline : 1px solid red;
+        }
+        .passwordOk:focus{
+            outline : 1px solid black;
+        }
+        .legendAccount{
+            width: 70%;
+            background-color: var(--beige);
+            margin : 0 auto 0 auto;
+            padding : 10px;
+            border-radius: 20px;
+        }
+        .btn-red{
+            padding : 20px; 
+            font-family : var(--font_sans_serif)
         }
     }
 }
