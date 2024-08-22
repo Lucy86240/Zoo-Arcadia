@@ -135,7 +135,7 @@
             margin-left: 5vw;
             margin-right: 5vw;
             margin-bottom : 1vh;
-            textarea, input[type="text"], input[type="date"], select, .stars, input[type="time"], input[type="password"]{
+            textarea, input[type="text"], input[type="date"], select, .stars, input[type="time"], input[type="password"], input[type="email"]{
               width : 40vw;
               border-radius: 20px;
             }

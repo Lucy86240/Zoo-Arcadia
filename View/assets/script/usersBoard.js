@@ -187,7 +187,15 @@ function createPopupAccount(mail, myAccount){
     divDialogBox.classList.add('themeBeige')
     divDialogBox.classList.add('popup')
 
-    if(mail != '')id='updateAccount'
+    if(mail != ''){ 
+        id='updateAccount';
+        temp = mail
+        mailSubmit=mail.replace('.','');
+        while(mailSubmit != temp){
+            temp = mailSubmit
+            mailSubmit = mailSubmit.replace('.','')
+        }
+    }
     else id='createAccount'
     divDialogBox.setAttribute('id',id)
 
@@ -221,7 +229,7 @@ function createPopupAccount(mail, myAccount){
 
     //nom
     if(mail != ''){
-        id='updateAccountFirstname';
+        id='updateAccountFirstname-'+mailSubmit;
         if(!myAccount){
             nameplaceholder = document.querySelector('.js-firstname[mail=\"'+mail+'\"]')
             placeholder = 'Actuellement : '+nameplaceholder.textContent
@@ -237,14 +245,14 @@ function createPopupAccount(mail, myAccount){
         placeholder = ''
         required = true
     }
-    textLabel = "Nom :";
+    textLabel = "Prénom :";
     type = 'text';
     firstName = document.querySelectorAll('.js-firstname')
     form.append(createDivElement(id,textLabel,type,placeholder,false,required))
 
     //prénom
     if(mail != ''){
-        id='updateAccountLastname';
+        id='updateAccountLastname-'+mailSubmit;
         if(!myAccount){
             nameplaceholder = '.js-lastname[mail=\"'+mail+'\"]'
             placeholder = 'Actuellement : '+document.querySelector(nameplaceholder).textContent
@@ -260,13 +268,13 @@ function createPopupAccount(mail, myAccount){
         placeholder = '';
         required = true
     } 
-    textLabel = "Prénom :";
+    textLabel = "Nom :";
     type = 'text';
     form.append(createDivElement(id,textLabel,type,placeholder,false,required))
 
     //role
     if(!myAccount){
-        if(mail != '') id="updateAccountRole"
+        if(mail != '') id="updateAccountRole-"+mailSubmit
         else id="newAccountRole"
         
         divElement = document.createElement('div')
@@ -312,7 +320,7 @@ function createPopupAccount(mail, myAccount){
     mailDiv.style = "margin : 20px 0 20px 0;"
 
     if(mail != ''){
-        id='updateAccountMail';
+        id='updateAccountMail-'+mailSubmit;
         placeholder = 'Actuellement : '+mail
         required = false
     }
@@ -322,7 +330,7 @@ function createPopupAccount(mail, myAccount){
         required = true
     } 
     textLabel = "Mail :";
-    type = 'text';
+    type = 'email';
     mailDiv.append(createDivElement(id,textLabel,type,placeholder,false,required))
 
     legendMail = document.createElement('p')
@@ -331,7 +339,7 @@ function createPopupAccount(mail, myAccount){
     mailDiv.append(legendMail)
 
     if(mail !=''){
-        id='updateAccountConfirmMail';
+        id='updateAccountConfirmMail-'+mailSubmit;
         required = false
     }
     else{
@@ -348,7 +356,7 @@ function createPopupAccount(mail, myAccount){
     form.append(mailDiv)
 
     if(mail != ''){
-        id='updateAccountPassword';
+        id='updateAccountPassword-'+mailSubmit;
         textLabel = "Nouveau mot de passe :";
         required = false
     }
@@ -394,7 +402,7 @@ function createPopupAccount(mail, myAccount){
     form.append(legendPassword)
 
     if(mail !=''){
-        id='updateAccountConfirmPassword';
+        id='updateAccountConfirmPassword-'+mailSubmit;
         required = false
     } 
     else{
@@ -415,8 +423,7 @@ function createPopupAccount(mail, myAccount){
     input.setAttribute('type','submit')
     input.setAttribute('value','Soumettre')
     if(mail != ''){
-        mailSubmit=mail.replace('.','')
-        input.setAttribute('name','updateAccount'+mailSubmit)
+        input.setAttribute('name','updateAccount-'+mailSubmit)
     }
     else input.setAttribute('name','createAccount')
     input.classList.add('button')
@@ -666,13 +673,15 @@ for(let i=0 ; i<iconsUpdate.length ; i++){
     iconsUpdate[i].addEventListener("click",()=>{
         
         mail = iconsUpdate[i].getAttribute('mail')
+        mailSubmit = mail.replace('.','');
         createPopupAccount(mail);
 
         // la confirmation de mail n'apparait que si un mail est saisi
-        const inputMail = document.getElementById('updateAccountMail')
-        inputMail.addEventListener('input',()=>{
-            displayConfirmMail(inputMail)
-        })
+        const inputMail = document.getElementById('updateAccountMail-'+mailSubmit)
+        if(inputMail != null){
+            inputMail.addEventListener('input',()=>{
+                displayConfirmMail(inputMail)
+        })}
 
         //la confirmation est rouge si le texte est différent de l'input (vert sinon)
         const confirmMail = document.getElementById('confirmMailElement')
@@ -682,7 +691,7 @@ for(let i=0 ; i<iconsUpdate.length ; i++){
         })
 
         // la légende du mot de passe n'apparait que si le focus est sur le nouveau mot de passe
-        const inputPassword = document.getElementById('updateAccountPassword')
+        const inputPassword = document.getElementById('updateAccountPassword-'+mailSubmit)
         displaylegendPassword(inputPassword)
 
         //on indique si les critères sont respectés
@@ -890,15 +899,16 @@ const updateMyAccount = document.getElementById('updateMyAccount')
 
 updateMyAccount.addEventListener('click',()=>{
     mail = updateMyAccount.getAttribute('mail')
+    mailSubmit = mail.replace('@','')
     createPopupAccount(mail,true);
     // la confirmation de mail n'apparait que si un mail est saisi
-    const inputMail = document.getElementById('updateAccountMail')
+    const inputMail = document.getElementById('updateAccountMail-'+mailSubmit)
     inputMail.addEventListener('input',()=>{
         displayConfirmMail(inputMail)
     })
 
     // la légende du mot de passe n'apparait que si le focus est sur le nouveau mot de passe
-    const inputPassword = document.getElementById('updateAccountPassword')
+    const inputPassword = document.getElementById('updateAccountPassword-'+mailSubmit)
     displaylegendPassword(inputPassword)
 
     //on indique si les critères sont respectés

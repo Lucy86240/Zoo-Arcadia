@@ -55,7 +55,50 @@ function unblockedAccount(&$accounts){
     return $msg;
 }
 
+function updateAccount(&$accounts){
+    $msg='';
+    $firstname ='';
+    $lastname ='';
+    $mail='';
+    $password='';
+    $role='';
+    //modification des utilisateurs
+    for($i=0; $i<count($accounts); $i++){
+        $id= str_replace('.','',$accounts[$i]['mail']);
+        if(isset($_POST['updateAccount-'.$id])){
+            if(isset($_POST['updateAccountFirstname-'.$id])) $firstname = $_POST['updateAccountFirstname-'.$id];
+            if(isset($_POST['updateAccountLastname-'.$id])) $lastname = $_POST['updateAccountLastname-'.$id];
+            if(isset($_POST['updateAccountRole-'.$id])) $role = $_POST['updateAccountRole-'.$id];  
+            if(isset($_POST['updateAccountMail-'.$id]) && isset($_POST['updateAccountConfirmMail-'.$id])){
+                if(!userExist($_POST['updateAccountMail-'.$id])){
+                    if($_POST['updateAccountMail-'.$id] == $_POST['updateAccountConfirmMail-'.$id]) $mail = $_POST['updateAccountMail-'.$id];
+                    else $msg .= "La confirmation du mail est différente.";
+                }
+                else{
+                    $msg .= "Le mail : ".$_POST['updateAccountMail-'.$id]."est déjà utilisé";
+                }
+            }          
+            if(isset($_POST['updateAccountPassword-'.$id]) && isset($_POST['updateAccountConfirmPassword-'.$id])){
+                if($_POST['updateAccountPassword-'.$id] == $_POST['updateAccountConfirmPassword-'.$id]) $password = $_POST['updateAccountPassword-'.$id];
+                else $msg .= "La confirmation du mot de passe est différente.";
+            }
+            $user = new User();
+            $user->setFirstName($firstname);
+            $user->setLastName($lastname);
+            $user->setUsername($mail);
+            $user->setPassword($password);
+
+            $user->setIdrole(findIdRole($role));
+            updateUser($user, $accounts[$i]['mail']);
+        }
+    }
+
+    $accounts = accountsList();
+    return $msg;
+}
+
 $accounts = accountsList();
 deleteAccount($accounts);
 blockedAccount($accounts);
 unblockedAccount($accounts);
+updateAccount($accounts);
