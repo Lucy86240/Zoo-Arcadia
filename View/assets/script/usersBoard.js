@@ -725,7 +725,7 @@ btnCreateAccount.addEventListener('click',()=>{
     const confirmMail = document.getElementById('confirmMailElement')
     confirmMailInput = confirmMail.querySelector('input')
     confirmMailInput.addEventListener('input',()=>{
-        verifyEquivalent(inputMail,confirmMailInput)
+        verifyEquivalent(inputMailCreate,confirmMailInput)
     })
 
     // la légende du mot de passe n'apparait que si le focus est sur le nouveau mot de passe
@@ -741,7 +741,7 @@ btnCreateAccount.addEventListener('click',()=>{
     const confirmPassword = document.getElementById('confirmPasswordElement')
     const confirmPasswordInput = confirmPassword.querySelector('input')
     confirmPasswordInput.addEventListener('input',()=>{
-        verifyEquivalent(inputPassword,confirmPasswordInput)
+        verifyEquivalent(inputPasswordCreate,confirmPasswordInput)
     })
 
 })

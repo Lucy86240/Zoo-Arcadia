@@ -97,8 +97,47 @@ function updateAccount(&$accounts){
     return $msg;
 }
 
+function newAccount(&$accounts){
+    $firstname ='';
+    $lastname ='';
+    $mail='';
+    $password='';
+    $role='';
+    $msg='';
+    if(isset($_POST['createAccount'])){
+        if(isset($_POST['newAccountFirstname'])) $firstname = $_POST['newAccountFirstname'];
+        if(isset($_POST['newAccountLastname'])) $lastname = $_POST['newAccountLastname'];
+        if(isset($_POST['newAccountRole'])) $role = $_POST['newAccountRole'];  
+        if(isset($_POST['newAccountMail']) && isset($_POST['newAccountConfirmMail'])){
+            if(!userExist($_POST['newAccountMail'])){
+                if($_POST['newAccountMail'] == $_POST['newAccountConfirmMail']) $mail = $_POST['newAccountMail'];
+                else $msg .= "La confirmation du mail est différente.";
+            }
+            else{
+                $msg .= "Le mail : ".$_POST['newAccountMail']."est déjà utilisé";
+            }
+        }          
+        if(isset($_POST['newAccountPassword']) && isset($_POST['newAccountConfirmPassword'])){
+            if($_POST['newAccountPassword'] == $_POST['newAccountConfirmPassword']) $password = $_POST['newAccountPassword'];
+            else $msg .= "La confirmation du mot de passe est différente.";
+        }
+        $user = new User();
+        $user->setFirstName($firstname);
+        $user->setLastName($lastname);
+        $user->setUsername($mail);
+        $user->setPassword($password);
+
+        $user->setIdrole(findIdRole($role));
+        newUser($user);
+    }
+
+    $accounts = accountsList();
+    return $msg;
+}
+
 $accounts = accountsList();
 deleteAccount($accounts);
 blockedAccount($accounts);
 unblockedAccount($accounts);
 updateAccount($accounts);
+newAccount($accounts);

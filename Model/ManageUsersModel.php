@@ -1,18 +1,25 @@
 <?php
 
 function newUser(User $user){
-    $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-    $stmt=$pdo->prepare("INSERT INTO users ( mail, password, first_name, last_name) VALUES (:username, :password,:first_name,:last_name) ");
-    $username = $user->getUsername();
-    $password= password_hash($user->getPassword(), PASSWORD_DEFAULT);
-    $fistName = $user->getFirstName();
-    $lastName = $user->getLastName();
-    $stmt->bindValue(":username", $username,PDO::PARAM_STR);
-    $stmt->bindValue(":password", $password,PDO::PARAM_STR);
-    $stmt->bindValue(":first_name", $fistName,PDO::PARAM_STR);
-    $stmt->bindValue(":last_name", $lastName,PDO::PARAM_STR);
-    $stmt->execute();
-
+    try{
+        if(!userExist($user->getUsername())){
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+            $stmt=$pdo->prepare("INSERT INTO users ( mail, password, first_name, last_name, role) VALUES (:username, :password,:first_name,:last_name, :role) ");
+            $username = $user->getUsername();
+            $password= password_hash($user->getPassword(), PASSWORD_DEFAULT);
+            $firstName = $user->getFirstName();
+            $lastName = $user->getLastName();
+            $role = $user->getIdRole();
+            $stmt->bindValue(":username", $username,PDO::PARAM_STR);
+            $stmt->bindValue(":password", $password,PDO::PARAM_STR);
+            $stmt->bindValue(":first_name", $firstName,PDO::PARAM_STR);
+            $stmt->bindValue(":last_name", $lastName,PDO::PARAM_STR);
+            $stmt->bindValue(":role", $role,PDO::PARAM_INT);
+            $stmt->execute();
+        }
+    }catch(error $e){
+        echo('error');
+    }
 }
 
 function listOfUsers(){
