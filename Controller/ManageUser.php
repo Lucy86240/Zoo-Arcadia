@@ -30,7 +30,6 @@ function verifiedLogin(){
     }
     return false;
 }
-
 /**
  * Summary of passwordError : return true si l'utilisateur a fait un mauvais mot de passe
  * @return bool 

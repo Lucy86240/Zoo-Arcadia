@@ -43,12 +43,14 @@ function blocUser(string $id){
     }
 }
 
-function deblocUser(string $id){
+function unblocUser(string $id, string $password){
     try{
-        if(userExist($id)){
+        if(userExist($id) && verifiedBlocked($id)){
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-            $stmt = $pdo->prepare('UPDATE users SET blocked = 0 WHERE mail = :id');
+            $stmt = $pdo->prepare('UPDATE users SET blocked = 0, password = :password WHERE mail = :id');
             $stmt->bindParam(":id", $id, PDO::PARAM_STR);
+            $pwd= password_hash($password, PASSWORD_DEFAULT);
+            $stmt->bindParam(":password", $pwd, PDO::PARAM_STR);
             $stmt->execute();
         }
     }

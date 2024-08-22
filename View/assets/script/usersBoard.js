@@ -117,7 +117,7 @@ for(let i=0; i<deleteAccount.length;i++){
 const unblocAccount = document.querySelectorAll('.js-unbloc');
 
 
-//modifier un compte
+//fonctions pour créer / modifier un compte
 
 const iconsUpdate = document.querySelectorAll('.js-edit')
 
@@ -212,12 +212,14 @@ function createPopupAccount(mail, myAccount){
 
     // élément du formulaire
 
+    //introduction
     intro = document.createElement('p')
     if(mail != '') intro.textContent = "Vous pouvez modifier le/les éléments souhaités :"
     else intro.textContent = "Merci de renseigner tous les éléments :"
     intro.style ="font-weight : bold; margin : 0 auto 10px auto !important;"
     form.append(intro)
 
+    //nom
     if(mail != ''){
         id='updateAccountFirstname';
         if(!myAccount){
@@ -240,6 +242,7 @@ function createPopupAccount(mail, myAccount){
     firstName = document.querySelectorAll('.js-firstname')
     form.append(createDivElement(id,textLabel,type,placeholder,false,required))
 
+    //prénom
     if(mail != ''){
         id='updateAccountLastname';
         if(!myAccount){
@@ -261,50 +264,49 @@ function createPopupAccount(mail, myAccount){
     type = 'text';
     form.append(createDivElement(id,textLabel,type,placeholder,false,required))
 
-    if(mail != '') id="updateAccountRole"
-    else id="newAccountRole"
-    divElement = document.createElement('div')
-    divElement.classList.add('element')
-    label = document.createElement('label')
-    label.setAttribute('for',id)
-    label.textContent = "Rôle :"
-    divElement.append(label)
-
-    select = document.createElement('select')
-    select.setAttribute('name',id)
-    select.setAttribute('id',id)
-    if(mail != ''){
-        option1 = document.createElement('option')
-        if(!myAccount){
+    //role
+    if(!myAccount){
+        if(mail != '') id="updateAccountRole"
+        else id="newAccountRole"
+        
+        divElement = document.createElement('div')
+        divElement.classList.add('element')
+        label = document.createElement('label')
+        label.setAttribute('for',id)
+        label.textContent = "Rôle :"
+        divElement.append(label)
+        select = document.createElement('select')
+        select.setAttribute('name',id)
+        select.setAttribute('id',id)
+        
+        if(mail != ''){
+            option1 = document.createElement('option')
             nameplaceholder = '.js-role[mail=\"'+mail+'\"]'
             option1.textContent = document.querySelector(nameplaceholder).textContent
             option1.value = option1.textContent
-        }
-        else{
-            option1.textContent = document.getElementById('updateMyAccount').getAttribute('role')
-            option1.value = option1.textContent
-        }
-        select.append(option1)
-        for(let i=0; i < allRoles.length;i++){
-            if(option1.textContent != allRoles[i]){
-                option = document.createElement('option')
-                option.textContent = allRoles[i]
-                option.value = allRoles[i]
-                select.append(option)
+            select.append(option1)
+            for(let i=0; i < allRoles.length;i++){
+                if(option1.textContent != allRoles[i] && allRoles[i]!='Administrateur.rice'){
+                    option = document.createElement('option')
+                    option.textContent = allRoles[i]
+                    option.value = allRoles[i]
+                    select.append(option)
+                }
             }
         }
-    }
-    else{
-        for(let i=0; i < allRoles.length;i++){
-            option = document.createElement('option')
-            option.textContent = allRoles[i]
-            option.value = allRoles[i]
-            select.append(option)
+        else{
+            for(let i=0; i < allRoles.length;i++){
+                if(allRoles[i]!='Administrateur.rice'){
+                    option = document.createElement('option')
+                    option.textContent = allRoles[i]
+                    option.value = allRoles[i]
+                    select.append(option)
+                }
+            }
         }
+        divElement.append(select)
+        form.append(divElement)
     }
-    divElement.append(select)
-
-    form.append(divElement)
 
     mailDiv = document.createElement('div')
     mailDiv.style = "margin : 20px 0 20px 0;"
@@ -393,15 +395,13 @@ function createPopupAccount(mail, myAccount){
 
     if(mail !=''){
         id='updateAccountConfirmPassword';
-        textLabel = "Confirmation du nouveau mot de passe :";
         required = false
     } 
     else{
         id='newAccountConfirmPassword';
-        textLabel = "Confirmation du mot de passe :";
         required = true
     } 
-
+    textLabel = "Confirmation mot de passe :";
     type = 'password';
     confirmPassword = createDivElement(id,textLabel,type,'',true,required)
     confirmPassword.setAttribute('id','confirmPasswordElement');
@@ -567,6 +567,20 @@ function displayConfirmMail(inputMail){
 }
 
 /**
+ * Permet d'afficher le contour du confirmInput en rouge ou vert suivant s'il est équivalent à l'input
+ * @param {*} input : saisie initiale
+ * @param {*} confirmInput : confirmation de saisie
+ */
+function verifyEquivalent(input, confirmInput){
+    if(input.value != confirmInput.value){
+        confirmInput.style = "outline : 1px solid red; color : red;"
+    }
+    else{
+        confirmInput.style = "outline : 1px solid var(--green); color : var(--green);"
+    }
+}
+
+/**
  * Permet d'afficher la legende seulement au focus de l'input de MDP
  * @param {*} inputPassword : l'input où est saisi le MPD
  */
@@ -660,6 +674,13 @@ for(let i=0 ; i<iconsUpdate.length ; i++){
             displayConfirmMail(inputMail)
         })
 
+        //la confirmation est rouge si le texte est différent de l'input (vert sinon)
+        const confirmMail = document.getElementById('confirmMailElement')
+        confirmMailInput = confirmMail.querySelector('input')
+        confirmMailInput.addEventListener('input',()=>{
+            verifyEquivalent(inputMail,confirmMailInput)
+        })
+
         // la légende du mot de passe n'apparait que si le focus est sur le nouveau mot de passe
         const inputPassword = document.getElementById('updateAccountPassword')
         displaylegendPassword(inputPassword)
@@ -667,6 +688,13 @@ for(let i=0 ; i<iconsUpdate.length ; i++){
         //on indique si les critères sont respectés
         inputPassword.addEventListener('input',()=>{
             displayRespectPassword(inputPassword)
+        })
+
+        //on met en evidence si la confirmation du mdp est bonne
+        const confirmPassword = document.getElementById('confirmPasswordElement')
+        const confirmPasswordInput = confirmPassword.querySelector('input')
+        confirmPasswordInput.addEventListener('input',()=>{
+            verifyEquivalent(inputPassword,confirmPasswordInput)
         })
     })
 }
@@ -684,6 +712,13 @@ btnCreateAccount.addEventListener('click',()=>{
         displayConfirmMail(inputMailCreate)
     })
 
+    //la confirmation est rouge si le texte est différent de l'input (vert sinon)
+    const confirmMail = document.getElementById('confirmMailElement')
+    confirmMailInput = confirmMail.querySelector('input')
+    confirmMailInput.addEventListener('input',()=>{
+        verifyEquivalent(inputMail,confirmMailInput)
+    })
+
     // la légende du mot de passe n'apparait que si le focus est sur le nouveau mot de passe
     const inputPasswordCreate = document.getElementById('newAccountPassword')
     displaylegendPassword(inputPasswordCreate)
@@ -691,6 +726,13 @@ btnCreateAccount.addEventListener('click',()=>{
     //on indique si les critères sont respectés
     inputPasswordCreate.addEventListener('input',()=>{
         displayRespectPassword(inputPasswordCreate)
+    })
+
+    //on met en evidence si la confirmation du mdp est bonne
+    const confirmPassword = document.getElementById('confirmPasswordElement')
+    const confirmPasswordInput = confirmPassword.querySelector('input')
+    confirmPasswordInput.addEventListener('input',()=>{
+        verifyEquivalent(inputPassword,confirmPasswordInput)
     })
 
 })
@@ -773,8 +815,8 @@ function createPopupUnblocAccount(mail){
     legendPassword.append(textPassword("deux caractères spéciaux parmi @ & ~ # $ * + : ; ? ! % ,",'spePassword'))
     form.append(legendPassword)
 
-    id='deblocAccountConfirmPassword';
-    textLabel = "Confirmation du nouveau mot de passe :";
+    id='unblocAccountConfirmPassword';
+    textLabel = "Confirmation mot de passe :";
     type = 'password';
     confirmPassword = createDivElement(id,textLabel,type,'',true,true)
     confirmPassword.setAttribute('id','confirmPasswordElement');
@@ -788,7 +830,7 @@ function createPopupUnblocAccount(mail){
     input.setAttribute('type','submit')
     input.setAttribute('value','Soumettre')
     mailSubmit=mail.replace('.','')
-    input.setAttribute('name','unblocAccount'+mailSubmit)
+    input.setAttribute('name','unblocAccount-'+mailSubmit)
     input.classList.add('button')
     input.classList.add('btn-green')
     submitDiv.append(input)
@@ -830,8 +872,16 @@ for(let i=0 ; i<iconsUnbloc.length; i++){
     //on indique si les critères sont respectés
     inputPasswordUnbloc.addEventListener('input',()=>{
         displayRespectPassword(inputPasswordUnbloc)
+        const confirmPassword = document.getElementById('confirmPasswordElement')
+        const confirmPasswordInput = confirmPassword.querySelector('input')
+        confirmPasswordInput.addEventListener('input',()=>{
+            verifyEquivalent(inputPasswordUnbloc,confirmPasswordInput)
+        })
     })
     })
+
+     //on met en evidence si la confirmation du mdp est bonne
+
 }
 
 //modifier le compte de l'utilisateur connecté

@@ -39,6 +39,23 @@ function blockedAccount(&$accounts){
     $accounts = accountsList();
 }
 
+function unblockedAccount(&$accounts){
+    $msg='';
+    for($i=0; $i<count($accounts); $i++){
+        $name='unblocAccount-'.$accounts[$i]['mail'];
+        $name=str_replace('.','',$name);
+        if(isset($_POST[$name])){
+            if(isset($_POST['unblocAccountPassword']) && isset($_POST['unblocAccountConfirmPassword']) && verifiedBlocked($accounts[$i]['mail'])){
+                if($_POST['unblocAccountPassword'] == $_POST['unblocAccountConfirmPassword']) unblocUser($accounts[$i]['mail'],$_POST['unblocAccountPassword']);
+                else $msg = "La confirmation du mot de passe est différente.";
+            }
+        }
+    }
+    $accounts = accountsList();
+    return $msg;
+}
+
 $accounts = accountsList();
 deleteAccount($accounts);
 blockedAccount($accounts);
+unblockedAccount($accounts);

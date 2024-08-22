@@ -319,7 +319,7 @@
         .legendAccount{
             width: 70%;
             background-color: var(--beige);
-            margin : 0 auto 0 auto;
+            margin : 5px auto 5px auto;
             padding : 10px;
             border-radius: 20px;
         }
