@@ -2,7 +2,10 @@
     <div class="head"></div>
     <h1>Nous contacter</h1>
     <?php if(isset($msg) && $msg){ ?>
-        <p id="msgSend">Votre message a bien été envoyé. <br> Notre équipe le traitera sous les meilleurs délais.</p>
+        <p>Votre message a bien été envoyé. <br> Notre équipe le traitera sous les meilleurs délais.</p>
+    <?php } ?>
+    <?php if(isset($msg) && !$msg){ ?>
+        <p>Une erreur est survenue nous n'avons pas pu envoyer votre message.</p>
     <?php } ?>
     <div id="form">
         <img id="illustration">

@@ -14,18 +14,13 @@ window.addEventListener("resize", ()=>{
 
 choicePanda()
 
-send = document.getElementById('msgSend')
-if(send != null){
-    mail = document.getElementById('mail')
-    mail.value = ''
-}
-
 msg = document.querySelector('textarea')
 
 function verifCaracMsg(txt){
-    let reg = /^([a-zA-Z0-9'èéëïçñ,!;:?()-])+$/g
+    let reg = /^([a-zA-Z0-9'èéëïçñ ,!;:?()-])+$/g
     return reg.test(txt)
 }
+
 function cancelLastCharacter(txt){
     let newTxt = txt.slice(0,txt.length-1)
     return newTxt

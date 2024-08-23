@@ -19,7 +19,7 @@ if(isset($_POST['submitMsg'])){
     if(isset($_POST['lastName'])) $lastName = $_POST['lastName'];
     else $goodForSend = false;
 
-    if(isset($_POST['mail']) && $_POST['mail']!='') $mail = $_POST['mail'];
+    if(isset($_POST['mail']) && $_POST['mail']!='' && preg_match_all("/^[a-zA-Z0-9_.±]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/",$_POST['mail'])==1) $mail = $_POST['mail'];
     else $goodForSend = false;
 
     if(isset($_POST['object'])) $obj = $_POST['object'];
@@ -45,5 +45,6 @@ if(isset($_POST['submitMsg'])){
         if(mail($recipient,$object,$message,$headers)) $msg=true;
         else $msg=false;
     }
-
+    else
+        $msg = false;
 }
