@@ -104,31 +104,43 @@ function newAccount(&$accounts){
     $password='';
     $role='';
     $msg='';
-    if(isset($_POST['createAccount'])){
-        if(isset($_POST['newAccountFirstname'])) $firstname = $_POST['newAccountFirstname'];
-        if(isset($_POST['newAccountLastname'])) $lastname = $_POST['newAccountLastname'];
-        if(isset($_POST['newAccountRole'])) $role = $_POST['newAccountRole'];  
+    if(isset($_POST['createAccount'])){  
         if(isset($_POST['newAccountMail']) && isset($_POST['newAccountConfirmMail'])){
             if(!userExist($_POST['newAccountMail'])){
+                if(isset($_POST['newAccountPassword']) && isset($_POST['newAccountConfirmPassword'])){
+                    if($_POST['newAccountPassword'] == $_POST['newAccountConfirmPassword']) $password = $_POST['newAccountPassword'];
+                    else $msg .= "La confirmation du mot de passe est différente.";
+                }
+                if(isset($_POST['newAccountFirstname'])) $firstname = $_POST['newAccountFirstname'];
+                if(isset($_POST['newAccountLastname'])) $lastname = $_POST['newAccountLastname'];
+                if(isset($_POST['newAccountRole'])) $role = $_POST['newAccountRole'];
                 if($_POST['newAccountMail'] == $_POST['newAccountConfirmMail']) $mail = $_POST['newAccountMail'];
                 else $msg .= "La confirmation du mail est différente.";
+                
+                if($firstname !='' && $lastname!='' && $mail!='' && $password!='' && $role!=''){
+                    $user = new User();
+                    $user->setFirstName($firstname);
+                    $user->setLastName($lastname);
+                    $user->setUsername($mail);
+                    $user->setPassword($password);
+                    $user->setIdrole(findIdRole($role));
+                    $create = newUser($user);
+                    if($create){
+                        $recipient = $user->getUsername();
+                        $object = "Bienvenue à votre espace Arcadia";
+                        $message = "Bonjour ".$user->getFirstName().","."<br> <br>"."Votre espace sur ".SITE_URL." vient d'être crée."."<br>"."Merci de bien vouloir vous approcher de votre administrateur pour récupérer votre mot de passe."."<br> <br>"."L'équipe Arcadia";
+                        $headers="MIME-version: 1.0\r\n".'Date: '.date('r')."\r\n";
+                        $headers .= 'From: Arcadia <'.MAIL_CONTACT.'>' . "\r\n"."Reply-To: Arcadia <'.MAIL_CONTACT.'> \r\n";
+                        $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n"; 
+                        mail($recipient,$object,$message,$headers);
+                    }
+                }
             }
             else{
                 $msg .= "Le mail : ".$_POST['newAccountMail']."est déjà utilisé";
             }
         }          
-        if(isset($_POST['newAccountPassword']) && isset($_POST['newAccountConfirmPassword'])){
-            if($_POST['newAccountPassword'] == $_POST['newAccountConfirmPassword']) $password = $_POST['newAccountPassword'];
-            else $msg .= "La confirmation du mot de passe est différente.";
-        }
-        $user = new User();
-        $user->setFirstName($firstname);
-        $user->setLastName($lastname);
-        $user->setUsername($mail);
-        $user->setPassword($password);
 
-        $user->setIdrole(findIdRole($role));
-        newUser($user);
     }
 
     $accounts = accountsList();
