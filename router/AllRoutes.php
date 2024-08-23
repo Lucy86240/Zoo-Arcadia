@@ -28,6 +28,7 @@ $allRoutes = array(
     new Route('animaux',true,'Animaux','View/pages/animal/allAnimals.php',[],'Controller/ManageAllAnimals.php'),
     new Route('dashboard',false,'Dashboard','View/pages/dashboard.php',[],'Controller/DashboardController.php'),
     new Route('comptes_utilisateurs',false,'Comptes utilisateur','View/pages/usersBoard.php',[],'Controller/ManageUsers.php'),
+    new Route('contact',false,'Contact','View/pages/contact.php',[],'Controller/ManageContact.php'),
 );
 
 define('ALL_ROUTES',$allRoutes);
