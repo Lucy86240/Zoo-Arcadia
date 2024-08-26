@@ -93,6 +93,7 @@
                         <span> : avis à vérifier</span>
                     </div>
                 </div>
+                <div id="choicesMobile">
                 <div class="choice <?php permission(['Employé.e','Administrateur.rice']); ?>">
                     <div class="title-choice">                
                         <img class="icon-filter" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/filter.svg" alt="filtrer">
@@ -147,6 +148,7 @@
                             </label>
                         </li>
                     </div>
+                </div>
                 </div>
             </div>
             <div class="valid-choices"><input class="btn-DarkGreen" type="submit" value="Appliquer" name="choices"></div>
