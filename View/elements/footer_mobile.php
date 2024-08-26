@@ -1,3 +1,4 @@
+<?php require 'Controller/schedules.php'; ?>
 <section class="footer-mobile footer">
     <hr class="line_top"> </hr>
     <div class="networks">
@@ -18,7 +19,7 @@
             </div>
             <div class="schedules-container col text-center">
                 <h2>Nos horaires</h2>
-                <span>horaires</span>
+                <span><?php echo($schedules) ?></span>
             </div>
         </div>
         <div class="row">
@@ -31,10 +32,10 @@
             </div>
         <div class="other text-center">
             <h2>Divers</h2>
-            <a href="">Mentions légales</a>
-            <a href="">Politique de confidentialité</a>
+            <a href="mentions_legales">Mentions légales</a>
+            <a href="politique_confidentialites">Politique de confidentialité</a>
         </div>
         </div>
     </div>
-    <p class="copyright text-center">@Copyright Zoo Arcadia</p>
+    <p class="copyright text-center">© Zoo Arcadia 2024</p>
 </section>

@@ -28,7 +28,6 @@
     .contactDetails-container, .discover-container, .schedules-container{
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
     }
     br{
         content: "";
@@ -47,6 +46,21 @@
         .container-illu{
             display: flex;
         }
+        .contactDetails-container, .discover-container{
+            justify-content: space-between;
+        }
+        .schedules-container{
+            align-items: center;
+            span{
+                margin-top : 10px;
+                width: 75%;
+                text-align: center;
+            }
+        }
+        .discover-container{
+            align-items: flex-end;
+            width : 12rem;
+        }
 
         .container-links{
             display: flex;
@@ -64,7 +78,7 @@
         }
 
         .illustration{
-            width: 12vw;
+            width: 10vw;
         }
 
         .logo-network{
@@ -117,6 +131,12 @@
     }
     .copyright{
         color : var(--blue);
+    }
+    .schedules-container{
+        align-items: center;
+        span{
+            width : 80%;
+        }
     }
     .other{
         display: flex;

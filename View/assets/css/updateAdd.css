@@ -1,4 +1,4 @@
-.updateAnimal,.updateHousing, .newAnimal, .newHousing{
+.updateAnimal,.updateHousing, .newAnimal, .newHousing, #updateSchedules{
     margin-top : 10px;
     h1{
         padding : 30px;
@@ -125,7 +125,7 @@
     }
 }
 
-.updateAnimal, .newAnimal, .newHousing, .updateHousing{
+.updateAnimal, .newAnimal, .newHousing, .updateHousing, #updateSchedules{
     background-color: var(--beige);
     color : var(--brown);
 
@@ -163,6 +163,38 @@
         font-weight: bold;
         max-width: 34vw;
         text-align: center;
+    }
+
+}
+
+#updateSchedules{
+    .element{
+        display: flex;
+        flex-direction: column;
+        #bodySchedule{
+            display: flex;
+            align-items: center;
+            @media only screen and (max-width: 556px){
+                flex-direction: column;
+                img{
+                    display:none;
+                }
+
+            }
+            @media only screen and (min-width: 556px){
+                img{
+                    width: 40vw;
+                }
+            }
+
+
+            textarea{
+                margin : 10px auto 10px auto;
+                border-radius: 20px;
+                height: 50vh;
+                width: 50vw;
+            }
+        }
     }
 
 }

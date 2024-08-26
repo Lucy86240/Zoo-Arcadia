@@ -58,7 +58,7 @@
                 <img src ="View/assets/img/general/pages/dashboard/users.svg">
                 <span>Comptes utilisateurs</span>
             </a>
-            <a class="tile js-tile" id="timeTile">
+            <a class="tile js-tile" id="timeTile" href="horaires">
                 <img src ="View/assets/img/general/pages/dashboard/time.svg">
                 <span>Modifier les horaires</span>
             </a>
