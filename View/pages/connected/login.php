@@ -2,7 +2,7 @@
         <div class="container-login">
         <form method="POST" action="" id="logout-btn">
             <button class="btn-logout" type="submit" name="logout" form="logout-btn">
-                <img class="account-connected <?php if(!isset($_SESSION['firstName']) || empty($_SESSION['firstName'])) echo('none');?>"src="<?php if($optionPage)echo("../");?>View/assets/img/general/header/connected.png"  alt="Connexion">
+                <img class="account-connected <?php  if(!isset($_SESSION['firstName']) || empty($_SESSION['firstName'])) echo('none');?>"src="<?php if($optionPage)echo("../");?>View/assets/img/general/header/connected.png"  alt="Connexion">
                 <img class="account <?php if(isset($_SESSION['firstName']) && !empty($_SESSION['firstName'])) echo('none');?>"src="<?php if($optionPage)echo("../");?>View/assets/img/general/header/account.svg"  alt="Connexion">
                 <span class="logoutText none">Déconnexion</span>
             </button>
@@ -30,12 +30,17 @@
                         <label for="password">Votre mot de passe : </label>
                         <input type="password" name="password" id="password" required>
                     </div>
-                    <p class="<?php if(!passwordError() || (isset($_SESSION['blocked']) && $_SESSION['blocked']==1) || !isset($_SESSION['blocked'])) echo('none');?>">
-                        Votre mail ou votre mot de passe est incorrect</p>
-                    <p class="<?php if((isset($_SESSION['blocked']) && $_SESSION['blocked']==0) || !isset($_SESSION['blocked'])) echo('none'); ?>">
+                    <?php if(!(!passwordError() || (isset($_SESSION['blocked']) && $_SESSION['blocked']==1) || !isset($_SESSION['blocked']))){ ?>
+                        <p class="<?php // if(!passwordError() || (isset($_SESSION['blocked']) && $_SESSION['blocked']==1) || !isset($_SESSION['blocked'])) echo('none');?>">
+                            Votre mail ou votre mot de passe est incorrect
+                        </p>
+                    <?php } ?>
+                    <?php if(!((isset($_SESSION['blocked']) && $_SESSION['blocked']==0) || !isset($_SESSION['blocked']))) {?>
+                        <p class="<?php if((isset($_SESSION['blocked']) && $_SESSION['blocked']==0) || !isset($_SESSION['blocked'])) echo('none'); ?>">
                         Vous avez fait plus de 3 mots de passe erronés. </br>
                         Votre accès est bloqué. Veuillez contacter l'admin pour vous débloquer.
-                    </p>
+                        </p>
+                    <?php } ?>    
                     <div class="form-submit">
                         <input type="submit" value="Connexion" name="login" class="button btn-green" />
                     </div>

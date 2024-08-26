@@ -2,6 +2,7 @@
 
     require_once 'config.php';
     require_once 'AllRoutes.php';
+    require_once "Controller/ManageUser.php";
 
     //HTTP protocol + Server address(localhost or example.com) + requested uri (/route or /route/home)
     $current_url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -21,7 +22,7 @@
 
       // Parcours de toutes les routes pour trouver la correspondance
         foreach(ALL_ROUTES as $route){
-            if ($route->getURL() == $url && $option == $route->getOption()) {
+            if ($route->getURL() == $url && $option == $route->getOption() && authorize($route->getAuthorize())) {
                 $currentRoute = $route;
             }
         }

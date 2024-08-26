@@ -38,14 +38,16 @@
                 ?>
                 <!-- habitat type polaroïde -->
                 <div class="heroHousingWithBox <?php echo($option); ?>" >
-                    <div class="icons">
-                        <a class="icon UpdateHousingIcon" href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>maj_habitat/?id=<?php echo($housing['id'])?>">
-                            <div class="bgc-img-box"><img class="img-box editHousing" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/edit.svg" alt="Modifier l'habitat"></div>
-                        </a>
-                        <div class="icon deleteIconHousing" id_housing="<?php echo($housing['id'])?>" name_housing="<?php echo($housing['name'])?>" nb_animal="<?php echo(count($housing['animals'])) ?>">
-                            <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer l'habitat"></div>
+                    <?php if(authorize(['Administrateur.rice'])){ ?>
+                        <div class="icons">
+                            <a class="icon UpdateHousingIcon" href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>maj_habitat/?id=<?php echo($housing['id'])?>">
+                                <div class="bgc-img-box"><img class="img-box editHousing" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/edit.svg" alt="Modifier l'habitat"></div>
+                            </a>
+                            <div class="icon deleteIconHousing" id_housing="<?php echo($housing['id'])?>" name_housing="<?php echo($housing['name'])?>" nb_animal="<?php echo(count($housing['animals'])) ?>">
+                                <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer l'habitat"></div>
+                            </div>
                         </div>
-                    </div>
+                    <?php } ?>
                     <a href="#<?php echo("housing-".$housing['id'])?>" style = "width : <?php echo($width_div) ?>; height : <?php echo($height_div) ?>;}" class="hero-housing">
                         <img style = "max-width : <?php echo($width_img) ?>; max-height : <?php echo($height_img) ?>;" src="<?php echo($housing['images'][0]['path'])?>" alt="<?php echo($housing['images'][0]['description'])?>">
                         <h3><?php echo($housing['name'])?></h3>
@@ -55,10 +57,13 @@
             } ?>
             <div id="js-confirm"></div>
         </div>
-        <a href="nouvel_habitat" class="back add <?php permission(['Administrateur.rice']); ?>"><button type="button" class="btn btn-beige">
-                <img src="View/assets/img/general/icons/emoji_nature.svg">
-                Ajouter un habitat
-            </button></a>
+        <?php if(authorize(['Administrateur.rice'])){ ?>
+        <a href="nouvel_habitat" class="back add"><button type="button" class="btn btn-beige">
+            <img src="View/assets/img/general/icons/emoji_nature.svg">
+            Ajouter un habitat
+        </button></a>
+        <?php } ?>
+
     </div>
     <!-- habitats détaillés-->
     <?php $count=0;
@@ -87,45 +92,55 @@
                     <p><?php echo($housing['description']); ?></p>
                 </div>
             </div>
-            <div class="commentsVeto <?php permission(['connected']) ?>">
-                <div class="headerComments">
-                    <div class="icons">
-                        <a class="icon js-iconComments" href="commentaires_habitats">
-                            <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Voir la liste de tous les commentaires"></div>
-                        </a>
-                        <div class="<?php permission(['vétérinaire']);?> icon js-iconComments js-iconAddComments" id_housing="<?php echo($housing['id']) ?>">
-                            <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un commentaire">
-                        </div>
-                    </div>
-                    <div class="title"><h3>Commentaires des vétérinaires</h3></div>
-                </div>
-                <div class="legendsComments">
-                    <span class="js-legendComments none">Voir tous les commentaires</span>
-                    <span class="js-legendComments none">Ajouter un commentaire</span>
-                </div>
-                <div class="comment <?php if(!(count($housing['comments']) < 1)) echo('none');?>">
-                    <span>Les vétérinaires n'ont déposé aucun commentaire actif.</span>
-                </div>
-                <?php foreach($housing['comments'] as $comment){ ?>
-                    <div class="comment">
+            <?php if(authorize(['connected'])){ ?>
+                <div class="commentsVeto">
+                    <div class="headerComments">
                         <div class="icons">
-
-                            <div class="icon js-iconArchive" id_comment="<?php echo($comment['idComment']) ?>">
-                                <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/archive.svg" alt="Archiver le commentaire">
+                            <a class="icon js-iconComments" href="commentaires_habitats">
+                                <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Voir la liste de tous les commentaires"></div>
+                            </a>
+                            <?php if(authorize(['vétérinaire'])){ ?>
+                            <div class="icon js-iconComments js-iconAddComments" id_housing="<?php echo($housing['id']) ?>">
+                                <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un commentaire">
                             </div>
-                            <div class="<?php permission(['vétérinaire']);?> icon popupDesktop deleteIcon" id_comment="<?php echo($comment['idComment']) ?>">
-                                <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer le commentaire">
-                            </div>
+                            <?php } ?>
                         </div>
-                        <span><?php echo("\"".$comment['comment']."\"");?></span>
-                        <div class="footerComment">
-                            <span>le <?php echo($comment['date']);?></span>
-                            <span>de <?php echo($comment['veterinarian']);?></span>
-                        </div>
+                        <div class="title"><h3>Commentaires des vétérinaires</h3></div>
                     </div>
-                <?php }?>
-                <div id="js-confirm"> </div>
-            </div>
+                    <div class="legendsComments">
+                        <span class="js-legendComments none">Voir tous les commentaires</span>
+                        <?php if(authorize(['vétérinaire'])){ ?>
+                            <span class="js-legendComments none">Ajouter un commentaire</span>
+                        <?php } ?>
+                    </div>
+                    <?php if((count($housing['comments']) ==0)) {?>
+                        <div class="comment">
+                            <span>Les vétérinaires n'ont déposé aucun commentaire actif.</span>
+                        </div>
+                    <?php } else{ ?>
+                    <?php foreach($housing['comments'] as $comment){ ?>
+                        <div class="comment">
+                            <div class="icons">
+
+                                <div class="icon js-iconArchive" id_comment="<?php echo($comment['idComment']) ?>">
+                                    <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/archive.svg" alt="Archiver le commentaire">
+                                </div>
+                                <?php if(authorize(['vétérinaire'])){ ?>
+                                    <div class="icon popupDesktop deleteIcon" id_comment="<?php echo($comment['idComment']) ?>">
+                                        <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer le commentaire">
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <span><?php echo("\"".$comment['comment']."\"");?></span>
+                            <div class="footerComment">
+                                <span>le <?php echo($comment['date']);?></span>
+                                <span>de <?php echo($comment['veterinarian']);?></span>
+                            </div>
+                        </div>
+                    <?php } }?>
+                    <div id="js-confirm"> </div>
+                </div>
+            <?php } ?>
             <div class="list-animals">
                 <h3>Vous pouvez m'y retrouver :</h3>
                 <div class="search">
@@ -145,12 +160,14 @@
                         <?php $i++; } ?>
                     </ul>
                 </form>
-                <div class="none messageNoResult"></div>
+              <div class="none messageNoResult"></div>
             </div>
-            <a href="nouvel_animal/?housing=<?php echo($housing['id']) ?>" class="back add <?php permission(['Administrateur.rice']); ?>"><button type="button" class="btn btn-beige">
-                <img src="View/assets/img/general/icons/emoji_nature.svg">
-                Ajouter un animal
-            </button></a>
+            <?php if(authorize(['Administrateur.rice'])){ ?>
+                <a href="nouvel_animal/?housing=<?php echo($housing['id']) ?>" class="back add"><button type="button" class="btn btn-beige">
+                    <img src="View/assets/img/general/icons/emoji_nature.svg">
+                    Ajouter un animal
+                </button></a>
+            <?php } ?>
             <section class="animal" id="animal<?php echo($housing['id'])?>">
                 <?php 
                 if(isset($_POST['animal'.$housing['id']]) || isset($_SESSION['animal'.$housing['id']])){

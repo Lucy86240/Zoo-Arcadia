@@ -7,24 +7,30 @@
             <a class="icon js-icon" href="<?php if($optionPage){echo("../");}?>animaux">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/list.svg" alt="Voir la liste des animaux"></div>
             </a>
-            <div class="icon js-icon <?php //permission(['Vétérinaire']);?>" id="popupFed">
+            <?php if(authorize(['Employé.e'])){ ?>
+            <div class="icon js-icon" id="popupFed">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Nourrir un animal"></div>
             </div>
+            <?php } ?>
         </div>
         <div class="legends">
             <span class="legend js-legend none">Voir la liste de tous les animaux</span>
-            <span class="legend js-legend none">Nourrir un animal</span>
+            <?php if(authorize(['Employé.e'])){ ?>
+                <span class="legend js-legend none">Nourrir un animal</span>
+            <?php } ?>
         </div>
-        <div class="none c-dialog" id="dialogFed">
-            <div class="fond"></div>
-            <div role="document" class="c-dialog__box popup fed themeBeige">
-                <div class="entete">
-                    <h3 class="dialog-title">Nourrir un animal</h3>
-                    <button class="close" id="closeFed" type="button">x</button>
+        <?php if(authorize(['Employé.e'])){ ?>
+            <div class="none c-dialog" id="dialogFed">
+                <div class="fond"></div>
+                <div role="document" class="c-dialog__box popup fed themeBeige">
+                    <div class="entete">
+                        <h3 class="dialog-title">Nourrir un animal</h3>
+                        <button class="close" id="closeFed" type="button">x</button>
+                    </div>
+                    <?php include_once "View/pages/foodAnimal/fedAnimal.php";?>
                 </div>
-                <?php include_once "View/pages/foodAnimal/fedAnimal.php";?>
             </div>
-        </div>
+        <?php } ?>
 
         <!-- liste des repas-->
 

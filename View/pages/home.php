@@ -141,8 +141,10 @@
         <div class="button"><a href="/avis"><button type="button" class="btn btn-blue">
             En voir plus...
         </button></a></div> 
+        <?php if(authorize(['disconnect'])){ ?>
         <div class="home-button-review">
             <?php include_once ('Reviews/addReview.php') ?>
         </button></div>
+        <?php } ?>
     </div>
 </section>

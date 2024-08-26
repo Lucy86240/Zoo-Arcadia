@@ -11,9 +11,11 @@
             <a class="icon js-icon" href="../animaux">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/list.svg" alt="Voir la liste des animaux"></div>
             </a>
-            <div class="icon js-icon <?php //permission(['Employé.e']);?>" id="popupFed">
+            <?php  if(authorize(['Employé.e'])){?>
+            <div class="icon js-icon" id="popupFed">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un compte rendu"></div>
             </div>
+            <?php } ?>
             <a class="icon js-icon" href="../repas">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Voir la liste de tous les comptes rendus"></div>
             </a>
@@ -21,9 +23,12 @@
         <div class="legends">
             <span class="legend js-legend none">Voir la fiche de l'animal</span>
             <span class="legend js-legend none">Voir la liste de tous les animaux</span>
+            <?php  if(authorize(['Employé.e'])){?>
             <span class="legend js-legend none">Nourrir l'animal</span>
+            <?php } ?>
             <span class="legend js-legend none">Voir la liste de tous les repas confondus</span>
         </div>
+        <?php  if(authorize(['Employé.e'])){?>
         <div class="none c-dialog" id="dialogFed">
             <div class="fond"></div>
             <div role="document" class="c-dialog__box themeBeige popup Fed">
@@ -34,6 +39,7 @@
             <?php include_once "View/pages/foodAnimal/fedAnimal.php";?>
             </div>
         </div>
+        <?php } ?>
 
         <!-- fiche de l'animal lié aux rapports-->
         <div class="none c-dialog js-animal-popup">
@@ -50,7 +56,6 @@
             </div>
         </div>
         <!-- tableau des repas et filtres-->
-       
         <?php if($animal != null && isset($animal['foods'])){?>
             <table>
                 <caption>

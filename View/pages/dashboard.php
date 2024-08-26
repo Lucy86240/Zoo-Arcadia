@@ -54,30 +54,37 @@
                 </ul>
 
             </div>
-            <a class="tile js-tile" id="usersTile" href="comptes_utilisateurs">
-                <img src ="View/assets/img/general/pages/dashboard/users.svg">
-                <span>Comptes utilisateurs</span>
-            </a>
-            <a class="tile js-tile" id="timeTile" href="horaires">
-                <img src ="View/assets/img/general/pages/dashboard/time.svg">
-                <span>Modifier les horaires</span>
-            </a>
+            <?php if(authorize(['Administrateur.rice'])){ ?>
+                <a class="tile js-tile" id="usersTile" href="comptes_utilisateurs">
+                    <img src ="View/assets/img/general/pages/dashboard/users.svg">
+                    <span>Comptes utilisateurs</span>
+                </a>
+                
+                <a class="tile js-tile" id="timeTile" href="horaires">
+                    <img src ="View/assets/img/general/pages/dashboard/time.svg">
+                    <span>Modifier les horaires</span>
+                </a>
+            <?php } ?>
             <a class="tile js-tile" id="animalsTile" href="animaux">
                 <img src ="View/assets/img/general/pages/dashboard/empreinte.png">
                 <span>Animaux</span>
             </a>
-            <a class="tile js-tile" id="reviewsTile" href="avis">
-                <img src ="View/assets/img/general/pages/dashboard/star.svg">
-                <span>Valider les avis</span>
-            </a>
+            <?php if(authorize(['Employé.e','Administrateur.rice'])){ ?>
+                <a class="tile js-tile" id="reviewsTile" href="avis">
+                    <img src ="View/assets/img/general/pages/dashboard/star.svg">
+                    <span>Valider les avis</span>
+                </a>
+            <?php } ?>
             <a class="tile js-tile" id="fedTile" href="repas">
                 <img src ="View/assets/img/general/pages/dashboard/feed.svg">
                 <span>Repas des animaux</span>
             </a>
+            <?php if(authorize(['Vétérinaire','Administrateur.rice'])){ ?>
             <a class="tile js-tile" id="reportsTile" href="rapports_medicaux">
                 <img src ="View/assets/img/general/pages/dashboard/veterinaire.png">
                 <span>Comptes-rendus vétérinaires</span>
             </a>
+            <?php } ?>
             <a class="tile js-tile" id="commentsTile" href="commentaires_habitats">
                 <img src ="View/assets/img/general/pages/dashboard/housing.svg">
                 <span>Commentaires des habitats</span>

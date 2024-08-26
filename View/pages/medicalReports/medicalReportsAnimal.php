@@ -11,9 +11,11 @@
             <a class="icon js-icon" href="../animaux">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/list.svg" alt="Voir la liste des animaux"></div>
             </a>
-            <div class="icon js-icon <?php //permission(['Vétérinaire']);?>" id="popupNewReport">
+            <?php if(authorize(['Vétérinaire'])){ ?>
+            <div class="icon js-icon" id="popupNewReport">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un compte rendu"></div>
             </div>
+            <?php } ?>
             <a class="icon js-icon" href="../rapports_medicaux">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Voir la liste de tous les comptes rendus"></div>
             </a>
@@ -21,20 +23,23 @@
         <div class="legends">
             <span class="legend js-legend none">Voir la fiche de l'animal</span>
             <span class="legend js-legend none">Voir la liste de tous les animaux</span>
-            <span class="legend js-legend none">Ajouter un compte rendu</span>
+            <?php if(authorize(['Vétérinaire'])){ ?>
+                <span class="legend js-legend none">Ajouter un compte rendu</span>
+            <?php } ?>
             <span class="legend js-legend none">Voir la liste de tous les comptes rendus confondus</span>
         </div>
-        <div class="none c-dialog" id="dialogNewReport">
-            <div class="fond"></div>
-            <div role="document" class="c-dialog__box themeBlue popup newReport">
-                <div class="entete">
-                    <h3 class="dialog-title">Nouveau rapport médical</h3>
-                    <button class="close" id="closeNewReport" type="button">x</button>
+        <?php if(authorize(['Vétérinaire'])){ ?>
+            <div class="none c-dialog" id="dialogNewReport">
+                <div class="fond"></div>
+                <div role="document" class="c-dialog__box themeBlue popup newReport">
+                    <div class="entete">
+                        <h3 class="dialog-title">Nouveau rapport médical</h3>
+                        <button class="close" id="closeNewReport" type="button">x</button>
+                    </div>
+                <?php include_once "View/pages/medicalReports/addMedicalReport.php";?>
                 </div>
-            <?php include_once "View/pages/medicalReports/addMedicalReport.php";?>
             </div>
-        </div>
-
+            <?php } ?>
         <!-- fiche de l'animal lié aux rapports-->
         <div class="none c-dialog js-animal-popup">
             <div class="fond"> </div>

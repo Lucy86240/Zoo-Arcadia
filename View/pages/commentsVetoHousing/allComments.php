@@ -4,9 +4,11 @@
         <a class="icon js-iconComments" href="habitats">
             <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/housing.svg" alt="Voir les habitats"></div>
         </a>
-        <div class="<?php permission(['vétérinaire']);?> icon js-iconComments js-iconAddComments" id_housing="<?php echo($housing['id']) ?>">
-            <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un commentaire">
-        </div>       
+        <?php if(authorize(['vétérinaire'])){ ?>
+            <div class="icon js-iconComments js-iconAddComments" id_housing="<?php echo($housing['id']) ?>">
+                <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un commentaire">
+            </div> 
+        <?php } ?>      
     </div>
     <div class="legendsComments">
         <span class="js-legendComments none">Voir les habitats</span>
@@ -78,10 +80,11 @@
                                     <img class="img-box js-iconUnarchive" id_comment="<?php echo($comment['idComment']) ?>" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/unarchive.svg" alt="Désarchiver le commentaire">
                                 <?php } ?>
                             </div>
-                        
-                        <div class="<?php //permission(['vétérinaire']);?> icon deleteIcon popupDesktop" id_comment="<?php echo($comment['idComment']) ?>">
-                            <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer le commentaire">
-                        </div>
+                        <?php if(authorize(['vétérinaire'])){ ?>
+                            <div class="icon deleteIcon popupDesktop" id_comment="<?php echo($comment['idComment']) ?>">
+                                <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer le commentaire">
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
                     

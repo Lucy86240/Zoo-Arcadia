@@ -59,6 +59,7 @@
                         }?>
                     </div>
                 </div>
+                <?php if(authorize(['connected'])) {?>
                 <div class="element">
                     <h3>Statut :</h3>
                     <ul>
@@ -72,6 +73,7 @@
                         </li>
                     </ul>
                 </div>
+                <?php } ?>
             </div>
             <div id="sort">
                 <h2>Trie</h2>

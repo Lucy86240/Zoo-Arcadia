@@ -76,6 +76,24 @@ function permission($permissions){
 
 }
 
+function authorize($roles){
+    if($roles==[]) return true;
+    if($roles[0]=='disconnect'){
+        if(isConnected()) return false;
+        else return true;
+    }
+    else{
+        if($roles[0]=='connected'){
+            if((!isset($_SESSION['role']) || $_SESSION['role']=="")) return false;
+            else return true;
+        }
+        else{
+            if((isset($_SESSION['role']) && in_array($_SESSION['role'],$roles,true))) return true;
+            else return false;
+        } 
+    }
+}
+
 /**
  * Summary of isConnected : indique si l'utilisateur est connecté
  * @return bool
