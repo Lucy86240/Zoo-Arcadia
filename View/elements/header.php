@@ -43,7 +43,7 @@
                                         <li><a class="dropdown-item" href="<?php if($optionPage){echo("../");}?>dashboard">Tableau de bord</a></li>
                                         <li><a class="dropdown-item <?php permission(['Administrateur.rice','vétérinaire']); ?>" href="<?php if($optionPage){echo("../");}?>rapports_medicaux">Comptes-rendus vétérinaires</a></li>
                                         <li><a class="dropdown-item" href="<?php if($optionPage){echo("../");}?>animaux">Animaux</a></li>
-                                        <li><a class="dropdown-item <?php permission(['Administrateur.rice']); ?>" href="#">Horaires du zoo</a></li>
+                                        <li><a class="dropdown-item <?php permission(['Administrateur.rice']); ?>" href="horaires">Horaires du zoo</a></li>
                                         <li><a class="dropdown-item <?php permission(['Administrateur.rice','Employé.e']); ?>" href="<?php if($optionPage){echo("../");}?>avis">Avis</a></li>
                                         <li><a class="dropdown-item <?php permission(['Employé.e']); ?>" href="<?php if($optionPage){echo("../");}?>repas">Nourrir un animal</a></li>
                                         <li><a class="dropdown-item" href="<?php if($optionPage){echo("../");}?>commentaires_habitats">Commentaires des habitats</a></li>

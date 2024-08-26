@@ -140,6 +140,27 @@ function validIcon($file){
     return $message;
 }
 
+function listAttributions(){
+    
+    try{
+        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+        $stmt = $pdo->prepare('SELECT attribution FROM images  WHERE attribution is not null');
+        if($stmt->execute()){
+            $temp = $stmt->fetchAll();
+            $res = [];
+            foreach($temp as $t){
+                array_push($res,$t[0]);
+            }
+            
+            return $res;
+        }
+    }
+    catch(error $e)
+    {
+        echo('erreur bd');
+    }
+}
+
 /**
  * addImgRequest permet d'enregistrer une image dans la base de données
  * @param string $type : 'services' , 'housings', 'animals'

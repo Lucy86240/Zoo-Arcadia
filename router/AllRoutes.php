@@ -29,6 +29,10 @@ $allRoutes = array(
     new Route('dashboard',false,'Dashboard','View/pages/dashboard.php',[],'Controller/DashboardController.php'),
     new Route('comptes_utilisateurs',false,'Comptes utilisateur','View/pages/usersBoard.php',[],'Controller/ManageUsers.php'),
     new Route('contact',false,'Contact','View/pages/contact.php',[],'Controller/ManageContact.php'),
+    new Route('horaires',false,'Mise à jour horaires','View/pages/updateSchedules.php',['administrateur.trice'],'Controller/updateSchedules.php'),
+    new Route('mentions_legales',false,'Mentions légles','View/pages/legalNotice.php',[],'Controller/attributions.php'),
+    new Route('politique_confidentialite',false,'Politique de confidentialité','View/pages/privacyPolicy.php',[],'Controller/attributions.php'),
+
 );
 
 define('ALL_ROUTES',$allRoutes);
