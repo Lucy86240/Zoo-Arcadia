@@ -1,4 +1,11 @@
 
+<?php if($_SERVER['REQUEST_URI']=='/View/pages/foodAnimal/fedAnimal.php'){
+    ?>
+    <link rel="stylesheet" href = "../View/assets/css/style.css">
+    <?php
+    require_once '../View/pages/404.php';
+}
+else{?>
             <form method="POST" action="" class="fedAnimalPage">
             <?php if(substr($_SERVER['REQUEST_URI'],0,6)!='/repas'){ ?>
                 <div class="head"></div>
@@ -38,7 +45,7 @@
                 <!--
                     animal -> par défaut get
                     emp -> utilisateur connecté
--->
+                -->
                 <div class="element">
                     <label for="foodFed">Nourriture donnée :</label>
                     <input type="text" name="foodFed" id="foodFed" required />
@@ -55,3 +62,4 @@
                     <?php } ?>
                 </div>
             </form>
+<?php } ?>

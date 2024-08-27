@@ -1,7 +1,13 @@
 <?php
-
+if($_SERVER['REQUEST_URI']=='/router/router.php'){
+    ?>
+    <link rel="stylesheet" href = "../View/assets/css/style.css">
+    <?php
+    require_once '../View/pages/404.php';
+}
+else{
     require_once 'config.php';
-    require_once 'AllRoutes.php';
+    require_once 'allRoutes.php';
     require_once "Controller/ManageUser.php";
 
     //HTTP protocol + Server address(localhost or example.com) + requested uri (/route or /route/home)
@@ -52,7 +58,6 @@
 
         $actualRoute = getRouteByUrl($request[0],$option);
 
-
         if($actualRoute->getPathController()!=null)
         {
             include $actualRoute->getPathController();
@@ -62,3 +67,4 @@
             include $actualRoute->getPathHtml();
         }
     }
+}

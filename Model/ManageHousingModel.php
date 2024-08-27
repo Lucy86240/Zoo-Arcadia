@@ -1,5 +1,11 @@
 <?php
-    //include_once '../config.php';
+if($_SERVER['REQUEST_URI']=='/Model/ManageHousingModel.php'){
+    ?>
+    <link rel="stylesheet" href = "../View/assets/css/style.css">
+    <?php
+    require_once '../View/pages/404.php';
+}
+else{
     include_once "Model/Housing.php";
     include_once "Model/Animal.php";
     include_once "Model/ManageAnimalModel.php";
@@ -239,203 +245,204 @@
         }
     }
 
-function commentHousing(int $housing,$archive){
-    try{
-        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-        $request='';
-        
-        if($archive==1 || $archive==0){
-            $request=' AND archive='.$archive;
+    function commentHousing(int $housing,$archive){
+        try{
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+            $request='';
+            
+            if($archive==1 || $archive==0){
+                $request=' AND archive='.$archive;
+            }
+            $stmt = $pdo->prepare('SELECT * FROM comments_housing_veto WHERE housing= :housing'.$request);
+            $stmt->bindParam(':housing',$housing,PDO::PARAM_INT);
+            $stmt->execute();
+            $res = $stmt->fetchAll(PDO::FETCH_CLASS,'CommentHousing');
+            return $res;
         }
-        $stmt = $pdo->prepare('SELECT * FROM comments_housing_veto WHERE housing= :housing'.$request);
-        $stmt->bindParam(':housing',$housing,PDO::PARAM_INT);
-        $stmt->execute();
-        $res = $stmt->fetchAll(PDO::FETCH_CLASS,'CommentHousing');
-        return $res;
+        catch(Error $e){
+            echo "Désolée";
+            return '';
+        }
     }
-    catch(Error $e){
-        echo "Désolée";
-        return '';
-    }
-}
 
-/**
- * Summary of allCommentsRequest
- * @param mixed $housing peut être null sinon tableau d'id
- * @param mixed $dateStart peut être null
- * @param mixed $dateEnd peut être null
- * @param mixed $status : 1 = archivé 0 = actif 2 = tous
- * @return array
- */
-function allCommentsRequest($housing,$dateStart,$dateEnd,$status){
-    try{
-        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-        $request='';
-        if($housing != null || $dateEnd !=null || $dateStart != null || $status != null){
-            $request="WHERE";
-            if($housing !=null){
-                $request.=' housing='.$housing[0];
-                for ($i=1; $i < count($housing); $i++){
-                    $request.=' OR housing='.$housing[$i];
+    /**
+     * Summary of allCommentsRequest
+     * @param mixed $housing peut être null sinon tableau d'id
+     * @param mixed $dateStart peut être null
+     * @param mixed $dateEnd peut être null
+     * @param mixed $status : 1 = archivé 0 = actif 2 = tous
+     * @return array
+     */
+    function allCommentsRequest($housing,$dateStart,$dateEnd,$status){
+        try{
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+            $request='';
+            if($housing != null || $dateEnd !=null || $dateStart != null || $status != null){
+                $request="WHERE";
+                if($housing !=null){
+                    $request.=' housing='.$housing[0];
+                    for ($i=1; $i < count($housing); $i++){
+                        $request.=' OR housing='.$housing[$i];
+                    }
+                }
+                if(($status==1 || $status==0) && $status != null){
+                    if($request != "WHERE") $request.= " AND";
+                    $request.=' archive='.$status;
+                }
+                if($dateStart != null){
+                    if($request != "WHERE") $request.= " AND";
+                    $request.=' date >= \"'.$dateStart."\"";
+                }
+                if($dateEnd != null){
+                    if($request != "WHERE") $request.= " AND";
+                    $request.=' date >= \"'.$dateEnd."\"";
                 }
             }
-            if(($status==1 || $status==0) && $status != null){
-                if($request != "WHERE") $request.= " AND";
-                $request.=' archive='.$status;
-            }
-            if($dateStart != null){
-                if($request != "WHERE") $request.= " AND";
-                $request.=' date >= \"'.$dateStart."\"";
-            }
-            if($dateEnd != null){
-                if($request != "WHERE") $request.= " AND";
-                $request.=' date >= \"'.$dateEnd."\"";
-            }
-        }
-        $stmt = $pdo->prepare('SELECT * FROM comments_housing_veto '.$request.' ORDER BY date DESC');
-        $stmt->execute();
-        $res = $stmt->fetchAll(PDO::FETCH_CLASS,'CommentHousing');
-        return $res;
-    }
-    catch(Error $e){
-        echo "Désolée";
-        return [];
-    }
-}
-
-function commentExist($veto, $date, $housing, $comment){
-    try{
-        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-        $stmt = $pdo->prepare('SELECT * FROM comments_housing_veto 
-        WHERE comment = :comment AND housing = :housing AND veterinarian = :veterinarian AND date=:date');
-        $stmt->bindParam(":veterinarian", $veto, PDO::PARAM_STR);
-        $stmt->bindParam(":housing", $housing, PDO::PARAM_INT);
-        $stmt->bindParam(":comment", $comment, PDO::PARAM_STR);
-        $stmt->bindParam(":date", $date, PDO::PARAM_STR);
-        $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        if($stmt->execute()){
-            if($stmt->fetch() == null) return false;
-        else return true;
-        }
-    }
-    catch(error $e){
-        return true;
-    }
-}
-
-function commentExistbyId($id){
-    try{
-        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-        $stmt = $pdo->prepare('SELECT * FROM comments_housing_veto 
-        WHERE id_comment = :id');
-        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-        $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        if($stmt->execute()){
-            if($stmt->fetch() == null) return false;
-        else return true;
-        }
-    }
-    catch(error $e){
-        return true;
-    }
-}
-
-/**
- * Summary of changeStatusCommentRequest : permet d'archiver ou rendre actif un commentaire
- * @param int $id : identifiant du commentaire
- * @param bool $status : 1 pour archivé, 0 pour actif
- * @return string : success ou error
- */
-function changeStatusCommentRequest(int $id,bool $status){
-    try{
-        //on vérifie que le service existe et qu'il y a une modification à faire
-        if(commentExistById($id)){
-            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-            $stmt = $pdo->prepare('UPDATE comments_housing_veto SET archive = :status WHERE id_comment = :id');
-            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-            $stmt->bindParam(":status", $status, PDO::PARAM_BOOL);
+            $stmt = $pdo->prepare('SELECT * FROM comments_housing_veto '.$request.' ORDER BY date DESC');
             $stmt->execute();
+            $res = $stmt->fetchAll(PDO::FETCH_CLASS,'CommentHousing');
+            return $res;
         }
-        return "success";
+        catch(Error $e){
+            echo "Désolée";
+            return [];
+        }
     }
-    catch(error $e){
-        echo('erreur bd');
-        return "error";
-    }
-}
 
-function addCommentRequest($veto, $date, $housing, $comment){
-    try{
-        if(commentExist($veto, $date, $housing, $comment)==false){
+    function commentExist($veto, $date, $housing, $comment){
+        try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-            $stmt = $pdo->prepare('insert into comments_housing_veto (veterinarian,housing,comment,date) 
-            VALUES (:veterinarian,:housing,:comment,:date)');
+            $stmt = $pdo->prepare('SELECT * FROM comments_housing_veto 
+            WHERE comment = :comment AND housing = :housing AND veterinarian = :veterinarian AND date=:date');
             $stmt->bindParam(":veterinarian", $veto, PDO::PARAM_STR);
             $stmt->bindParam(":housing", $housing, PDO::PARAM_INT);
             $stmt->bindParam(":comment", $comment, PDO::PARAM_STR);
             $stmt->bindParam(":date", $date, PDO::PARAM_STR);
-            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            if($stmt->execute()){
+                if($stmt->fetch() == null) return false;
+            else return true;
+            }
+        }
+        catch(error $e){
+            return true;
         }
     }
-    catch(error $e)
-    {
 
-    }
-}
-
-function deleteCommentRequest(int $id){
-    try{
-        if(commentExistById($id)==true){
+    function commentExistbyId($id){
+        try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-            $stmt = $pdo->prepare('DELETE FROM comments_housing_veto WHERE id_comment = :id');
+            $stmt = $pdo->prepare('SELECT * FROM comments_housing_veto 
+            WHERE id_comment = :id');
             $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            if($stmt->execute()){
+                if($stmt->fetch() == null) return false;
+            else return true;
+            }
+        }
+        catch(error $e){
+            return true;
         }
     }
-    catch(error $e)
-    {
 
-    }
-}
-
-function housingsIDOrderByPopularity(){
-    try{
-        $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-        $stmt = $pdo->prepare('SELECT housings.id_housing, count(*) as \'clics\' FROM popularity JOIN animals ON popularity.id_animal = animals.id_animal JOIN housings ON animals.housing=housings.id_housing GROUP BY housings.name ORDER BY clics DESC');
-        $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $res=$stmt->fetchAll();
-        if($stmt->execute()) $res = $stmt->fetchAll();
-        if($res != null){
-            $request = "WHERE ";
-            for($i=0;$i<count($res);$i++){
-                if($request != "WHERE ") $request .= 'AND ';
-                $request .='id_housing!='.$res[$i]['id_housing'].' ';
+    /**
+     * Summary of changeStatusCommentRequest : permet d'archiver ou rendre actif un commentaire
+     * @param int $id : identifiant du commentaire
+     * @param bool $status : 1 pour archivé, 0 pour actif
+     * @return string : success ou error
+     */
+    function changeStatusCommentRequest(int $id,bool $status){
+        try{
+            //on vérifie que le service existe et qu'il y a une modification à faire
+            if(commentExistById($id)){
+                $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+                $stmt = $pdo->prepare('UPDATE comments_housing_veto SET archive = :status WHERE id_comment = :id');
+                $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+                $stmt->bindParam(":status", $status, PDO::PARAM_BOOL);
+                $stmt->execute();
             }
-            $stmt2 = $pdo->prepare('SELECT id_housing FROM housings '.$request.' ORDER BY id_housing ASC');
-            $stmt2->setFetchMode(PDO::FETCH_ASSOC);
-            $stmt2->execute();
-            $res2=$stmt2->fetchAll();
-            for($j=0;$j<count($res2);$j++){
-                $res2[$j]['clics']=0;
-                array_push($res,$res2[$j]);
-            }
-            return $res;
+            return "success";
         }
-        else return [];
+        catch(error $e){
+            echo('erreur bd');
+            return "error";
+        }
     }
-    catch(error $e){
-        return [];
-    }
-}
 
-function housingsOrderByPopularity(){
-    $idHousings = housingsIDOrderByPopularity();
-    $housings = [];
-    for($i=0;$i<count($idHousings);$i++){
-        $housing=housingById($idHousings[$i]['id_housing']);
-        $housing->setPopularityRange($i+1);
-        $housing->setNumberOfClics($idHousings[$i]['clics']);
-        array_push($housings,$housing);
+    function addCommentRequest($veto, $date, $housing, $comment){
+        try{
+            if(commentExist($veto, $date, $housing, $comment)==false){
+                $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+                $stmt = $pdo->prepare('insert into comments_housing_veto (veterinarian,housing,comment,date) 
+                VALUES (:veterinarian,:housing,:comment,:date)');
+                $stmt->bindParam(":veterinarian", $veto, PDO::PARAM_STR);
+                $stmt->bindParam(":housing", $housing, PDO::PARAM_INT);
+                $stmt->bindParam(":comment", $comment, PDO::PARAM_STR);
+                $stmt->bindParam(":date", $date, PDO::PARAM_STR);
+                $stmt->execute();
+            }
+        }
+        catch(error $e)
+        {
+
+        }
     }
-    return $housings;
+
+    function deleteCommentRequest(int $id){
+        try{
+            if(commentExistById($id)==true){
+                $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+                $stmt = $pdo->prepare('DELETE FROM comments_housing_veto WHERE id_comment = :id');
+                $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+                $stmt->execute();
+            }
+        }
+        catch(error $e)
+        {
+
+        }
+    }
+
+    function housingsIDOrderByPopularity(){
+        try{
+            $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+            $stmt = $pdo->prepare('SELECT housings.id_housing, count(*) as \'clics\' FROM popularity JOIN animals ON popularity.id_animal = animals.id_animal JOIN housings ON animals.housing=housings.id_housing GROUP BY housings.name ORDER BY clics DESC');
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $res=$stmt->fetchAll();
+            if($stmt->execute()) $res = $stmt->fetchAll();
+            if($res != null){
+                $request = "WHERE ";
+                for($i=0;$i<count($res);$i++){
+                    if($request != "WHERE ") $request .= 'AND ';
+                    $request .='id_housing!='.$res[$i]['id_housing'].' ';
+                }
+                $stmt2 = $pdo->prepare('SELECT id_housing FROM housings '.$request.' ORDER BY id_housing ASC');
+                $stmt2->setFetchMode(PDO::FETCH_ASSOC);
+                $stmt2->execute();
+                $res2=$stmt2->fetchAll();
+                for($j=0;$j<count($res2);$j++){
+                    $res2[$j]['clics']=0;
+                    array_push($res,$res2[$j]);
+                }
+                return $res;
+            }
+            else return [];
+        }
+        catch(error $e){
+            return [];
+        }
+    }
+
+    function housingsOrderByPopularity(){
+        $idHousings = housingsIDOrderByPopularity();
+        $housings = [];
+        for($i=0;$i<count($idHousings);$i++){
+            $housing=housingById($idHousings[$i]['id_housing']);
+            $housing->setPopularityRange($i+1);
+            $housing->setNumberOfClics($idHousings[$i]['clics']);
+            array_push($housings,$housing);
+        }
+        return $housings;
+    }
 }
