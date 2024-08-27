@@ -5,7 +5,7 @@
     require_once '../View/pages/404.php';
 }
 else{?>
-    <section class="newHousing">
+    < class="newHousing">
         <div class="head"> </div>
         <?php $optionPage=true;?>
         <form class="formNewHousing" method="POST" enctype = "multipart/form-data">
@@ -14,7 +14,7 @@ else{?>
                 <div class="elements-input">
                     <div class="element">
                         <label for="newHousingName">Nom :</label>
-                        <input type="text" name="newHousingName" id="newHousingName" required />
+                        <input type="text" name="newHousingName" id="newHousingName" pattern="^([a-zA-Z0-9èéëïç ])+$" required />
                     </div>
                     <div class="element">
                         <label for="newHousingDescription">Description :</label>
@@ -27,7 +27,7 @@ else{?>
                             <div class="img-element"><input type="file" name="newHousingPhoto" id="newHousingPhoto"></div>
 
                             <div class="img-element"><label for="NHP-Description">Description de la photo :</label>
-                            <input type="text" name="NHP-Description" id="NHP-Description"></div>
+                            <input type="text" name="NHP-Description" id="NHP-Description" pattern="^([a-zA-Z0-9èéëïç&!?,:;() ])+$"/></div>
 
                             <div class="img-element"><input type="checkbox" name="NHP-checkboxPortrait" id="checkbox-portrait">
                             <label for="checkbox-portrait<?php echo($Housing['id']); ?>">la photo est en portrait</label></div>
@@ -55,5 +55,6 @@ else{?>
                 </div>
             <?php } ?>
         <?php }?>
+        <script src="View/assets/script/addHousing.js"></script>
     </section>
 <?php } ?>

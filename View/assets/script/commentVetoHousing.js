@@ -15,25 +15,39 @@ for(let i=0; i<iconComments.length;i++){
 //nouveau commentaire
 const iconsAddComment = document.querySelectorAll('.js-iconAddComments')
 const addComment = document.getElementById('addComment')
-const close = addComment.querySelector('.close')
-const select = addComment.querySelector('#addCommentsHousing')
+if(addComment != null){
+    const close = addComment.querySelector('.close')
+    close.addEventListener('click',()=>{
+        addComment.classList.add('none')
+    })
 
-
-for(let j=0;j<iconsAddComment.length;j++){
-    iconsAddComment[j].addEventListener('click',()=>{
-        addComment.classList.remove('none');
-        id=iconsAddComment[j].getAttribute('id_housing')
-        for (let i=0; i < select.options.length; i++){
-            if (select.options[i].value == id){
-                select.options[i].selected = true;
+    const select = addComment.getElementById('addCommentsHousing')
+    for(let j=0;j<iconsAddComment.length;j++){
+        iconsAddComment[j].addEventListener('click',()=>{
+            addComment.classList.remove('none');
+            id=iconsAddComment[j].getAttribute('id_housing')
+            for (let i=0; i < select.options.length; i++){
+                if (select.options[i].value == id){
+                    select.options[i].selected = true;
+                }
             }
+        })
+    }
+} 
+
+addCommentComment = document.getElementById('addCommentComment')
+if(addCommentComment != null)
+{
+    addCommentComment.addEventListener('input',()=>{
+        if(!verifDescriptionRegex(addCommentComment.value)){
+            addCommentComment.style = "outline : 1px solid red"
+            addCommentComment.value = cancelLastCharacter(addCommentComment.value)
+        }
+        else{
+            addCommentComment.style = "outline : 1px solid grey"
         }
     })
 }
-
-close.addEventListener('click',()=>{
-    addComment.classList.add('none')
-})
 
 // suppression commentaire
 const deleteIcon = document.querySelectorAll(".deleteIcon");

@@ -20,7 +20,7 @@ else{?>
                 <form method="POST" action="">
                     <div class="element">
                         <label for="NewReviewPseudo">Votre pseudo :</label>
-                        <input type="text" name="NewReviewPseudo" id="NewReviewPseudo" required />
+                        <input type="text" name="NewReviewPseudo" id="NewReviewPseudo" pattern="^([a-zA-Z0-9èéëïç@#$*+:;?! -_])+$" required />
                     </div>
                     <div class = "element">
                         <label>Votre note :</label>

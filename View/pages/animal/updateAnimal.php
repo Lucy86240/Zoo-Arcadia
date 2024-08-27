@@ -27,7 +27,7 @@ else{?>
                     </br>
                     <div class="element">
                         <label for="updateAnimalBreed<?php echo($animal['id']); ?>">Race :</label>
-                        <input type="text" class="updateBreed" id="updateAnimalBreed<?php echo($animal['id']); ?>" placeholder="<?php echo($animal['breed']) ?>" autocomplete="off">
+                        <input type="text" class="updateBreed" id="updateAnimalBreed<?php echo($animal['id']); ?>" placeholder="<?php echo($animal['breed']) ?>" autocomplete="off" pattern="^([a-zA-Z0-9èéëïç\-\(\) ])+$"/>
                         <?php $breeds = listAllBreeds(); ?>
                     </div>
                     <div>
@@ -35,7 +35,7 @@ else{?>
                             <?php foreach($breeds as $breed){
                                 if($breed['label'] !=$animal['breed']){?>
                                     <li class="form-check none">
-                                        <input class="form-check-input" type="radio" name="updateAnimalBreed<?php echo($animal['id']); ?>" id="Breed<?php echo($breed['id_breed'].'for'.$animal['id']); ?>" value="<?php echo($breed['id_breed']);?>">
+                                        <input class="form-check-input" type="radio" name="updateAnimalBreed<?php echo($animal['id']); ?>" id="Breed<?php echo($breed['id_breed'].'for'.$animal['id']); ?>" value="<?php echo($breed['id_breed']);?>"/>
                                         <label class="form-check-label" for="Breed<?php echo($breed['id_breed'].'for'.$animal['id']); ?>">
                                             <?php echo($breed['label']) ?>
                                         </label>
@@ -46,12 +46,12 @@ else{?>
                         <div class="newBreed none">
                             <p>La race saisie n'a pas de résultat</p>
                             <label for="newBreed<?php echo($animal['id']); ?>">Nouvelle race à créer et à affecter à l'animal :</label>
-                            <input type="text" id="newBreed<?php echo($animal['id']); ?>" name="newBreed<?php echo($animal['id']); ?>">
+                            <input type="text" class="js-newBreed" id="newBreed<?php echo($animal['id']); ?>" name="newBreed<?php echo($animal['id']); ?>" pattern="^([a-zA-Z0-9èéëïç\(\)\- ])+$"/>
                         </div>
                     </div>
                     <div class="element">
                         <label for="updateAnimalName<?php echo($animal['id']); ?>">Nom :</label>
-                        <input type="text" name="updateAnimalName<?php echo($animal['id']); ?>" id="updateAnimalName<?php echo($animal['id']); ?>" required value = "<?php echo($animal['name']); ?>"/>
+                        <input type="text" class="js-updateAnimalName" name="updateAnimalName<?php echo($animal['id']); ?>" id="updateAnimalName<?php echo($animal['id']); ?>" required value = "<?php echo($animal['name']); ?>" pattern="^([a-zA-Z0-9èéëïç\- ])+$"/>
                     </div>
                     <div class="element">
                         <div class="addImg">
@@ -60,7 +60,7 @@ else{?>
                             <div class="img-element"><input type="file" name="UpdateAnimalPhoto<?php echo($animal['id']); ?>" id="UpdateAnimalPhoto<?php echo($animal['id']); ?>"></div>
 
                             <div class="img-element"><label for="UAP-Description<?php echo($animal['id']); ?>">Description de la photo :</label>
-                            <input type="text" name="UAP-Description<?php echo($animal['id']); ?>" id="UAP-Description<?php echo($animal['id']); ?>"></div>
+                            <input type="text" class="js-UAPDescription" name="UAP-Description<?php echo($animal['id']); ?>" id="UAP-Description<?php echo($animal['id']); ?>" pattern="^([a-zA-Z0-9èéëïç&.!?,:;\(\)\- ])+$"/></div>
 
                             <div class="img-element"><input type="checkbox" name="UAP-checkboxPortrait<?php echo($animal['id']); ?>" id="checkbox-portrait<?php echo($animal['id']); ?>">
                             <label for="checkbox-portrait<?php echo($animal['id']); ?>">la photo est en portrait</label></div>

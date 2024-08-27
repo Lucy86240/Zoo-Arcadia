@@ -9,17 +9,21 @@ if(window.location.href==(SITE_URL)){
     window.onscroll = function(){
         if (window.scrollY > 1 && scroll===false){
             container.classList.add("scroll");
-            dropdown.classList.add("scroll");
             container.classList.remove("top");
-            dropdown.classList.remove("top");
+            if(dropdown != null){
+                dropdown.classList.add("scroll");
+                dropdown.classList.remove("top");
+            }
             
             scroll = true
         }
         else if (window.scrollY <= 1){
             container.classList.add("top");
-            dropdown.classList.add("top");
             container.classList.remove("scroll");
-            dropdown.classList.remove("scroll");
+            if(dropdown != null){
+                dropdown.classList.add("top");
+                dropdown.classList.remove("scroll");
+            }
             scroll = false
         }
     }

@@ -23,7 +23,7 @@ else{?>
                 <?php if(substr($_SERVER['REQUEST_URI'],0,6)=='/repas'){ ?>
                     <div class="element">
                         <label for="animalFed">Animal :</label>
-                        <input type="text" class="animalFed" id="animalFed" value="<?php if(isset($animal['name'])) echo($animal['name'].' - '.$animal['breed']);?>" placeholder="chercher" autocomplete="off">
+                        <input type="text" class="animalFed" id="animalFed" value="<?php if(isset($animal['name'])) echo($animal['name'].' - '.$animal['breed']);?>" placeholder="chercher" autocomplete="off" pattern="^([a-zA-Z0-9èéëïç ])+$">
                         <?php $animalsListUpdate = listAllAnimals();?>
                     </div>
                     <div class="element">
@@ -48,11 +48,11 @@ else{?>
                 -->
                 <div class="element">
                     <label for="foodFed">Nourriture donnée :</label>
-                    <input type="text" name="foodFed" id="foodFed" required />
+                    <input type="text" name="foodFed" id="foodFed" pattern="^([a-zA-Z0-9èéëïç&!?,:;\(\)\- ])+$" required />
                 </div>
                 <div class="element">
                     <label for="weightFed">Quantité :</label>
-                    <input type="text" name="weightFed" id="weightFed" required />
+                    <input type="text" name="weightFed" id="weightFed" pattern="^([a-zA-Z0-9èéëïç&!?,:;\(\)\- ])+$" required />
                 </div>
                 <div class="form-submit">
                     <input type="submit" value="Soumettre" name="addFood" class="button btn-darkGreen" />

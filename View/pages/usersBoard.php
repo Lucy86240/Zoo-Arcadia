@@ -36,7 +36,7 @@ else{?>
                             </div>
                             <div>
                                 <label for="mailSearch">Mail : </label>
-                                <input type="text" name="mailSearch" id="mailSearch">
+                                <input type="email" name="mailSearch" id="mailSearch" />
                             </div>
                         </div>
                     </form>

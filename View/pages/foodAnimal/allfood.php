@@ -39,9 +39,7 @@ else{?>
                 </div>
             <?php } ?>
 
-            <!-- liste des repas-->
-
-        <!-- tableau des rapports et filtres-->
+        <!-- liste des repas-->
             <table>
                 <caption>
                     <div class="entete">
@@ -66,7 +64,7 @@ else{?>
                                         <?php $i=0;
                                         foreach($breeds as $breed){ ?>
                                             <li class="form-check <?php if(defaultValueCheckbox('breedSelected'.$i,$breed['id_breed'])!='checked') echo('none'); ?> js-liBreedsSelected">
-                                                <input class="form-check-input js-checkboxBreedsSelected" type="checkbox" name="breedSelected<?php echo($i);?>" id="breedSelected<?php echo($i);?>" value="<?php echo($breed['id_breed']) ?>" <?php echo(defaultValueCheckbox('breedSelected'.$i,$breed['id_breed'])); ?>>
+                                                <input class="form-check-input js-checkboxBreedsSelected" type="checkbox" name="breedSelected<?php echo($i);?>" id="breedSelected<?php echo($i);?>" value="<?php echo($breed['id_breed']) ?>" <?php echo(defaultValueCheckbox('breedSelected'.$i,$breed['id_breed'])); ?>/>
                                                 <label class="form-check-label" for="breedSelect<?php echo($i); ?>">
                                                     <?php echo($breed['label']) ?>
                                                 </label>
@@ -75,7 +73,7 @@ else{?>
                                     </ul>
                                 </div>
                                 <div class="searchElements">
-                                    <input type="text" class="filterSearch" name="filterBreedsSearch" id="filterBreedsSearch" placeholder="chercher" autocomplete="off">
+                                    <input type="text" class="filterSearch" name="filterBreedsSearch" id="filterBreedsSearch" placeholder="chercher" autocomplete="off" pattern="^([a-zA-Z0-9èéëïç ])+$"/>
                                     <ul class="Breeds" id="listBreeds">
                                         <?php $i=0;
                                         foreach($breeds as $breed){ ?>

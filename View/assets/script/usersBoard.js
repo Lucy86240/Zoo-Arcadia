@@ -140,7 +140,7 @@ const iconsUpdate = document.querySelectorAll('.js-edit')
  * @param {*} required : true si l'input est obligatoire
  * @returns 
  */
-function createDivElement(id, textLabel, type, placeholder,displayNone,required){
+function createDivElement(id, textLabel, type, pattern, placeholder,displayNone,required){
     divElement = document.createElement('div')
     divElement.classList.add('element')
     label = document.createElement('label')
@@ -154,6 +154,7 @@ function createDivElement(id, textLabel, type, placeholder,displayNone,required)
     input.setAttribute('id',id)
     if(required) input.setAttribute('required','')
     if(placeholder!='') input.setAttribute('placeholder',placeholder)
+    if(pattern != '') input.setAttribute('pattern',pattern)
     if(displayNone) divElement.classList.add('none')
     divElement.append(input)
 
@@ -257,7 +258,8 @@ function createPopupAccount(mail, myAccount){
     textLabel = "Prénom :";
     type = 'text';
     firstName = document.querySelectorAll('.js-firstname')
-    form.append(createDivElement(id,textLabel,type,placeholder,false,required))
+    pattern = "^([a-zA-Z0-9èéëïç ])+$";
+    form.append(createDivElement(id,textLabel,type,pattern, placeholder,false,required))
 
     //prénom
     if(mail != ''){
@@ -279,7 +281,8 @@ function createPopupAccount(mail, myAccount){
     } 
     textLabel = "Nom :";
     type = 'text';
-    form.append(createDivElement(id,textLabel,type,placeholder,false,required))
+    pattern = "^([a-zA-Z0-9èéëïç ])+$";
+    form.append(createDivElement(id,textLabel,type,pattern, placeholder,false,required))
 
     //role
     if(!myAccount){
@@ -340,7 +343,7 @@ function createPopupAccount(mail, myAccount){
     } 
     textLabel = "Mail :";
     type = 'email';
-    mailDiv.append(createDivElement(id,textLabel,type,placeholder,false,required))
+    mailDiv.append(createDivElement(id,textLabel,type,placeholder,'',false,required))
 
     legendMail = document.createElement('p')
     legendMail.textContent = "Pour information : Le mail ne doit pas être utilisé par un autre utilisateur."
@@ -357,8 +360,8 @@ function createPopupAccount(mail, myAccount){
     }
 
     textLabel = "Confirmation mail :";
-    type = 'text';
-    confirmMail = createDivElement(id,textLabel,type,'',true, required);
+    type = 'email';
+    confirmMail = createDivElement(id,textLabel,type,'','',true, required);
     confirmMail.setAttribute('id','confirmMailElement');
     mailDiv.append(confirmMail);
 
@@ -420,7 +423,7 @@ function createPopupAccount(mail, myAccount){
     } 
     textLabel = "Confirmation mot de passe :";
     type = 'password';
-    confirmPassword = createDivElement(id,textLabel,type,'',true,required)
+    confirmPassword = createDivElement(id,textLabel,type,'','',true,required)
     confirmPassword.setAttribute('id','confirmPasswordElement');
     form.append(confirmPassword)
 
@@ -552,16 +555,6 @@ function verifCaracSpe(txt){
 function verifCaracPassword(txt){
     let reg = /^([a-zA-Z0-9@&~#$*+:;?!%,])+$/g
     return reg.test(txt)
-}
-
-/**
- * Permet de supprimer le dernier caractère d'un texte
- * @param {*} txt : text à diminuer
- * @returns 
- */
-function cancelLastCharacter(txt){
-    let newTxt = txt.slice(0,txt.length-1)
-    return newTxt
 }
 
 /**
@@ -836,7 +829,7 @@ function createPopupUnblocAccount(mail){
     id='unblocAccountConfirmPassword';
     textLabel = "Confirmation mot de passe :";
     type = 'password';
-    confirmPassword = createDivElement(id,textLabel,type,'',true,true)
+    confirmPassword = createDivElement(id,textLabel,type,'','',true,true)
     confirmPassword.setAttribute('id','confirmPasswordElement');
     form.append(confirmPassword)
 

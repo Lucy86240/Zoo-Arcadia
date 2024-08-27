@@ -34,7 +34,7 @@ else{?>
                                     </ul>
                                 </div>
                                 <div class="searchElements">
-                                    <input type="text" class="filterSearch" name="filterBreedsSearch" id="filterBreedsSearch" placeholder="chercher" autocomplete="off">
+                                    <input type="text" class="filterSearch" name="filterBreedsSearch" id="filterBreedsSearch" placeholder="chercher" autocomplete="off" pattern="^([a-zA-Zèéëïç ])+$">
                                     <ul class="Breeds" id="listBreeds">
                                         <?php $i=0;
                                         foreach($breeds as $breed){ ?>

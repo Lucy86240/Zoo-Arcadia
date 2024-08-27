@@ -26,3 +26,26 @@ popup(dialogNR,triggerNR,dismissTriggerNR)
     })
   }
 
+//inputs 
+
+newReviewPseudo = document.getElementById('NewReviewPseudo')
+newReviewComment = document.getElementById('NewReviewComment')
+
+newReviewPseudo.addEventListener('input',()=>{
+  console.log(verifPseudoRegex(newReviewPseudo.value));
+  if(!verifPseudoRegex(newReviewPseudo.value)){
+    newReviewPseudo.value = cancelLastCharacter(newReviewPseudo.value);
+    newReviewPseudo.style = "outline : 1px solid red;"
+  }
+  else newReviewPseudo.style = "outline : 1px solid black;"
+})
+
+newReviewComment.addEventListener('input',()=>{
+  if(!verifDescriptionRegex(newReviewComment.value)){
+    newReviewComment.value = cancelLastCharacter(newReviewComment.value);
+    newReviewComment.style = "outline : 1px solid red;"
+  }
+  else newReviewComment.style = "outline : 1px solid black;"
+})
+
+

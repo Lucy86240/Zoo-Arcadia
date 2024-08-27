@@ -14,7 +14,7 @@ else{?>
                 <div class="elements-input">
                     <div class="element">
                         <label for="updateHousingName">Nom :</label>
-                        <input type="text" name="updateHousingName" id="updateHousingName" value="<?php echo($housing['name']) ?>" required />
+                        <input type="text" name="updateHousingName" id="updateHousingName" value="<?php echo($housing['name']) ?>" pattern="^([a-zA-Z0-9èéëïç ])+$" required />
                     </div>
                     <div class="element">
                         <label for="updateHousingDescription">Description :</label>
@@ -27,7 +27,7 @@ else{?>
                             <div class="img-element"><input type="file" name="UpdateHousingPhoto<?php echo($housing['id']); ?>" id="UpdateHousingPhoto<?php echo($housing['id']); ?>"></div>
 
                             <div class="img-element"><label for="UAP-Description<?php echo($Housing['id']); ?>">Description de la photo :</label>
-                            <input type="text" name="UAP-Description<?php echo($Housing['id']); ?>" id="UHP-Description<?php echo($housing['id']); ?>"></div>
+                            <input type="text" name="UAP-Description<?php echo($Housing['id']); ?>" id="UHP-Description<?php echo($housing['id']); ?>" pattern="^([a-zA-Z0-9èéëïç&!?,:;() ])+$" /></div>
                             <div class="img-element"><input type="checkbox" name="UHP-checkboxPortrait<?php echo($housing['id']); ?>" id="checkbox-portrait<?php echo($housing['id']); ?>">
                             <label for="checkbox-portrait<?php echo($housing['id']); ?>">la photo est en portrait</label></div>
                             <p>Pour info : la photo doit être au format jpg ou png et ne pas dépasser 5 Mo.</p>

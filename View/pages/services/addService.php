@@ -14,7 +14,7 @@ else{?>
             <div class="txt">
                 <div class="element">
                     <label for="NewServiceName">Intitulé :</label>
-                    <div><input type="text" name="NewServiceName" id="NewServiceName" maxlength="155" required />
+                    <div><input type="text" name="NewServiceName" id="NewServiceName" maxlength="155" pattern="^([a-zA-Z0-9èéëïç&!?,:;() ])+$" required />
                     <p>Max 155 caractères</p>
                     </div>
                 </div>
@@ -27,16 +27,16 @@ else{?>
             <div class="images">
                 <div class="image">
                         <label class="title-img" for="NewServiceIcon">L'icone</label>
-                        <input type="file" name="NewServiceIcon" id="NewServiceIcon" required>
+                        <input type="file" name="NewServiceIcon" id="NewServiceIcon" required/>
                         <p>Pour info : l'icone doit être au format png et ne pas dépasser 100ko.</p>
                 </div>
                 <div class="image">
                         <label class="title-img" for="NewServicePhoto">La photo</label>
-                        <input type="file" name="NewServicePhoto" id="NewServicePhoto" required>
+                        <input type="file" name="NewServicePhoto" id="NewServicePhoto" required/>
                         
                         <div><label for="NSP-Description">Description de la photo :</label>
-                        <input type="text" name="NSP-Description" id="NSP-Description"></div>
-                        <div><input type="checkbox" name="NSP-checkboxPortrait" id="checkbox-portrait">
+                        <input type="text" name="NSP-Description" id="NSP-Description" pattern="^([a-zA-Z0-9èéëïç&!?,:;() ])+$"/></div>
+                        <div><input type="checkbox" name="NSP-checkboxPortrait" id="checkbox-portrait"/>
                         
                         <label for="checkbox-portrait">l'image est en portrait</label></div>
                         <p>Pour info : la photographie doit être au format jpg ou png et ne pas dépasser 5 Mo.</p>

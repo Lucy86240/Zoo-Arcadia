@@ -11,7 +11,7 @@ else{?>
             <div class="element">
                 <label for="UpdateServiceName<?php echo($service['id_service']);?>">Intitulé :</label>
                 <div>
-                    <input type="text" name="UpdateServiceName<?php echo($service['id_service']);?>" id="UpdateServiceName<?php echo($service['id_service']);?>" maxlength="155" value="<?php echo($service['name']);?>"/>
+                    <input type="text" class="js-UpdateServiceName" name="UpdateServiceName<?php echo($service['id_service']);?>" id="UpdateServiceName<?php echo($service['id_service']);?>" maxlength="155" value="<?php echo($service['name']);?>" pattern="^([a-zA-Z0-9èéëïç&!?,:;\(\)\- ])+$"/>
                     <p>Max 155 caractères</p>
                 </div>
             </div>
@@ -49,13 +49,13 @@ else{?>
                         <img class="imgForm-service" src="<?php echo($service['photo']->getPath());?>" alt="<?php echo($service['photo']->getDescription()); ?>">
                     </div>
                     <div>
-                        <input type="file" name="UpdateServicePhoto<?php echo($service['id_service']);?>" id="UpdateServicePhoto<?php echo($service['id_service']);?>" >
+                        <input type="file" name="UpdateServicePhoto<?php echo($service['id_service']);?>" id="UpdateServicePhoto<?php echo($service['id_service']);?>" />
                         <div>
                             <label for="USP-Description<?php echo($service['id_service']);?>">Description de la photo :</label>
-                            <input type="text" name="USP-Description<?php echo($service['id_service']);?>" id="USP-Description<?php echo($service['id_service']);?>">
+                            <input type="text" class="js-USP-Description" name="USP-Description<?php echo($service['id_service']);?>" id="USP-Description<?php echo($service['id_service']);?>" pattern="^([a-zA-Z0-9èéëïç&!?,:;\(\)\- ])+$" />
                         </div>
                         <div>
-                            <input type="checkbox" name="USP-checkboxPortrait<?php echo($service['id_service']);?>" id="USP-checkboxPortrait<?php echo($service['id_service']);?>">
+                            <input type="checkbox" name="USP-checkboxPortrait<?php echo($service['id_service']);?>" id="USP-checkboxPortrait<?php echo($service['id_service']);?>"/>
                             <label for="USP-checkboxPortrait<?php echo($service['id_service']);?>">l'image est en portrait</label>
                         </div>
                             <p>Pour info : la photographie doit être au format jpg ou png et ne pas dépasser 5 Mo.</p>

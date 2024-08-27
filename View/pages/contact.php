@@ -20,16 +20,16 @@ else{?>
             <form method="POST" action="">
                 <div class="element">
                     <label for="company">Structure :</label>
-                    <input type="text" name="company" id="company" pattern="^([a-zA-Z0-9èéëïç&])+$">
+                    <input type="text" name="company" id="company" pattern="^([a-zA-Z0-9èéëïç&- ])+$" maxlength="150">
                 </div>
                 <div id="name">
                     <div class="element">
                         <label for="firstName">Prénom* :</label>
-                        <input type="text" name="firstName" id="firstName" pattern="^([a-zA-Zèéëïç])+$" required>
+                        <input type="text" name="firstName" id="firstName" pattern="^([a-zA-Zèéëïç-])+$" maxlength="150" required>
                     </div>
                     <div class="element">
                         <label for="lastName">Nom* :</label>
-                        <input type="text" name="lastName" id="lastName" pattern="^([a-zA-Zèéëïç])+$" required>
+                        <input type="text" name="lastName" id="lastName" pattern="^([a-zA-Zèéëïç-])+$" maxlength="150" required>
                     </div>
                 </div>
                 <div id="coordonate">
@@ -39,16 +39,16 @@ else{?>
                     </div>
                     <div class="element">
                         <label for="mail">Mail* :</label>
-                        <input type="email" name="mail" id="mail" required>
+                        <input type="email" name="mail" id="mail" placeholder = "mail@exemple.fr" maxlength="150" required>
                     </div>
                 </div>
                 <div class="element">
                     <label for="object">Objet* :</label>
-                    <input type="tel" name="object" id="object" pattern="^([a-zA-Zèéëïç])+$" required>
+                    <input type="tel" name="object" id="object" pattern="^([a-zA-Zèéëïç ])+$" maxlength="150" required>
                 </div>
                 <div class="element">
                     <span>Message* :</span>
-                    <textarea name="msg" pattern="^([a-zA-Z0-9èéëïç&!?,:;()])+$" required></textarea>
+                    <textarea name="msg" maxlength="450" required></textarea>
                 </div>
                 <div class="form-submit">
                     <input type="submit" value="Envoyer" name="submitMsg" class="button btn-brown" />    

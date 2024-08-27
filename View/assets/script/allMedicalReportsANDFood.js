@@ -17,6 +17,14 @@ const vetoCheckbox = document.querySelectorAll('.js-vetocheckbox')
 const dateStart = document.getElementById('dateStart')
 const dateEnd = document.getElementById('dateEnd')
 
+dateStart.addEventListener('blur',()=>{
+    if(!verifDateRegex(dateStart.value)) dateStart.value = '';
+})
+
+dateEnd.addEventListener('blur',()=>{
+    if(!verifDateRegex(dateEnd.value)) dateEnd.value = '';
+})
+
 cancelFilter.addEventListener('click',()=>{
     for(i=0;i<checkboxSearchInput.length;i++){
         checkboxSearchInput[i].checked = false;

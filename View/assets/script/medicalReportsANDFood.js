@@ -107,3 +107,87 @@ searchAnimal.addEventListener('input',() => {
         }
     }
 })
+
+let dateNewReport = document.getElementById('dateNewReport')
+if(dateNewReport !=null){
+    dateNewReport.addEventListener('blur',()=>{
+        if(!verifDateRegex(dateNewReport.value)){
+            dateNewReport.value = '';
+        }
+    })
+}
+
+let healthNewReport = document.getElementById('healthNewReport')
+if(healthNewReport !=null){
+    healthNewReport.addEventListener('input',()=>{
+        if(!verifDescriptionRegex(healthNewReport.value)){
+            healthNewReport.value = cancelLastCharacter(healthNewReport.value)
+            healthNewReport.style = 'outline : 1px solid red'
+        }
+        else healthNewReport.style = 'outline : 1px solid grey'
+    })
+}
+
+let commentNewReport = document.getElementById('commentNewReport')
+if(commentNewReport !=null){
+    commentNewReport.addEventListener('input',()=>{
+        if(!verifDescriptionRegex(commentNewReport.value)){
+            commentNewReport.value = cancelLastCharacter(commentNewReport.value)
+            commentNewReport.style = 'outline : 1px solid red'
+        }
+        else commentNewReport.style = 'outline : 1px solid grey'
+    })
+}
+
+let foodNewReport = document.getElementById('foodNewReport')
+if(foodNewReport !=null){
+    foodNewReport.addEventListener('input',()=>{
+        if(!verifDescriptionRegex(foodNewReport.value)){
+            foodNewReport.value = cancelLastCharacter(foodNewReport.value)
+            foodNewReport.style = 'outline : 1px solid red'
+        }
+        else foodNewReport.style = 'outline : 1px solid grey'
+    })
+}
+
+let weightFoodNewReport = document.getElementById('weightFoodNewReport')
+if(weightFoodNewReport !=null){
+    weightFoodNewReport.addEventListener('input',()=>{
+        if(!verifDescriptionRegex(weightFoodNewReport.value)){
+            weightFoodNewReport.value = cancelLastCharacter(weightFoodNewReport.value)
+            weightFoodNewReport.style = 'outline : 1px solid red'
+        }
+        else weightFoodNewReport.style = 'outline : 1px solid grey'
+    })
+}
+
+let dateFed = document.getElementById('dateFed')
+if(dateFed !=null){
+    dateFed.addEventListener('blur',()=>{
+        if(!verifDateRegex(dateFed.value)){
+            dateFed.value = '';
+        }
+    })
+}
+
+let foodFed = document.getElementById('foodFed')
+if(foodFed !=null){
+    foodFed.addEventListener('input',()=>{
+        if(!verifDescriptionRegex(foodFed.value)){
+            foodFed.value = cancelLastCharacter(foodFed.value)
+            foodFed.style = 'outline : 1px solid red'
+        }
+        else foodFed.style = 'outline : 1px solid var(--brown)'
+    })
+}
+
+let weightFed = document.getElementById('weightFed')
+if(weightFed !=null){
+    weightFed.addEventListener('input',()=>{
+        if(!verifDescriptionRegex(weightFed.value)){
+            weightFed.value = cancelLastCharacter(weightFed.value)
+            weightFed.style = 'outline : 1px solid red'
+        }
+        else fooweightFeddFed.style = 'outline : 1px solid var(--brown)'
+    })
+}

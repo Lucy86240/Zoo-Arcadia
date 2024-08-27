@@ -18,7 +18,7 @@ else{?>
                 <?php if(substr($_SERVER['REQUEST_URI'],0,18)=='/rapports_medicaux'){ ?>
                     <div class="element">
                         <label for="animalNewReport">Animal :</label>
-                        <input type="text" class="animalNewReport" id="animalNewReport" value="<?php if(isset($animal['name'])) echo($animal['name'].' - '.$animal['breed']);?>" placeholder="par défaut : <?php if(isset($animal['name'])) echo($animal['name'].' - '.$animal['breed']);?>"autocomplete="off">
+                        <input type="text" class="animalNewReport" id="animalNewReport" value="<?php if(isset($animal['name'])) echo($animal['name'].' - '.$animal['breed']);?>" placeholder="par défaut : <?php if(isset($animal['name'])) echo($animal['name'].' - '.$animal['breed']);?>"autocomplete="off" pattern="^([a-zA-Z0-9èéëïç\- ])+$" />
                         <?php $animalsListUpdate = listAllAnimals();?>
                     </div>
                     <div class="element">
@@ -39,7 +39,7 @@ else{?>
 
                 <div class="element">
                     <label for="healthNewReport">Etat de santé :</label>
-                    <input type="text" name="healthNewReport" id="healthNewReport" required />
+                    <input type="text" name="healthNewReport" id="healthNewReport" pattern="^([a-zA-Z0-9èéëïç\)&!?,:;\(.\- ])+$" required />
                 </div>
                 <div class="element">
                     <label for="commentNewReport">Détail :</label>
@@ -47,11 +47,11 @@ else{?>
                 </div>
                 <div class="element">
                     <label for="foodNewReport">Nourriture proposée :</label>
-                    <input type="text" name="foodNewReport" id="foodNewReport" required />
+                    <input type="text" name="foodNewReport" id="foodNewReport" pattern="^([a-zA-Z0-9èéëïç&!?,:;\(\) ])+$" required />
                 </div>
                 <div class="element">
                     <label for="weightFoodNewReport">Grammage :</label>
-                    <input type="text" name="weightFoodNewReport" id="weightFoodNewReport" required />
+                    <input type="text" name="weightFoodNewReport" id="weightFoodNewReport" pattern="^([a-zA-Z0-9èéëïç&!?,\):;\( \-])+$" required />
                 </div>
                 <div class="form-submit">
                     <input type="submit" value="Soumettre" name="addReport" class="button btn-green" />

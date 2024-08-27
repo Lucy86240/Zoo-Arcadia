@@ -75,3 +75,93 @@ const ulAdd = document.querySelectorAll('.breedsAdd');
 const newBreedAdd = document.querySelectorAll('.newBreedAdd');
 const messageResultAdd = document.querySelectorAll('.messageResultNew');
 if(inputAdd != null) searchBreed(inputAdd, ulAdd, newBreedAdd, messageResultAdd)
+
+
+    let newBreed = document.getElementById('newBreed')
+    newBreed.addEventListener('input',()=>{
+        if(verifAnimalNameRegex(newBreed.value) || newBreed.value==''){
+            newBreed.style = 'outline : 1px solid black'
+        }
+        else{
+            newBreed.style = 'outline : 1px solid red'
+            newBreed.value = cancelLastCharacter(newBreed.value)
+        }
+    })
+
+    let newAnimalName = document.getElementById('newAnimalName')
+    newAnimalName.addEventListener('input',()=>{
+        if(verifAnimalNameRegex(newAnimalName.value) || newAnimalName.value==''){
+            newAnimalName.style = 'outline : 1px solid black'
+        }
+        else{
+            newAnimalName.style = 'outline : 1px solid red'
+            newAnimalName.value = cancelLastCharacter(newAnimalName.value)
+        }
+    })
+
+    let NAPDescription = document.getElementById('NAP-Description')
+    NAPDescription.addEventListener('input',()=>{
+        if(verifDescriptionRegex(NAPDescription.value) || NAPDescription.value==''){
+            NAPDescription.style = 'outline : 1px solid black'
+        }
+        else{
+            NAPDescription.style = 'outline : 1px solid red'
+            NAPDescription.value = cancelLastCharacter(NAPDescription.value)
+        }
+    })
+
+    let newAnimalBreed = document.getElementById('NAP-Description')
+    newAnimalBreed.addEventListener('input',()=>{
+        if(verifAnimalNameRegex(newAnimalBreed.value) || newAnimalBreed.value==''){
+            newAnimalBreed.style = 'outline : 1px solid black'
+        }
+        else{
+            newAnimalBreed.style = 'outline : 1px solid red'
+            newAnimalBreed.value = cancelLastCharacter(newAnimalBreed.value)
+        }
+    })
+
+    let newBreedUpd = document.querySelectorAll('.js-newBreed')
+    if(newBreedUpd != null)
+        for(let i=0; i<newBreedUpd.length; i++)
+    {
+        newBreedUpd[i].addEventListener('input',()=>{
+            if(verifAnimalNameRegex(newBreedUpd[i].value) || newBreedUpd[i].value==''){
+                newBreedUpd[i].style = 'outline : 1px solid black'
+            }
+            else{
+                newBreedUpd[i].style = 'outline : 1px solid red'
+                newBreedUpd[i].value = cancelLastCharacter(newBreedUpd[i].value)
+            }
+        })
+    }
+
+    let updateAnimalName = document.querySelectorAll('.js-updateAnimalName')
+    if(updateAnimalName != null)
+        for(let i=0; i<updateAnimalName.length; i++)
+    {
+        updateAnimalName[i].addEventListener('input',()=>{
+            if(verifAnimalNameRegex(updateAnimalName[i].value) || updateAnimalName[i].value==''){
+                updateAnimalName[i].style = 'outline : 1px solid black'
+            }
+            else{
+                updateAnimalName[i].style = 'outline : 1px solid red'
+                updateAnimalName[i].value = cancelLastCharacter(updateAnimalName[i].value)
+            }
+        })
+    }
+
+    let UAPDescription = document.querySelectorAll('.js-UAPDescription')
+    if(UAPDescription != null)
+        for(let i=0; i<UAPDescription.length; i++)
+    {
+        UAPDescription[i].addEventListener('input',()=>{
+            if(verifAnimalNameRegex(UAPDescription[i].value) || UAPDescription[i].value==''){
+                UAPDescription[i].style = 'outline : 1px solid black'
+            }
+            else{
+                UAPDescription[i].style = 'outline : 1px solid red'
+                UAPDescription[i].value = cancelLastCharacter(UAPDescription[i].value)
+            }
+        })
+    }

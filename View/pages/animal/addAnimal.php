@@ -31,7 +31,7 @@ else{?>
                     </br>
                     <div class="element">
                         <label for="newAnimalBreed">Race :</label>
-                        <input type="text" class="addBreed" id="newAnimalBreed" autocomplete="off">
+                        <input type="text" class="addBreed" id="newAnimalBreed" autocomplete="off" pattern="^([a-zA-Zèéëïç\- ])+$">
                         <?php $breeds = listAllBreeds(); ?>
                     </div>
                     <div>
@@ -50,13 +50,13 @@ else{?>
                             <p class="notBreed">La race saisie n'a pas de résultat</p>
                             <div class="element">
                                 <label for="newBreed">Nouvelle race à créer et à affecter à l'animal :</label>
-                                <input type="text" id="newBreed" name="newBreed">
+                                <input type="text" id="newBreed" name="newBreed" pattern="^([a-zA-Zèéëïç\(\)\- ])+$">
                             </div>
                         </div>
                     </div>
                     <div class="element">
                         <label for="newAnimalName">Nom :</label>
-                        <input type="text" name="newAnimalName" id="newAnimalName" required />
+                        <input type="text" name="newAnimalName" id="newAnimalName" pattern="^([a-zA-Z0-9èéëïç\- ])+$" required />
                     </div>
                     <div class="element">
                         <div class="addImg">
@@ -65,7 +65,7 @@ else{?>
                             <div class="img-element"><input type="file" name="newAnimalPhoto" id="newAnimalPhoto"></div>
 
                             <div class="img-element"><label for="NAP-Description">Description de la photo :</label>
-                            <input type="text" name="NAP-Description" id="NAP-Description"></div>
+                            <input type="text" name="NAP-Description" id="NAP-Description" pattern="^([a-zA-Z0-9èéëïç&!?,:;\(\)\- ])+$"></div>
 
                             <div class="img-element"><input type="checkbox" name="NAP-checkboxPortrait" id="checkbox-portrait">
                             <label for="checkbox-portrait<?php echo($animal['id']); ?>">la photo est en portrait</label></div>
