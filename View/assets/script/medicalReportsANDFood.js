@@ -47,8 +47,10 @@ if(dialogNR != null){
 else{
     dialogNR = document.getElementById('dialogFed');
     const triggerNR = document.querySelector('#popupFed'); 
-    const dismissTriggerNR = dialogNR.querySelector('#closeFed');
-    popup(dialogNR,triggerNR,dismissTriggerNR)
+    if(dialogNR != null){
+        const dismissTriggerNR = dialogNR.querySelector('#closeFed');
+        popup(dialogNR,triggerNR,dismissTriggerNR)
+    }
 }
 
 
@@ -72,41 +74,42 @@ function nbResult(filter, list){
     return count;
 }
 
-searchAnimal.addEventListener('input',() => {
-    const filter = searchAnimal.value.toUpperCase();
-    const li = list.getElementsByTagName('li');
-    if(filter != ""){
-        for(let k=0; k<li.length;k++){
-            li[k].classList.remove('none');
-        }
-    }
-    if(nbResult(filter,li) <= 5){
-        for (let j = 0; j < li.length; j++) {
-            const label = li[j].getElementsByTagName("label")[0];
-            const txtValue = label.textContent || label.innerText;
-            //on vérifie la correspondance entre les boutons radios et la saisie
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[j].classList.remove('none');
-            } else {
-                li[j].classList.add('none');
+if( searchAnimal != null)
+    searchAnimal.addEventListener('input',() => {
+        const filter = searchAnimal.value.toUpperCase();
+        const li = list.getElementsByTagName('li');
+        if(filter != ""){
+            for(let k=0; k<li.length;k++){
+                li[k].classList.remove('none');
             }
         }
-        msg.classList.add('none');
-    }
-    else{
-        if(filter != ""){
-            msg.classList.remove('none');
+        if(nbResult(filter,li) <= 5){
+            for (let j = 0; j < li.length; j++) {
+                const label = li[j].getElementsByTagName("label")[0];
+                const txtValue = label.textContent || label.innerText;
+                //on vérifie la correspondance entre les boutons radios et la saisie
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[j].classList.remove('none');
+                } else {
+                    li[j].classList.add('none');
+                }
+            }
+            msg.classList.add('none');
         }
         else{
-            msg.classList.add('none');
-        } 
-    }
-    if(filter == "" || nbResult(filter,li)>5){
-        for(let k=0; k<li.length;k++){
-            li[k].classList.add('none');
+            if(filter != ""){
+                msg.classList.remove('none');
+            }
+            else{
+                msg.classList.add('none');
+            } 
         }
-    }
-})
+        if(filter == "" || nbResult(filter,li)>5){
+            for(let k=0; k<li.length;k++){
+                li[k].classList.add('none');
+            }
+        }
+    })
 
 let dateNewReport = document.getElementById('dateNewReport')
 if(dateNewReport !=null){

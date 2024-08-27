@@ -78,6 +78,7 @@ if(inputAdd != null) searchBreed(inputAdd, ulAdd, newBreedAdd, messageResultAdd)
 
 
     let newBreed = document.getElementById('newBreed')
+    if(newBreed != null)
     newBreed.addEventListener('input',()=>{
         if(verifAnimalNameRegex(newBreed.value) || newBreed.value==''){
             newBreed.style = 'outline : 1px solid black'
@@ -89,6 +90,7 @@ if(inputAdd != null) searchBreed(inputAdd, ulAdd, newBreedAdd, messageResultAdd)
     })
 
     let newAnimalName = document.getElementById('newAnimalName')
+    if(newAnimalName != null)
     newAnimalName.addEventListener('input',()=>{
         if(verifAnimalNameRegex(newAnimalName.value) || newAnimalName.value==''){
             newAnimalName.style = 'outline : 1px solid black'
@@ -100,6 +102,7 @@ if(inputAdd != null) searchBreed(inputAdd, ulAdd, newBreedAdd, messageResultAdd)
     })
 
     let NAPDescription = document.getElementById('NAP-Description')
+    if(NAPDescription != null)
     NAPDescription.addEventListener('input',()=>{
         if(verifDescriptionRegex(NAPDescription.value) || NAPDescription.value==''){
             NAPDescription.style = 'outline : 1px solid black'
@@ -111,6 +114,7 @@ if(inputAdd != null) searchBreed(inputAdd, ulAdd, newBreedAdd, messageResultAdd)
     })
 
     let newAnimalBreed = document.getElementById('NAP-Description')
+    if(newAnimalBreed != null)
     newAnimalBreed.addEventListener('input',()=>{
         if(verifAnimalNameRegex(newAnimalBreed.value) || newAnimalBreed.value==''){
             newAnimalBreed.style = 'outline : 1px solid black'
