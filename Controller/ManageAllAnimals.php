@@ -144,6 +144,11 @@ $first = ($currentPage * $perPage) - $perPage;
 $nbAnimals=0;
 
 declareFilter($breeds, $housings, $isVisible, $sort, $first);
-$animals = allAnimals($breeds, $housings, $isVisible, $sort, $first, $perPage,$nbAnimals);
+if(authorize(['connected'])){
+    $animals = allAnimals($breeds, $housings, $isVisible, $sort, $first, $perPage,$nbAnimals);
+}
+else{
+    $animals = allAnimals($breeds, $housings, 1, $sort, $first, $perPage,$nbAnimals);
+}
 $pages = ceil($nbAnimals / $perPage);
 if(isset($_POST['animalSelected'])) $_SESSION['allAnimals_animalSlected']=$_POST['animalSelected'];

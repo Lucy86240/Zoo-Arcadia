@@ -36,25 +36,27 @@ function listAnimalsWithFilter(array $breeds, array $housings, $isVisible, $sort
         if($breeds!=[] || $housings!=[] || $isVisible==0 || $isVisible==1) $request = 'WHERE ';
         $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
         if($breeds != []){
-            $request .= 'animals.breed = '.$breeds[0];
+            $request .= '(animals.breed = '.$breeds[0];
             if(count($breeds)>1){
                 for($i=1;$i<count($breeds);$i++){
                     $request .= ' OR animals.breed = '.$breeds[$i];
                 }
             }
+            $request.=')';
         }
         if($housings != []){
             if($request!="WHERE ") $request .= " AND ";
-            $request .= 'animals.housing = '.$housings[0];
+            $request .= '(animals.housing = '.$housings[0];
             if(count($housings)>1){
                 for($i=1;$i<count($housings);$i++){
                     $request .= ' OR animals.housing = '.$housings[$i];
                 }
             }
+            $request .=')';
         }
         if($isVisible==0 || $isVisible==1){
             if($request!="WHERE ") $request .= " AND ";
-            $request .= 'animals.isVisible = '.$isVisible;
+            $request .= '(animals.isVisible = '.$isVisible.')';
         }
 
         $offset = '';
@@ -67,7 +69,7 @@ function listAnimalsWithFilter(array $breeds, array $housings, $isVisible, $sort
         }else{
             $sortRequest="animals.id_animal DESC";
         }
-        $stmt = $pdo->prepare('SELECT animals.* FROM animals JOIN breeds ON animals.breed = breeds.id_breed '.$request.' ORDER BY '.$sortRequest.' LIMIT :limit'.$offset);
+        $stmt = $pdo->prepare('SELECT animals.* FROM animals JOIN breeds ON animals.breed = breeds.id_breed '.$request.' ORDER BY '.$sortRequest.' LIMIT :limit '.$offset);
         $stmt->bindParam(':limit',$nbAnimals,PDO::PARAM_INT);
         $stmt->setFetchMode(PDO::FETCH_CLASS,'Animal');
         if($stmt->execute()){
