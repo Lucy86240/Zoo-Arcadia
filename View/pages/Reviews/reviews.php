@@ -111,8 +111,8 @@ else{?>
                             </div>
                         </div>
                     <?php } ?>
-                    <?php if(authorize(['Employé.e','Administrateur.rice'])){ ?>
                         <div id="choicesMobile">
+                        <?php if(authorize(['Employé.e','Administrateur.rice'])){ ?>
                             <div class="choice">
                                 <div class="title-choice">                
                                     <img class="icon-filter" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/buttons/filter.svg" alt="filtrer">
@@ -222,7 +222,7 @@ else{?>
                                     </div>
                                 <?php } ?>
                             </div>
-                            <p>“<?php echo($review["comment"]);?>”</p>  
+                            <p>”<?php echo($review["comment"]);?>”</p>  
                             <?php if(authorize(['Employé.e','Administrateur.rice'])){ ?>      
                                 <div class="check">
                                     <p>Vérifié le 

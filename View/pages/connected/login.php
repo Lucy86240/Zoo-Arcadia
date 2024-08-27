@@ -31,7 +31,7 @@ else{?>
                 <form class="login-form" method="POST" action="">
                     <div class="element">
                         <label for="user">Votre mail : </label>
-                        <input type="mail" name="user" id="user" required placeholder="mail@exemple.fr" autocomplete="email">
+                        <input type="email" name="user" id="user" required placeholder="mail@exemple.fr" autocomplete="email">
                     </div>
                     <div class="element">
                         <label for="password">Votre mot de passe : </label>

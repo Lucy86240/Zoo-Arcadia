@@ -106,7 +106,7 @@ else{?>
                                 <a class="icon js-iconComments" href="commentaires_habitats">
                                     <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Voir la liste de tous les commentaires"></div>
                                 </a>
-                                <?php if(authorize(['vétérinaire'])){ ?>
+                                <?php if(authorize(['Vétérinaire'])){ ?>
                                 <div class="icon js-iconComments js-iconAddComments" id_housing="<?php echo($housing['id']) ?>">
                                     <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un commentaire">
                                 </div>
@@ -116,7 +116,7 @@ else{?>
                         </div>
                         <div class="legendsComments">
                             <span class="js-legendComments none">Voir tous les commentaires</span>
-                            <?php if(authorize(['vétérinaire'])){ ?>
+                            <?php if(authorize(['Vétérinaire'])){ ?>
                                 <span class="js-legendComments none">Ajouter un commentaire</span>
                             <?php } ?>
                         </div>
@@ -132,7 +132,7 @@ else{?>
                                     <div class="icon js-iconArchive" id_comment="<?php echo($comment['idComment']) ?>">
                                         <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/archive.svg" alt="Archiver le commentaire">
                                     </div>
-                                    <?php if(authorize(['vétérinaire'])){ ?>
+                                    <?php if(authorize(['Vétérinaire'])){ ?>
                                         <div class="icon popupDesktop deleteIcon" id_comment="<?php echo($comment['idComment']) ?>">
                                             <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer le commentaire">
                                         </div>
@@ -195,15 +195,17 @@ else{?>
         <?php   $count++;
         } ?>
 
+        <?php if(authorize(['Vétérinaire'])){ ?>
         <div id="addComment" class="none c-dialog">
             <div class="fond"></div>
-            <div role="document" class="c-dialog__box popup">
+            <div role="document" class="c-dialog__box popup themeBeige">
                 <div class="Entete">
                     <h3 class="dialog-title">Nouveau commentaire</h3>
                     <button class="close" type="button" aria-label="Fermer" title="Fermer nouveau commentaire" data-dismiss="dialog">x</button>
                 </div>
             <?php include_once "View/pages/commentsVetoHousing/addComments.php"?>
         </div>
+        <?php } ?>
         <script src="View/assets/script/popup.js"></script>
         <script src="View/assets/script/housings.js"></script>
         <script src="View/assets/script/commentVetoHousing.js"></script>

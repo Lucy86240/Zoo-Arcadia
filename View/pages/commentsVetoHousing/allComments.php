@@ -11,7 +11,7 @@ else{?>
             <a class="icon js-iconComments" href="habitats">
                 <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/housing.svg" alt="Voir les habitats"></div>
             </a>
-            <?php if(authorize(['vétérinaire'])){ ?>
+            <?php if(authorize(['Vétérinaire'])){ ?>
                 <div class="icon js-iconComments js-iconAddComments" id_housing="<?php echo($housing['id']) ?>">
                     <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un commentaire">
                 </div> 
@@ -21,16 +21,18 @@ else{?>
             <span class="js-legendComments none">Voir les habitats</span>
             <span class="js-legendComments none">Ajouter un commentaire</span>
         </div>
-        <div id="addComment" class="none c-dialog">
-            <div class="fond"></div>
-            <div role="document" class="c-dialog__box popup">
-                <div class="Entete">
-                    <h3 class="dialog-title">Nouveau commentaire</h3>
-                    <button class="close" type="button" aria-label="Fermer" title="Fermer nouveau commentaire" data-dismiss="dialog">x</button>
+        <?php if(authorize(['Vétérinaire'])){ ?>
+            <div id="addComment" class="none c-dialog">
+                <div class="fond"></div>
+                <div role="document" class="c-dialog__box popup themeBeige">
+                    <div class="Entete">
+                        <h3 class="dialog-title">Nouveau commentaire</h3>
+                        <button class="close" type="button" aria-label="Fermer" title="Fermer nouveau commentaire" data-dismiss="dialog">x</button>
+                    </div>
+                <?php include_once "View/pages/commentsVetoHousing/addComments.php"?>
                 </div>
-            <?php include_once "View/pages/commentsVetoHousing/addComments.php"?>
             </div>
-        </div>
+        <?php } ?>
         <h1>Commentaires des vétérinaires</h1>
         <form method="POST" id="filter" action="">
             <div class="titleFilter"><span>Filtres </span></div>

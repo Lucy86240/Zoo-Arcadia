@@ -23,7 +23,7 @@ else{?>
                     
                     <?php if(authorize(['Administrateur.rice'])){ ?>
                         <!-- bouton de suppression seulement pour admin-->
-                        <a href="#" class="bgc-img-box iconDelete <?php permission(['Administrateur.rice']); ?>"><img class="img-box" src="View/assets/img/general/icons/delete.svg" alt="Supprimer service"></a>
+                        <a href="#" class="bgc-img-box iconDelete"><img class="img-box" src="View/assets/img/general/icons/delete.svg" alt="Supprimer service"></a>
                         
                         <!-- le popup de suppression s'affichant quand la poubelle est cliquée-->
                         <div class="none c-dialog popupDelete">

@@ -87,7 +87,7 @@ else{?>
                                 <span class="legendAnimal">Repas</span>
                             </a>
                         </div>
-                        <?php if(authorize(['Administrateur.rice','Employé.e'])){ ?>
+                        <?php if(authorize(['Employé.e'])){ ?>
                             <div class="icon">
                                 <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>nourrir/?animal=<?php echo($animal['id']); ?>">
                                     <div class="bgc-img-box"><img class="img-box feedAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/feed.svg" alt="Nourrir"></div>

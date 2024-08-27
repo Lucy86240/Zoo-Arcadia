@@ -340,7 +340,9 @@
 }
 
 .fedAnimalPage{
-    background: linear-gradient(var(--beige), var(--brown));
+    padding-top: 20px;
+    border-radius: 20px;;
+    background-color : var(--brown);
     color : var(--beige);
     textarea, input[type="text"], input[type="date"], input[type="time"]{
         background-color: var(--white);

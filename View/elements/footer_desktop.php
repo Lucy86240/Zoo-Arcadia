@@ -25,7 +25,9 @@ else{ ?>
                         <span>12345 VilleBidon</span>
                         </br>
                         <span> +33 ** ** ** **</span>
-                        <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>contact">Nous contacter</a>
+                        <?php if(authorize(['disconnect'])){?>
+                            <a href="<?php if(isset($optionPage) && $optionPage){echo("../");}?>contact">Nous contacter</a>
+                        <?php } ?>
                     </div>
             </div>
             <div class="schedules-container">

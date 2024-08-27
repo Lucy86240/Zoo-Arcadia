@@ -34,7 +34,7 @@ else{
         new Route('animaux',true,'Animaux','View/pages/animal/allAnimals.php',[],'Controller/ManageAllAnimals.php'),
         new Route('dashboard',false,'Dashboard','View/pages/dashboard.php',['connected'],'Controller/DashboardController.php'),
         new Route('comptes_utilisateurs',false,'Comptes utilisateur','View/pages/usersBoard.php',['Administrateur.rice'],'Controller/ManageUsers.php'),
-        new Route('contact',false,'Contact','View/pages/contact.php',['disconnected'],'Controller/ManageContact.php'),
+        new Route('contact',false,'Contact','View/pages/contact.php',['disconnect'],'Controller/ManageContact.php'),
         new Route('horaires',false,'Mise à jour horaires','View/pages/updateSchedules.php',['Administrateur.rice'],'Controller/updateSchedules.php'),
         new Route('mentions_legales',false,'Mentions légles','View/pages/legalNotice.php',[],'Controller/attributions.php'),
         new Route('politique_confidentialite',false,'Politique de confidentialité','View/pages/privacyPolicy.php',[],'Controller/attributions.php'),

@@ -36,9 +36,11 @@ else{?>
                                 <li class="nav-item">
                                     <a class="nav-link <?php if($_SERVER['REQUEST_URI']=='/habitats') echo('active') ?> text-white" id="<?php if($optionPage){echo("../");}?>housings" href="<?php if($optionPage==true){echo("../");}?>habitats">Nos habitats</a>
                                 </li>
+                                <?php if(authorize(['disconnect'])){?>
                                 <li class="nav-item">
                                     <a class="nav-link <?php if($_SERVER['REQUEST_URI']=='/contact') echo('active') ?> text-white" id="<?php if($optionPage){echo("../");}?>contact" href="<?php if($optionPage==true){echo("../");}?>contact">Contact</a>
                                 </li>
+                                <?php } ?>
                                     <?php if(authorize(['connected'])){ ?>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link connected-link" id="dropdown-toggle" href="#" role="button" aria-expanded="false">
@@ -48,7 +50,7 @@ else{?>
                                             </a>
                                             <ul class="dropdown-menu none top" id="dropdown-menu">
                                                 <li><a class="dropdown-item" href="<?php if($optionPage){echo("../");}?>dashboard">Tableau de bord</a></li>
-                                                <?php if(authorize(['Administrateur.rice','vétérinaire'])){ ?>
+                                                <?php if(authorize(['Administrateur.rice','Vétérinaire'])){ ?>
                                                     <li><a class="dropdown-item" href="<?php if($optionPage){echo("../");}?>rapports_medicaux">Comptes-rendus vétérinaires</a></li>
                                                 <?php } ?>
                                                 <li><a class="dropdown-item" href="<?php if($optionPage){echo("../");}?>animaux">Animaux</a></li>

@@ -116,6 +116,9 @@
                 }
             }    
         }
+        .popup-confirm{
+            background-color: var(--beige);
+        }
     }
 
     .theme-green{
