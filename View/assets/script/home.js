@@ -12,7 +12,7 @@ for(let i=0; i<housings.length;i++){
     for(let j=0; j<imgAnimalHousingDesktop.length; j++){
         img=imgAnimalHousingDesktop[j].querySelector('img');
         imgSrc.push(img.getAttribute('src'));
-        imgAlt.push(img.alt);
+        imgAlt.push(img.getAttribute('alt'));
         nameA = imgAnimalHousingDesktop[j].querySelector('span');
         nameAnimal.push(nameA.innerHTML)
     }
@@ -79,7 +79,7 @@ function versionMobileHousing(){
     /*carrousel animaux mobile*/
 const slidesAnimals = document.querySelectorAll(".js-slideAnimal");
 const rounds = document.querySelectorAll(".round");
-slideIndex = 0;
+let slideIndex = 0;
 const nbSlideViewAnimals = 1;
 
 const showSlidesAnimal = (firstSlide) => {
