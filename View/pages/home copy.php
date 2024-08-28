@@ -26,34 +26,27 @@ else{?>
                     ?>
                     <div class="home-housing-container js-slide">
                         <div class="home-img-font"> 
-                            <div class="home-title-housing-position">
-                                <h3 class="text-brown text-center home-housing-title"><?php echo($housing["name"]); ?></h3>
-                            </div>
-                            <div>
-                                <img class="home-housing-img rounded-circle " src="<?php echo($housing["images"][0]["path"]); ?>" alt="<?php echo($housing["images"][0]["description"]);?>">
-                            </div>
+                            <div class="home-title-housing-position"><h3 class="text-brown text-center home-housing-title"><?php echo($housing["name"]); ?></h3></div>
+                            <div><img class="home-housing-img rounded-circle " src="<?php echo($housing["images"][0]["path"]); ?>" alt="<?php echo($housing["images"][0]["description"]);?>"></div>
                         </div>
+
                         <?php if(isset($housing["animals"][0])){
                             $animal1 = $housing["animals"][0];?>
-                            <div class="home-img-font js-homeAnimal">
-                                <div>
-                                    <img class="home-animal-img rounded-circle home-housing-animal1" src="<?php echo($animal1["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal1["imagesAnimals"][0]["descriptionAnimals"]); ?>">
-                                </div>
-                                <div class="home-title-animal1-position none">
-                                    <span class="text-center home-animal-title"><?php echo($animal1["name"]); ?></span>
-                                </div>
+                            <div class="home-img-font">
+                                <div><img class="home-animal-img rounded-circle home-housing-animal1" src="<?php echo($animal1["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal1["imagesAnimals"][0]["descriptionAnimals"]); ?>"></div>
+                                <div class="home-title-animal1-position none"><span class="text-center home-animal-title"><?php echo($animal1["name"]); ?></span></div>
                             </div>
                         <?php }
                         if(isset($housing["animals"][1])){
                             $animal2 = $housing["animals"][1];?>
-                            <div class="home-img-font js-homeAnimal">
+                            <div class="home-img-font">
                                 <img class="home-animal-img rounded-circle home-housing-animal2" src="<?php echo($animal2["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal2["imagesAnimals"][0]["descriptionAnimals"]); ?>">
                                 <div class="home-title-animal2-position none"><span class="text-center home-animal-title"><?php echo($animal2["name"]); ?></span></div>
                             </div>
                         <?php }
                         if(isset($housing["animals"][2])){
                         $animal3 = $housing["animals"][2];?>
-                            <div class="home-img-font js-homeAnimal">
+                            <div class="home-img-font">
                                 <img class="home-animal-img rounded-circle home-housing-animal3" src="<?php echo($animal3["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal3["imagesAnimals"][0]["descriptionAnimals"]); ?>">
                                 <div class="home-title-animal3-position none"><span class="text-center home-animal-title"><?php echo($animal3["name"]); ?></span></div>
                             </div>
@@ -67,6 +60,29 @@ else{?>
 
     <!-- animals for mobile -->
     <section class="animals-mobile">
+        <h2>Plus de 1200 animaux à découvrir</h2>
+        <?php 
+        $nbAnimals=0;
+        foreach($housings as $housing){
+            for($i=0;$i<3;$i++){
+                if(isset($housing["animals"][$i])){
+                    $nbAnimals++;
+                    $animal = $housing["animals"][$i]; ?>
+                    <div class = "animal-mobile js-slideAnimal">
+                        <h3><?php echo($animal["name"]); ?></h3>
+                        <img class="img-animal-mobile" src="<?php echo($animal["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal["imagesAnimals"][0]["descriptionAnimals"]); ?>">
+                        <a href="">Découvrir</a>
+                    </div>
+        <?php }}}?>
+        <div class="rounds rounds-beige">
+            <?php
+            for($i=0;$i<$nbAnimals;$i++){ ?>
+                <div class="round"> </div>  
+            <?php }
+            ?>
+        </div>
+        
+        <div class="button"><button type="button" class="btn btn-DarkGreen">En voir plus...</button></div>
     </section>
 
     <section class = "home-services">

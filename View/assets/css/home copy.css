@@ -1,0 +1,420 @@
+/*HERO SECTION*/
+
+.background{
+    @media only screen and (max-width: 576px){
+        background-image: url(../img/general/home_background_mobile.jpg);
+    }
+    @media only screen and (min-width: 576px){
+        background-image: url(../img/general/home_background_desktop.jpg);
+    }
+    background-size: cover;
+    top:0vh;
+    height:100vh;
+}
+
+.home-hero{
+    height:100vh;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    h1{  
+        color : var(--beige);
+    }
+    p{
+        color:var(--white);
+    }
+}
+
+/*styles specials for mobile*/
+@media only screen and (max-width: 576px){
+    .home-hero{
+        h1{  
+            padding-top : 10vh;
+        }
+        p{
+            padding-top: 15vh;
+            padding-left:15vw;
+            padding-right:15vw;
+        }
+    }
+}
+
+/*styles specials for desktop*/
+@media only screen and (min-width: 576px){
+    .home-hero{
+        h1{  
+        padding-top: 25vh;
+        }
+        p{
+            padding-top: 15vh;
+            padding-left:35vw;
+            padding-right:30vw;
+        }
+    }
+}
+
+
+/*HOUSINGS SECTION*/
+
+/*styles specials for mobile*/
+@media only screen and (max-width: 576px){
+
+    .home-housings-title-desktop,
+    .home-animal-img,
+    .home-housing-animal1,
+    .home-title-animal1-position,
+    .home-animal-title,
+    .home-housing-animal2,
+    .home-title-animal2-position,
+    .home-housing-animal3,
+    .home-title-animal3-position{
+        display:none
+    }
+    .home-housings{
+        background: var(--beige);
+        padding-bottom: 2vh;
+    }
+
+    .home-housings-container{
+        margin-top: 2vh;
+    }
+
+    .home-housings-title-mobile{
+        background-color: var(--brown);
+        padding-top:5vh;
+        padding-bottom:5vh;
+        margin-bottom:5vh;
+    }
+
+    .home-housing-img{
+        width: 40vw;
+        filter:drop-shadow(1px 1px);
+    }
+
+    .home-img-font{
+        display:flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-top:2vw;
+    }
+
+    .animals-mobile{
+        background-color : var(--green);
+        h2{
+            color : var(--white);
+            background-color: var(--dark_green);
+            padding-top:5vh;
+            padding-bottom:5vh;
+            margin-bottom:5vh;
+            text-align: center;
+        }
+
+        .animal-selected{
+            padding : 15px;
+            background-color: var(--dark_green);
+        }
+
+        .animal-mobile{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 20px;
+            margin-left : 5vw;
+            margin-right : 5vw;
+            filter:drop-shadow(1px 1px);
+
+            h3{
+                padding-bottom: 10px;
+                color: var(--white);
+            }
+            a{
+                padding-top: 10px;
+                text-decoration: none;
+                color : var(--white);
+            }
+        }
+
+        .img-animal-mobile{
+            width : 60vw;
+
+        }
+    }
+}
+
+/*styles specials for desktop*/
+@media only screen and (min-width: 576px){
+    .animals-mobile{
+        display:none;
+    }
+
+    .home-housings{
+        background: linear-gradient(var(--dark_green), var(--blue));
+
+        .home-housings-title-desktop{
+            padding-top: 80px;
+            padding-bottom: 40px;
+            margin-left:20%;
+            margin-right:20%;
+        }
+
+        .home-housings-title-mobile{
+            display:none;
+        }
+
+        .home-housings-container{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-left : 6vw;
+
+            .home-housing-container{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .home-img-font{
+                    position:relative;
+                }
+
+
+                .home-title-housing-position{
+                    position:absolute;
+                    margin-left: 8vw;
+
+                }
+                .home-housing-title{
+                    padding: 5px;
+                    background-color:  rgba(250,255,241,0.5);
+                    border-radius: 10px;
+                }
+                .home-housing-img{
+                    width: 25vw;
+                    margin : 10px;
+                }
+
+                .home-animal-img{
+                    width: 30%;
+                }
+
+                .home-animal-img:hover{
+                    border: 2px solid var(--green);
+                    -webkit-transform: scale(1.3);
+                    transform: scale(1.3);
+                }
+
+                .home-animal-img_not-hover{
+                    width: 25%;
+                    opacity: 0.5;
+                }
+
+                .home-housing-animal1{
+                    margin-top:1vh;
+                    margin-right:45%;
+                }
+
+                .home-title-animal1-position{
+                    position:absolute;
+                    left:22%;
+                    transform: translate(-100%,-50%);
+                }
+                .home-animal-title{
+                    background-color: var(--dark_green);
+                    color: var(--green);
+                    padding:10px;
+                    border-radius:10px;
+                }
+
+
+                .home-housing-animal2{
+                    margin-top:-1vh;
+                    margin-left:25%;
+                }
+
+                .home-title-animal2-position{
+                    position:absolute;
+                    right:30%;
+                    transform: translate(-50%,-50%);
+                }
+
+                .home-housing-animal3{
+                    margin-top: 1vh;
+                    margin-left:5%;
+                }
+                .home-title-animal3-position{
+                    position:absolute;
+                    left:27%;
+                    transform: translate(-100%,-50%);
+                }
+            }
+        }
+    }
+}
+
+
+/*SERVICES SECTION*/
+
+/*style commun*/
+.home-services{
+    background-color: var(--blue);
+    padding-bottom : 2vh;
+
+    .home-service{
+        background-color : var(--green);
+        margin-left: 20vw;
+        margin-right: 20vw;
+        margin-top : 20px;
+
+        border-radius : 20px;
+        img{
+            margin : 2%;
+            filter:drop-shadow(1px 1px);
+        }
+        h3{
+            color : var(--blue);
+        }
+    }
+}
+
+/*styles specials for mobile*/
+@media only screen and (max-width: 576px){
+    .home-services{
+        h2{
+            background-color: var(--green);
+            padding-top:5vh;
+            padding-bottom:5vh;
+            margin-bottom:5vh;
+        }
+    }
+
+    .home-service{
+        padding-top : 5px;
+        padding-bottom: 5px;
+        text-align: center;
+        img{
+            width : 20vw;
+        }
+    }
+}
+
+/*styles specials for desktop*/
+@media only screen and (min-width: 576px){
+    .home-services{
+        h2{
+            padding-top:10vh;
+        }
+    }
+
+    .home-service{
+        display : flex;
+        align-items : center;
+        padding-top : 10px;
+        padding-bottom: 10px;
+        padding-left : 15px;
+        img{
+            width : 10vw;
+            margin-bottom:2%;
+        }
+        h3{
+            margin-left : 3%;
+        }
+    }
+}
+
+/*REVIEWS*/
+
+.home-reviews{
+    padding-bottom: 10vh;
+    a{
+        text-decoration: none;
+    }
+    .home-review{
+        border-radius: 20px;
+        
+        p{
+            padding: 15px;
+        }
+        .h-review-date{
+            font-size:0.9em;
+        }
+        .home-review-stars, h3{
+            padding-left : 15px;
+        }
+
+        h3{
+            padding-top: 15px;
+        }
+    }
+    .buttons{
+        display: flex;
+        flex-direction: row;   
+        .edit-review{
+            width: 24px;
+        }
+        .btn-edit{
+            background-color: var(--blue) !important;
+        }
+    }
+    .home-button-review{
+        #popup-review{
+            margin-right : 50px;
+        }
+    }
+}
+
+/*styles specials mobile*/
+@media only screen and (max-width: 576px){
+    .home-reviews{
+        background-color: var(--brown);
+        h2{
+            background-color: var(--beige);
+            color : var(--brown) !important;
+            padding-top:5vh;
+            padding-bottom:5vh;
+            margin-bottom:5vh;
+        }
+        .home-reviews-container-desktop{
+            display : none;
+        }
+        .home-review{
+            margin:auto;
+            background-color: var(--white);
+            color: var(--blue);
+            width : 80vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        p{
+            text-align: center;
+        }
+        .buttons{
+            justify-content: center;
+        }
+    }
+}
+
+/*styles specials desktop*/
+@media only screen and (min-width: 576px){
+    .home-reviews{
+        background: linear-gradient(var(--blue), var(--beige));
+        h2{
+            padding-top:10vh;
+            padding-bottom: 8vh;
+        }
+        .home-reviews-container-desktop{
+            display: flex;
+            justify-content: space-around;
+        }
+        .home-reviews-container-mobile{
+            display : none;
+        }
+        .home-review{
+            background-color: var(--brown);
+            color: var(--white);
+            width: 20vw;
+        }
+        .buttons{
+            justify-content: flex-end;
+        }
+    }
+}
