@@ -1,8 +1,6 @@
 <?php if($_SERVER['REQUEST_URI']=='/View/pages/services/services.php'){
-    ?>
-    <link rel="stylesheet" href = "../View/assets/css/style.css">
-    <?php
-    require_once '../View/pages/404.php';
+    ?><link rel="stylesheet" href = "../../assets/css/style.css"> <?php
+    require_once '../404.php';
 }
 else{?>
     <section class="services">

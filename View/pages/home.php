@@ -1,8 +1,8 @@
 <?php if($_SERVER['REQUEST_URI']=='/View/pages/home.php'){
     ?>
-    <link rel="stylesheet" href = "../View/assets/css/style.css">
+    <link rel="stylesheet" href = "../assets/css/style.css">
     <?php
-    require_once '../View/pages/404.php';
+    require_once '404.php';
 }
 else{?>
     <script src = "View/assets/script/home.js" defer></script>

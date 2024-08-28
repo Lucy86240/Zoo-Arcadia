@@ -1,9 +1,7 @@
 
 <?php if($_SERVER['REQUEST_URI']=='/View/pages/foodAnimal/fedAnimal.php'){
-    ?>
-    <link rel="stylesheet" href = "../View/assets/css/style.css">
-    <?php
-    require_once '../View/pages/404.php';
+    ?><link rel="stylesheet" href = "../../assets/css/style.css"> <?php
+    require_once '../404.php';
 }
 else{?>
             <form method="POST" action="" class="fedAnimalPage">
