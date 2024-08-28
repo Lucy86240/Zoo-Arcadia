@@ -92,7 +92,7 @@ else{?>
 
         foreach($services as $service){?>
             <div class = "home-service">
-                <img class="" src="<?php echo($service["icon"]->getPath());?>" alt="<?php echo($service["icon"]->getDescription());?>">
+                <img class="" src="<?php echo($service["icon"]["path"]);?>" alt="<?php echo($service["icon"]["description"]);?>">
                 <h3 class = "cb"><?php echo($service["name"]); ?></h3>
             </div>
         <?php } ?>

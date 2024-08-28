@@ -94,7 +94,8 @@ accountConnected.addEventListener('mouseover', ()=>{
     if(nameLog.innertHTML != 'Me connecter'){
         text.classList.remove('none');
         text.style = 'color: red; font-size: 12px;';
-        nameLog.style = 'color: red;';
+        nameLog.classList.add('nameLogHover');
+        nameLog.classList.remove('nameLog');
     }
 })
 accountConnected.addEventListener('mouseout', ()=>{
@@ -106,5 +107,6 @@ accountConnected.addEventListener('mouseout', ()=>{
     }
 
     text.classList.add('none');
-    nameLog.style = 'color: var(--brown)';
+    nameLog.classList.add('nameLog')
+    nameLog.classList.remove('nameLogHover');
 })

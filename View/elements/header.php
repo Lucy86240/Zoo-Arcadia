@@ -23,7 +23,9 @@ else{?>
                         <img class="logo" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/header/logo.png" alt="logo du zoo Arcadia">
                     </a>
                     <div class="menu">
-                        <label class="mobile" for="toggle"><img class="menu-icon" src="<?php if($optionPage==true){echo("../");}?>View/assets/img/general/header/menu.svg" alt="Menu"></label>
+                        <label class="mobile" for="toggle">
+                            <img class="menu-icon" src="<?php if($optionPage==true){echo("../");}?>View/assets/img/general/header/menu.svg" alt="Menu">
+                        </label>
                         <input type="checkbox" id="toggle">
                         <div class="navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav">

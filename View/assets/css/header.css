@@ -2,7 +2,7 @@
 
 .header{
         
-    /*position: fixed;*/
+    position: fixed;
     z-index: 100;
     top: 0;
 
@@ -20,22 +20,9 @@
         }
     }
 
-    .active, .active:hover{
-        color: var(--blue) !important;
-        font-weight: bold;
-    }
-
     .connected-link{
         display: flex;
         align-items: center;
-    }
-
-    .nav-link:hover, .dropdown-item:hover,.connected-link:hover{
-        color: var(--dark_green);  
-        font-weight : bold;
-        .arrow{
-            filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(2365%) hue-rotate(39deg) brightness(90%) contrast(87%);
-        }
     }
 
     .arrow{
@@ -49,6 +36,9 @@
     }
 
     .login{
+        .nameLogHover{
+            color : red;
+        }
         .btn-logout{
             display: flex;
             flex-direction: column;
@@ -99,6 +89,17 @@
     .logo{
         display: none;
     }
+    .nav-link:hover, .dropdown-item:hover,.connected-link:hover{
+        color: var(--green);  
+        font-weight : bold;
+        .arrow{
+            filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(2365%) hue-rotate(39deg) brightness(90%) contrast(87%);
+        }
+    }
+    .active, .active:hover{
+        color: var(--beige) !important;
+        font-weight: bold;
+    }
 
     .menu-icon{
         background-color: var(--brown);
@@ -118,6 +119,10 @@
         padding:2px;
         border-radius: 50%;
 
+        .nameLog{
+            background-color: var(--brown);
+            color : var(--white);
+        }
         .account, .account-connected{
             width : 6vw;
         }
@@ -165,7 +170,9 @@
                     display: flex;
                     justify-content: center;
                     background-color: var(--brown);
-                    color : var(--white);
+                }
+                .connected-link:hover, .nav-item:hover{
+                    color : var(--green);
                 }
             }
         }
@@ -175,10 +182,21 @@
 /*version desktop*/
 @media only screen and (min-width: 556px){
     header{
+        .active, .active:hover{
+            color: var(--blue) !important;
+            font-weight: bold;
+        }
         .menu{
             display: flex;
             flex-direction: row;
             justify-content: space-around;
+        }
+        .nav-link:hover, .dropdown-item:hover,.connected-link:hover{
+            color: var(--dark_green);  
+            font-weight : bold;
+            .arrow{
+                filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(2365%) hue-rotate(39deg) brightness(90%) contrast(87%);
+            }
         }
         .navbar{
             display: flex;
@@ -259,24 +277,25 @@
 .scroll{
     @media only screen and (min-width: 556px){
         background-color : var(--beige) !important;
-    }
-    .nav-link, .dropdown-item{
-        color : var(--brown);
-        font-weight: bold;
-    }
-
-    .navbar-nav, .connected-link{
-        background-color : var(--beige) !important;
-    }
-
-    .arrow{
-        filter: brightness(0) saturate(100%) invert(27%) sepia(40%) saturate(388%) hue-rotate(349deg) brightness(100%) contrast(88%);
-    }
-    .nav-link:hover, .dropdown-item:hover, .dropdown-selected{
-        color: var(--dark_green);  
-        font-weight : bold;
-        .arrow{
-            filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(2365%) hue-rotate(39deg) brightness(90%) contrast(87%);
         }
+        /*
+        .nav-link:hover, .dropdown-item:hover, .dropdown-selected{
+            color: var(--dark_green);  
+            font-weight : bold;
+            .arrow{
+                filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(2365%) hue-rotate(39deg) brightness(90%) contrast(87%);
+            }
+        .nav-link, .nav-item, .dropdown-item{
+            color : var(--brown);
+            font-weight: bold;
+        }
+    
+        .navbar-nav, .connected-link{
+            background-color : var(--beige) !important;
+        }
+    
+        .arrow{
+            filter: brightness(0) saturate(100%) invert(27%) sepia(40%) saturate(388%) hue-rotate(349deg) brightness(100%) contrast(88%);
+        }
+    }*/
     }
-}

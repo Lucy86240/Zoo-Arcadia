@@ -13,10 +13,10 @@ else{?>
             </button>
         </form>
         <?php if(!isset($_SESSION['firstName']) || empty($_SESSION['firstName'])){ ?>
-            <span class="js-nameLog" id="popup-login" aria-haspopup="dialog" aria-controls="dialog"> Me connecter </span>
+            <span class="js-nameLog nameLog" id="popup-login"> Me connecter </span>
         <?php }
         else{ ?>
-            <span class="js-nameLog"><?php echo($_SESSION['firstName']) ?></span>
+            <span class="js-nameLog nameLog"><?php echo($_SESSION['firstName']) ?></span>
         <?php } ?>
         <div id="login-dialog" role="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-desc" aria-modal="true" tabindex="-1" class="c-dialog <?php if(!passwordError()) echo('none');?>">
             <div class="fond"></div>
