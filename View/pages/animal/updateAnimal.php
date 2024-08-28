@@ -55,14 +55,25 @@ else{?>
                         <div class="addImg">
                             <p class="title">Ajouter une photo</p>
 
-                            <div class="img-element"><input type="file" name="UpdateAnimalPhoto<?php echo($animal['id']); ?>" id="UpdateAnimalPhoto<?php echo($animal['id']); ?>"></div>
+                            <div class="img-element">
+                                <input type="file" name="UpdateAnimalPhoto<?php echo($animal['id']); ?>" id="UpdateAnimalPhoto<?php echo($animal['id']); ?>">
+                            </div>
 
-                            <div class="img-element"><label for="UAP-Description<?php echo($animal['id']); ?>">Description de la photo :</label>
-                            <input type="text" class="js-UAPDescription" name="UAP-Description<?php echo($animal['id']); ?>" id="UAP-Description<?php echo($animal['id']); ?>" pattern="^([a-zA-Z0-9èéëïç&.!?,:;\(\)\- ])+$"/></div>
+                            <div class="img-element">
+                                <label for="UAP-Description<?php echo($animal['id']); ?>">Description de la photo :</label>
+                                <textarea class="js-UAPDescription" name="UAP-Description<?php echo($animal['id']); ?>" id="UAP-Description<?php echo($animal['id']); ?>"> </textarea>
+                            </div>
 
-                            <div class="img-element"><input type="checkbox" name="UAP-checkboxPortrait<?php echo($animal['id']); ?>" id="checkbox-portrait<?php echo($animal['id']); ?>">
-                            <label for="checkbox-portrait<?php echo($animal['id']); ?>">la photo est en portrait</label></div>
-                            <p>Pour info : la photo doit être au format jpg ou png et ne pas dépasser 5 Mo.</p>
+                            <div class="img-element">
+                                <label for="UAP-attribution<?php echo($animal['id']); ?>">Attribution :</label>
+                                <textarea class="js-UAPDescription" name="UAP-attribution<?php echo($animal['id']); ?>" id="UAP-attribution<?php echo($animal['id']); ?>"> </textarea>
+                            </div>
+
+                            <div class="img-element">
+                                <input type="checkbox" name="UAP-checkboxPortrait<?php echo($animal['id']); ?>" id="checkbox-portrait<?php echo($animal['id']); ?>">
+                                <label for="checkbox-portrait<?php echo($animal['id']); ?>">la photo est en portrait</label>
+                            </div>
+                            <p>Pour info : la photo doit être au format jpg ou png et ne pas dépasser 5 Mo. <br> L'attribution sera visible dans les mentions légales.</p>
                         </div>
                     </div>
                 </div>

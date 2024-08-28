@@ -48,7 +48,7 @@ else{
                     $id = $services[$indice]->getId();
 
                     //recherche l'icone du service en cours d'ajout d'ajout dans le tableau
-                    $stmtIcon = $pdo->prepare('SELECT images.id_image, images.path, images.description, images.icon, images.portrait 
+                    $stmtIcon = $pdo->prepare('SELECT images.* 
                     FROM images_services JOIN images ON images_services.id_image = images.id_image  WHERE id_service = :id and images.icon=true');
                     $stmtIcon->bindParam(":id", $id, PDO::PARAM_INT);
                     $stmtIcon->setFetchMode(PDO::FETCH_CLASS,'Image');
@@ -61,7 +61,7 @@ else{
                     }
 
                     //recherche la photo du service
-                    $stmtPhoto = $pdo->prepare('SELECT images.id_image, images.path, images.description, images.icon, images.portrait 
+                    $stmtPhoto = $pdo->prepare('SELECT images.* 
                     FROM images_services JOIN images ON images_services.id_image = images.id_image  WHERE id_service = :id and images.icon=0');
                     $stmtPhoto->bindParam(":id", $id, PDO::PARAM_INT);
                     $stmtPhoto->setFetchMode(PDO::FETCH_CLASS,'Image');

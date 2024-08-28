@@ -42,7 +42,7 @@ else{?>
             foreach($reports as $report){ ?>
                 <div class="none c-dialog reportView">
                     <div class="fond"> </div>
-                    <div class="popup c-dialog__box reportViewContainer">
+                    <div class="popup c-dialog__box reportViewContainer themeblue">
                         <div class="Entete">
                             <h3 class="dialog-title">Rapport de <?php echo($report['animal']['name'].' - '.$report['animal']['breed'] ); ?></h3>
                             <button class="close buttonCloseReport" type="button" aria-label="Fermer" title="Fermer rapport">x</button>

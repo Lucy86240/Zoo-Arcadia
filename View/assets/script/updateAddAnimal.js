@@ -160,7 +160,7 @@ if(inputAdd != null) searchBreed(inputAdd, ulAdd, newBreedAdd, messageResultAdd)
         for(let i=0; i<UAPDescription.length; i++)
     {
         UAPDescription[i].addEventListener('input',()=>{
-            if(verifAnimalNameRegex(UAPDescription[i].value) || UAPDescription[i].value==''){
+            if(verifDescriptionRegex(UAPDescription[i].value) || UAPDescription[i].value==''){
                 UAPDescription[i].style = 'outline : 1px solid black'
             }
             else{

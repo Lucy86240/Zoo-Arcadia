@@ -18,7 +18,7 @@ else{
             //on récupère la modification du nom (si besoin)
             $nameName ="updateAnimalName".$id;
             $name = '0';
-            if(isset($_POST[$nameName]) && $_POST[$nameName]!=null){
+            if(isset($_POST[$nameName]) && $_POST[$nameName]!='' && isAnimalName($_POST[$nameName])){
                 $name = $_POST[$nameName];
                 $_POST[$nameName] = null;
             }
@@ -26,7 +26,7 @@ else{
             //on récupère la modification de l'habitat (si besoin)
             $nameHousing = "updateAnimalHousing".$id;
             $housing = 0;
-            if(isset($_POST[$nameHousing]) && $_POST[$nameHousing]!=null){
+            if(isset($_POST[$nameHousing]) && $_POST[$nameHousing]!=null && is_numeric($_POST[$nameHousing])){
                 $housing = $_POST[$nameHousing];
                 $_POST[$nameHousing] = null;
             }
@@ -34,7 +34,7 @@ else{
             //on récupère la modification de la race (si besoin)
             $nameNewBreed = "newBreed".$id;
             $newBreed = 0;
-            if(isset($_POST[$nameNewBreed]) && $_POST[$nameNewBreed]!=null && $_POST[$nameNewBreed]!=''){
+            if(isset($_POST[$nameNewBreed]) && $_POST[$nameNewBreed]!='' && isAnimalName($_POST[$nameNewBreed])){
                 $newBreed = $_POST[$nameNewBreed];
                 $_POST[$nameNewBreed] = null;
                 $breed = addBreedRequest($newBreed);
@@ -42,7 +42,7 @@ else{
             if($newBreed==0){
                 $nameBreed = "updateAnimalBreed".$id;
                 $breed = 0;
-                if(isset($_POST[$nameBreed]) && $_POST[$nameBreed]!=null){
+                if(isset($_POST[$nameBreed]) && $_POST[$nameBreed]!=null && is_numeric($_POST[$nameBreed])){
                     $breed = $_POST[$nameBreed];
                     $_POST[$nameBreed] = null;
                 }
@@ -70,13 +70,18 @@ else{
                     $photo->setPath($path);
                     $namePortrait = 'USP-checkboxPortrait'.$id;
                     $nameDescriptionImg = 'USP-Description'.$id;
+                    $nameAttributionImg = 'USP-attribution'.$id;
                     $portrait = false;
                     $descImg = 'NULL';
-                    if(isset($_POST[$nameDescriptionImg])) $descImg = $_POST[$nameDescriptionImg];
-                    if(isset($_POST[$namePortrait])) $portrait = $_POST[$namePortrait];
+                    $attribution = '';
+                    if(isset($_POST[$nameDescriptionImg]) && isText($_POST[$nameDescriptionImg])) $descImg = $_POST[$nameDescriptionImg];
+                    if(isset($_POST[$namePortrait])) $portrait = true;
+                    if(isset($_POST[$nameAttributionImg])) $attribution = $_POST[$nameAttributionImg];
+
                     $photo->setDescription($descImg);
                     $photo->setPortrait($portrait);
                     $photo->setIcon(false);
+                    $photo->setAttribution($attribution);
                     $msgImg= addImgRequest('animals',$id, $photo);
                 }
                 $_FILES[$namePhoto]=null;

@@ -20,16 +20,16 @@ else{?>
             <form method="POST" action="">
                 <div class="element">
                     <label for="company">Structure :</label>
-                    <input type="text" name="company" id="company" pattern="^([a-zA-Z0-9èéëïç&- ])+$" maxlength="150">
+                    <input type="text" name="company" id="company" pattern="^([a-zA-Z0-9èéëïç&\- ])+$" maxlength="150">
                 </div>
                 <div id="name">
                     <div class="element">
                         <label for="firstName">Prénom* :</label>
-                        <input type="text" name="firstName" id="firstName" pattern="^([a-zA-Zèéëïç-])+$" maxlength="150" required>
+                        <input type="text" name="firstName" id="firstName" pattern="^([a-zA-Zèéëïç\-])+$" maxlength="150" required>
                     </div>
                     <div class="element">
                         <label for="lastName">Nom* :</label>
-                        <input type="text" name="lastName" id="lastName" pattern="^([a-zA-Zèéëïç-])+$" maxlength="150" required>
+                        <input type="text" name="lastName" id="lastName" pattern="^([a-zA-Zèéëïç\-])+$" maxlength="150" required>
                     </div>
                 </div>
                 <div id="coordonate">

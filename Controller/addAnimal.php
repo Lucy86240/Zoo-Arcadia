@@ -10,26 +10,26 @@ if($_SERVER['REQUEST_URI']!='/Controller/addAnimal.php'){
         //on récupère le nom du bouton à cliquer pour modifier l'animal
         if(isset($_POST["addAnimal"]) && $_POST["addAnimal"]!=null){
             //on récupère le nom
-            if(isset($_POST["newAnimalName"]) && $_POST["newAnimalName"]!=null){
+            if(isset($_POST["newAnimalName"]) && $_POST["newAnimalName"]!='' && isAnimalName($_POST["newAnimalName"]) ){
                 $animal->setName($_POST["newAnimalName"]);
                 $_POST["newAnimalName"] = null;
             }
 
             //on récupère l'habitat
-            if(isset($_POST["newAnimalHousing"]) && $_POST["newAnimalHousing"]!=null){
+            if(isset($_POST["newAnimalHousing"]) && $_POST["newAnimalHousing"]!=null && is_numeric($_POST["newAnimalHousing"])){
                 $animal->setIdHousing($_POST["newAnimalHousing"]);
                 $_POST["newAnimalHousing"] = null;
             }
 
             //on récupère la race
             $newBreed = 0;
-            if(isset($_POST["newBreed"]) && $_POST["newBreed"]!=null && $_POST["newBreed"]!=''){
+            if(isset($_POST["newBreed"]) && $_POST["newBreed"]!=null && $_POST["newBreed"]!='' && isName($_POST["newBreed"])){
                 $newBreed = $_POST["newBreed"];
                 $_POST["newBreed"] = null;
                 $animal->setIdBreed(addBreedRequest($newBreed));
             }
             if($newBreed==0){
-                if(isset($_POST["newAnimalBreed"]) && $_POST["newAnimalBreed"]!=null){
+                if(isset($_POST["newAnimalBreed"]) && $_POST["newAnimalBreed"]!=null && is_numeric($_POST["newAnimalBreed"])){
                     $animal->setIdBreed($_POST["newAnimalBreed"]);
                     $_POST["newAnimalBreed"] = null;
                 }
@@ -57,10 +57,13 @@ if($_SERVER['REQUEST_URI']!='/Controller/addAnimal.php'){
                     $photo->setPath($path);
                     $portrait = false;
                     $descImg = 'NULL';
-                    if(isset($_POST['NSP-Description'])) $descImg = $_POST['NSP-Description'];
-                    if(isset($_POST['NSP-checkboxPortrait'])) $portrait = $_POST['NSP-checkboxPortrait'];
+                    $att ='';
+                    if(isset($_POST['NSP-Description']) && isText($_POST['NSP-Description'])) $descImg = $_POST['NSP-Description'];
+                    if(isset($_POST['NSP-checkboxPortrait'])) $portrait = true;
+                    if(isset($_POST['NSP-attribution'])) $att = $_POST['NSP-attribution'];
                     $photo->setDescription($descImg);
                     $photo->setPortrait($portrait);
+                    $photo->setAttribution($att);
                     $photo->setIcon(false);
                     $msgImg= addImgRequest('animals',$id, $photo);
                 }

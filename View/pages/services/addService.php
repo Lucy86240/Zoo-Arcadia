@@ -26,22 +26,33 @@ else{?>
                 <div class="image">
                         <label class="title-img" for="NewServiceIcon">L'icone</label>
                         <input type="file" name="NewServiceIcon" id="NewServiceIcon" required/>
-                        <p>Pour info : l'icone doit être au format png et ne pas dépasser 100ko.</p>
+                        <div>
+                            <label for="NSP-attributionIcon">Attribution :</label>
+                            <input type="text" name="NSP-attributionIcon" id="NSP-attributionIcon">
+                        </div>
+                        <p>Pour info : l'icone doit être au format png et ne pas dépasser 100ko. <br> L'attribution sera visible dans les mentions légales.</p>
                 </div>
                 <div class="image">
                         <label class="title-img" for="NewServicePhoto">La photo</label>
                         <input type="file" name="NewServicePhoto" id="NewServicePhoto" required/>
                         
-                        <div><label for="NSP-Description">Description de la photo :</label>
-                        <input type="text" name="NSP-Description" id="NSP-Description" pattern="^([a-zA-Z0-9èéëïç&!?,:;() ])+$"/></div>
-                        <div><input type="checkbox" name="NSP-checkboxPortrait" id="checkbox-portrait"/>
-                        
-                        <label for="checkbox-portrait">l'image est en portrait</label></div>
-                        <p>Pour info : la photographie doit être au format jpg ou png et ne pas dépasser 5 Mo.</p>
+                        <div>
+                            <label for="NSP-Description">Description de la photo :</label>
+                            <input type="text" name="NSP-Description" id="NSP-Description" pattern="^([a-zA-Z0-9èéëïç&!?,:;() ])+$"/>
+                        </div>
+                        <div>
+                            <label for="NSP-attributionPhoto">Attribution :</label>
+                            <input type="text" name="NSP-attributionPhoto" id="NSP-attributionPhoto">
+                        </div>
+                        <div>
+                            <input type="checkbox" name="NSP-checkboxPortrait" id="checkbox-portrait"/>
+                            <label for="checkbox-portrait">l'image est en portrait</label>
+                        </div>
+                        <p>Pour info : la photographie doit être au format jpg ou png et ne pas dépasser 5 Mo. <br> L'attribution sera visible dans les mentions légales.</p>
                 </div>
             </div>
             <div class="form-submit">
-                <input type="submit" value="Ajouter" name="addReview" class="button btn-green"/>
+                <input type="submit" value="Ajouter" name="addService" class="button btn-green"/>
                 <p class="messageOfSubmit<?php if($submit) echo("__good"); else if($submit == false && $message !=null) echo("__bad");?>">
                     <?php
                         if($submit == false && $message != null){

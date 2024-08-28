@@ -19,13 +19,13 @@ else{
         if(isset($_POST["updateHousing"]) && $_POST["updateHousing"]!=null){
             //on récupère la modification du nom (si besoin)
             $name = '0';
-            if(isset($_POST["updateHousingName"]) && $_POST["updateHousingName"]!=null){
+            if(isset($_POST["updateHousingName"]) && $_POST["updateHousingName"]!='' && isAnimalName($_POST["updateHousingName"])){
                 $name = $_POST["updateHousingName"];
                 $_POST["updateHousingName"] = null;
             }
             //on récupère la modification du nom (si besoin)
             $description = '0';
-            if(isset($_POST["updateHousingDescription"]) && $_POST["updateHousingDescription"]!=null){
+            if(isset($_POST["updateHousingDescription"]) && $_POST["updateHousingDescription"]!='' && isText($_POST["updateHousingDescription"])){
                 $description = $_POST["updateHousingDescription"];
                 $_POST["updateHousingDescription"] = null;
             }
@@ -53,13 +53,18 @@ else{
                     $photo->setPath($path);
                     $namePortrait = 'UHP-checkboxPortrait'.$id;
                     $nameDescriptionImg = 'UHP-Description'.$id;
+                    $nameAttribution = 'UHP-attribution'.$id;
                     $portrait = false;
                     $descImg = 'NULL';
-                    if(isset($_POST[$nameDescriptionImg])) $descImg = $_POST[$nameDescriptionImg];
-                    if(isset($_POST[$namePortrait])) $portrait = $_POST[$namePortrait];
+                    $attr = "";
+                    if(isset($_POST[$nameDescriptionImg]) && isText($_POST[$nameDescriptionImg])) $descImg = $_POST[$nameDescriptionImg];
+                    if(isset($_POST[$namePortrait])) $portrait = true;
+                    if(isset($_POST[$nameAttribution])) $attr = $_POST[$nameAttribution];
+
                     $photo->setDescription($descImg);
                     $photo->setPortrait($portrait);
                     $photo->setIcon(false);
+                    $photo->setAttribution($attr);
                     $msgImg= addImgRequest('housings',$id, $photo);
                 }
                 $_FILES[$namePhoto]=null;

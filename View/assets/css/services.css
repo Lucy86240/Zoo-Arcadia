@@ -55,6 +55,13 @@
             justify-content: center;
             margin-bottom : 20px;
         }
+        .elementTextarea{
+            display: flex;
+            flex-direction: column;
+            textarea{
+                height : 100px;
+            }
+        }
         p, input, label, textarea{
             color : var(--blue);
             border-radius: 20px;

@@ -14,12 +14,7 @@ else{
         private bool $icon;
         private bool $portrait;
 
-        /*public function __construct(string $path, string $description, bool $icon, bool $portrait){
-            $this->path = $path;
-            $this->description = $description;
-            $this->icon = $icon;
-            $this->portrait = $portrait;
-        }*/
+        private string $attribution;
 
         public function getId() : int{
             return $this->id_image;
@@ -41,6 +36,17 @@ else{
             $this->description = $description;
         }
 
+        
+        public function getAttribution(){
+            if(!isset($this->attribution))
+                return '';
+            else
+                return $this->attribution;
+        }
+
+        public function setAttribution(string $attribution){
+            $this->attribution = $attribution;
+        }
         public function getIcon(){
             return $this->icon;
         }
@@ -181,12 +187,14 @@ else{
             $description = $image->getDescription();
             $icon = $image->getIcon();
             $portrait = $image->getportrait();
+            $attribution = $image->getAttribution();
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-            $stmt = $pdo->prepare('insert into images (path, description, icon, portrait) VALUES (:path, :description, :icon, :portrait)');
+            $stmt = $pdo->prepare('insert into images (path, description, icon, portrait,attribution) VALUES (:path, :description, :icon, :portrait, :attribution)');
             $stmt->bindParam(":path", $path, PDO::PARAM_STR);
             $stmt->bindParam(":description", $description, PDO::PARAM_STR);
             $stmt->bindParam(":icon", $icon, PDO::PARAM_STR);
             $stmt->bindParam(":portrait", $portrait, PDO::PARAM_STR);
+            $stmt->bindParam(":attribution", $attribution, PDO::PARAM_STR);
             $stmt->execute();
 
             $stmt = $pdo->prepare('SELECT id_image FROM images WHERE path = :path and description = :description');
@@ -227,16 +235,18 @@ else{
         }
     }
 
-    function updateImageRequest(int $id, string $path, string $description, bool $portrait){
+    function updateImageRequest(int $id, string $path, string $description, bool $portrait, string $attr){
 
         try{
             if(imageExistById($id)){
                 $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-                $stmt = $pdo->prepare('UPDATE images SET path = :path, description = :description, portrait = :portrait  WHERE id_image = :id');
+                $stmt = $pdo->prepare('UPDATE images SET path = :path, description = :description, portrait = :portrait, attribution= :attr  WHERE id_image = :id');
                 $stmt->bindParam(":id", $id, PDO::PARAM_INT);
                 $stmt->bindParam(":path", $path, PDO::PARAM_STR);
                 $stmt->bindParam(":description", $description, PDO::PARAM_STR);
                 $stmt->bindParam(":portrait", $portrait, PDO::PARAM_STR);
+                $stmt->bindParam(":attr", $attr, PDO::PARAM_STR);
+
                 $stmt->execute();
             }
         }

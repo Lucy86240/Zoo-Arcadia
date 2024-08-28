@@ -42,12 +42,12 @@ else{?>
 
                 <!-- image et textes du service-->
                 <div class="container-service">
-                    <?php if($index%2==0){?> <img class="img-service <?php if($service['photo']->getPortrait()) echo('img-portrait'); ?>" src="<?php echo($service['photo']->getPath());?>" alt="<?php echo($service['photo']->getDescription()); ?>"><?php } ?>
+                    <?php if($index%2==0){?> <img class="img-service <?php if($service['photo']['portrait']) echo('img-portrait'); ?>" src="<?php echo($service['photo']['path']);?>" alt="<?php echo($service['photo']['description']); ?>"><?php } ?>
                     <div class="text-service">
                         <h2><?php echo($service['name']);?></h2>
                         <p><?php echo($service['description']);?></p>
                     </div>
-                    <?php if($index%2!=0){?> <img class="img-service <?php if($service['photo']->getPortrait()) echo('img-portrait'); ?>" src="<?php echo($service['photo']->getPath());?>" alt="<?php echo($service['photo']->getDescription()); ?>"><?php } ?>
+                    <?php if($index%2!=0){?> <img class="img-service <?php if($service['photo']['portrait']) echo('img-portrait'); ?>" src="<?php echo($service['photo']['path']);?>" alt="<?php echo($service['photo']['description']); ?>"><?php } ?>
                 </div>
             </div>
             <!-- les services version mobile-->
@@ -77,7 +77,7 @@ else{?>
 
                 <div class="container-service">
                     <h2><?php echo($service['name']);?></h2>
-                    <img class="img-service <?php if($service['photo']->getPortrait()) echo('img-portrait'); ?>" src="<?php echo($service['photo']->getPath());?>" alt="<?php echo($service['photo']->getDescription()); ?>">
+                    <img class="img-service <?php if($service['photo']['portrait']) echo('img-portrait'); ?>" src="<?php echo($service['photo']['path']);?>" alt="<?php echo($service['photo']['description']); ?>">
                     <p><?php echo($service['description']);?></p>
                 </div>
 

@@ -21,7 +21,7 @@ if(addComment != null){
         addComment.classList.add('none')
     })
 
-    const select = addComment.getElementById('addCommentsHousing')
+    const select = addComment.querySelector('#addCommentsHousing')
     for(let j=0;j<iconsAddComment.length;j++){
         iconsAddComment[j].addEventListener('click',()=>{
             addComment.classList.remove('none');

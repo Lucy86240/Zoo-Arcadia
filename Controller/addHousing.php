@@ -9,13 +9,13 @@ if($_SERVER['REQUEST_URI']!='/Controller/addHousing.php'){
         //on récupère le nom du bouton à cliquer pour créer l'habitat
         if(isset($_POST["addHousing"]) && $_POST["addHousing"]!=null){
             //on récupère le nom
-            if(isset($_POST["newHousingName"]) && $_POST["newHousingName"]!=null){
+            if(isset($_POST["newHousingName"]) && $_POST["newHousingName"]!='' && isAnimalName($_POST["newHousingName"])){
                 $housing->setName($_POST["newHousingName"]);
                 $_POST["newHousingName"] = null;
             }
 
             //on récupère le nom
-            if(isset($_POST["newHousingDescription"]) && $_POST["newHousingDescription"]!=null){
+            if(isset($_POST["newHousingDescription"]) && $_POST["newHousingDescription"]!='' && isText($_POST["newHousingDescription"])){
                 $housing->setDescription($_POST["newHousingDescription"]);
                 $_POST["newHousingDescription"] = null;
             }
@@ -43,10 +43,13 @@ if($_SERVER['REQUEST_URI']!='/Controller/addHousing.php'){
                     $photo->setPath($path);
                     $portrait = false;
                     $descImg = 'NULL';
-                    if(isset($_POST['NSP-Description'])) $descImg = $_POST['NSP-Description'];
-                    if(isset($_POST['NSP-checkboxPortrait'])) $portrait = $_POST['NSP-checkboxPortrait'];
+                    $att ='';
+                    if(isset($_POST['NSP-Description']) && isText($_POST['NSP-Description'])) $descImg = $_POST['NSP-Description'];
+                    if(isset($_POST['NSP-checkboxPortrait'])) $portrait = true;
+                    if(isset($_POST['NSP-attribution'])) $att = $_POST['NSP-attribution'];
                     $photo->setDescription($descImg);
                     $photo->setPortrait($portrait);
+                    $photo->setAttribution($att);
                     $photo->setIcon(false);
                     $msgImg= addImgRequest('housings',$id, $photo);
                 }

@@ -21,7 +21,7 @@ function verifHumanNameRegex(name){
 }
 
 function verifDescriptionRegex(txt){
-    let reg = /^([a-zA-Z0-9èéëïç&.!?,:\);\( \-])+$/g
+    let reg = /^([a-zA-Z0-9èê^éëïç&.!?,:\);\( \-\'])+$/g
     return reg.test(txt)
 }
 

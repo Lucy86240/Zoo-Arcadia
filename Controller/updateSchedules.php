@@ -8,7 +8,7 @@ if($_SERVER['REQUEST_URI']=='/Controller/updateSchedules.php'){
 else{
     require_once 'Controller/schedules.php';
 
-    if(isset($_POST['schedules'])){
+    if(isset($_POST['schedules']) && isText($_POST['schedules'])){
         $collection->updateOne(
             [ 'text' => ['$exists'=>true] ],
             [ '$set' => [ 'text' => $_POST['schedules']]]

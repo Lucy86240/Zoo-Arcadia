@@ -164,9 +164,9 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
             }
             if($housings==[]) $housings=null;
 
-            if(isset($_POST['dateStart'])) $dateStart = $_POST['dateStart'];
+            if(isset($_POST['dateStart']) && isDate($_POST['dateStart'])) $dateStart = $_POST['dateStart'];
 
-            if(isset($_POST['dateEnd'])) $dateStart = $_POST['dateEnd'];
+            if(isset($_POST['dateEnd']) && isDate($_POST['dateEnd'])) $dateStart = $_POST['dateEnd'];
 
             if(isset($_POST['archive']) && isset($_POST['unarchive'])) $status = 2;
             else if(isset($_POST['archive'])) $status = 1;
@@ -195,7 +195,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
 
     function addComment(&$housings, &$comments){
         if(isset($_POST['addComment'])){
-            if(isset($_POST['addCommentsHousing']) && isset($_POST['addCommentComment'])){
+            if(isset($_POST['addCommentsHousing']) && isset($_POST['addCommentComment']) && isText($_POST['addCommentComment'])){
                 addCommentRequest($_SESSION['mail'],now(),$_POST['addCommentsHousing'],$_POST['addCommentComment']);
                 $housings = allHousingsView(true,-1,-1,1,1);
                 filterComments($comments);

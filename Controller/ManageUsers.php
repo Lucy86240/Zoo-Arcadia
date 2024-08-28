@@ -68,10 +68,11 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageUsers.php'){
         for($i=0; $i<count($accounts); $i++){
             $id= str_replace('.','',$accounts[$i]['mail']);
             if(isset($_POST['updateAccount-'.$id])){
-                if(isset($_POST['updateAccountFirstname-'.$id])) $firstname = $_POST['updateAccountFirstname-'.$id];
-                if(isset($_POST['updateAccountLastname-'.$id])) $lastname = $_POST['updateAccountLastname-'.$id];
-                if(isset($_POST['updateAccountRole-'.$id])) $role = $_POST['updateAccountRole-'.$id];  
-                if(isset($_POST['updateAccountMail-'.$id]) && isset($_POST['updateAccountConfirmMail-'.$id])){
+                if(isset($_POST['updateAccountFirstname-'.$id]) && isName($_POST['updateAccountFirstname-'.$id])) $firstname = $_POST['updateAccountFirstname-'.$id];
+                if(isset($_POST['updateAccountLastname-'.$id]) && isName($_POST['updateAccountLastname-'.$id])) $lastname = $_POST['updateAccountLastname-'.$id];
+                if(isset($_POST['updateAccountRole-'.$id]) && isName($_POST['updateAccountRole-'.$id])) $role = $_POST['updateAccountRole-'.$id];  
+                if(isset($_POST['updateAccountMail-'.$id]) && isMail($_POST['updateAccountMail-'.$id])
+                && isset($_POST['updateAccountConfirmMail-'.$id]) && isMail($_POST['updateAccountConfirmMail-'.$id]) ){
                     if(!userExist($_POST['updateAccountMail-'.$id])){
                         if($_POST['updateAccountMail-'.$id] == $_POST['updateAccountConfirmMail-'.$id]) $mail = $_POST['updateAccountMail-'.$id];
                         else $msg .= "La confirmation du mail est différente.";
@@ -113,10 +114,10 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageUsers.php'){
                         if($_POST['newAccountPassword'] == $_POST['newAccountConfirmPassword']) $password = $_POST['newAccountPassword'];
                         else $msg .= "La confirmation du mot de passe est différente.";
                     }
-                    if(isset($_POST['newAccountFirstname'])) $firstname = $_POST['newAccountFirstname'];
-                    if(isset($_POST['newAccountLastname'])) $lastname = $_POST['newAccountLastname'];
-                    if(isset($_POST['newAccountRole'])) $role = $_POST['newAccountRole'];
-                    if($_POST['newAccountMail'] == $_POST['newAccountConfirmMail']) $mail = $_POST['newAccountMail'];
+                    if(isset($_POST['newAccountFirstname']) && isName($_POST['newAccountFirstname'])) $firstname = $_POST['newAccountFirstname'];
+                    if(isset($_POST['newAccountLastname']) && isName($_POST['newAccountLastname'])) $lastname = $_POST['newAccountLastname'];
+                    if(isset($_POST['newAccountRole']) && isName($_POST['newAccountRole'])) $role = $_POST['newAccountRole'];
+                    if($_POST['newAccountMail'] == $_POST['newAccountConfirmMail'] && isMail($_POST['newAccountMail'])) $mail = $_POST['newAccountMail'];
                     else $msg .= "La confirmation du mail est différente.";
                     
                     if($firstname !='' && $lastname!='' && $mail!='' && $password!='' && $role!=''){

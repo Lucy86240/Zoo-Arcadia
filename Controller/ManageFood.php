@@ -6,7 +6,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageFood.php'){
     function addFood($animal, &$foods, $perPage, $first){
         if(isset($_POST['addFood']) && $_POST['addFood']!=null){
             $problem = false;
-            if(isset($_POST['dateFed'])){
+            if(isset($_POST['dateFed']) && isDate($_POST['dateFed'])){
                 $date=$_POST['dateFed'];
             }
             else{
@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageFood.php'){
             else{
                 $problem = true;
             }
-            if(isset($_POST['searchAnimalFed'])){
+            if(isset($_POST['searchAnimalFed']) && is_numeric($_POST['searchAnimalFed'])){
                 $id_animal = $_POST['searchAnimalFed'];
             }
             else{
@@ -26,13 +26,13 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageFood.php'){
                 else $problem = true;
                 $msg='Le repas n\'a pas été enregistré car vous devez sélectionner un animal';
             }
-            if(isset($_POST['foodFed'])){
+            if(isset($_POST['foodFed']) && isText($_POST['foodFed'])){
                 $foodFed = $_POST['foodFed'];
             }
             else{
                 $problem = true;
             }
-            if(isset($_POST['weightFed'])){
+            if(isset($_POST['weightFed']) && isText($_POST['weightFed'])){
                 $weightFed = $_POST['weightFed'];
             }
             else{

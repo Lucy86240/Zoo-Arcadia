@@ -3,7 +3,7 @@
     require_once '../404.php';
 }
 else{?>
-    < class="newHousing">
+    <section class="newHousing">
         <div class="head"> </div>
         <?php $optionPage=true;?>
         <form class="formNewHousing" method="POST" enctype = "multipart/form-data">
@@ -22,14 +22,21 @@ else{?>
                         <div class="addImg">
                             <p class="title">Ajouter une photo</p>
 
-                            <div class="img-element"><input type="file" name="newHousingPhoto" id="newHousingPhoto"></div>
+                            <div class="img-element">
+                                <input type="file" name="newHousingPhoto" id="newHousingPhoto">
+                            </div>
 
-                            <div class="img-element"><label for="NHP-Description">Description de la photo :</label>
-                            <input type="text" name="NHP-Description" id="NHP-Description" pattern="^([a-zA-Z0-9èéëïç&!?,:;() ])+$"/></div>
-
+                            <div class="img-element">
+                                <label for="NHP-Description">Description de la photo :</label>
+                                <input type="text" name="NHP-Description" id="NHP-Description" pattern="^([a-zA-Z0-9èéëïç&!?,:;() ])+$"/>
+                            </div>
+                            <div class="img-element">
+                                <label for="NAP-Description">Attribution :</label>
+                                <input type="text" name="NAP-attribution" id="NAP-attribution">
+                            </div>
                             <div class="img-element"><input type="checkbox" name="NHP-checkboxPortrait" id="checkbox-portrait">
                             <label for="checkbox-portrait<?php echo($Housing['id']); ?>">la photo est en portrait</label></div>
-                            <p>Pour info : la photo doit être au format jpg ou png et ne pas dépasser 5 Mo.</p>
+                            <p>Pour info : la photo doit être au format jpg ou png et ne pas dépasser 5 Mo. <br> L'attribution sera visible dans les mentions légales.</p>
                         </div>
                     </div>
                 </div>

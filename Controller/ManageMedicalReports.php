@@ -12,13 +12,13 @@ else{
     function addReport($animal, &$reports, $perPage, $first){
         if(isset($_POST['addReport']) && $_POST['addReport']!=null){
             $problem = false;
-            if(isset($_POST['dateNewReport'])){
+            if(isset($_POST['dateNewReport']) && isDate($_POST['dateNewReport'])){
                 $date=$_POST['dateNewReport'];
             }
             else{
                 $problem = true;
             }
-            if(isset($_POST['searchAnimalNewReport'])){
+            if(isset($_POST['searchAnimalNewReport']) && is_numeric($_POST['searchAnimalNewReport'])){
                 $id_animal = $_POST['searchAnimalNewReport'];
             }
             else{
@@ -26,25 +26,25 @@ else{
                 else $problem = true;
                 $msg='La rapport n\'a pas été enregistré car vous devez sélectionner un animal';
             }
-            if(isset($_POST['healthNewReport'])){
+            if(isset($_POST['healthNewReport']) && isText($_POST['healthNewReport'])){
                 $healthNewReport = $_POST['healthNewReport'];
             }
             else{
                 $problem=true;
             }
-            if(isset($_POST['commentNewReport'])){
+            if(isset($_POST['commentNewReport']) && isText($_POST['commentNewReport'])){
                 $commentNewReport = $_POST['commentNewReport'];
             }
             else{
                 $commentNewReport = null;
             }
-            if(isset($_POST['foodNewReport'])){
+            if(isset($_POST['foodNewReport']) && isText($_POST['foodNewReport'])){
                 $foodNewReport = $_POST['foodNewReport'];
             }
             else{
                 $problem = true;
             }
-            if(isset($_POST['weightFoodNewReport'])){
+            if(isset($_POST['weightFoodNewReport']) && isText($_POST['weightFoodNewReport'])){
                 $weightFoodNewReport = $_POST['weightFoodNewReport'];
             }
             else{
@@ -98,24 +98,22 @@ else{
             $lenght = count(listOfUserByRole(2));
             $all=true;
             $veterinarians = [];
-            //$_SESSION['allMedicalReports_filterVeto']=[];
             for($i=0;$i<$lenght;$i++){
                 if(isset($_POST['veto'.$i])){
                     array_push($veterinarians,$_POST['veto'.$i]);
-                    //array_push($_SESSION['allMedicalReports_filterVeto'],$_POST['veto'.$i]);
                 }
                 else $all=false;
             }
             $_SESSION['allMedicalReports_filterVeto']=$veterinarians;
             if($all==true) $veterinarians = null;
 
-            if(isset($_POST['dateStart']) && $_POST['dateStart']!=''){
+            if(isset($_POST['dateStart']) && $_POST['dateStart']!='' && isDate($_POST['dateStart'])){
                 $dateStart=$_POST['dateStart'];
             } 
             else $dateStart=null;
             $_SESSION['allMedicalReports_filterdateStart']=$dateStart;
 
-            if(isset($_POST['dateEnd']) && $_POST['dateEnd']!=''){
+            if(isset($_POST['dateEnd']) && $_POST['dateEnd']!='' && isDate($_POST['dateEnd'])){
                 $dateEnd=$_POST['dateEnd'];
             } 
             else $dateEnd=null;

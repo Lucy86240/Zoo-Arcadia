@@ -32,6 +32,33 @@ function nowHour(){
     return $now;
 }
 
+function isName($name){
+    return preg_match_all("/^([a-zA-Zèéëïç\- ])+$/",$name);
+}
+
+function isAnimalName($name){
+    return preg_match_all("/^([a-zA-Z0-9èéëïç\- ])+$/",$name);
+}
+
+function isText($txt){
+    return preg_match_all("/^([a-zA-Z0-9èéëï^êç&!?,.:;\(\)\-\' ])+$/",$txt);
+}
+
+function isMail($mail){
+    return preg_match_all("/^[a-zA-Z0-9_.±]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/",$mail);
+}
+
+function isDate($date){
+    return preg_match_all("/[1-9][0-9][0-9]{2}-([0][1-9]|[1][0-2])-([1-2][0-9]|[0][1-9]|[3][0-1])/",$date);
+}
+
+function echapHTML($text){
+    $newtext = str_replace("<","&lt;",$text);
+    $newtext = str_replace(">","&gt;",$newtext);
+    $newtext = str_replace("\"","&quot;",$newtext);
+    return $newtext;
+}
+
 $pageHousing = false;
 if(substr($_SERVER['REQUEST_URI'],0,9)=='/habitats') $pageHousing = true;
 

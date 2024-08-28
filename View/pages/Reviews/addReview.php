@@ -18,14 +18,14 @@ else{?>
                 <form method="POST" action="">
                     <div class="element">
                         <label for="NewReviewPseudo">Votre pseudo :</label>
-                        <input type="text" name="NewReviewPseudo" id="NewReviewPseudo" pattern="^([a-zA-Z0-9èéëïç@#$*+:;?! -_])+$" required />
+                        <input type="text" name="NewReviewPseudo" id="NewReviewPseudo" pattern="^([a-zA-Z0-9èéëïç@#$*+:;?! \-_])+$" required />
                     </div>
                     <div class = "element">
                         <label>Votre note :</label>
                         <div class="stars">
                         <?php for($i=1;$i<6;$i++){?>
                             <div class="star">
-                                <input class="check-stars-input" type="radio" name="stars" value="<?php echo($i)?>" id="star<?php echo($i)?>" required>
+                                <input class="check-stars-input" type="radio" name="stars" value="<?php echo($i)?>" id="star<?php echo($i)?>" required/>
                                 <label class="form-check-label" for="star<?php echo($i)?>">
                                     <img class="NewReview-star" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/pages/reviews/Star-white.png" alt="" id="startImg<?php echo($i)?>">
                                 </label>

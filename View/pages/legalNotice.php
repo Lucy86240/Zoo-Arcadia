@@ -84,7 +84,7 @@ else{?>
             <a href="https://www.flaticon.com/fr/icones-gratuites/fermer-a-cle" title="fermer à clé icônes" target="_blank">Fermer à clé icônes créées par Freepik - Flaticon</a> <br>
             <a href="https://www.flaticon.com/fr/stickers-gratuites/raton-laveur" title="raton laveur stickers" target="_blank">Raton laveur stickers créés par stickerfolio - Flaticon</a> <br>
             <?php foreach($attributions as $attribution){
-                echo($attribution.' <br>');
+                if($attribution!='') echo($attribution.' <br>');
             } ?>
         </p>
         <h2>Modifications des informations légales du site Zoo Arcadia</h2> 

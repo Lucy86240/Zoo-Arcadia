@@ -28,11 +28,11 @@ else{
             else return '';
         }
         if($filter=="dateStart"){
-            if(isset($_POST['choices']) && isset($_POST['dateStart'])) return $_POST['dateStart'];
+            if(isset($_POST['choices']) && isset($_POST['dateStart']) && isDate($_POST['dateStart'])) return $_POST['dateStart'];
             else return '';
         }
         if($filter=='dateEnd'){
-            if(isset($_POST['choices']) && isset($_POST['dateEnd'])) return $_POST['dateEnd'];
+            if(isset($_POST['choices']) && isset($_POST['dateEnd']) && isDate($_POST['dateEnd'])) return $_POST['dateEnd'];
             else return '';
         }
     }
@@ -46,15 +46,15 @@ else{
      */
     function initialFilter(&$dateStart, &$dateEnd, &$limit){
         
-        if(isset($_POST['choices']) && isset($_POST['limit'])){
+        if(isset($_POST['choices']) && isset($_POST['limit']) && is_numeric($_POST['limit'])){
             $limit= $_POST['limit'];
         }
 
-        if(isset($_POST['choices']) && isset($_POST['dateStart'])){
+        if(isset($_POST['choices']) && isset($_POST['dateStart']) && isDate($_POST['dateStart'])){
             $dateStart = $_POST['dateStart'];
         }
 
-        if(isset($_POST['choices']) && isset($_POST['dateEnd'])){
+        if(isset($_POST['choices']) && isset($_POST['dateEnd']) && isDate($_POST['dateEnd'])){
             $dateEnd = $_POST['dateEnd'];
         }
     }
@@ -91,7 +91,7 @@ else{
     $animal = null;
     $filter = null;
 
-    if(isset($_GET['animal'])){
+    if(isset($_GET['animal']) && is_numeric($_GET['animal'])){
         $animal=animalById($_GET['animal'],true,true);
         if(filterExist()){
             $dateStart = null;

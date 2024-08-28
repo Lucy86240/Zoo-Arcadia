@@ -258,9 +258,9 @@ else{
         if(isset($_POST['addReview'])){
             //un crée un objet review avec les infos renseignées
             $review = new Review();
-            if(isset($_POST['NewReviewPseudo'])) $review->setPseudo($_POST['NewReviewPseudo']);
-            if(isset($_POST['NewReviewComment'])) $review->setComment($_POST['NewReviewComment']);
-            if(isset($_POST['stars'])) $review->setNote($_POST['stars']);
+            if(isset($_POST['NewReviewPseudo']) && preg_match_all('/^([a-zA-Z0-9èéëïç@#$*+:;?! \-_])+$/',$_POST['NewReviewPseudo'])) $review->setPseudo($_POST['NewReviewPseudo']);
+            if(isset($_POST['NewReviewComment']) && isText($_POST['NewReviewComment'])) $review->setComment($_POST['NewReviewComment']);
+            if(isset($_POST['stars']) && is_numeric($_POST['stars'])) $review->setNote($_POST['stars']);
             //on l'ajoute à la base de données
             addReviewRequest($review);
         }
@@ -306,7 +306,7 @@ else{
     }
 
     // On détermine sur quelle page on se trouve
-    if((isset($_GET['page']) && !empty($_GET['page']))&& !isset($_POST['filter'])){
+    if((isset($_GET['page']) && !empty($_GET['page']))&& !isset($_POST['filter']) ){
         $currentPage = (int) strip_tags($_GET['page']);
     }else{
         $currentPage = 1;
