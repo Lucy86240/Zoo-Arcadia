@@ -1,4 +1,5 @@
 <?php
+//si l'url correspond au chemin du fichier on affiche la page 404
 if($_SERVER['REQUEST_URI']=='/Model/Image.php'){
     ?>
     <link rel="stylesheet" href = "../View/assets/css/style.css">
@@ -69,6 +70,13 @@ else{
         }
     }
 
+    /**
+     * Summary of searchIdImage : retourne l'id de la 1ere image
+     * @param string $type : services, housings, animals
+     * @param int $id_type : id du type
+     * @param bool $icon : si c'est une icone
+     * @return mixed : id de l'image
+     */
     function searchIdImage(string $type, int $id_type, bool $icon){
         try{
             switch($type){
@@ -100,6 +108,11 @@ else{
         }
     }
 
+    /**
+     * Summary of searchPathById récupère le chemin d'une image via son id
+     * @param int $id id de l'image
+     * @return mixed path
+     */
     function searchPathById(int $id){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
@@ -115,6 +128,11 @@ else{
         }
     }
 
+    /**
+     * Summary of imageExistById : indique si une image existe en fonction d'un id
+     * @param int $id : id d'une image
+     * @return bool
+     */
     function imageExistById(int $id){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
@@ -127,8 +145,15 @@ else{
         }
         catch(error $e){
             echo('erreur de bd');
+            return true;
         }
     }
+
+    /**
+     * Summary of validImg indique si l'image est valide (extention, taille)
+     * @param mixed $file : tableau asso du type $_FILE
+     * @return string|null : null ou message d'erreur
+     */
     function validImg($file){
         $name_file = explode('.',$file['name']);
         $extension = end($name_file);
@@ -141,6 +166,11 @@ else{
         return $message;
     }
 
+    /**
+     * Summary of validIcon indique si l'icone est valide (extention, taille)
+     * @param mixed $file : tableau asso du type $_FILE
+     * @return string|null : null ou message d'erreur
+     */
     function validIcon($file){
         $name_file = explode('.',$file['name']);
         $extension = end($name_file);
@@ -153,11 +183,14 @@ else{
         return $message;
     }
 
+    /**
+     * Summary of listAttributions : retourne la liste des attributions
+     * @return array
+     */
     function listAttributions(){
-        
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-            $stmt = $pdo->prepare('SELECT attribution FROM images  WHERE attribution is not null');
+            $stmt = $pdo->prepare("SELECT attribution FROM images  WHERE attribution != ''");
             if($stmt->execute()){
                 $temp = $stmt->fetchAll();
                 $res = [];
@@ -167,10 +200,12 @@ else{
                 
                 return $res;
             }
+            return [];
         }
         catch(error $e)
         {
             echo('erreur bd');
+            return [];
         }
     }
 
@@ -235,6 +270,15 @@ else{
         }
     }
 
+    /**
+     * Summary of updateImageRequest met à jour une image de la BD
+     * @param int $id : id de l'image
+     * @param string $path : nouveau chemin (ne doit pas être vide)
+     * @param string $description : nouvelle description
+     * @param bool $portrait : true/false
+     * @param string $attr : attributions
+     * @return void
+     */
     function updateImageRequest(int $id, string $path, string $description, bool $portrait, string $attr){
 
         try{
@@ -257,6 +301,11 @@ else{
 
     }
 
+    /**
+     * Summary of deleteImageRequest supprime l'image de la base de données
+     * @param int $id : id de l'image à supprimer
+     * @return void
+     */
     function deleteImageRequest(int $id){
         try{
             if(imageExistById($id)){

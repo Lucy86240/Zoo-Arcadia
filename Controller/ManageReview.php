@@ -1,4 +1,5 @@
 <?php
+//si l'url correspond au chemin du fichier on affiche la page 404
 if($_SERVER['REQUEST_URI']=='/Controller/ManageReview.php'){
     ?>
     <link rel="stylesheet" href = "../View/assets/css/style.css">
@@ -22,7 +23,9 @@ else{
      * @param bool $ElementCheckBy : true si on veut que dans le tableau associatif il y ait l'id du vérificateur
      */
     function reviews(int $nbReviews, int $startList,bool $justVisible,string $filter, string $sort, bool $ElementIsVisible, bool $ElementDateCheck, bool $ElementCheckBy){
+        //on récupère les objets avis en fonction des filtres
         $reviewsObject = reviewsExtract($nbReviews,$startList,$sort,$justVisible,$filter);
+        //on crée le tableau associatif
         $reviews = [];
         foreach($reviewsObject as $reviewObject){
             $review = array(
@@ -62,7 +65,7 @@ else{
      * @return string
      */
     function filterRequestReview(){
-        //conditions de requete
+        //initialisation des conditions
         $validate = " not (date_check is not null and isVisible = 1)";
         $and = " AND";
         $toValidate = " date_check is not null";
@@ -178,7 +181,7 @@ else{
      * Summary of urlOption affiche l'url complet afin de gérer la pagination / filtre / trie
      * @param mixed $page : le numéro de la page
      * @param mixed $optionPage : true si on a déjà des paramétres sur la page en cours
-     * @param mixed $filter : urlfiter
+     * @param mixed $filter : urlfilter
      * @param mixed $sort : urlSort
      * @return void
      */
@@ -229,7 +232,7 @@ else{
             for($i=0;$i<$nbReviews;$i++){
                 //on récupère le nom des boutons radios de l'avis en cours
                 $name = 'status'.$i;
-                //s'il le bouton radio existe
+                //si le bouton radio existe
                 if(isset($_POST[$name])){
                     if(($_POST[$name]=='validate'&& !validateReview($reviews[$i]['id'])) ||
                     $_POST[$name]=='moderate'&& !moderateReview($reviews[$i]['id']) ||
@@ -250,7 +253,7 @@ else{
     }
 
     /**
-     * Summary of addReview : permet d'ajouter un avis
+     * Summary of addReview : permet d'ajouter un avis (nécessite un formulaire)
      * @return void
      */
     function addReview(){

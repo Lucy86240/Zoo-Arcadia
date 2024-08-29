@@ -1,4 +1,5 @@
 <?php
+//si l'url correspond au chemin du fichier on affiche la page 404
 if($_SERVER['REQUEST_URI']=='/Model/ManageMedicalReportsModel.php'){
     ?>
     <link rel="stylesheet" href = "../View/assets/css/style.css">
@@ -39,6 +40,17 @@ else{
         }
     }
 
+    /**
+     * Summary of reportExist : indique si un rapport existe en fonction des paramètres renseignés
+     * @param mixed $id
+     * @param mixed $veto
+     * @param mixed $date
+     * @param mixed $healthNewReport
+     * @param mixed $commentNewReport
+     * @param mixed $foodNewReport
+     * @param mixed $weightFoodNewReport
+     * @return bool : attention retourne vrai en cas de problème de base de données
+     */
     function reportExist($id,$veto,$date,$healthNewReport,$commentNewReport,$foodNewReport,$weightFoodNewReport){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
@@ -61,13 +73,24 @@ else{
             if($stmt->execute()){
                 if($stmt->fetch() == null) return false;
                 else return true;
-            }
+            } else return true;
         }
         catch(error $e){
             return true;
         }
     }
 
+    /**
+     * Summary of addMedicalReportRequest ajoute un rapport médical à la base de données
+     * @param mixed $id_animal
+     * @param mixed $veto
+     * @param mixed $date
+     * @param mixed $healthNewReport
+     * @param mixed $commentNewReport
+     * @param mixed $foodNewReport
+     * @param mixed $weightFoodNewReport
+     * @return void
+     */
     function addMedicalReportRequest($id_animal,$veto, $date,$healthNewReport,$commentNewReport,$foodNewReport,$weightFoodNewReport){
             //vérifie que la race n'existe pas
             try{
@@ -179,6 +202,15 @@ else{
         }
     }
 
+    /**
+     * Summary of countReportsFilter retourne le nombre de rapports suivant les filtres renseignées
+     * @param mixed $breeds tableau d'id de breeds (si non null)
+     * @param mixed $animals tableau d'id d'animaux (si non null)
+     * @param mixed $veto tableau d'id de veto(si non null)
+     * @param mixed $dateStart (si non null)
+     * @param mixed $dateEnd (si non null)
+     * @return mixed
+     */
     function countReportsFilter($breeds,$animals,$veto,$dateStart,$dateEnd){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);

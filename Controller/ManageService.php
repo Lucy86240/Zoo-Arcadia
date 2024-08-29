@@ -1,4 +1,5 @@
 <?php
+//si l'url correspond au chemin du fichier on affiche la page 404
 if($_SERVER['REQUEST_URI']=='/Controller/ManageService.php'){
     ?>
     <link rel="stylesheet" href = "../View/assets/css/style.css">
@@ -46,7 +47,7 @@ else{
     }
 
     /**
-     * Summary of addService : permet d'ajouter un service
+     * Summary of addService : permet d'ajouter un service (nécessite un formulaire)
      * @param mixed $message : permet d'obtenir les messages d'erreurs des images ou le message de réussite du traitement
      * @return bool : retourne true si le service est créé
      */

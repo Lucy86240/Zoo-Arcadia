@@ -1,4 +1,5 @@
 <?php
+//si l'url correspond au chemin du fichier on affiche la page 404
 if($_SERVER['REQUEST_URI']=='/Controller/ManageMedicalReportsAnimal.php'){
     ?>
     <link rel="stylesheet" href = "../View/assets/css/style.css">
@@ -88,11 +89,15 @@ else{
 
     }
 
+    //initialisation des variables
     $animal = null;
     $filter = null;
 
+    //si l'id de l'animal existe dans les paramètres de l'url
     if(isset($_GET['animal']) && is_numeric($_GET['animal'])){
+        //initialisation de l'animal
         $animal=animalById($_GET['animal'],true,true);
+        //modification de l'animal en cas de filtres
         if(filterExist()){
             $dateStart = null;
             $dateEnd = null;
@@ -100,6 +105,7 @@ else{
             initialFilter($dateStart, $dateEnd, $limit);
             $animal = animalFilter($animal, $dateStart, $dateEnd, $limit);
         }
+        //permet l'ajout de rapports
         $reports=null;
         addReport($animal,$reports,20,0);
     }

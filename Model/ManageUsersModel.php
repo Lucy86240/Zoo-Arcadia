@@ -1,4 +1,5 @@
 <?php
+//si l'url correspond au chemin du fichier on affiche la page 404
 if($_SERVER['REQUEST_URI']=='/Model/ManageUsersModel.php'){
     ?>
     <link rel="stylesheet" href = "../View/assets/css/style.css">
@@ -6,6 +7,11 @@ if($_SERVER['REQUEST_URI']=='/Model/ManageUsersModel.php'){
     require_once '../View/pages/404.php';
 }
 else{
+    /**
+     * Summary of newUser ajoute un utilisateur à la base de données
+     * @param User $user
+     * @return bool
+     */
     function newUser(User $user){
         try{
             if(!userExist($user->getUsername())){
@@ -32,6 +38,10 @@ else{
         }
     }
 
+    /**
+     * Summary of listOfUsers
+     * @return array tableau de tous les objets user de la base de données
+     */
     function listOfUsers(){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
@@ -46,6 +56,11 @@ else{
         }
     }
 
+    /**
+     * Summary of blocUser : bloque un utilisateur dans la base de données
+     * @param string $id : mail de l'utilisateur à bloquer
+     * @return void
+     */
     function blocUser(string $id){
         try{
             if(userExist($id)){
@@ -60,6 +75,12 @@ else{
         }
     }
 
+    /**
+     * Summary of unblocUser débloque un utilisateur dans la base de données
+     * @param string $id : mail de l'utilisateur à débloquer
+     * @param string $password : nouveau mot de passe de l'utilisateur
+     * @return void
+     */
     function unblocUser(string $id, string $password){
         try{
             if(userExist($id) && verifiedBlocked($id)){
@@ -76,6 +97,10 @@ else{
         }
     }
 
+    /**
+     * Summary of listOfRole : liste nom des roles existants
+     * @return array
+     */
     function listOfRole(){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
@@ -89,6 +114,11 @@ else{
         }
     }
 
+    /**
+     * Summary of findIdRole retourne l'id du nom du role saisi
+     * @param mixed $label : nom du role à trouver
+     * @return int
+     */
     function findIdRole($label){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
@@ -107,6 +137,11 @@ else{
         }
     }
 
+    /**
+     * Summary of idRoleExist indique si un role existe dans la base de données en fonction de son id
+     * @param mixed $id
+     * @return mixed
+     */
     function idRoleExist($id){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
@@ -125,6 +160,12 @@ else{
         }
     }
 
+    /**
+     * Summary of updateUser met à jour un utilisateur dans la base de données
+     * @param User $user : objet utilisateur
+     * @param string $originMail : mail de l'utilisateur indiqué dans la base de données
+     * @return bool : false si pas de mise à jour effectuée
+     */
     function updateUser(User $user, string $originMail){
         try{
             if(userExist($originMail)){
@@ -165,6 +206,7 @@ else{
                     $stmt->bindParam(":mail", $newMail, PDO::PARAM_STR); 
                     $stmt->execute();       
                 }
+                return true;
             }
             else{
                 return false;
@@ -172,9 +214,15 @@ else{
         }
         catch(error $e){
             echo('Une erreur est survenue');
+            return false;
         }
     }
 
+    /**
+     * Summary of deleteUser supprime un utilisateur de la base de deonnées
+     * @param string $mail : mail de l'utilisateur à supprimer
+     * @return void
+     */
     function deleteUser(string $mail){
         try{
             if(userExist($mail)){

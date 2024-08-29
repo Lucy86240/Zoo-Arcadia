@@ -1,4 +1,5 @@
 <?php
+//si l'url correspond au chemin du fichier on affiche la page 404
 if($_SERVER['REQUEST_URI']=='/Controller/schedules.php'){
     ?>
     <link rel="stylesheet" href = "../View/assets/css/style.css">
@@ -6,9 +7,7 @@ if($_SERVER['REQUEST_URI']=='/Controller/schedules.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    $client = new MongoDB\Client(MONGO_DB_HOST);
-
-    $collection = $client->Arcadia->schedules;
-
-    $schedules = $collection->findOne(['text' => ['$exists'=>true]])['text'];
+    include_once "Model/schedules.php";
+    //on récupère le texte des horaires
+    $schedules=schedules();
 }

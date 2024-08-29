@@ -1,20 +1,23 @@
 <?php
 
+// on execute le programme que si l'url est différent du chemin de la page
 if($_SERVER['REQUEST_URI']!='/Controller/addAnimal.php'){
     include_once "Controller/ManageAnimal.php";
 
+    /**
+     * Summary of addAnimal : ajoute un animal
+     * @return string|null : au besoin retourne un msg d'erreur
+     */
     function addAnimal(){
-
         $animal = new Animal();
         $animal->setIsVisible(true);
-        //on récupère le nom du bouton à cliquer pour modifier l'animal
+        //si on a cliqué sur ajouter un animal
         if(isset($_POST["addAnimal"]) && $_POST["addAnimal"]!=null){
             //on récupère le nom
             if(isset($_POST["newAnimalName"]) && $_POST["newAnimalName"]!='' && isAnimalName($_POST["newAnimalName"]) ){
                 $animal->setName($_POST["newAnimalName"]);
                 $_POST["newAnimalName"] = null;
             }
-
             //on récupère l'habitat
             if(isset($_POST["newAnimalHousing"]) && $_POST["newAnimalHousing"]!=null && is_numeric($_POST["newAnimalHousing"])){
                 $animal->setIdHousing($_POST["newAnimalHousing"]);
@@ -23,11 +26,14 @@ if($_SERVER['REQUEST_URI']!='/Controller/addAnimal.php'){
 
             //on récupère la race
             $newBreed = 0;
+
+            //dans le cas où on a saisi une nouvelle race
             if(isset($_POST["newBreed"]) && $_POST["newBreed"]!=null && $_POST["newBreed"]!='' && isName($_POST["newBreed"])){
                 $newBreed = $_POST["newBreed"];
                 $_POST["newBreed"] = null;
                 $animal->setIdBreed(addBreedRequest($newBreed));
             }
+            // dans le cas où on a cliqué sur une race existante
             if($newBreed==0){
                 if(isset($_POST["newAnimalBreed"]) && $_POST["newAnimalBreed"]!=null && is_numeric($_POST["newAnimalBreed"])){
                     $animal->setIdBreed($_POST["newAnimalBreed"]);
@@ -38,7 +44,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/addAnimal.php'){
             $id=0;
             $msgNew = addAnimalRequest($animal,$id);
             
-            //on ajoute la nouvelle photo
+            //on ajoute la photo
             if(isset($_FILES['newAnimalPhoto']) && $_FILES['newAnimalPhoto']['name'] !='' && $id!=0 && $msgNew != 'error'){
                 //on vérifie que l'image soit valide
                 $msgImg = validImg($_FILES['newAnimalPhoto']);
@@ -76,13 +82,12 @@ if($_SERVER['REQUEST_URI']!='/Controller/addAnimal.php'){
                 return "Oups! Une erreur est survenue nous n'avons pas pu mettre à jour l'animal...";
             }
             else return $msgImg;
-
         }
     }
-
     $msg = addAnimal();
 }
 else{
+    // on affiche erreur 404 si on se trouve sur le chemin du fichier
     ?>
     <link rel="stylesheet" href = "../View/assets/css/style.css">
     <?php

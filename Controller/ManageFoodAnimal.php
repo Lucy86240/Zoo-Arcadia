@@ -1,9 +1,10 @@
 <?php
+//execution du programme seulement si l'url est différent du chemin du fichier
 if($_SERVER['REQUEST_URI']!='/Controller/ManageFoodAnimal.php'){
     include_once "Controller/ManageFood.php";
 
     /**
-     * Summary of filterExist indique si un filtre est appliqué
+     * Summary of filterExist indique si un filtre est appliqué aux repas
      * @return bool
      */
     function filterExist(){
@@ -54,11 +55,11 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageFoodAnimal.php'){
     }
 
     /**
-     * Summary of animalFilter : renvoi un tableau associatif de l'animal selon les filtres médicaux
-     * @param mixed $animal : le tableau associatif de l'animal dont les rapports sont à filtrer
-     * @param mixed $dateStart : la date de début des rapports (null si pas de filtre)
-     * @param mixed $dateEnd : la date de fin des rapports (null si pas de filtre)
-     * @param mixed $limit : le nombre de rapports à afficher (null si pas de filtre)
+     * Summary of animalFilter : renvoi un tableau associatif de l'animal selon les filtres de repas
+     * @param mixed $animal : le tableau associatif de l'animal dont les repas sont à filtrer
+     * @param mixed $dateStart : la date de début des repas (null si pas de filtre)
+     * @param mixed $dateEnd : la date de fin des repas (null si pas de filtre)
+     * @param mixed $limit : le nombre de repas à afficher (null si pas de filtre)
      * @return array|null
      */
     function animalFilter($animal, $dateStart, $dateEnd, $limit){
@@ -82,27 +83,35 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageFoodAnimal.php'){
 
     }
 
+    //initialisation des variables
     $animal = null;
     $filter = null;
 
+    //dans le cas où le paramètre d'id existe dans l'url
     if(isset($_GET['animal'])){
+        //l'animal est celui ayant pour id l'id du GET
         $animal=animalById($_GET['animal'],false,true);
+        //on initialise les filtres
         if(filterExist()){
             $dateStart = null;
             $dateEnd = null;
             $limit = null;
             initialFilter($dateStart, $dateEnd, $limit);
+            //on met a jour l'animal en fonction des filtres
             $animal = animalFilter($animal, $dateStart, $dateEnd, $limit);
         }
         $foods=null;
-        addFood($animal,$reports,50,0);
+        //on permet d'ajouter un repas si nécessaire
+        addFood($animal,$foods,50,0);
     }
     else
     {
+        //si pas d'animal trouvé
         echo("Nous n'arrivons pas à trouver l'animal");
     }
 }
 else{
+    //on affiche la page 404
     ?>
     <link rel="stylesheet" href = "../View/assets/css/style.css">
     <?php

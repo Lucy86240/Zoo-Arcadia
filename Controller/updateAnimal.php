@@ -1,4 +1,5 @@
 <?php
+//si l'url correspond au chemin du fichier on affiche la page 404
 if($_SERVER['REQUEST_URI']=='/Controller/updateAnimal.php'){
     ?>
     <link rel="stylesheet" href = "../View/assets/css/style.css">
@@ -8,7 +9,13 @@ if($_SERVER['REQUEST_URI']=='/Controller/updateAnimal.php'){
 else{
     include_once "Controller/ManageAnimal.php";
 
+    /**
+     * Summary of updateAnimal permet de mettre à jour un animal (nécessite un formulaire)
+     * @param mixed $animal : tableau associatif de l'animal à modifier
+     * @return string|null
+     */
     function updateAnimal(&$animal){
+        //on récupère les infos
         $id = $animal['id'];
         $name = $animal['name'];
         $nbPhoto = count($animal['images']);
@@ -100,6 +107,7 @@ else{
                     deleteImageRequest($id_image);
                 }
             }
+            //on met à jour l'animal
             $animal = animalById($_GET['id'], false, false);
             if($msgUpdate=="success" && ((isset($msgImg) && $msgImg=="success" && !isset($msgImgSave)) || (!isset($msgImg)))){
                 return "success";
@@ -112,7 +120,9 @@ else{
         }
     }
 
+    //on initialise l'animal
     $animal = animalById($_GET['id'], false, false);
+    //on le met à jour et récupère le message de fin de traitement
     $msg = updateAnimal($animal);
 }
 

@@ -1,4 +1,5 @@
 <?php
+//si l'url correspond au chemin du fichier on affiche la page 404
 if($_SERVER['REQUEST_URI']=='/Controller/updateHousing.php'){
     ?>
     <link rel="stylesheet" href = "../View/assets/css/style.css">
@@ -8,7 +9,13 @@ if($_SERVER['REQUEST_URI']=='/Controller/updateHousing.php'){
 else{
     include_once "Controller/ManageHousing.php";
 
+    /**
+     * Summary of updateHousing permet de mettre à jour un habitat (nécessite un formulaire)
+     * @param mixed $housing : tableau asso de l'habitat à modifier
+     * @return string|null
+     */
     function updateHousing(&$housing){
+        //on récupère les infos
         $id = $housing['id'];
         $name = $housing['name'];
         $description = $housing['description'];
@@ -83,6 +90,7 @@ else{
                     deleteImageRequest($id_image);
                 }
             }
+            //on met à jour l'habitat
             $housing = housingArrayAssociation($_GET['id']);
             if($msgUpdate=="success" && ((isset($msgImg) && $msgImg=="success" && !isset($msgImgSave)) || (!isset($msgImg)))){
                 return "success";
@@ -95,7 +103,8 @@ else{
         }
     }
 
+    //on initialise l'habitat
     $housing = housingArrayAssociation($_GET['id']);
-
+    //on récupère le message de fin de traitement
     $msg = updatehousing($housing);
 }

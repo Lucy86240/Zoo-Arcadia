@@ -1,12 +1,16 @@
 <?php
+//on execute le code si on est sur un url différent du chemin du fichier
 if($_SERVER['REQUEST_URI']!='/Controller/addHousing.php'){
     include_once "Controller/ManageHousing.php";
 
+    /**
+     * Summary of addHousing : ajoute un habitat (s'utilise sur la page ajout habitat)
+     * @return string|null retourne un msg 'sucess' ou le détail de l'erreur
+     */
     function addHousing(){
-
         $housing = new Housing();
         
-        //on récupère le nom du bouton à cliquer pour créer l'habitat
+        //si on a cliqué sur le bouton d'ajout d'un habitat
         if(isset($_POST["addHousing"]) && $_POST["addHousing"]!=null){
             //on récupère le nom
             if(isset($_POST["newHousingName"]) && $_POST["newHousingName"]!='' && isAnimalName($_POST["newHousingName"])){
@@ -14,7 +18,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/addHousing.php'){
                 $_POST["newHousingName"] = null;
             }
 
-            //on récupère le nom
+            //on récupère la description
             if(isset($_POST["newHousingDescription"]) && $_POST["newHousingDescription"]!='' && isText($_POST["newHousingDescription"])){
                 $housing->setDescription($_POST["newHousingDescription"]);
                 $_POST["newHousingDescription"] = null;
@@ -24,12 +28,12 @@ if($_SERVER['REQUEST_URI']!='/Controller/addHousing.php'){
             $id=0;
             $msgNew = addHousingRequest($housing,$id);
             
-            //on ajoute la nouvelle photo
+            //on ajoute la photo
             if(isset($_FILES['newHousingPhoto']) && $_FILES['newHousingPhoto']['name'] !='' && $id!=0 && $msgNew != 'error'){
                 //on vérifie que l'image soit valide
                 $msgImg = validImg($_FILES['newHousingPhoto']);
                 if(validImg($_FILES['newHousingPhoto']) == null){
-                    // on déplace la nouvelle photo
+                    // on déplace la photo
                     $name_file = explode('.',$_FILES['newHousingPhoto']['name']);
                     $extension = end($name_file);
                     $pathImg='View/assets/img/housings/'.$id;
@@ -69,6 +73,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/addHousing.php'){
     $msg = addHousing();
 }
 else{
+    //affiche page 404 si on est sur le chemin du fichier
     ?>
     <link rel="stylesheet" href = "../View/assets/css/style.css">
     <?php

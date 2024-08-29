@@ -1,4 +1,5 @@
 <?php
+//si l'url correspond au chemin du fichier on affiche la page 404
 if($_SERVER['REQUEST_URI']=='/Model/ManageHousingModel.php'){
     ?>
     <link rel="stylesheet" href = "../View/assets/css/style.css">
@@ -11,6 +12,11 @@ else{
     include_once "Model/ManageAnimalModel.php";
     include_once "Model/Image.php";
     include_once "Model/CommentHousing.php";
+    /**
+     * Summary of AllHousings : 
+     * @param bool $portraitAccept : par défaut vrai, si les images en portrait sont acceptées
+     * @return array|Housing tableau de tous les objets habitats de la BD
+     */
     function AllHousings(bool $portraitAccept=true){
         try{
             $housings = [];
@@ -22,6 +28,7 @@ else{
                     array_push($housings,$housing);
                     $indice=count($housings)-1;
                     $id = $housings[$indice]->getId();
+                    //ajout des images
                     if($portraitAccept == false){
                         $stmt2 = $pdo->prepare('SELECT images.id_image, images.path, images.description, images.icon, images.portrait 
                         FROM images_housings JOIN images ON images_housings.id_image = images.id_image  WHERE id_housing = :id and images.portrait=0');
@@ -48,7 +55,11 @@ else{
         }
     }
 
-//    public function FindHousingByid(int $id){
+    /**
+     * Summary of FindHousingByid  : retourne un objet habitat suivant l'id en paramètre (sans image)
+     * @param int $id : id de l'habitat
+     * @return array
+     */
     function FindHousingByid(int $id){
         $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
         $stmt = $pdo->prepare('SELECT * FROM housings WHERE id_housing = :id');
@@ -58,6 +69,11 @@ else{
         return $housing;
     }
 
+    /**
+     * Summary of housingById: retourne un objet habitat suivant l'id en paramètre (avec image)
+     * @param int $id : id de l'habitat
+     * @return mixed
+     */
     function housingById(int $id){
         $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
         $stmt = $pdo->prepare('SELECT * FROM housings WHERE id_housing = :id');
@@ -81,7 +97,11 @@ else{
         return $housing;
     }
 
-//    public function FindHousingByName(string $name){
+    /**
+     * Summary of FindHousingByName retourne un tableau asso de l'habitat suivant le nom en paramètre (sans image)
+     * @param string $name : nom de l'habitat à trouver
+     * @return mixed
+     */
     function FindHousingByName(string $name){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
@@ -93,19 +113,26 @@ else{
             else null;
         }
         catch(Error $e){
-            echo "Désolée";
+            echo "Erreur de base de données";
             return null;
         }
     }
 
+    /**
+     * Summary of findHousingNameById indique le nom d'un habitat suivant son id
+     * @param int $id : id de l'habitat
+     * @return mixed
+     */
     function findHousingNameById(int $id){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
             $stmt = $pdo->prepare('SELECT name FROM housings WHERE id_housing = :id');
             $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-            $stmt->execute();
-            $housing = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $housing[0]['name'];
+            if($stmt->execute()){
+                $housing = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $housing[0]['name'];
+            }
+            else return '';
         }
         catch(Error $e){
             echo "Désolée";
@@ -113,6 +140,10 @@ else{
         }
     }
 
+    /**
+     * Summary of listNameIdAllHousings : tableau avec tous les habitats de la base de données
+     * @return array|string tableau asso (name, id_housing)
+     */
     function listNameIdAllHousings(){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
@@ -127,6 +158,10 @@ else{
         }
     }
 
+    /**
+     * Summary of listIdAllHousings tableau avec tous les habitats de la base de données
+     * @return array|string tableau d'id
+     */
     function listIdAllHousings(){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
@@ -141,23 +176,41 @@ else{
             return $res;
         }
         catch(Error $e){
-            echo "Désolée";
+            echo "Erreur de base de données";
             return '';
         }
     }
 
+    /**
+     * Summary of housingExist indique si l'objet existe dans la base de données
+     * @param Housing $housing : objet housing à trouver
+     * @return bool
+     */
     function housingExist(Housing $housing){
         $name = $housing->getName();
         if (FindHousingByName($name) != null) return true;
         else return false;
     }
+
+    /**
+     * Summary of housingExistById indique si l'id existe dans la base de données
+     * @param int $id : id d'un habitat à trouver
+     * @return bool
+     */
     function housingExistById(int $id){
         if (FindHousingById($id) != null) return true;
         else return false;
     }
 
+    /**
+     * Summary of addHousingRequest ajoute un habitat à la base de données
+     * @param Housing $housing : objet à ajouter à la BD
+     * @param mixed $id : id de l'habitat crée
+     * @return string : message de fin de traitement
+     */
     function addHousingRequest(Housing $housing,&$id){
         try{
+            // on vérifie d'abord que l'habitat n'existe pas
             if(housingExist($housing)==false){
                 //ajoute les éléments dans la table housing
                 $name = $housing->getName();
@@ -182,11 +235,18 @@ else{
             }
         }
         catch(error $e){
-            echo("problème avec les données");
+            echo("problème avec la base de données");
             return 'error';
         }
     }
 
+    /**
+     * Summary of updateHousingRequest met à jour un habitat de la base de données
+     * @param int $id : id de l'habitat à mettre à jour
+     * @param mixed $name : nouveau nom (0 si pas de modification)
+     * @param mixed $description : nouvelle description (0 si pas de modification)
+     * @return string : message de fin de traitement
+     */
     function updateHousingRequest(int $id,$name,$description){
         try{
             //on vérifie que l'habitat existe et qu'il y a une modification à faire
@@ -214,8 +274,14 @@ else{
         }
     }
 
+    /**
+     * Summary of deleteHousingRequest suppression d'un habitat dans la base de données
+     * @param mixed $id : id de l'habitat à supprimer
+     * @return void
+     */
     function deleteHousingRequest($id){
         try{
+            //on vérifie que l'habitat existe
             if(housingExistById($id)){
                 $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
 
@@ -245,6 +311,12 @@ else{
         }
     }
 
+    /**
+     * Summary of commentHousing tableau de commentaires en fonction de filtres
+     * @param int $housing : id de l'habitat des commentaires souhaités
+     * @param mixed $archive : 1 archivé, 0 actif, 2 les deux
+     * @return array|string : tableau d'objets CommentHousing
+     */
     function commentHousing(int $housing,$archive){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
@@ -309,6 +381,14 @@ else{
         }
     }
 
+    /**
+     * Summary of commentExist indique si un commentaire existe en fonction des éléments renseignés
+     * @param mixed $veto : id du veto
+     * @param mixed $date : date du com
+     * @param mixed $housing : id de l'habitat
+     * @param mixed $comment : commentaire
+     * @return bool : attention retourne vrai en cas de problème de BD
+     */
     function commentExist($veto, $date, $housing, $comment){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
@@ -321,14 +401,20 @@ else{
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             if($stmt->execute()){
                 if($stmt->fetch() == null) return false;
-            else return true;
+                else return true;
             }
+            else return true;
         }
         catch(error $e){
             return true;
         }
     }
 
+    /**
+     * Summary of commentExistbyId indique si un commentaire existe en fonction de l'id
+     * @param mixed $id
+     * @return bool
+     */
     function commentExistbyId($id){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
@@ -340,6 +426,7 @@ else{
                 if($stmt->fetch() == null) return false;
             else return true;
             }
+            else return true;
         }
         catch(error $e){
             return true;
@@ -370,8 +457,17 @@ else{
         }
     }
 
+    /**
+     * Summary of addCommentRequest : ajoute un commentaire à la base de données
+     * @param mixed $veto : id véto
+     * @param mixed $date : date du commentaire
+     * @param mixed $housing : id de l'habitat
+     * @param mixed $comment : commentaire
+     * @return void
+     */
     function addCommentRequest($veto, $date, $housing, $comment){
         try{
+            //on vérifie d'abord que le commentaire n'existe pas
             if(commentExist($veto, $date, $housing, $comment)==false){
                 $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
                 $stmt = $pdo->prepare('insert into comments_housing_veto (veterinarian,housing,comment,date) 
@@ -385,10 +481,15 @@ else{
         }
         catch(error $e)
         {
-
+            echo("Erreur de base de données");
         }
     }
 
+    /**
+     * Summary of deleteCommentRequest supprime un commentaire de la base de données
+     * @param int $id : id du commentaire à supprimer
+     * @return void
+     */
     function deleteCommentRequest(int $id){
         try{
             if(commentExistById($id)==true){
@@ -400,13 +501,18 @@ else{
         }
         catch(error $e)
         {
-
+            echo("Erreur de base de données");
         }
     }
 
+    /**
+     * Summary of housingsIDOrderByPopularity : tableau des id et clics des habitats en fonction de leur popularité
+     * @return array
+     */
     function housingsIDOrderByPopularity(){
         try{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+            //requete du nombre de clics par housing
             $stmt = $pdo->prepare('SELECT housings.id_housing, count(*) as \'clics\' FROM popularity JOIN animals ON popularity.id_animal = animals.id_animal JOIN housings ON animals.housing=housings.id_housing GROUP BY housings.name ORDER BY clics DESC');
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $res=$stmt->fetchAll();
@@ -417,6 +523,7 @@ else{
                     if($request != "WHERE ") $request .= 'AND ';
                     $request .='id_housing!='.$res[$i]['id_housing'].' ';
                 }
+                //on ajoute les housings sans clic
                 $stmt2 = $pdo->prepare('SELECT id_housing FROM housings '.$request.' ORDER BY id_housing ASC');
                 $stmt2->setFetchMode(PDO::FETCH_ASSOC);
                 $stmt2->execute();
@@ -434,6 +541,10 @@ else{
         }
     }
 
+    /**
+     * Summary of housingsOrderByPopularity tableau d'habitat en fonction de leur popularité
+     * @return array
+     */
     function housingsOrderByPopularity(){
         $idHousings = housingsIDOrderByPopularity();
         $housings = [];

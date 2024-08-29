@@ -1,4 +1,5 @@
-<?php 
+<?php
+//si l'url correspond au chemin du fichier on affiche la page 404 
 if($_SERVER['REQUEST_URI']=='/Model/FedAnimal.php'){
     ?>
     <link rel="stylesheet" href = "../View/assets/css/style.css">
