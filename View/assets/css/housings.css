@@ -229,6 +229,15 @@
         }
     }
 }
+
+@keyframes colorchange {
+    from {
+        background-color: var(--beige);
+    }
+    to {
+        background-color: var(--dark_green);
+    }
+}
 .theme-brown{
     background-color: var(--brown);
     .head{
@@ -261,6 +270,9 @@
             }
         }
         .heroHousingWithBox:hover{
+
+            animation-name : colorchange;
+            animation-duration : 1s;
             background-color: var(--dark_green);
             h3{
                 color : var(--white);
@@ -280,7 +292,6 @@
                     }
                 }
             }
-
         }
     }
     h2{

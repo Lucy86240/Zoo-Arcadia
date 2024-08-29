@@ -1,24 +1,35 @@
 /* gestion des popup*/
 const iconDeleteAnimal = document.querySelectorAll('.iconDeleteAnimal')
-const popupDeleteAnimal = document.querySelectorAll('.popupDeleteAnimal')
+
 if(iconDeleteAnimal != null){
-    popupConfirm(iconDeleteAnimal,popupDeleteAnimal)
+    for(let i=0; i<iconDeleteAnimal.length;i++){
+        iconDeleteAnimal[i].addEventListener('click',()=>{
+            titleContent = "Suppression"
+            parContent = "Etes vous sûr de vouloir supprimer l'animal : \""+iconDeleteAnimal[i].getAttribute('nameAnimal')+"\" de race \""+iconDeleteAnimal[i].getAttribute('breedAnimal')+"\" ?"
+            submitContent="ValidationDeleteAnimal"+iconDeleteAnimal[i].getAttribute('id')
+            createConfirm(titleContent,parContent,submitContent)
+        })
+    }
+
 }
 
 const iconArchive = document.querySelectorAll('.iconArchive')
 const popupArchive = document.querySelectorAll('.popupArchive')
+
 if(iconArchive != null){
     popupConfirm(iconArchive,popupArchive)
-    const archive = document.querySelectorAll('.js-archive') 
-    for(let g=0; g<archive.length;g++){
-        archive[g].addEventListener('click',location.reload);
-    }
 }
 
 const iconUnarchive = document.querySelectorAll('.iconUnarchive')
 const popupUnarchive = document.querySelectorAll('.popupUnarchive')
+
 if(iconUnarchive != null){
     popupConfirm(iconUnarchive,popupUnarchive)
+}
+
+const archive = document.querySelectorAll('.js-archive') 
+for(let g=0; g<archive.length;g++){
+    archive[g].addEventListener('click',location.reload);
 }
 
 

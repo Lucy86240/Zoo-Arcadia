@@ -22,7 +22,7 @@ else{?>
                                 <div class="bgc-img-box"><img class="img-box editAnimal" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/edit.svg" alt="Modifier l'animal"></div>                                <span class="legendAnimal">Modifier</span>
                             </a>
                             <!-- icon archivage (seulement si l'animal est visible-->
-                            <div class="icon iconArchive <?php if($animal['isVisible']==0) echo('none');?>">
+                            <div class="icon iconArchive <?php if($animal['isVisible']==0) echo('none');?>" id="<?php echo($animal['id'])?>" nameAnimal = "<?php echo($animal['name'])?>" breedAnimal="<?php echo($animal['breed'])?>">
                                 <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/archive.svg" alt="Archiver l'animal"></div>
                                 <span class="legendAnimal">Archiver</span>
                             </div>
@@ -41,7 +41,7 @@ else{?>
                                 </form>
                             </div>
                             <!-- icon désarchivage (seulement si l'animal est non-visible-->
-                            <div class="icon iconUnarchive <?php if($animal['isVisible']==1) echo('none');?>">
+                            <div class="icon iconUnarchive <?php if($animal['isVisible']==1) echo('none');?>" id="<?php echo($animal['id'])?>" nameAnimal = "<?php echo($animal['name'])?>" breedAnimal="<?php echo($animal['breed'])?>">
                                 <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/unarchive.svg" alt="Désrchiver l'animal"></div>
                                 <span class="legendAnimal">Désarchiver</span>
                             </div>
@@ -53,26 +53,14 @@ else{?>
                                         <p>Etes vous sûr de vouloir désarchiver l'animal : "<?php echo($animal['name'].'" de race "'.$animal['breed']);?>" ?</p>
                                         <span>L'animal sera à nouveau visible auprès des visiteurs et accessible depuis les habitats.</span>
                                         <div class="confirm-choice">
-                                            <input type="submit" name="ValidationUnarchiveAnimal<?php echo($animal['id']);?>" value="Oui" class="button-confirm">
+                                            <input type="submit" name="ValidationUnarchiveAnimal<?php echo($animal['id']);?>" value="Oui" class="button-confirm js-archive">
                                             <button class="button btn-green">Non</button>
                                         </div>
                                 </form>
                             </div>
-                            <div class="icon iconDeleteAnimal">
+                            <div class="icon iconDeleteAnimal" id="<?php echo($animal['id'])?>" nameAnimal = "<?php echo($animal['name'])?>" breedAnimal="<?php echo($animal['breed'])?>">
                                 <div class="bgc-img-box"><img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer l'animal"></div>
                                 <span class="legendAnimal">Supprimer</span>
-                            </div>
-                            <!-- le popup de suppression s'affichant quand la poubelle est cliquée-->
-                            <div class="none c-dialog popupDeleteAnimal">
-                                    <div class="fond"> </div>
-                                    <form class="popup-confirm" method="POST">
-                                            <p class="entete">Suppression</p>
-                                            <p>Etes vous sûr de vouloir supprimer l'animal : "<?php echo($animal['name'].'" de race "'.$animal['breed']);?>" ?</p>
-                                            <div class="confirm-choice">
-                                                <input type="submit" name="ValidationDeleteAnimal<?php echo($animal['id']);?>" value="Oui" class="button-confirm">
-                                                <button class="button btn-green">Non</button>
-                                            </div>
-                                    </form>
                             </div>
                         </div>
                     <?php } ?>
@@ -189,5 +177,6 @@ else{?>
                 </div>
             </div>
         </div>
+        <div id="js-confirm"> </div>
     </section>
 <?php } ?>
