@@ -1,8 +1,86 @@
 
+//responsive
+let services = document.querySelectorAll('.service')
+servicesMobile = []
+for(let i=0; i<services.length;i++){
+    servicesMobile.push(services.innerHTML)
+}
+
+function versionMobile(){
+    for(let i=0; i<services.length; i++){
+        services[i].classList.remove('service-desktop')
+        services[i].classList.add('service-mobile')
+        let containerD = services[i].querySelector('.container-service')
+        img = containerD.querySelector('img')
+        h2 = containerD.querySelector('h2')
+        p = containerD.querySelector('p')
+        containerMobile = document.createElement('div')
+
+        containerMobile.append(h2)
+        containerMobile.append(img)
+        containerMobile.append(p)
+
+        containerD.innerHTML = containerMobile.innerHTML;
+
+    }
+}
+
+function versionDesktop(){
+    for(let i=0; i<services.length; i++){
+        services[i].classList.remove('service-mobile')
+        services[i].classList.add('service-desktop')
+        let containerM = services[i].querySelector('.container-service')
+        img = containerM.querySelector('img')
+        h2 = containerM.querySelector('h2')
+        p = containerM.querySelector('p')
+        containerDesktop = document.createElement('div')
+        if(i%2==0){
+            containerDesktop.append(img)
+        }
+        div = document.createElement('div')
+        div.classList.add("text-service")
+        div.append(h2)
+        div.append(p)
+        containerDesktop.append(div)
+        if(i%2!=0){
+            containerDesktop.append(img)
+        }
+        containerM.innerHTML = containerDesktop.innerHTML;
+
+    }
+}
+
+if(window.innerWidth < 576){
+    mobile = true
+}
+else{
+    versionDesktop()
+    mobile = false
+}
+
+window.addEventListener('resize',()=>{
+    if(window.innerWidth < 576 && mobile == false){
+        versionMobile()
+        mobile = true
+    }
+    else if(window.innerWidth > 576 && mobile == true){
+        versionDesktop()
+        mobile = false
+    }
+})
+
+
 // popup
 const iconDelete = document.querySelectorAll('.iconDelete')
-const popupDelete = document.querySelectorAll('.popupDelete')
-popupConfirm(iconDelete,popupDelete)
+if(iconDelete != null)
+    for(let i = 0; i<iconDelete.length; i++){
+        iconDelete[i].addEventListener('click',()=>{
+            titleContent = "Suppression";
+            parContent = "Etes vous sûr de vouloir supprimer le service : \""+iconDelete[i].getAttribute("nameService")+"\" ?"
+            submitContent = "ValidationDeleteService"+iconDelete[i].getAttribute("id")
+            createConfirm(titleContent,parContent,submitContent)
+        })
+    }
 
 
 //apparition du formulaire de modification
