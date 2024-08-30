@@ -512,28 +512,58 @@ else{
          */
         function housingsIDOrderByPopularity(){
             try{
+                $popularityHousing = [];
+                $popularityAnimals = idAnimalsOrderByPopularity();
                 $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
                 //requete du nombre de clics par housing
-                $stmt = $pdo->prepare('SELECT housings.id_housing, count(*) as \'clics\' FROM popularity JOIN animals ON popularity.id_animal = animals.id_animal JOIN housings ON animals.housing=housings.id_housing GROUP BY housings.name ORDER BY clics DESC');
-                $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                $res=$stmt->fetchAll();
-                if($stmt->execute()) $res = $stmt->fetchAll();
-                if($res != null){
-                    $request = "WHERE ";
+                $stmt = $pdo->prepare('SELECT id_housing FROM housings');
+                $stmt->setFetchMode(PDO::FETCH_NUM);
+
+                if($stmt->execute()){
+                    $res=$stmt->fetchAll();
+
                     for($i=0;$i<count($res);$i++){
-                        if($request != "WHERE ") $request .= 'AND ';
-                        $request .='id_housing!='.$res[$i]['id_housing'].' ';
+                        $housing=[];
+                        $housing['id_housing'] = $res[$i][0];
+                        $housing['clics'] =0;
+                        $housing['order'] = false;
+                        array_push($popularityHousing,$housing);
                     }
-                    //on ajoute les housings sans clic
-                    $stmt2 = $pdo->prepare('SELECT id_housing FROM housings '.$request.' ORDER BY id_housing ASC');
-                    $stmt2->setFetchMode(PDO::FETCH_ASSOC);
-                    $stmt2->execute();
-                    $res2=$stmt2->fetchAll();
-                    for($j=0;$j<count($res2);$j++){
-                        $res2[$j]['clics']=0;
-                        array_push($res,$res2[$j]);
+
+                    for($i=0; $i<count($popularityAnimals); $i++){
+                        $id= findHousingByIdAnimal($popularityAnimals[$i]['id']);
+                        $housing = false;
+                        $j=0;
+                        while($housing == false && $j<count($popularityHousing)){
+                            
+                            if($id == $popularityHousing[$j]['id_housing']){
+                                $housing = true;
+                            }
+                            else $j++; 
+                        }
+                        if($housing) $popularityHousing[$j]['clics']+=$popularityAnimals[$i]['clics'];
                     }
-                    return $res;
+                    $clics = [];
+                    for($i=0;$i<count($popularityHousing);$i++){
+                        array_push($clics,$popularityHousing[$i]['clics']);
+                    }
+                    rsort($clics);
+                    $popularityOrder=[];
+                    for($i=0;$i<count($clics);$i++){
+                        $find = false;
+                        $j=0;
+                        while(!$find &&$j<count($clics)){
+                            if($popularityHousing[$j]['clics']==$clics[$i] && $popularityHousing[$j]['order']==false){
+                                $find = true;
+                            }
+                            else $j++;
+                        }
+                        if($find){
+                            $popularityHousing[$j]['order'] = true;
+                            array_push($popularityOrder,$popularityHousing[$j]);
+                        }
+                    }
+                    return $popularityOrder;
                 }
                 else return [];
             }

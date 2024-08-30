@@ -197,7 +197,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageUsers.php'){
                             if($create){
                                 $recipient = $user->getUsername();
                                 $object = "Bienvenue à votre espace Arcadia";
-                                $message = "Bonjour ".$user->getFirstName().","."<br> <br>"."Votre espace sur ".SITE_URL." vient d'être crée."."<br>"."Merci de bien vouloir vous approcher de votre administrateur pour récupérer votre mot de passe."."<br> <br>"."L'équipe Arcadia";
+                                $message = "Bonjour ".$user->getFirstName().","."<br> <br>"."Votre espace sur ".SITE_URL." vient d'être crée."."<br>"."Votre identifiant est : ".$user->getUsername()."<br>"."Merci de bien vouloir vous approcher de votre administrateur pour récupérer votre mot de passe."."<br> <br>"."L'équipe Arcadia";
                                 $headers="MIME-version: 1.0\r\n".'Date: '.date('r')."\r\n";
                                 $headers .= 'From: Arcadia <'.MAIL_CONTACT.'>' . "\r\n"."Reply-To: Arcadia <'.MAIL_CONTACT.'> \r\n";
                                 $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n"; 

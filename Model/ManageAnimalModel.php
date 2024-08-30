@@ -343,6 +343,26 @@ else{
     
             }
         }
+
+                /**
+         * Summary of findAnimalById : trouve l'habitat de l'animal
+         * @param int $id : id de l'animal à trouver
+         * @return mixed 
+         */
+        function findHousingByIdAnimal(int $id){
+            try{
+                $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+                $stmt = $pdo->prepare('SELECT housing FROM animals WHERE id_animal = :id');
+                $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+                if($stmt->execute()){
+                    return $stmt->fetch()['housing'];
+                }
+                return 0;
+            }
+            catch(error $e){
+                return 0;
+            }
+        }
     
         /**
          * Summary of animalExistById : indique si l'animal avec l'id saisi existe
@@ -484,7 +504,6 @@ else{
     
                     //on supprime toutes les images
                     if($res != null){
-                    // var_dump($res);
                         foreach ($res as $id_image){
                             $stmt = $pdo->prepare('DELETE FROM images WHERE id_image = :id');
                             $stmt->bindParam(":id", $id_image['id_image'], PDO::PARAM_INT);
@@ -636,32 +655,35 @@ else{
          */
         function idAnimalsOrderByPopularity(){
             try{
-                $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-                //on récupère le nombre de clics qu'a chaque animal
-                $stmt = $pdo->prepare('SELECT id_animal, count(*) as \'clics\' FROM popularity GROUP BY id_animal ORDER BY clics DESC');
-                $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                $res=$stmt->fetchAll();
-                if($stmt->execute()) $res = $stmt->fetchAll();
-    
-                //on récupère les animaux qui n'ont pas de clics
-                if($res != null){
-                    $request = "WHERE ";
-                    for($i=0;$i<count($res);$i++){
-                        if($request != "WHERE ") $request .= 'AND ';
-                        $request .='id_animal!='.$res[$i]['id_animal'].' ';
+                    $client = new MongoDB\Client(MONGO_DB_HOST);
+                    $popularity = $client->Arcadia->popularity;
+                    $filter = [ ];
+                    $options = [ 'sort' => [ 'nbClics' => -1 ] ];
+                    $list = $popularity->find($filter,$options);
+                    $id=[];
+                    $request = 'NOT(';
+                    foreach($list as $l){
+                        $animal = [];
+                        $animal['id'] = $l['id_animal'];
+                        $animal['clics'] = $l['nbClics'];
+                        array_push($id,$animal);
+                        if($request!='NOT(') $request .= ' OR ';
+                        $request .= " id_animal=".$l['id_animal'];
                     }
-                    $stmt2 = $pdo->prepare('SELECT id_animal FROM animals '.$request.' ORDER BY id_animal ASC');
-                    $stmt2->setFetchMode(PDO::FETCH_ASSOC);
-                    $stmt2->execute();
-                    $res2=$stmt2->fetchAll();
-                    //on fusionne les deux tableaux
-                    for($j=0;$j<count($res2);$j++){
-                        $res2[$j]['clics']=0;
-                        array_push($res,$res2[$j]);
+                    $request.=')';
+
+                    $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+                    $stmt = $pdo->prepare('SELECT id_animal FROM animals WHERE '.$request);
+                    if($stmt->execute()){
+                        $res = $stmt->fetchAll();
+                        foreach($res as $r){
+                            $animal = [];
+                            $animal['id'] = $r['id_animal'];
+                            $animal['clics'] = 0;
+                            array_push($id,$animal);
+                        }
                     }
-                    return $res;
-                }
-                else return [];
+                    return $id;
             }
             catch(error $e){
                 return [];
@@ -676,7 +698,7 @@ else{
             $popularity = idAnimalsOrderByPopularity();
             $animals = [];
             for($i=0;$i<count($popularity);$i++){
-                $animal = findAnimalById($popularity[$i]['id_animal']);
+                $animal = findAnimalById($popularity[$i]['id']);
                 $animal->setPopularityRange($i+1);
                 $animal->setNumberOfClics($popularity[$i]['clics']);
                 array_push($animals,$animal);
@@ -691,15 +713,28 @@ else{
          */
         function animalClic(int $id){
             try{
-                //on vérifie que le service existe et qu'il y a une modification à faire
+                //on vérifie que l'animal existe dans la base de données
                 if(animalExistById($id)){
-                    $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-                    //date du jour
-                    $date = now();
-                    $stmt = $pdo->prepare('insert into popularity (id_animal, date_clic) VALUES (:id, :date)');
-                    $stmt->bindParam(":date", $date, PDO::PARAM_STR);
-                    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-                    $stmt->execute();
+                    //on regarde s'il existe dans la base no sql
+                    $client = new MongoDB\Client(MONGO_DB_HOST);
+                    $popularity = $client->Arcadia->popularity;
+                    $exist = $popularity->findOne(['id_animal' => $id]);
+                    //s'il n'existe pas on le crée
+                    if($exist == null){
+                        $animal = findAnimalById($id);
+                        $popularity->insertOne([
+                            'id_animal' => $id,
+                            'Name_breed' => $animal->getName().' - '.$animal->getBreed(),
+                            'nbClics' => 1,
+                        ]);
+                    }else{
+                        // s'il existe on le met à jour
+                        $clics = $exist["nbClics"]+1;
+                        $popularity->updateOne(
+                            [ 'id_animal' => $id ],
+                            [ '$set' => [ 'nbClics' => $clics]]
+                        );
+                    }
                 }
                     return "success";
                 }
