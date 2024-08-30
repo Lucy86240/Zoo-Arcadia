@@ -7,9 +7,8 @@ if($_SERVER['REQUEST_URI']=='/Model/Animal.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    //namespace animal;
-    include_once "Image.php";
-    //use \PDO;
+
+    require_once "Image.php";
 
     Class Animal{
         private int $id_animal;

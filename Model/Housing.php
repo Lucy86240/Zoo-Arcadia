@@ -7,8 +7,8 @@ if($_SERVER['REQUEST_URI']=='/Model/Housing.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    //namespace housing;
-    include_once "Image.php";
+
+    require_once "Image.php";
 
     class Housing{
         private int $id_housing;

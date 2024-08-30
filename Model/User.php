@@ -7,8 +7,6 @@ if($_SERVER['REQUEST_URI']=='/Model/User.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    //namespace user;
-    //use \PDO;
 
     Class User{
         private string $mail;

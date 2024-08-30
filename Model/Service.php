@@ -8,7 +8,7 @@ if($_SERVER['REQUEST_URI']=='/Model/Service.php'){
 }
 else{
     //namespace service;
-    include_once "Image.php";
+    require_once "Image.php";
     class Service{
         private int $id_service;
         private string $name;

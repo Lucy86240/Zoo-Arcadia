@@ -7,7 +7,6 @@ if($_SERVER['REQUEST_URI']=='/Model/Image.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    //namespace image;
     class Image{
         private int $id_image;
         private string $path;

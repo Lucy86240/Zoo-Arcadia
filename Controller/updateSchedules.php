@@ -7,9 +7,15 @@ if($_SERVER['REQUEST_URI']=='/Controller/updateSchedules.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    require_once 'Controller/schedules.php';
-    //après validation du formulaire on modifie 
-    if(isset($_POST['schedules']) && isText($_POST['schedules'])){
-        modifySchedules($_POST['schedules']);
+    try{
+        require_once 'Controller/schedules.php';
+        //après validation du formulaire on modifie 
+        if(isset($_POST['schedules']) && isText($_POST['schedules'])){
+            modifySchedules($_POST['schedules']);
+        }
     }
+    catch(error $e){
+        echo('Oups nous ne pouvons pas traiter la page...');
+    }
+
 }

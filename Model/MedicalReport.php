@@ -7,10 +7,9 @@ if($_SERVER['REQUEST_URI']=='/Model/MedicalReport.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    //namespace MedicalReport;
-    include_once "User.php";
-    include_once "Animal.php";
-    //use \PDO;
+
+    require_once "User.php";
+    require_once "Animal.php";
 
     Class MedicalReport{
         private int $id_report;

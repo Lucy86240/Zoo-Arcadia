@@ -1,9 +1,14 @@
 <?php
 //on execute le programme si on est sur un url différent du chemin du fichier
 if($_SERVER['REQUEST_URI']!='/Controller/attributions.php'){
-    require_once "Model/Image.php";
-    //on récupère les attributions des images
-    $attributions = listAttributions();
+    try{
+        require_once "Model/Image.php";
+        //on récupère les attributions des images
+        $attributions = listAttributions();
+    }
+    catch(error $e){
+        echo('Oups nous ne trouvons pas les informations nécessaires à la page...');
+    }
 }
 else{
     //on affiche la page 404

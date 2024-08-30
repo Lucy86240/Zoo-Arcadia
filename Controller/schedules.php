@@ -7,7 +7,12 @@ if($_SERVER['REQUEST_URI']=='/Controller/schedules.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    include_once "Model/schedules.php";
-    //on récupère le texte des horaires
-    $schedules=schedules();
+    try{
+        require_once "Model/schedules.php";
+        //on récupère le texte des horaires
+        $schedules=schedules();
+    }
+    catch(error $e){
+        $schedules='Oups nous ne trouvons pas les horaires...';
+    }
 }
