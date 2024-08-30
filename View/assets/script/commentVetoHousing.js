@@ -1,4 +1,6 @@
-//icons commentaires
+/* pages : habitats, commentaires_veterinaire */
+
+//icons commentaires : affichage de la légende au survol
 
 const iconComments = document.querySelectorAll('.js-iconComments');
 const legendComments = document.querySelectorAll('.js-legendComments');
@@ -12,15 +14,17 @@ for(let i=0; i<iconComments.length;i++){
     })
 }
 
-//nouveau commentaire
+//nouveau commentaire : affichage au clic de l'icone
 const iconsAddComment = document.querySelectorAll('.js-iconAddComments')
 const addComment = document.getElementById('addComment')
 if(addComment != null){
+    //fermeture de l'ajout au clic sur la croix
     const close = addComment.querySelector('.close')
     close.addEventListener('click',()=>{
         addComment.classList.add('none')
     })
 
+    //détermination de la 1ere option du select des habitats
     const select = addComment.querySelector('#addCommentsHousing')
     for(let j=0;j<iconsAddComment.length;j++){
         iconsAddComment[j].addEventListener('click',()=>{
@@ -35,6 +39,7 @@ if(addComment != null){
     }
 } 
 
+//bloc la saisie lors de caractères non autorisés
 addCommentComment = document.getElementById('addCommentComment')
 if(addCommentComment != null)
 {
@@ -49,7 +54,7 @@ if(addCommentComment != null)
     })
 }
 
-// suppression commentaire
+// suppression commentaire : popup au clic sur l'icone
 const deleteIcon = document.querySelectorAll(".deleteIcon");
 for(let k=0;k<deleteIcon.length;k++){
     deleteIcon[k].addEventListener('click',()=>{
@@ -62,7 +67,7 @@ for(let k=0;k<deleteIcon.length;k++){
     })
 }
 
-//archivage 
+//archivage : popup au clic sur l'icone
 
 const archiveIcon = document.querySelectorAll('.js-iconArchive')
 for(let l=0;l<archiveIcon.length;l++){
@@ -75,6 +80,7 @@ for(let l=0;l<archiveIcon.length;l++){
     })
 }
 
+//désarchivage : popup au clic sur l'icone
 
 const unarchiveIcon = document.querySelectorAll('.js-iconUnarchive')
 for(let m=0;m<unarchiveIcon.length;m++){

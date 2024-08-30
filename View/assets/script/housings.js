@@ -1,4 +1,7 @@
+//PAGE HABITATS
+
 /* popup */
+
 // suppression habitat
 const deleteIconHousing = document.querySelectorAll(".deleteIconHousing");
 for(let k=0;k<deleteIconHousing.length;k++){
@@ -77,6 +80,7 @@ for(let i=0; i<inputSearch.length;i++){
                     liSearch[j].classList.add('none');
                 }
             }
+        //si pas de résultat on affiche un petit message sympa
         if(nbResult(filter,liSearch)==0){
             messageNoResult[i].classList.remove('none');
             title=document.createElement('span')

@@ -6,7 +6,7 @@
 }
 else{?>
     <section id="usersBoard">
-        <!--<div class="head"></div>-->
+        <div class="head"></div>
         <div class="themeBeige">
             <table>
                 <caption>

@@ -1,8 +1,8 @@
-<?php if($_SERVER['REQUEST_URI']=='/View/elements/footer_desktop.php'){
+<?php if($_SERVER['REQUEST_URI']=='/View/elements/footer.php'){
     ?>
-    <link rel="stylesheet" href = "../View/assets/css/style.css">
+    <link rel="stylesheet" href = "../assets/css/style.css">
     <?php
-    require_once '../View/pages/404.php';
+    require_once '../pages/404.php';
 }
 else{ ?>
     <?php require 'Controller/schedules.php'; ?>

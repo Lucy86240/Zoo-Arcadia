@@ -1,3 +1,11 @@
+//plusieurs pages
+
+/**
+ * Affiche / ferme un popup avec une croix existant dans le HTML
+ * @param {*} dialog : popup
+ * @param {*} trigger : icone
+ * @param {*} dismissTrigger : croix
+ */
 function popup(dialog, trigger, dismissTrigger){
 
   trigger.addEventListener('click',()=>{
@@ -8,6 +16,11 @@ function popup(dialog, trigger, dismissTrigger){
   })
 }
 
+/**
+ * Affiche un popup existant dans le HTML
+ * @param {*} icon 
+ * @param {*} popup 
+ */
 function popupConfirm(icon,popup){
   for(let i=0; i<icon.length; i++){
     icon[i].addEventListener('click',() => {
@@ -21,7 +34,7 @@ function popupConfirm(icon,popup){
  * créer une popup de confirmation (attention nécessite une div avec pour id "js-confirm")
  * @param {*} titleContent : titre du popup
  * @param {*} parContent : texte du popup
- * @param {*} submitContent : name du bouton de validation 
+ * @param {*} submitContent : nom du bouton de validation 
  */
 function createConfirm(titleContent,parContent,submitContent){
   const divConfirm = document.getElementById("js-confirm");

@@ -1,3 +1,6 @@
+//FOOTER
+
+//mise en place du footer mobile ou desktop suivant la taille de l'écran
 const footerDesktop = document.querySelector('.footer-desktop').innerHTML
 const footerMobile = document.querySelector('.footer-mobile').innerHTML
 
@@ -13,7 +16,7 @@ else{
     mobile = false
 }
 
-
+//modification en cas de modification de la taille de l'écran
 window.addEventListener('resize',()=>{
     if(window.innerWidth < 576 && mobile == false){
         footerD.innerHTML = ""

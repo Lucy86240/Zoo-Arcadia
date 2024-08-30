@@ -1,3 +1,5 @@
+//PAGES rapports_medicaux, repas
+
 //affiche le détail d'un rapport
 links = document.querySelectorAll('.reportLink');
 reports = document.querySelectorAll('.reportView');
@@ -54,7 +56,7 @@ else{
 }
 
 
-//Nouveau rapport : affichage de la liste des animaux
+//Nouveau rapport : affichage de la liste des animaux en fonction des saisies
     // Declare variables
     let searchAnimal = document.querySelector('#animalNewReport');
     if(searchAnimal == null) searchAnimal = document.querySelector('#animalFed');
@@ -78,16 +80,18 @@ if( searchAnimal != null)
     searchAnimal.addEventListener('input',() => {
         const filter = searchAnimal.value.toUpperCase();
         const li = list.getElementsByTagName('li');
+        //on affiche tous les animaux
         if(filter != ""){
             for(let k=0; k<li.length;k++){
                 li[k].classList.remove('none');
             }
         }
+        //si on a moins de 5 résultats
         if(nbResult(filter,li) <= 5){
             for (let j = 0; j < li.length; j++) {
                 const label = li[j].getElementsByTagName("label")[0];
                 const txtValue = label.textContent || label.innerText;
-                //on vérifie la correspondance entre les boutons radios et la saisie
+                //on vérifie la correspondance entre les boutons radios et la saisie on affiche seulement ceux correspondant
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
                     li[j].classList.remove('none');
                 } else {
@@ -98,6 +102,7 @@ if( searchAnimal != null)
         }
         else{
             if(filter != ""){
+                //on affiche le message indiquant qu'il y a trop de résultats
                 msg.classList.remove('none');
             }
             else{
@@ -105,12 +110,16 @@ if( searchAnimal != null)
             } 
         }
         if(filter == "" || nbResult(filter,li)>5){
+            //on affiche aucun animal
             for(let k=0; k<li.length;k++){
                 li[k].classList.add('none');
             }
         }
     })
 
+
+    //on vérifie les saisis des inputs : on bloc si saisi non autorisé
+    
 let dateNewReport = document.getElementById('dateNewReport')
 if(dateNewReport !=null){
     dateNewReport.addEventListener('blur',()=>{

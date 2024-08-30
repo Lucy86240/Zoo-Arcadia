@@ -1,10 +1,10 @@
 
 /**
- * 
- * @param {*} input 
- * @param {*} ul 
- * @param {*} messageResult 
- * @param {*} max 
+ * Permet d'afficher les éléments d'une liste en fonction de la saisie d'un input
+ * @param {*} input : barre de recherche
+ * @param {*} ul  : liste des éléments
+ * @param {*} messageResult : message s'affichant si trop de résultat
+ * @param {*} max : nombre max d'éléments pouvant être affiché (si trop affiche le messageResult)
  * @param {*} checkedAlways : booléen true = les checkbox cochées sont toujours affichées
  * @param {*} checkedNever : booléen true = les checkbox cochées ne sont jamais affichées
  */
@@ -90,6 +90,13 @@ function search(input, ul, messageResult,max,checkedAlways,checkedNever){
     })
 }
 
+/**
+ * Au clic sur un checkbox (1) disparait de la liste et apparait dans une autre liste (2)
+ * @param {*} checkboxSelectedInput : checkbox (2)
+ * @param {*} checkboxSelectedLi : li des checkbox (2)
+ * @param {*} checkboxSearchInput : checkbox (1)
+ * @param {*} allText : texte indiquant que tout est sélectionné
+ */
 function passListSearchOfListSelected(checkboxSelectedInput,checkboxSelectedLi,checkboxSearchInput,allText){
     nbSelected=0;
     for(let i=0; i<checkboxSearchInput.length;i++){

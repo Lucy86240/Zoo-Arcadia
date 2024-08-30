@@ -1,4 +1,8 @@
+/*Plusieurs pages : rapports_medicaux, repas*/
+
 // Declare variables
+
+//recherche d'une race
     const input = document.getElementById('filterBreedsSearch');
     const ul = document.getElementById('listBreeds');
     const messageResult = document.getElementById('msgBreedsSearch');
@@ -12,8 +16,8 @@ const checkboxSearchInput = document.querySelectorAll(".js-checkboxBreedsSearch"
 const allBreed = document.getElementById('breedsSelectedAll');
 passListSearchOfListSelected(checkboxSelectedInput,checkboxSelectedLi,checkboxSearchInput,allBreed);
 
-const cancelFilter = document.getElementById('cancelFilter')
-const vetoCheckbox = document.querySelectorAll('.js-vetocheckbox')
+//vérification saisie des dates
+
 const dateStart = document.getElementById('dateStart')
 const dateEnd = document.getElementById('dateEnd')
 
@@ -25,32 +29,22 @@ dateEnd.addEventListener('blur',()=>{
     if(!verifDateRegex(dateEnd.value)) dateEnd.value = '';
 })
 
-cancelFilter.addEventListener('click',()=>{
-    for(i=0;i<checkboxSearchInput.length;i++){
-        checkboxSearchInput[i].checked = false;
-        checkboxSelectedInput[i].checked = false;
-        checkboxSelectedLi[i].classList.add('none');
-    }
-    for(i=0;i<vetoCheckbox.length;i++){
-        vetoCheckbox.checked = true;
-    }
-    dateStart.value='';
-    dateEnd.value='';
-})
-
 //supprimer les filtres
-const form = document.querySelector('.filter')
-const submit = form.querySelector('.btn-DarkGreen')
+const cancelFilter = document.getElementById('cancelFilter')
+const vetoCheckbox = document.querySelectorAll('.js-vetocheckbox')
 
 cancelFilter.addEventListener('click', ()=> {
+    //on réinitialise les races
     for(let m=0; m<checkboxSelectedInput.length; m++){
         checkboxSelectedInput[m].checked = false;
         checkboxSearchInput[m].checked = false;
         checkboxSelectedInput[m].classList.add('none');
     }
+    //on réinitialise les vétérinaires
     for(let n=0; n<vetoCheckbox.length;n++){
         vetoCheckbox[n].checked=true;
     }
+    //on réinitiale les dates
     dateStart.value='';
     dateEnd.value='';
 });

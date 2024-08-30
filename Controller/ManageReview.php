@@ -283,8 +283,8 @@ else{
         $firstAvis = ($currentPage * $perPage) - $perPage;
         
     //on détermine le filtre et le trie à appliquer
-        if(isConnected()) $filter = filterRequestReview();
-        //sans connexion seulement les avis validés sont accessibles
+        if(authorize(['Employé.e','Administrateur.rice'])) $filter = filterRequestReview();
+        //sans droit seulement les avis validés sont accessibles
         else $filter = 'isVisible = 1';
         $sort = sortReview();
 

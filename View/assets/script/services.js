@@ -1,11 +1,16 @@
+//PAGE SERVICES
 
 //responsive
+//initialisation des variables
 let services = document.querySelectorAll('.service')
 servicesMobile = []
 for(let i=0; i<services.length;i++){
     servicesMobile.push(services.innerHTML)
 }
 
+/**
+ * HTML de la version mobile des services
+ */
 function versionMobile(){
     for(let i=0; i<services.length; i++){
         services[i].classList.remove('service-desktop')
@@ -25,6 +30,9 @@ function versionMobile(){
     }
 }
 
+/**
+ * HTML de la version desktop des services
+ */
 function versionDesktop(){
     for(let i=0; i<services.length; i++){
         services[i].classList.remove('service-mobile')
@@ -34,6 +42,7 @@ function versionDesktop(){
         h2 = containerM.querySelector('h2')
         p = containerM.querySelector('p')
         containerDesktop = document.createElement('div')
+        //affichage de l'image alternée gauche/droite
         if(i%2==0){
             containerDesktop.append(img)
         }
@@ -50,6 +59,7 @@ function versionDesktop(){
     }
 }
 
+//affichage de la bonne version suivant taille de l'écran
 if(window.innerWidth < 576){
     mobile = true
 }
@@ -71,6 +81,8 @@ window.addEventListener('resize',()=>{
 
 
 // popup
+
+//création de la popup de suppression
 const iconDelete = document.querySelectorAll('.iconDelete')
 if(iconDelete != null)
     for(let i = 0; i<iconDelete.length; i++){
@@ -83,7 +95,7 @@ if(iconDelete != null)
     }
 
 
-//apparition du formulaire de modification
+//affichage du formulaire de modification
 const editServiceDesktop = document.querySelectorAll('.editServiceD');
 const editServiceMobile = document.querySelectorAll('.editServiceM');
 const editServiceForm = document.querySelectorAll('.editServiceForm');
@@ -99,6 +111,7 @@ for(let i=0; i<editServiceMobile.length; i++){
     });
 }
 
+//vérification et blocage des saisies en cas de caractères non autorisés
 
 updateServiceName = document.querySelectorAll('.js-UpdateServiceName')
 if(updateServiceName != null)

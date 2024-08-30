@@ -1,3 +1,5 @@
+/*Popup d'ajout d'un avis*/
+
 const triggerNR = document.querySelector('#popup-review'); 
 const dialogNR = document.getElementById('new-review-dialog');
 const dismissTriggerNR = dialogNR.querySelector('[data-dismiss]');
@@ -26,7 +28,7 @@ popup(dialogNR,triggerNR,dismissTriggerNR)
     })
   }
 
-//inputs 
+//inputs : on bloc la saisie en cas de caractères non autorisés
 
 newReviewPseudo = document.getElementById('NewReviewPseudo')
 newReviewComment = document.getElementById('NewReviewComment')

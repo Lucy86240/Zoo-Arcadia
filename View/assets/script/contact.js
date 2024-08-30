@@ -1,3 +1,6 @@
+/*Page contact*/
+
+//détermination de l'image suivant la taille de l'écran
 img = document.getElementById('illustration')
 function choicePanda(){
     if(window.innerWidth > 576){
@@ -13,6 +16,8 @@ window.addEventListener("resize", ()=>{
 })
 
 choicePanda()
+
+//vérification des saisies, blocage en cas de saisi non autorisée
 
 msg = document.querySelector('textarea')
 company = document.getElementById('company')

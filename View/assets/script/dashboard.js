@@ -1,5 +1,8 @@
+/** Page dashboard */
+
 //ouverture / fermeture de la liste de popularité (avec mise en page spéciale des tuiles)
 
+//initialisation des variables
 const icon = document.getElementById('statsTile');
 const textStat = icon.querySelector('span')
 const title = document.getElementById('titleStats')
@@ -11,12 +14,20 @@ const newtiles = document.querySelectorAll('.js-tile')
 let deplace = document.querySelector('.js')
 
 actif = false;
+
+//au clic sur l'icon de popularité
 icon.addEventListener('click',()=>{
+    //si la popularité des animaux n'est pas affichée
     if(actif==false){
+        //modification du titre de la tuile
         textStat.innerHTML = "Moins de popularité"
+        //affichage le titre 
         title.classList.remove('none');
+        //affichage de la liste
         ul.classList.remove('none');
+        //indication de l'affichage de la popularité
         actif = true;
+        //on déplace les tuiles pour une présentation plus sympathique
         let deplace;
         if(window.innerWidth > 808)
             deplace = document.querySelector('.jsDesktop')
@@ -31,10 +42,14 @@ icon.addEventListener('click',()=>{
         deplace.classList.add('tilesTemp')
     }
     else{
+        //modification du titre de la tuile
         textStat.innerHTML = "Plus de popularité"
+        //disparition des éléments affichés
         title.classList.add('none');
         ul.classList.add('none');
+        //indication que la popularité n'est pas affichée
         actif = false;
+        //remise en place des tuiles
         if(window.innerWidth > 808)
             deplace = document.querySelector('.jsDesktop')
         else

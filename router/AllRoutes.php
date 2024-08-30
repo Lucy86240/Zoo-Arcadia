@@ -15,7 +15,6 @@ else{
         new Route('avis',false,'Avis','View/pages/reviews/reviews.php',[],'Controller/ManageReview.php'),
         new Route('services',false,'Services','View/pages/services/services.php',[],'Controller/ManageService.php'),
         new Route('nouveau_service',false,'Nouveau service','View/pages/services/addService.php',['Administrateur.rice'],'Controller/ManageService.php'),
-        new Route('animal',false,'Habitats','View/elements/animal.php',[],'Controller/ManageAnimal.php'),
         new Route('habitats',false,'Habitats','View/pages/housings/housings.php',[],'Controller/ManageHousing.php'),
         new Route('nouvel_habitat',false,'Nouvel habitat','View/pages/housings/addHousing.php',['Administrateur.rice'],'Controller/addHousing.php'),
         new Route('maj_habitat',true,'MAJ habitat','View/pages/housings/updateHousing.php',['Administrateur.rice'],'Controller/updateHousing.php'),

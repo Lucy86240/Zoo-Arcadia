@@ -1,8 +1,8 @@
 <?php if($_SERVER['REQUEST_URI']=='/View/elements/header.php'){
     ?>
-    <link rel="stylesheet" href = "../View/assets/css/style.css">
+    <link rel="stylesheet" href = "../assets/css/style.css">
     <?php
-    require_once '../View/pages/404.php';
+    require_once '../pages/404.php';
 }
 else{?>
     <!DOCTYPE html>
@@ -36,11 +36,11 @@ else{?>
                                     <a class="nav-link <?php if($_SERVER['REQUEST_URI']=='/services') echo('active') ?>" id="<?php if($optionPage){echo("../");}?>services" href="<?php if($optionPage==true){echo("../");}?>services">Nos services</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link <?php if($_SERVER['REQUEST_URI']=='/habitats') echo('active') ?> text-white" id="<?php if($optionPage){echo("../");}?>housings" href="<?php if($optionPage==true){echo("../");}?>habitats">Nos habitats</a>
+                                    <a class="nav-link <?php if($_SERVER['REQUEST_URI']=='/habitats') echo('active') ?>" id="<?php if($optionPage){echo("../");}?>housings" href="<?php if($optionPage==true){echo("../");}?>habitats">Nos habitats</a>
                                 </li>
                                 <?php if(authorize(['disconnect'])){?>
                                 <li class="nav-item">
-                                    <a class="nav-link <?php if($_SERVER['REQUEST_URI']=='/contact') echo('active') ?> text-white" id="<?php if($optionPage){echo("../");}?>contact" href="<?php if($optionPage==true){echo("../");}?>contact">Contact</a>
+                                    <a class="nav-link <?php if($_SERVER['REQUEST_URI']=='/contact') echo('active') ?>" id="<?php if($optionPage){echo("../");}?>contact" href="<?php if($optionPage==true){echo("../");}?>contact">Contact</a>
                                 </li>
                                 <?php } ?>
                                     <?php if(authorize(['connected'])){ ?>

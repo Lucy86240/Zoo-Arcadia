@@ -1,4 +1,8 @@
+/* affichage d'un animal */
+
 /* gestion des popup*/
+
+//suppression
 const iconDeleteAnimal = document.querySelectorAll('.iconDeleteAnimal')
 
 if(iconDeleteAnimal != null){
@@ -13,12 +17,15 @@ if(iconDeleteAnimal != null){
 
 }
 
+//archivage
 const iconArchive = document.querySelectorAll('.iconArchive')
 const popupArchive = document.querySelectorAll('.popupArchive')
 
 if(iconArchive != null){
     popupConfirm(iconArchive,popupArchive)
 }
+
+//désarchivage
 
 const iconUnarchive = document.querySelectorAll('.iconUnarchive')
 const popupUnarchive = document.querySelectorAll('.popupUnarchive')

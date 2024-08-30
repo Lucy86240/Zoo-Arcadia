@@ -278,24 +278,27 @@
     @media only screen and (min-width: 556px){
         background-color : var(--beige) !important;
         }
-        /*
-        .nav-link:hover, .dropdown-item:hover, .dropdown-selected{
-            color: var(--dark_green);  
-            font-weight : bold;
-            .arrow{
-                filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(2365%) hue-rotate(39deg) brightness(90%) contrast(87%);
-            }
         .nav-link, .nav-item, .dropdown-item{
-            color : var(--brown);
+            color : var(--brown) !important;
             font-weight: bold;
+        }
+    
+        .active, .active:hover{
+            color : var(--blue) !important;
         }
     
         .navbar-nav, .connected-link{
             background-color : var(--beige) !important;
         }
-    
         .arrow{
             filter: brightness(0) saturate(100%) invert(27%) sepia(40%) saturate(388%) hue-rotate(349deg) brightness(100%) contrast(88%);
         }
-    }*/
+        
+        .nav-link:hover, .dropdown-item:hover, .dropdown-selected{
+            color: var(--dark_green) !important;  
+            font-weight : bold;
+            .arrow{
+                filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(2365%) hue-rotate(39deg) brightness(90%) contrast(87%);
+            }
     }
+}

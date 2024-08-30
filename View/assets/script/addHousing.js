@@ -1,7 +1,10 @@
+/*Page ajout d'un habitat*/ 
+
 newHousingName = document.getElementById('newHousingName')
 newHousingDescription = document.getElementById('newHousingDescription')
 NHPDescription = document.getElementById('NHP-Description')
 
+//on bloque la saisie en cas de caractères non autorisés
 newHousingName.addEventListener('input',()=>{
     if(verifAnimalNameRegex(newHousingName.value) || newHousingName.value==''){
         newHousingName.style = 'outline : 1px solid black'
@@ -12,6 +15,7 @@ newHousingName.addEventListener('input',()=>{
     }
 })
 
+//on bloque la saisie en cas de caractères non autorisés
 newHousingDescription.addEventListener('input',()=>{
     if(verifAnimalNameRegex(newHousingDescription.value) || newHousingDescription.value==''){
         newHousingDescription.style = 'outline : 1px solid black'
@@ -22,6 +26,7 @@ newHousingDescription.addEventListener('input',()=>{
     }
 })
 
+//on bloque la saisie en cas de caractères non autorisés
 NHPDescription.addEventListener('input',()=>{
     if(verifAnimalNameRegex(NHPDescription.value) || NHPDescription.value==''){
         NHPDescription.style = 'outline : 1px solid black'

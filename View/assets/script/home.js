@@ -1,4 +1,9 @@
+/* PAGE ACCUEIL */
+
 /*Section habitat / animaux*/
+
+//initialisation de la durée des slides
+const durationSlide = 5_000;
 
 // on récupère les infos des animaux
 const housings = document.querySelectorAll(".home-housing-container")
@@ -18,6 +23,10 @@ for(let i=0; i<housings.length;i++){
     }
 }
 const animalsMobile = document.querySelector('.animals-mobile')
+
+/**
+ * HTML et carroussel de la version mobile de partie habitats/animaux
+ */
 function versionMobileHousing(){
     //on efface la partie des animaux des habitats
     for(let j=0; j<housings.length; j++){
@@ -32,6 +41,7 @@ function versionMobileHousing(){
     h2.innerHTML = "Plus de 1200 animaux à découvrir";
     animalsMobile.append(h2);
 
+    //encadré des animaux
     for(let k=0; k<imgSrc.length;k++){
         div = document.createElement('div')
         div.classList.add('animal-mobile')
@@ -50,6 +60,7 @@ function versionMobileHousing(){
         animalsMobile.append(div)
     }
 
+    //ronds en dessous de l'encadré
     divParent = document.createElement('div')
     divParent.classList.add('rounds')
     divParent.classList.add('rounds-beige')
@@ -62,6 +73,7 @@ function versionMobileHousing(){
     }
     animalsMobile.append(divParent)
 
+    //bouton en voir plus
     div = document.createElement('div')
     div.classList.add('button')
 
@@ -77,62 +89,66 @@ function versionMobileHousing(){
     animalsMobile.append(div)
 
     /*carrousel animaux mobile*/
-const slidesAnimals = document.querySelectorAll(".js-slideAnimal");
-const rounds = document.querySelectorAll(".round");
-let slideIndex = 0;
-const nbSlideViewAnimals = 1;
+    const slidesAnimals = document.querySelectorAll(".js-slideAnimal");
+    const rounds = document.querySelectorAll(".round");
+    let slideIndex = 0;
+    const nbSlideViewAnimals = 1;
 
-const showSlidesAnimal = (firstSlide) => {
-    let slideIndex = firstSlide;
+    const showSlidesAnimal = (firstSlide) => {
+        let slideIndex = firstSlide;
 
-    //on vérifie que la slide est incluse dans les slides
-    if (slideIndex >= slidesAnimals.length) {slideIndex = 0;}
-    if (slideIndex < 0) {slideIndex = slidesAnimals.length-1;}
+        //on vérifie que la slide est incluse dans les slides
+        if (slideIndex >= slidesAnimals.length) {slideIndex = 0;}
+        if (slideIndex < 0) {slideIndex = slidesAnimals.length-1;}
 
-    firstSlide = slideIndex
+        firstSlide = slideIndex
 
-    //on rend "invisible" tous les habitats
-    for (let i = 0; i < slidesAnimals.length; i++) {
-        slidesAnimals[i].classList.add("none");
-        slidesAnimals[i].classList.remove("animal-selected"); 
+        //on rend "invisible" tous les habitats
+        for (let i = 0; i < slidesAnimals.length; i++) {
+            slidesAnimals[i].classList.add("none");
+            slidesAnimals[i].classList.remove("animal-selected"); 
+        }
+        for(let k=0; k<slidesAnimals.length; k++){
+            rounds[k].classList.remove("round-selected");
+        }
+        rounds[slideIndex].classList.add("round-selected");
+
+        //on affiche ceux souhaités
+        let index = slideIndex;
+
+        for (let j=0; j<nbSlideViewAnimals ; j++){
+            slidesAnimals[index].classList.remove("none");
+            slidesAnimals[index].classList.add("animal-selected");       
+            index++;
+            if (index > slidesAnimals.length-1) {index = 0;}
+            if (index < 0) {index= slidesAnimals.length-1;}
+        }
+        return firstSlide;
     }
-    for(let k=0; k<slidesAnimals.length; k++){
-        rounds[k].classList.remove("round-selected");
+
+    const changeSlideAutoAnimal = () => {
+        setInterval( () => {
+            slideIndex ++;
+            slideIndex=showSlidesAnimal(slideIndex);
+        },durationSlide)
     }
-    rounds[slideIndex].classList.add("round-selected");
 
-    //on affiche ceux souhaités
-    let index = slideIndex;
-
-    for (let j=0; j<nbSlideViewAnimals ; j++){
-        slidesAnimals[index].classList.remove("none");
-        slidesAnimals[index].classList.add("animal-selected");       
-        index++;
-        if (index > slidesAnimals.length-1) {index = 0;}
-        if (index < 0) {index= slidesAnimals.length-1;}
-    }
-    return firstSlide;
-}
-
-const changeSlideAutoAnimal = () => {
-    setInterval( () => {
-        slideIndex ++;
+    if(slidesAnimals.length > nbSlideViewAnimals){
         slideIndex=showSlidesAnimal(slideIndex);
-    },durationSlide)
-}
-
-if(slidesAnimals.length > nbSlideViewAnimals){
-    slideIndex=showSlidesAnimal(slideIndex);
-    changeSlideAutoAnimal();
-}
+        changeSlideAutoAnimal();
+    }
 }
     
+/**
+ * HTML et carroussel de la version desktop des habitats/animaux
+ */
 function versionDesktopHousing(){
     //on enlève la partie animaux mobile
     animalsMobile.innerHTML ='';
     
     //on remet la partie animaux dans les habitats
     let imgAnimalHousingDesktop = document.querySelectorAll(".js-homeAnimal")
+    //div des animaux
     for(let i=0; i<imgAnimalHousingDesktop.length; i++){
         imgAnimalHousingDesktop[i].innerHTML = ""
         img = document.createElement('img')
@@ -152,6 +168,7 @@ function versionDesktopHousing(){
         imgAnimalHousingDesktop[i].append(div)
     }
 
+    //positionnement des animaux
     for(let j=0; j<housings.length;j++){
         let imgAnimalHousingDesktop = housings[j].querySelectorAll(".js-homeAnimal")
         if(imgAnimalHousingDesktop.length != null){
@@ -165,45 +182,50 @@ function versionDesktopHousing(){
             }
         }
     }
+
     /*Au passage de la souris le nom de l'animal apparait*/
 
-const animals1 = document.querySelectorAll(".home-housing-animal1 ");
-const titleAnimals1 = document.querySelectorAll(".home-title-animal1-position");
-const animals2 = document.querySelectorAll(".home-housing-animal2 ");
-const titleAnimals2 = document.querySelectorAll(".home-title-animal2-position");
-const animals3 = document.querySelectorAll(".home-housing-animal3 ");
-const titleAnimals3 = document.querySelectorAll(".home-title-animal3-position");
+    const animals1 = document.querySelectorAll(".home-housing-animal1 ");
+    const titleAnimals1 = document.querySelectorAll(".home-title-animal1-position");
+    const animals2 = document.querySelectorAll(".home-housing-animal2 ");
+    const titleAnimals2 = document.querySelectorAll(".home-title-animal2-position");
+    const animals3 = document.querySelectorAll(".home-housing-animal3 ");
+    const titleAnimals3 = document.querySelectorAll(".home-title-animal3-position");
 
-let onImg = false;
-for(let i=0;i<animals1.length;i++){
-    animals1[i].addEventListener("mouseover", () => {
-        //ajoute le titre à la sélection
-        titleAnimals1[i].classList.remove("none");
-    })
-    animals1[i].addEventListener("mouseout", () => {
-        //enlève le titre
-        titleAnimals1[i].classList.add("none");
-    })
+    //pour les animaux en position 1
+    for(let i=0;i<animals1.length;i++){
+        animals1[i].addEventListener("mouseover", () => {
+            //ajoute le titre à la sélection
+            titleAnimals1[i].classList.remove("none");
+        })
+        animals1[i].addEventListener("mouseout", () => {
+            //enlève le titre
+            titleAnimals1[i].classList.add("none");
+        })
+    }
+
+    //pour les animaux en position 2
+    for(let i=0;i<animals2.length;i++){
+        animals2[i].addEventListener("mouseover", () => {
+            titleAnimals2[i].classList.remove("none");
+        })
+        animals2[i].addEventListener("mouseout", () => {
+            titleAnimals2[i].classList.add("none");
+        })
+    }
+
+    //pour les animaux en position 3
+    for(let i=0;i<animals3.length;i++){
+        animals3[i].addEventListener("mouseover", () => {
+            titleAnimals3[i].classList.remove("none");
+        })
+        animals3[i].addEventListener("mouseout", () => {
+            titleAnimals3[i].classList.add("none");
+        })
+    }
 }
 
-for(let i=0;i<animals2.length;i++){
-    animals2[i].addEventListener("mouseover", () => {
-        titleAnimals2[i].classList.remove("none");
-    })
-    animals2[i].addEventListener("mouseout", () => {
-        titleAnimals2[i].classList.add("none");
-    })
-}
-for(let i=0;i<animals3.length;i++){
-    animals3[i].addEventListener("mouseover", () => {
-        titleAnimals3[i].classList.remove("none");
-    })
-    animals3[i].addEventListener("mouseout", () => {
-        titleAnimals3[i].classList.add("none");
-    })
-}
-}
-
+/* affichage suivant la taille de l'écran*/
 if(window.innerWidth < 576){
     versionMobileHousing()
     mobile = true;
@@ -225,7 +247,6 @@ window.addEventListener('resize',()=>{
 
 
 /*carroussel en cas de plus de trois habitats pour les desktop*/
-const durationSlide = 5_000;
 
 const slidesHousing = document.querySelectorAll(".js-slide");
 let slideIndex = 0;
@@ -280,6 +301,7 @@ if(slidesHousing.length > nbSlideViewHousing && window.innerWidth > 576){
     actif = true
 }
 
+// onréinitialise en cas de modification de la taille de l'écran
 window.addEventListener("resize", ()=>{
     if(actif==false && slidesHousing.length > nbSlideViewHousing && window.innerWidth > 576){       
         slideIndex=showSlides(slidesHousing,slideIndex,nbSlideViewHousing);
