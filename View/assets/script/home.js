@@ -5,37 +5,49 @@
 //initialisation de la durée des slides
 const durationSlide = 5_000;
 
-// on récupère les infos des animaux
 const housings = document.querySelectorAll(".home-housing-container")
-imgSrc = [];
-imgAlt = [];
-nameAnimal = [];
-nbAnimalPerHousing=[]
-for(let i=0; i<housings.length;i++){
-    imgAnimalHousingDesktop = housings[i].querySelectorAll(".js-homeAnimal")
-    nbAnimalPerHousing.push(imgAnimalHousingDesktop.length)
-    for(let j=0; j<imgAnimalHousingDesktop.length; j++){
-        img=imgAnimalHousingDesktop[j].querySelector('img');
-        imgSrc.push(img.getAttribute('src'));
-        imgAlt.push(img.getAttribute('alt'));
-        nameA = imgAnimalHousingDesktop[j].querySelector('span');
-        nameAnimal.push(nameA.innerHTML)
-    }
-}
-const animalsMobile = document.querySelector('.animals-mobile')
+let animalsMobile = document.querySelector('.animals-mobile')
 
 /**
  * HTML et carroussel de la version mobile de partie habitats/animaux
  */
 function versionMobileHousing(){
-    //on efface la partie des animaux des habitats
-    for(let j=0; j<housings.length; j++){
-        let imgAnimalHousingDesktop = housings[j].querySelectorAll(".js-homeAnimal")
-        for(let i=0; i<imgAnimalHousingDesktop.length ;i++){
-            for(let k=0; k<imgAnimalHousingDesktop[i].children.length; k++)
-            imgAnimalHousingDesktop[i].innerHTML='';
+    // on récupère les infos des animaux
+    imgSrc = [];
+    imgAlt = [];
+    nameAnimal = [];
+    idHousing = [];
+    for(let i=0; i<housings.length;i++){
+        imgAnimalHousingDesktop = housings[i].querySelectorAll(".js-homeAnimal")
+        for(let j=0; j<imgAnimalHousingDesktop.length; j++){
+            img=imgAnimalHousingDesktop[j].querySelector('img');
+            imgSrc.push(img.getAttribute('src'));
+            imgAlt.push(img.getAttribute('alt'));
+            nameA = imgAnimalHousingDesktop[j].querySelector('span');
+            nameAnimal.push(nameA.innerHTML)
+            idHousing.push(imgAnimalHousingDesktop[j].getAttribute('id_housing'))
         }
     }
+    idHousingAlone=[]
+    for(let j=0 ; j<idHousing.length;j++){
+        if(!idHousingAlone.includes(idHousing[j])) idHousingAlone.push(idHousing[j])
+    }
+    nbPerHousing = []
+    
+    for(let j=0 ; j<idHousingAlone.length;j++){
+        count = 0;
+        for(let k=0; k<idHousing.length;k++){
+            if(idHousing[k]==idHousingAlone[j])
+                count++;
+        }
+        nbPerHousing.push(count)
+    }
+    tab=[]
+    tab.push(imgSrc)
+    tab.push(imgAlt)
+    tab.push(nameAnimal)
+    tab.push(nbPerHousing)
+
     //on crée la partie animaux mobile
     h2 = document.createElement('h2')
     h2.innerHTML = "Plus de 1200 animaux à découvrir";
@@ -46,6 +58,7 @@ function versionMobileHousing(){
         div = document.createElement('div')
         div.classList.add('animal-mobile')
         div.classList.add('js-slideAnimal')
+        div.setAttribute('id_housing',idHousing[k])
 
         h3 = document.createElement('h3')
         h3.innerHTML = nameAnimal[k]
@@ -87,6 +100,15 @@ function versionMobileHousing(){
     a.append(button)
     div.append(a)
     animalsMobile.append(div)
+
+    //on efface la partie des animaux des habitats
+    for(let j=0; j<housings.length; j++){
+        let imgAnimalHousingDesktop = housings[j].querySelectorAll(".js-homeAnimal")
+        for(let i=0; i<imgAnimalHousingDesktop.length ;i++){
+            for(let k=0; k<imgAnimalHousingDesktop[i].children.length; k++)
+            imgAnimalHousingDesktop[i].innerHTML='';
+        }
+    }
 
     /*carrousel animaux mobile*/
     const slidesAnimals = document.querySelectorAll(".js-slideAnimal");
@@ -137,15 +159,20 @@ function versionMobileHousing(){
         slideIndex=showSlidesAnimal(slideIndex);
         changeSlideAutoAnimal();
     }
+    return tab;
 }
     
 /**
  * HTML et carroussel de la version desktop des habitats/animaux
  */
-function versionDesktopHousing(){
-    //on enlève la partie animaux mobile
-    animalsMobile.innerHTML ='';
-    
+function versionDesktopHousing(data){
+    if(data != null){
+        // on récupère les infos des animaux
+        imgSrc = data[0];
+        imgAlt = data[1];
+        nameAnimal = data[2];
+        nbAnimalPerHousing= data[3]
+
     //on remet la partie animaux dans les habitats
     let imgAnimalHousingDesktop = document.querySelectorAll(".js-homeAnimal")
     //div des animaux
@@ -181,6 +208,10 @@ function versionDesktopHousing(){
                 div.classList.add(nameClass)
             }
         }
+    }
+    
+    //on enlève la partie animaux mobile
+    animalsMobile.innerHTML ='';
     }
 
     /*Au passage de la souris le nom de l'animal apparait*/
@@ -228,22 +259,14 @@ function versionDesktopHousing(){
 /* affichage suivant la taille de l'écran*/
 if(window.innerWidth < 576){
     versionMobileHousing()
-    mobile = true;
+    mobileDisplay = true;
+    console.log(1)
 }
 else if(window.innerWidth > 576){
-    versionDesktopHousing()
-    mobile = false;
+    versionDesktopHousing(null)
+    mobileDisplay = false;
+    console.log(2)
 }
-window.addEventListener('resize',()=>{
-    if(window.innerWidth < 576 && mobile==false){
-        versionMobileHousing()
-        mobile = true;
-    }
-    else if(window.innerWidth > 576 && mobile==true){
-        versionDesktopHousing()
-        mobile = false;
-    }
-})
 
 
 /*carroussel en cas de plus de trois habitats pour les desktop*/
@@ -301,6 +324,7 @@ if(slidesHousing.length > nbSlideViewHousing && window.innerWidth > 576){
     actif = true
 }
 
+datas=[];
 // onréinitialise en cas de modification de la taille de l'écran
 window.addEventListener("resize", ()=>{
     if(actif==false && slidesHousing.length > nbSlideViewHousing && window.innerWidth > 576){       
@@ -314,6 +338,17 @@ window.addEventListener("resize", ()=>{
             stopCarrouselHousing();
             actif = false
         }
+    }
+
+    if(window.innerWidth < 576 && !mobileDisplay){
+        datas = versionMobileHousing();
+        mobileDisplay = true;
+    }
+    else if(window.innerWidth > 576 && mobileDisplay){
+        console.log('tab desktop:')
+        console.log(datas)
+        versionDesktopHousing(datas);
+        mobileDisplay = false;
     }
 });
 

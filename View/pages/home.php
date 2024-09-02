@@ -24,7 +24,7 @@ else{?>
                 $housings = allHousingsView(false,1,3,1,0);
                 foreach($housings as $housing){
                     ?>
-                    <div class="home-housing-container js-slide">
+                    <div class="home-housing-container js-slide" id_housing="<?php echo($housing["id"]); ?>">
                         <div class="home-img-font"> 
                             <div class="home-title-housing-position">
                                 <h3 class="text-brown text-center home-housing-title"><?php echo($housing["name"]); ?></h3>
@@ -35,7 +35,7 @@ else{?>
                         </div>
                         <?php if(isset($housing["animals"][0])){
                             $animal1 = $housing["animals"][0];?>
-                            <div class="home-img-font js-homeAnimal">
+                            <div class="home-img-font js-homeAnimal" id_housing="<?php echo($housing["id"]); ?>">
                                 <div>
                                     <img class="home-animal-img rounded-circle home-housing-animal1" src="<?php echo($animal1["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal1["imagesAnimals"][0]["descriptionAnimals"]); ?>">
                                 </div>
@@ -46,14 +46,14 @@ else{?>
                         <?php }
                         if(isset($housing["animals"][1])){
                             $animal2 = $housing["animals"][1];?>
-                            <div class="home-img-font js-homeAnimal">
+                            <div class="home-img-font js-homeAnimal" id_housing="<?php echo($housing["id"]); ?>">
                                 <img class="home-animal-img rounded-circle home-housing-animal2" src="<?php echo($animal2["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal2["imagesAnimals"][0]["descriptionAnimals"]); ?>">
                                 <div class="home-title-animal2-position none"><span class="text-center home-animal-title"><?php echo($animal2["name"]); ?></span></div>
                             </div>
                         <?php }
                         if(isset($housing["animals"][2])){
                         $animal3 = $housing["animals"][2];?>
-                            <div class="home-img-font js-homeAnimal">
+                            <div class="home-img-font js-homeAnimal" id_housing="<?php echo($housing["id"]); ?>">
                                 <img class="home-animal-img rounded-circle home-housing-animal3" src="<?php echo($animal3["imagesAnimals"][0]["pathAnimals"]); ?>" alt="<?php echo($animal3["imagesAnimals"][0]["descriptionAnimals"]); ?>">
                                 <div class="home-title-animal3-position none"><span class="text-center home-animal-title"><?php echo($animal3["name"]); ?></span></div>
                             </div>

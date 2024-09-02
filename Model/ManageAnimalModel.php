@@ -272,6 +272,7 @@ else{
                                 while($report = $stmt3->fetch()){
                                     $animals[$indice]->addMedicalReport($report);
                                 }
+
                             }
                         }
                 
