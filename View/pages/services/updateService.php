@@ -9,14 +9,14 @@ else{?>
             <div class="element">
                 <label for="UpdateServiceName<?php echo($service['id_service']);?>">Intitulé :</label>
                 <div>
-                    <input type="text" class="js-UpdateServiceName" name="UpdateServiceName<?php echo($service['id_service']);?>" id="UpdateServiceName<?php echo($service['id_service']);?>" maxlength="155" value="<?php echo(echapHTML($service['name']));?>" pattern="^([a-zA-Z0-9èéëïç&!?,:;\(\)\- ])+$"/>
+                    <input type="text" class="js-UpdateServiceName" name="UpdateServiceName<?php echo($service['id_service']);?>" id="UpdateServiceName<?php echo($service['id_service']);?>" maxlength="155" value="<?php echo(echapHTML($service['name']));?>" pattern="^([a-zA-Z0-9èéëïç&!?,:;\(\)\- ])+$" required />
                     <p>Max 155 caractères</p>
                 </div>
             </div>
             <div class="element">
                 <label for="UpdateServiceDescription<?php echo($service['id_service']);?>">Description :</label>
                 <div>
-                    <textarea class="update-description" name="UpdateServiceDescription<?php echo($service['id_service']);?>" id="UpdateServiceDescription<?php echo($service['id_service']);?>" maxlength="255">
+                    <textarea class="update-description" name="UpdateServiceDescription<?php echo($service['id_service']);?>" id="UpdateServiceDescription<?php echo($service['id_service']);?>" maxlength="255" required>
                         <?php echo(echapHTML($service['description']));?>
                     </textarea>
                     <p>Max 255 caractères</p>

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    try{
+   // try{
         require_once 'CONSTANTES.php';
         require_once 'config.php';
         require_once 'fonctions_generals_and_initializations.php';
@@ -14,8 +14,8 @@
         loadContentPage($request);
     
         require_once 'View/elements/footer.php';   
-    }
+   /* }
     catch(error $e){
         echo('Oups un problème est survenu...');
         die;
-    }
+    }*/

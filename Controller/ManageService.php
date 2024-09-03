@@ -159,7 +159,7 @@ else{
     
                 //on récupère la modification de l'intitulé (si besoin)
                 $nameName ="UpdateServiceName".$service['id_service'];
-                $name = null;
+                $name = '';
                 if(isset($_POST[$nameName]) && $_POST[$nameName]!='' && isAnimalName($_POST[$nameName])){
                     $name = $_POST[$nameName];
                     $_POST[$nameName] = null;
@@ -167,7 +167,7 @@ else{
     
                 //on récupère la modification de la description (si besoin)
                 $nameDescription = "UpdateServiceDescription".$service['id_service'];
-                $description = null;
+                $description = '';
                 if(isset($_POST[$nameDescription]) && $_POST[$nameDescription]!='' && isText($_POST[$nameDescription])){
                     $description = $_POST[$nameDescription];
                     $_POST[$nameDescription] = null;
@@ -178,7 +178,7 @@ else{
     
                 //on vérifie si il y a une nouvelle icone
                 $nameIcon = 'UpdateServiceIcon'.$service['id_service'];
-                if(isset($_FILES[$nameIcon])){
+                if(isset($_FILES[$nameIcon]) && $_FILES[$nameIcon]['tmp_name'] !=''){
                     if(validIcon($_FILES[$nameIcon]) == null){
                         //on supprime l'ancienne
                         $path = 'View/assets/img/services/'.$service['id_service'].'/icon.png';
@@ -190,19 +190,20 @@ else{
                     }
                 }
                     
-                if(isset($_POST['USP-Attr'.$service['id_service']])){
+                if(isset($_POST['USI-Attr'.$service['id_service']])){
                     //on cherche l'id de l'ancienne image
-                    $id_image = searchIdImage('services',$service['id_service'],0);
-                    //on modifie l'ancienne image
+                    $id_image = searchIdImage('services',$service['id_service'],1);
+                    //on modifie son attribution
                     $path = 'View/assets/img/services/'.$service['id_service'].'/icon.png';
-                    if($id_image !=0) updateImageRequest($id_image, $path, '', 0, $_POST['USP-Attr'.$service['id_service']]);
+                    if($id_image !=0) updateImageRequest($id_image, $path, '', 0, $_POST['USI-Attr'.$service['id_service']]);
                 }
                 
                 $namePhoto = 'UpdateServicePhoto'.$service['id_service'];
-                if(isset($_FILES[$namePhoto])){
+                if(isset($_FILES[$namePhoto]) && $_FILES[$namePhoto]['tmp_name']!=''){
+                    var_dump($_FILES[$namePhoto]['tmp_name']);
                     if(validImg($_FILES[$namePhoto]) == null){
                         //on supprime l'ancienne photo
-                        unlink($service['photo']->getPath());
+                        unlink($service['photo']['path']);
                         // on déplace la nouvelle
                         $name_file = explode('.',$_FILES[$namePhoto]['name']);
                         $extension = end($name_file);
@@ -215,7 +216,7 @@ else{
                         $nameDescriptionImg = 'USP-Description'.$service['id_service'];
                         $nameAttrib = 'USP-Attr'.$service['id_service'];
                         $portrait = false;
-                        $descImg = null;
+                        $descImg = '';
                         $attr="";
                         if(isset($_POST[$nameDescriptionImg]) && isText($_POST[$nameDescriptionImg])) $descImg = $_POST[$nameDescriptionImg];
                         if(isset($_POST[$namePortrait])) $portrait = true;
@@ -223,7 +224,7 @@ else{
     
                         //on cherche l'id de l'ancienne image
                         $id_image = searchIdImage('services',$service['id_service'],0);
-                        //on modifie l'ancienne image
+                        //on modifie l'image
                         if($id_image !=0) updateImageRequest($id_image, $path, $descImg, $portrait, $attr);
                     }
                 }
@@ -247,7 +248,7 @@ else{
         $services = allServices(true);
     }
     catch(error $e){
-        echo('Oups nous ne trouvons pas les informations nécessaires à la page...');
+        echo('Oups nous ne trouvons pas les informations nécessaires à la page service...');
     }
 }
 

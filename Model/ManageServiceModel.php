@@ -160,17 +160,17 @@ else{
         function updateServiceRequest(int $id, string $name, string $description){
             try{
                 //on vérifie que le service existe et qu'il y a une modification à faire
-                if(serviceExistById($id) && ($name != null || $description != null)){
+                if(serviceExistById($id) && ($name != '' || $description != '')){
                     $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
                     //on adapte la requête suivant la/les modifications à effectuer
                     //si on modifie l'intitulé et la description
-                    if(($name != null && $description != null)){
+                    if(($name != '' && $description != '')){
                         $stmt = $pdo->prepare('UPDATE services SET name = :name, description = :description WHERE id_service = :id');
                         $stmt->bindParam(":name", $name, PDO::PARAM_STR);
                         $stmt->bindParam(":description", $description, PDO::PARAM_STR);
                     }
                     //si on modifie seulement l'intitulé
-                    else if($name != null){
+                    else if($name != ''){
                         $stmt = $pdo->prepare('UPDATE services SET name = :name WHERE id_service = :id');
                         $stmt->bindParam(":name", $name, PDO::PARAM_STR);
                     }
