@@ -46,7 +46,6 @@ else{
             $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
             if($nbReviews<1 && $JustVisible==false){
                 $stmt = $pdo->prepare('SELECT * FROM reviews');
-                echo("1");
             }
             else if($JustVisible){
                 $request = 'SELECT * FROM reviews WHERE isVisible=1 ORDER BY '.$order .' LIMIT '.$nbReviews.' OFFSET '.$startList;
@@ -283,7 +282,6 @@ else{
                 }
                 $request.=', '.$isVisible.' WHERE id_review='.$id;
             }
-            echo($request);
             try{
                 $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
                 $stmt = $pdo->prepare($request);

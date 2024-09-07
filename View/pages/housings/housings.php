@@ -97,6 +97,7 @@ else{?>
                         <p><?php echo($housing['description']); ?></p>
                     </div>
                 </div>
+                <!-- Commentaires du vétérinaire-->
                 <?php if(authorize(['connected'])){ ?>
                     <div class="commentsVeto">
                         <div class="headerComments">
@@ -146,6 +147,7 @@ else{?>
                         <div id="js-confirm"> </div>
                     </div>
                 <?php } ?>
+                <!-- les animaux -->
                 <div class="list-animals">
                     <h3>Vous pouvez m'y retrouver :</h3>
                     <div class="search">
@@ -173,6 +175,7 @@ else{?>
                         Ajouter un animal
                     </button></a>
                 <?php } ?>
+                <!-- animal sélectionné-->
                 <section class="animal" id="animal<?php echo($housing['id'])?>">
                     <?php 
                     if(isset($_POST['animal'.$housing['id']]) || isset($_SESSION['animal'.$housing['id']])){
@@ -182,7 +185,8 @@ else{?>
                         // si on avait cliqué sur un animal
                         else $id=$_SESSION['animal'.$housing['id']];
                         //on affiche l'animal
-                        echoAnimal($id,'housings',$housings);
+                        if(!isset($_POST["ValidationDeleteAnimal".$id]))
+                            echoAnimal($id,'housings',$housings);
                     }?>
             </section>
             <a href="habitats" class="button back "><button type="button" class="btn btn-beige">

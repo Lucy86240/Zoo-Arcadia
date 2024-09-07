@@ -35,15 +35,23 @@ else{?>
                         <label for="password">Votre mot de passe : </label>
                         <input type="password" name="password" id="password" required>
                     </div>
-                    <?php if(!(!passwordError() || (isset($_SESSION['blocked']) && $_SESSION['blocked']==1) || !isset($_SESSION['blocked']))){ ?>
-                        <p class="<?php // if(!passwordError() || (isset($_SESSION['blocked']) && $_SESSION['blocked']==1) || !isset($_SESSION['blocked'])) echo('none');?>">
-                            Votre mail ou votre mot de passe est incorrect
+                    <?php if(isset($_SESSION['passwordError']) && $_SESSION['passwordError']==true && (!isset($_SESSION['blocked']) || (isset($_SESSION['blocked']) && $_SESSION['blocked'] == false))){ ?>
+                        <p>
+                            Votre mail ou votre mot de passe est incorrect. <br>
+                            <?php if(isset($_POST['user'])){ ?>
+                            Il vous reste <?php echo(3-$_SESSION['nbError'][$_POST['user']]) ?> essai(s).
+                            <?php } ?>
                         </p>
                     <?php } ?>
-                    <?php if(!((isset($_SESSION['blocked']) && $_SESSION['blocked']==0) || !isset($_SESSION['blocked']))) {?>
-                        <p class="<?php if((isset($_SESSION['blocked']) && $_SESSION['blocked']==0) || !isset($_SESSION['blocked'])) echo('none'); ?>">
-                        Vous avez fait plus de 3 mots de passe erronés. </br>
+                    <?php if(isset($_SESSION['blocked'])) {?>
+                        <p>
+                        <?php  if(isset ($_POST['user']))
+                                    if(isset($_SESSION['nbError'][$_POST['user']]) && $_SESSION['nbError'][$_POST['user']] >=3){ ?>    
+                                        Vous avez fait plus de 3 mots de passe erronés. </br>
+                                    <?php }
+                        if(isset($_SESSION['blocked']) && $_SESSION['blocked']==true){ ?>
                         Votre accès est bloqué. Veuillez contacter l'admin pour vous débloquer.
+                        <?php }?>
                         </p>
                     <?php } ?>    
                     <div class="form-submit">

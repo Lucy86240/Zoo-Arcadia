@@ -328,63 +328,28 @@
             font-family : var(--font_sans_serif)
         }
     }
-}
-
-.newReportPage{
-    background-color: var(--blue);
-    color : var(--white);
-    textarea, input[type="text"], input[type="date"], input[type="time"]{
-        background-color: var(--white);
-        color : var(--blue);
-    }
-}
-
-.fedAnimalPage{
-    padding-top: 20px;
-    border-radius: 20px;;
-    background-color : var(--brown);
-    color : var(--beige);
-    textarea, input[type="text"], input[type="date"], input[type="time"]{
-        background-color: var(--white);
-        color : var(--brown);
-    }
-}
-.newReportPage, .fedAnimalPage{
-    h1,h2{
-        text-align: center;
-    }
-    h2{
-        margin-bottom : 20px;
-    }
-    
-    display : flex;
-    flex-direction: column;
-
-    .element{
-        display: flex;
-        justify-content: space-between;
-        margin-left: 5vw;
-        margin-right: 5vw;
-        margin-bottom : 1vh;
-        textarea, input[type="text"], input[type="date"], input[type="time"]{
-            width : 40vw;
-            border-radius: 20px;
+    #problem{
+        background-color: brown;
+        border-radius: 20px;
+        margin : 15px;
+        padding : 10px;
+        #problemImg{
+            width : 50%;
         }
-        textarea{
-            height: 20vh;
-        }  
-    }
-    .form-submit{
-        display:flex;
-        justify-content: center;
-        margin-bottom : 2vh;
-        margin-top: 8vh;
-        .button{
-            padding : 15px;
+        p{
+            color : var(--white);
+            align-items: center;
         }
     }
 }
 
+
+#usersBoard{
+    .legend{
+        font-size : 10px;
+        width : 40px !important;
+    }
+}
 @media only screen and (max-width: 556px){
     .medicalReports, .foodAnimal, #usersBoard{
         .illustration{
@@ -404,7 +369,7 @@
             display: none;
         }
     }
-    .allMedicalReports, .allFood{
+    .allMedicalReports, .allFood, #usersBoard{
         .filter{
             .title{
                 text-align: center;
@@ -424,6 +389,33 @@
         .employee{
             display:'none';
         }
+    }
+    #usersBoard{
+
+        table{
+            h3{
+                font-size : 15px;
+            }
+            th, td {
+                font-size : 12px;
+            }
+
+            width: 95%;
+            margin : 0;
+            .filter{
+                margin : 0 !important;
+    
+            }
+            .icon{
+                img{
+                    width : 15px !important;
+                }
+                margin : 1px !important;
+            }
+
+
+        }
+
     }
 }
 
@@ -454,7 +446,7 @@
             justify-content: space-evenly;
         }
     }
-    .allMedicalReports, .allFood{
+    .allMedicalReports, .allFood, #usersBoard{
         table {
             .filter{
                 .searchFilter{

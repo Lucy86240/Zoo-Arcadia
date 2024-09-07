@@ -182,7 +182,7 @@ else{?>
                                 <div class="heading-review">
                                     <h3><?php echo($review["pseudo"]);?></h3>
                                     <div class="block">
-                                        <p class="r-review-date">visite du <?php echo($review["dateVisite"]);?></p>
+                                        <p class="r-review-date">Avis du <?php echo($review["dateVisite"]);?></p>
                                         <div class="r-review-stars">
                                             <?php for($i=0;$i<$review["note"];$i++){ 
                                                 ?>

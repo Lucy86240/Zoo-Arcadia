@@ -154,7 +154,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageAnimal.php'){
          * @param int $id_housing : id de l'habitat de l'animal à supprimer
          * @return void
          */
-        function deleteAnimal(int $id, string $name, int $id_housing){
+        function deleteAnimal(int $id, string $name, int $id_housing, &$elements){
             //on recupère le nom du bouton à cliquer pour supprimer l'animal
             $nameButton = "ValidationDeleteAnimal".$id;
             //si on a cliqué sur le bouton
@@ -165,7 +165,13 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageAnimal.php'){
                 $path = "View/assets/img/animals/".$id.'-'.$name.'/';
                 rrmdir($path);
                 //si on est sur la page habitat on enlève son affichage
-                $_SESSION['animal'.$id_housing] = null;
+                if($elements != null){
+                    $_SESSION['animal'.$id_housing] = null;
+                    $elements = allHousingsView(true,-1,-1,1,1);
+                }
+                else{
+                    $elements = null;
+                }
                 $_POST[$nameButton]=null;
             } 
             
@@ -253,7 +259,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageAnimal.php'){
                     } 
                     $_SESSION['animal'.$housing["id_housing"]] = $animal['id'];
                     //on permet la suppression / l'archivage / le désarchivage
-                    deleteAnimal($animal['id'],$animal['name'],$housing["id_housing"]);
+                    deleteAnimal($animal['id'],$animal['name'],$housing["id_housing"],$elements);
                     archiveAnimal($animal,$elements);
                     unarchiveAnimal($animal);
                     //on affiche les infos
@@ -274,8 +280,8 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageAnimal.php'){
                 } 
                 $_SESSION['allAnimals_animalSelected'] = $animal['id'];
                     //on permet la suppression / l'archivage / le désarchivage
-                deleteAnimal($animal['id'],$animal['name'],$housing["id_housing"]);
                 $elements = null;
+                deleteAnimal($animal['id'],$animal['name'],$housing["id_housing"],$elements);
                 archiveAnimal($animal,$elements);
                 unarchiveAnimal($animal);
     

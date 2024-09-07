@@ -57,25 +57,6 @@ else{
     }
 
     /**
-     * Summary of blocUser : bloque un utilisateur dans la base de données
-     * @param string $id : mail de l'utilisateur à bloquer
-     * @return void
-     */
-    function blocUser(string $id){
-        try{
-            if(userExist($id)){
-                $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
-                $stmt = $pdo->prepare('UPDATE users SET blocked = 1 WHERE mail = :id');
-                $stmt->bindParam(":id", $id, PDO::PARAM_STR);
-                $stmt->execute();
-            }
-        }
-        catch(error $e){
-            echo('Une erreur est survenue');
-        }
-    }
-
-    /**
      * Summary of unblocUser débloque un utilisateur dans la base de données
      * @param string $id : mail de l'utilisateur à débloquer
      * @param string $password : nouveau mot de passe de l'utilisateur

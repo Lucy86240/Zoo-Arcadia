@@ -27,19 +27,26 @@ else{
             if(isset($_POST["updateHousing"]) && $_POST["updateHousing"]!=null){
                 //on récupère la modification du nom (si besoin)
                 $name = '0';
-                if(isset($_POST["updateHousingName"]) && $_POST["updateHousingName"]!='' && isAnimalName($_POST["updateHousingName"])){
-                    $name = $_POST["updateHousingName"];
-                    $_POST["updateHousingName"] = null;
+                if(isset($_POST["updateHousingName"]) && $_POST["updateHousingName"]!=''){
+                    if(isAnimalName($_POST["updateHousingName"])){
+                        $name = $_POST["updateHousingName"];
+                        $_POST["updateHousingName"] = null;
+                    }
+                    else $msgUpdate = "Caractère(s) non conforme(s) détecté(s).";
                 }
                 //on récupère la modification du nom (si besoin)
                 $description = '0';
-                if(isset($_POST["updateHousingDescription"]) && $_POST["updateHousingDescription"]!='' && isText($_POST["updateHousingDescription"])){
-                    $description = $_POST["updateHousingDescription"];
-                    $_POST["updateHousingDescription"] = null;
+                if(isset($_POST["updateHousingDescription"]) && $_POST["updateHousingDescription"]!=''){
+                    if(isText($_POST["updateHousingDescription"])){
+                        $description = $_POST["updateHousingDescription"];
+                        $_POST["updateHousingDescription"] = null;
+                    }
+                    else $msgUpdate = "Caractère(s) non conforme(s) détecté(s).";
                 }
     
                 //on met à jour la base de données avec les infos
-                $msgUpdate = updateHousingRequest($id,$name,$description);
+                if(!isset($msgUpdate))
+                    $msgUpdate = updateHousingRequest($id,$name,$description);
                 
                 //on ajoute la nouvelle photo
                 $namePhoto = 'UpdateHousingPhoto'.$id;
@@ -50,9 +57,9 @@ else{
                         // on déplace la nouvelle photo
                         $name_file = explode('.',$_FILES[$namePhoto]['name']);
                         $extension = end($name_file);
-                        $pathImg='View/assets/img/housings/'.$id.'-'.$name;
+                        $pathImg='View/assets/img/housings/'.$id;
                         if(!file_exists( $pathImg )) mkdir($pathImg);
-                        $path = 'View/assets/img/housings/'.$id.'-'.$name.'/'.$name.'-'.time().'.'.$extension;
+                        $path = 'View/assets/img/housings/'.$id.'/'.$name.'-'.time().'.'.$extension;
                         if(move_uploaded_file($_FILES[$namePhoto]['tmp_name'],$path)==false){
                             $msgImgSave='error';
                         }
@@ -65,7 +72,11 @@ else{
                         $portrait = false;
                         $descImg = 'NULL';
                         $attr = "";
-                        if(isset($_POST[$nameDescriptionImg]) && isText($_POST[$nameDescriptionImg])) $descImg = $_POST[$nameDescriptionImg];
+                        if(isset($_POST[$nameDescriptionImg]))
+                            if(isText($_POST[$nameDescriptionImg]))
+                                $descImg = $_POST[$nameDescriptionImg];
+                            else
+                                $msgImg = "Caractère(s) non conforme(s) détecté(s).";
                         if(isset($_POST[$namePortrait])) $portrait = true;
                         if(isset($_POST[$nameAttribution])) $attr = $_POST[$nameAttribution];
     
@@ -73,7 +84,10 @@ else{
                         $photo->setPortrait($portrait);
                         $photo->setIcon(false);
                         $photo->setAttribution($attr);
-                        $msgImg= addImgRequest('housings',$id, $photo);
+                        if($msgImg==null || $msgImg=="" || $msgImg==NULL)
+                            $msgImg= addImgRequest('housings',$id, $photo);
+                        else
+                            {echo('vd:'); var_dump($msgImg);}
                     }
                     $_FILES[$namePhoto]=null;
                 }

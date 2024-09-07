@@ -17,7 +17,7 @@ else{
          * @param mixed $reports : tableau asso des rapports à mettre à jour (null si pas besoin)
          * @param mixed $perPage : nombre de rapport par page (pour pagination)
          * @param mixed $first : position du 1er rapport du tableau (pour pagination)
-         * @return void
+         * @return string
          */
         function addReport($animal, &$reports, $perPage, $first){
             //si on clique sur ajouter
@@ -29,6 +29,7 @@ else{
                 }
                 else{
                     $problem = true;
+                    $msg = "Désolé, le rapport n'a pas pu être enregistré... <br> La date est erronée.";
                 }
                 //on récupère l'id de l'animal du rapport s'il est bien renseigné
                 if(isset($_POST['searchAnimalNewReport']) && is_numeric($_POST['searchAnimalNewReport'])){
@@ -49,6 +50,7 @@ else{
                 }
                 else{
                     $problem=true;
+                    $msg = "Désolé, le rapport n'a pas pu être enregistré... <br> Il y a un souci avec la santé.";
                 }
     
                 //on récupère le détail de la santé
@@ -65,6 +67,7 @@ else{
                 }
                 else{
                     $problem = true;
+                    $msg = "Désolé, le rapport n'a pas pu être enregistré... <br> Il y a un souci avec la nourriture.";
                 }
     
                 //on récupère la quantité proposée
@@ -73,6 +76,8 @@ else{
                 }
                 else{
                     $problem = true;
+                    $msg = "Désolé, le rapport n'a pas pu être enregistré... <br> Il y a un souci avec le grammage.";
+                    
                 }
     
                 //si on a tout récupéré on l'ajoute à la base de données
@@ -82,7 +87,11 @@ else{
                 }
                 //on met à jour le tableau des rapports
                 if($reports != null) filter($reports,$nbReports,$perPage,$first);
+                if($problem) return $msg;
+                else return "Success";
             }
+            return null;
+
         }
     
         /**
@@ -242,7 +251,7 @@ else{
                         
                         if(isset($_SESSION['allMedicalReports_filterVeto'])){
                             $ind = array_search($value,$_SESSION['allMedicalReports_filterVeto'],true);
-                            if($_SESSION['allMedicalReports_filterVeto'][$ind] == $value) return 'checked';
+                            if(isset($_SESSION['allMedicalReports_filterVeto'][$ind]) && $_SESSION['allMedicalReports_filterVeto'][$ind] == $value) return 'checked';
                             else return '';
                         } 
                         else return 'checked';
@@ -326,7 +335,8 @@ else{
         displayReports($currentPage,$perPage,$reports,$pages,$nbReports,$first);
     
         //on permet d'ajouter un rapport
-        addReport(null,$reports,$perPage,$first);
+        $msg = null;
+        $msg = addReport(null,$reports,$perPage,$first);
         //on initialise la liste des vétérinaires
         $veterinarians = listOfUserByRole(2);
     }

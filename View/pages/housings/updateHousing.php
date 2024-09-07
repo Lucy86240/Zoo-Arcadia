@@ -25,12 +25,12 @@ else{?>
                             <div class="img-element"><input type="file" name="UpdateHousingPhoto<?php echo($housing['id']); ?>" id="UpdateHousingPhoto<?php echo($housing['id']); ?>"></div>
 
                             <div class="img-element">
-                                <label for="UAP-Description<?php echo($Housing['id']); ?>">Description de la photo :</label>
-                                <textarea name="UAP-Description<?php echo($Housing['id']); ?>" id="UHP-Description<?php echo($housing['id']); ?>"> </textarea>
+                                <label for="UAP-Description<?php echo($housing['id']); ?>">Description de la photo :</label>
+                                <textarea name="UAP-Description<?php echo($housing['id']); ?>" id="UHP-Description<?php echo($housing['id']); ?>"> </textarea>
                             </div>
                             <div class="img-element">
-                                <label for="UAP-attribution<?php echo($Housing['id']); ?>">Attribution :</label>
-                                <textarea name="UAP-attribution<?php echo($Housing['id']); ?>" id="UHP-attribution<?php echo($housing['id']); ?>"> </textarea>
+                                <label for="UAP-attribution<?php echo($housing['id']); ?>">Attribution :</label>
+                                <textarea name="UAP-attribution<?php echo($housing['id']); ?>" id="UHP-attribution<?php echo($housing['id']); ?>"> </textarea>
                             </div>
 
                             <div class="img-element">

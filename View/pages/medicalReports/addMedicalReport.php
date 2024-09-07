@@ -6,6 +6,19 @@ else{?>
             <form method="POST" action="" class="newReportPage">
                 <?php if(substr($_SERVER['REQUEST_URI'],0,18)!='/rapports_medicaux'){ ?>
                 <div class="head"></div>
+                <?php if($msg != null){
+                if($msg == "Success"){ ?>
+                    <div class="msg success">
+                        <img class="illustrationMsg" src="../View/assets/img/general/good.png" alt="">
+                        <p><?php echo('Le repas a été ajouté avec succès!'); ?></p>
+                    </div>
+                <?php }else{ ?>
+                    <div class="msg error">
+                        <img class="illustrationMsg" src="../View/assets/img/general/problem.png" alt="">
+                        <p><?php echo($msg); ?></p>
+                    </div>
+                <?php } 
+                }?>
                     <h1>Nouveau rapport médical de </h1>
                     <h2><?php echo($animal['name'].' - '.$animal['breed']) ?></h2>
                 <?php }?>
@@ -45,11 +58,11 @@ else{?>
                 </div>
                 <div class="element">
                     <label for="foodNewReport">Nourriture proposée :</label>
-                    <input type="text" name="foodNewReport" id="foodNewReport" pattern="^([a-zA-Z0-9èéëïç&!?,:;\(\) ])+$" required />
+                    <input type="text" name="foodNewReport" id="foodNewReport" pattern="^([a-zA-Z0-9èéë/ïç&!?,:;/\(\) ])+$" required />
                 </div>
                 <div class="element">
                     <label for="weightFoodNewReport">Grammage :</label>
-                    <input type="text" name="weightFoodNewReport" id="weightFoodNewReport" pattern="^([a-zA-Z0-9èéëïç&!?,\):;\( \-])+$" required />
+                    <input type="text" name="weightFoodNewReport" id="weightFoodNewReport" pattern="^([a-zA-Z0-9è/éëïç&/!?,\):;\( \-])+$" required />
                 </div>
                 <div class="form-submit">
                     <input type="submit" value="Soumettre" name="addReport" class="button btn-green" />

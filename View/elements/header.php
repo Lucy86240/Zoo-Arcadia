@@ -62,9 +62,7 @@ else{?>
                                                 <?php if(authorize(['Administrateur.rice','Employé.e'])){ ?>
                                                     <li><a class="dropdown-item" href="<?php if($optionPage){echo("../");}?>avis">Avis</a></li>
                                                 <?php } ?>
-                                                <?php if(authorize(['Employé.e'])){ ?>
-                                                    <li><a class="dropdown-item" href="<?php if($optionPage){echo("../");}?>repas">Nourrir un animal</a></li>
-                                                <?php } ?>
+                                                <li><a class="dropdown-item" href="<?php if($optionPage){echo("../");}?>repas">Repas des animaux</a></li>
                                                 <li><a class="dropdown-item" href="<?php if($optionPage){echo("../");}?>commentaires_habitats">Commentaires des habitats</a></li>
                                                 <?php if(authorize(['Administrateur.rice'])){ ?>
                                                     <li><hr class="dropdown-divider"></li>

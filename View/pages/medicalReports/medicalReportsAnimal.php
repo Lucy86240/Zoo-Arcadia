@@ -115,9 +115,7 @@ else{?>
                                 <div>
                                     <div>
                                         <label for="limit">Limité aux </label>
-                                        <?php   if(defaultValue('dateStart')=='') $default = count($animal['reports']);
-                                                else $default = defaultValue('dateStart'); ?>
-                                        <input type="number" name="limit" min="1" max="<?php echo($animal['numberReports']) ?>" placeholder="<?php echo($default);?>">
+                                        <input type="number" name="limit" min="1" max="<?php echo($animal['numberReports']) ?>" placeholder="<?php echo(count($animal['reports']));?>">
                                         <span> derniers comptes rendus / <?php echo($animal['numberReports']) ?>  </span>
                                     </div>
                                     <div>

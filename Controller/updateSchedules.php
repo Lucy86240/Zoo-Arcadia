@@ -10,7 +10,7 @@ else{
     try{
         require_once 'Controller/schedules.php';
         //après validation du formulaire on modifie 
-        if(isset($_POST['schedules']) && isText($_POST['schedules'])){
+        if(isset($_POST['schedules'])){
             modifySchedules($_POST['schedules']);
         }
     }

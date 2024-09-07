@@ -93,18 +93,16 @@
     //les légendes ne sont pas affichées au même endroit suivant l'icone
     margin0 = 'width : 90px; margin-left:'+0*40+'px';
     margin1 = 'width : 80px; margin-left:'+1*40+'px';
-    margin2 = 'width : 50px; margin-left:'+2*40+'px';
 
-    for(let j=0; j<(icons.length/3);j++){
-        for(let i=0; i<3;i++){
-            icons[i+j*3].addEventListener("mouseover",()=>{
-                legends[i+j*3].classList.remove('none');
-                if((i+1)%3==0) legends[i+j*3].style = margin2;
-                else if((i+1)%2==0) legends[i+j*3].style = margin1;
-                else legends[i+j*3].style = margin0;
+    for(let j=0; j<(icons.length/2);j++){
+        for(let i=0; i<2;i++){
+            icons[i+j*2].addEventListener("mouseover",()=>{
+                legends[i+j*2].classList.remove('none');
+                if((i+1)%2==0) legends[i+j*2].style = margin1;
+                else legends[i+j*2].style = margin0;
             })
-            icons[i+j*3].addEventListener("mouseout",()=>{
-                legends[i+j*3].classList.add('none');
+            icons[i+j*2].addEventListener("mouseout",()=>{
+                legends[i+j*2].classList.add('none');
             })
         }
     }
@@ -122,24 +120,6 @@ for(let i=0; i<blocAccount.length;i++){
         }
         parContent = "Etes vous sûr de vouloir bloquer le compte : "+blocAccount[i].getAttribute("mail")+" ? L'utilisateur ne pourra plus se connecter.";
         submitContent = "Bloc-"+blocAccountMail;
-        createConfirm(titleContent,parContent,submitContent);
-    })
-}
-
-//création du popup de suppression d'un utilisateur
-const deleteAccount = document.querySelectorAll('.js-delete');
-for(let i=0; i<deleteAccount.length;i++){
-    deleteAccount[i].addEventListener('click',()=>{
-        titleContent = "Supprimer un compte";
-        deleteAccountMail = deleteAccount[i].getAttribute("mail");
-        temp = '';
-        while(temp != deleteAccountMail ){
-            temp = deleteAccountMail
-            deleteAccountMail=deleteAccountMail.replace('.','')
-        }
-        parContent = "Etes vous sûr de vouloir supprimer le compte : "+deleteAccountMail+" ? L'utilisateur ne pourra plus se connecter et toutes les données lui étant affectées seront supprimées (repas, rapports médicaux...).";
-        deleteAccountMail=deleteAccountMail.replace('.','')
-        submitContent = "Delete"+deleteAccountMail;
         createConfirm(titleContent,parContent,submitContent);
     })
 }

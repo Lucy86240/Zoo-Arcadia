@@ -14,8 +14,17 @@ if(iconDeleteAnimal != null){
             createConfirm(titleContent,parContent,submitContent)
         })
     }
-
 }
+
+buttonValidate = document.querySelectorAll('.button-confirm');
+if(buttonValidate != null)
+    for(let i=0; i<buttonValidate.length;i++)
+    {
+        buttonValidate[i].addEventListener('click',()=>{
+            console.log('helo')
+            location.reload();
+        })
+    }
 
 //archivage
 const iconArchive = document.querySelectorAll('.iconArchive')

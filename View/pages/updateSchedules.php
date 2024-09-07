@@ -20,5 +20,6 @@ else{?>
             <input type="submit" value="Envoyer" name="submitMsg" class="button btn-brown" />    
             </div>
         </form>
+        <script src = "View/assets/script/schedules.js"> </script>
     </section>
 <?php } ?>

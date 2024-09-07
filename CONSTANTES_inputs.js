@@ -6,22 +6,22 @@ function verifMailRegex(mail){
 }
 
 function verifPseudoRegex(pseudo){
-    let reg = /^([a-zA-Z0-9èéëïç@#$*+:;?! _\-])+$/g
+    let reg = /^([a-zA-Z0-9èéœ ëïçîê@#$*+:;?! _\-])+$/g
     return reg.test(pseudo)
 }
 
 function verifAnimalNameRegex(name){
-    let reg = /^([a-zA-Z0-9 èéëïç\-])+$/g
+    let reg = /^([a-zA-Z0-9 èœîêéëïç\-])+$/g
     return reg.test(name)
 }
 
 function verifHumanNameRegex(name){
-    let reg = /^([a-zA-Zèéëïç\-])+$/g
+    let reg = /^([a-zA-Zèéîêœë ïç\-])+$/g
     return reg.test(name)
 }
 
 function verifDescriptionRegex(txt){
-    let reg = /^([a-zA-Z0-9èê^éëïç&.!?,:\);\( \-\'])+$/g
+    let reg = /^([A-Za-z0-9èœàêîêéëïùç&. !?,/:\);\( \-\'\n])+$/g
     return reg.test(txt)
 }
 

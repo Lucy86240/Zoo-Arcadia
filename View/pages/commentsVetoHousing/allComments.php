@@ -87,7 +87,7 @@ else{?>
                                         <img class="img-box js-iconUnarchive" id_comment="<?php echo($comment['idComment']) ?>" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/unarchive.svg" alt="Désarchiver le commentaire">
                                     <?php } ?>
                                 </div>
-                            <?php if(authorize(['vétérinaire'])){ ?>
+                            <?php if(authorize(['Vétérinaire'])){ ?>
                                 <div class="icon deleteIcon popupDesktop" id_comment="<?php echo($comment['idComment']) ?>">
                                     <img class="img-box" src="<?php if(isset($optionPage) && $optionPage){echo("../");}?>View/assets/img/general/icons/delete.svg" alt="Supprimer le commentaire">
                                 </div>

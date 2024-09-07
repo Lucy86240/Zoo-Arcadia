@@ -17,6 +17,13 @@ else{?>
                             </br>
                         </div>
                     </div>
+                    <?php if($msg!=null){?>
+                    <div id="problem">
+                        <img id="problemImg" src="View/assets/img/general/problem.png" alt="">
+                        <p><?php echo($msg); ?></p>
+                    </div>
+                    <?php } ?>
+
                     <!-- filtres -->
                     <form class="filter" method="POST">
                         <span class="title">Filtres :</span>
@@ -26,12 +33,13 @@ else{?>
                                 <div>
                                     <?php $roles = listOfRole();
                                     $count=0;
-                                    foreach($roles as $role){?>
+                                    foreach($roles as $role){
+                                        if($role[0]!="Administrateur.rice"){?>
                                         <div>
                                             <input class="roleCheckbox" type="checkbox" value="<?php echo($role[0]);?>" name="role<?php echo($count) ?>" id="role<?php echo($count) ?>" checked>
                                             <label for="role<?php echo($count) ?>"><?php echo($role[0]);?></label
                                         </div>
-                                    <?php $count++; }?>
+                                    <?php $count++; }}?>
                                 </div>
                             </div>
                             <div>
@@ -73,9 +81,6 @@ else{?>
                                         <div class="icon js-icon js-edit" mail=<?php echo($account['mail']); ?>>
                                             <div class="bgc-img-box"><img class="img-box" src="View/assets/img/general/icons/edit.svg" alt="Modifier compte"></div>
                                         </div>
-                                        <div class="icon js-icon js-delete" mail=<?php echo($account['mail']); ?>>
-                                            <div class="bgc-img-box"><img class="img-box" src="View/assets/img/general/icons/delete.svg" alt="Supprimer compte"></div>
-                                        </div>
                                     </div>
                                     <div class="legends">
                                         <?php if($account['blocked']==0){ ?>
@@ -85,7 +90,6 @@ else{?>
                                             <span class="legend js-legend none">Débloquer</span>
                                         <?php } ?>
                                         <span class="legend js-legend none">Modifier</span>
-                                        <span class="legend js-legend none">Suppr.</span>
                                     </div>
                                 </td>
                             </tr>

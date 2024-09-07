@@ -119,7 +119,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageUsers.php'){
                         if(!userExist($_POST['updateAccountMail-'.$id])){
                             //on vérifie que le mail et sa confirmation sont identiques
                             if($_POST['updateAccountMail-'.$id] == $_POST['updateAccountConfirmMail-'.$id]) $mail = $_POST['updateAccountMail-'.$id];
-                            else $msg .= "La confirmation du mail est différente.";
+                            else $msg .= "Nous n'avons pas pu mettre à jour le compte. <br> La confirmation du mail est différente.";
                         }
                         else{
                             $msg .= "Le mail : ".$_POST['updateAccountMail-'.$id]."est déjà utilisé";
@@ -129,7 +129,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageUsers.php'){
                     if(isset($_POST['updateAccountPassword-'.$id]) && isset($_POST['updateAccountConfirmPassword-'.$id])){
                         //on vérifie que le mot de passe et sa confirmation sont identiques
                         if($_POST['updateAccountPassword-'.$id] == $_POST['updateAccountConfirmPassword-'.$id]) $password = $_POST['updateAccountPassword-'.$id];
-                        else $msg .= "La confirmation du mot de passe est différente.";
+                        else $msg .= "Nous n'avons pas pu mettre à jour le compte. <br> La confirmation du mot de passe est différente.";
                     }
                     //on crée un objet user avec toutes les infos récupérées
                     $user = new User();
@@ -172,7 +172,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageUsers.php'){
                         if(isset($_POST['newAccountPassword']) && isset($_POST['newAccountConfirmPassword'])){
                             //on récupère les MDP si la confirmation est identique
                             if($_POST['newAccountPassword'] == $_POST['newAccountConfirmPassword']) $password = $_POST['newAccountPassword'];
-                            else $msg .= "La confirmation du mot de passe est différente.";
+                            else $msg .= "Nous n'avons pas pu créer le compte. <br> La confirmation du mot de passe est différente.";
                         }
                         //on récupère le prénom
                         if(isset($_POST['newAccountFirstname']) && isName($_POST['newAccountFirstname'])) $firstname = $_POST['newAccountFirstname'];
@@ -182,7 +182,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageUsers.php'){
                         if(isset($_POST['newAccountRole']) && isName($_POST['newAccountRole'])) $role = $_POST['newAccountRole'];
                         //on récupère le mail si la confirmation est identique
                         if($_POST['newAccountMail'] == $_POST['newAccountConfirmMail']) $mail = $_POST['newAccountMail'];
-                        else $msg .= "La confirmation du mail est différente.";
+                        else $msg .= "Nous n'avons pas pu créer le compte. <br>La confirmation du mail est différente.";
                         
                         //on met à jour la base de données si on a tout récupéré
                         if($firstname !='' && $lastname!='' && $mail!='' && $password!='' && $role!=''){
@@ -206,7 +206,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageUsers.php'){
                         }
                     }
                     else{
-                        $msg .= "Le mail : ".$_POST['newAccountMail']."est déjà utilisé";
+                        $msg .= "Nous n'avons pas pu créer le compte. <br>L'adresse mail ".$_POST['newAccountMail']." est déjà utilisée.";
                     }
                 }          
     
@@ -219,11 +219,12 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageUsers.php'){
         //initialisation de la liste
         $accounts = accountsList();
         //on permet de la mettre à jour en effectuant un CUD
+        $msg=null;
         deleteAccount($accounts);
         blockedAccount($accounts);
-        unblockedAccount($accounts);
-        updateAccount($accounts);
-        newAccount($accounts);        
+        $msg = unblockedAccount($accounts);
+        $msg = updateAccount($accounts);
+        $msg = newAccount($accounts);        
     }
     catch(error $e){
         echo('Oups nous ne trouvons pas les informations nécessaires à la page...');

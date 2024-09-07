@@ -6,7 +6,6 @@ if($_SERVER['REQUEST_URI']=='/router/allRoutes.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    try{
         require_once "Route.php";
 
         // ($url,parametre dans l'url, $title, $pathHtml, $authorize, $pathController)
@@ -46,9 +45,4 @@ else{
         define('WEBSITE_NAME' ,'Arcadia');
     
         define('ROUTE404',new Route('404',false,'Page introuvable','View/pages/404.php',[],''));
-    }
-    catch(error $e){
-        echo('oups nous avons perdu notre chemin...');
-        die;
-    }
 }

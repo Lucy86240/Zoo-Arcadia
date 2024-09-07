@@ -2,7 +2,7 @@
 
 .header{
         
-    /*position: fixed;*/
+    position: fixed;
     z-index: 100;
     top: 0;
 
@@ -259,6 +259,7 @@
         .dropdown{
             display: flex;
             flex-direction: column;
+            z-index : 100;
         }
 
         .dropdown-menu{

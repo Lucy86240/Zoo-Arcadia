@@ -106,7 +106,8 @@ else{?>
                 if(isset($_POST['animalSelected'])) $id=$_POST['animalSelected'];
                 else $id=$_SESSION['allAnimals_animalSelected'];
                 //on affiche l'animal
-                echoAnimal($id,'allAnimals',$temp);
+                if(!isset($_POST["ValidationDeleteAnimal".$id]))
+                    echoAnimal($id,'allAnimals',$temp);
             }?>
         </section>
         <form class="animals" action="#animalSelected" method="POST">

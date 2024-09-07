@@ -60,6 +60,6 @@ else{?>
                 </div>
             <?php } ?>
         <?php }?>
-        <script src="View/assets/script/addHousing.js"></script>
+        <script src="View/assets/script/updateAddHousing.js"></script>
     </section>
 <?php } ?>

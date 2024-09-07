@@ -41,7 +41,7 @@ function isAnimalName($name){
 }
 
 function isText($txt){
-    return preg_match_all("/^([a-zA-Z0-9èéëï^êç&!?,.:;\(\)\-\' ])+$/",$txt);
+    return preg_match_all("/^([A-Za-z0-9èœàêîêéëïùç&\/. !?,:);( -'])+$/",$txt);
 }
 
 function isMail($mail){

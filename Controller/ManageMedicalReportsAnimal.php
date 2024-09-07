@@ -108,7 +108,8 @@ else{
             }
             //permet l'ajout de rapports
             $reports=null;
-            addReport($animal,$reports,20,0);
+            $msg = null;
+            $msg = addReport($animal,$reports,20,0);
         }
         else
         {

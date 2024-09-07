@@ -98,7 +98,15 @@ function search(input, ul, messageResult,max,checkedAlways,checkedNever){
  * @param {*} allText : texte indiquant que tout est sélectionné
  */
 function passListSearchOfListSelected(checkboxSelectedInput,checkboxSelectedLi,checkboxSearchInput,allText){
+    function selected(){
+        select = 0;
+        for(let i=0; i<checkboxSearchInput.length;i++){
+            if(checkboxSearchInput[i].checked == true) select++;
+        }
+        return select;
+    }
     nbSelected=0;
+    if(selected()==0) allBreed.classList.remove('none')
     for(let i=0; i<checkboxSearchInput.length;i++){
         checkboxSearchInput[i].addEventListener('click', ()=>{
             if(checkboxSearchInput[i].checked == true){
@@ -106,9 +114,8 @@ function passListSearchOfListSelected(checkboxSelectedInput,checkboxSelectedLi,c
                 checkboxSelectedInput[i].checked = true;
                 checkboxSelectedLi[i].classList.remove('none');
                 if(nbSelected>0) allText.classList.add('none');
-                else allText.classList.add('none');
+                else allText.classList.remove('none');
             } 
-
         })
     }
     
@@ -119,7 +126,7 @@ function passListSearchOfListSelected(checkboxSelectedInput,checkboxSelectedLi,c
                 checkboxSearchInput[i].checked = false;
                 checkboxSelectedLi[i].classList.add('none');
                 if(nbSelected>0) allText.classList.add('none');
-                else allText.classList.add('none');
+                else allText.classList.remove('none');
             } 
         })
     }

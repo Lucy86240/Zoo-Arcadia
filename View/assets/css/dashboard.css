@@ -285,8 +285,12 @@
                 width: 80px;
                 height: 80px;
                 img{
-                    width : 60px;
+                    width : 40px;
                 }
+                span{
+                    font-size: 12px;
+                }
+
             }
         }
     }

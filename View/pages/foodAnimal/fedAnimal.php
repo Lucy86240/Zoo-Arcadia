@@ -7,6 +7,19 @@ else{?>
             <form method="POST" action="" class="fedAnimalPage">
             <?php if(substr($_SERVER['REQUEST_URI'],0,6)!='/repas'){ ?>
                 <div class="head"></div>
+                <?php if($msg != null){
+                if($msg == "Success"){ ?>
+                    <div class="msg success">
+                        <img class="illustrationMsg" src="../View/assets/img/general/good.png" alt="">
+                        <p><?php echo('Le repas a été ajouté avec succès!'); ?></p>
+                    </div>
+                <?php }else{ ?>
+                    <div class="msg error">
+                        <img class="illustrationMsg" src="../View/assets/img/general/problem.png" alt="">
+                        <p><?php echo($msg); ?></p>
+                    </div>
+                <?php } 
+                }?>
                     <h1>Nouvelle alimentation de</h1>
                     <h2><?php echo($animal['name'].' - '.$animal['breed']) ?></h2>
                 <?php }?>

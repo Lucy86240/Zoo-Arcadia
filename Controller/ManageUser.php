@@ -7,7 +7,7 @@ if($_SERVER['REQUEST_URI']=='/Controller/ManageUser.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    try{
+    /*try{*/
         require_once "Model/ManageUserModel.php";
 
         /**
@@ -21,9 +21,11 @@ else{
                 if(verifiedBlocked($_POST['user'])){
                     $_POST['login']=null;
                     $_SESSION['passwordError']=true;
+                    $_SESSION['blocked'] = true;
                 }
                 // sinon on vérifie si des données ont été saisies
                 else if(isset($_POST['user']) && isset($_POST['password'])){
+                    $_SESSION['blocked'] = false;
                     //on consulte la base de données, si c'est ok
                     if(verifiedLoginInput($_POST['user'], $_POST['password'])){
                         //onr réinitialise les $_SESSION en lien avec les erreurs
@@ -33,6 +35,7 @@ else{
                     }
                     //si le mot de passe est fait
                     else{
+                        $_SESSION['blocked'] = false;
                         $_POST['login']=null;
                         // on enregistre que l'utilisateur a saisi un mot de passe faut
                         $_SESSION['passwordError']=true;
@@ -57,7 +60,7 @@ else{
                 $_SESSION['passwordError']=false;
                 $_SESSION['openLogin']=false;
                 $_POST['close-login']=null;
-                $_SESSION['blocked']=0;
+                $_SESSION['blocked']=false;
             }
             //retourne la variable de session ayant enregistré si un mauvais de passe est saisi
             if(isset($_SESSION['passwordError'])) return $_SESSION['passwordError'];
@@ -119,8 +122,8 @@ else{
         verifiedLogin();
         //on permet à l'utilisateur de se déconnecter
         logout();
-    }
+   /* }
     catch(error $e){
-        echo('Oups nous ne trouvons pas les informations nécessaires à la page...');
-    }
+        echo('Oups nous ne trouvons pas les informations nécessaires à la connexion...');
+    }*/
 }

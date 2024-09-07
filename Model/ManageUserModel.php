@@ -31,6 +31,25 @@ else{
         }
     }
 
+     /**
+     * Summary of blocUser : bloque un utilisateur dans la base de données
+     * @param string $id : mail de l'utilisateur à bloquer
+     * @return void
+     */
+    function blocUser(string $id){
+        try{
+            if(userExist($id)){
+                $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
+                $stmt = $pdo->prepare('UPDATE users SET blocked = 1 WHERE mail = :id');
+                $stmt->bindParam(":id", $id, PDO::PARAM_STR);
+                $stmt->execute();
+            }
+        }
+        catch(error $e){
+            echo('Une erreur est survenue');
+        }
+    }
+
     /**
      * Summary of verifiedLoginInput vérifie si le mail et le mot de passe sont liés
      * @param string $mailInput :
@@ -81,7 +100,6 @@ else{
             $res = $stmt->fetch();
             //initialise la variable de session
             if(isset($res['blocked'])){
-                $_SESSION['blocked'] = $res['blocked'];
                 if($res['blocked']==1) return true;
                 else return false;
             }else return false;

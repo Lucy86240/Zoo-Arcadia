@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageFood.php'){
          * @param mixed $foods : tableau asso de repas à mettre à jour
          * @param mixed $perPage : nb repas par page (pour pagination)
          * @param mixed $first : 1er repas du tableau (pour pagination)
-         * @return void
+         * @return string
          */
         function addFood($animal, &$foods, $perPage, $first){
             //si on clique sur ajouter un repas
@@ -68,7 +68,12 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageFood.php'){
                 }
                 //si on a un tableau de repas on le met à jour
                 if($foods != null) filter($foods,$nbFoods,$perPage,$first);
+                if($problem)
+                return "Désolé, un problème est survenu nous n'avons pas pu enregistrer le repas...";
+                else
+                    return "Success";
             }
+            return null;
         }
     
         /**
@@ -303,8 +308,9 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageFood.php'){
         //on affiche les repas
         displayFoods($currentPage,$perPage,$foods,$pages,$nbFoods,$first);
     
+        $msg=null;
         //on permet d'ajouter un repas
-        addFood(null,$foods,$perPage,$first);
+        $msg = addFood(null,$foods,$perPage,$first);
     
         //on donne la liste des employés possibles
         $employees = listOfUserByRole(3);

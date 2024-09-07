@@ -68,7 +68,6 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageFoodAnimal.php'){
             $animalFilter = animalById($animal['id'],false,false);
             $animalFilter['foods'] = [];
             $foods = foodWithFilter($animal['id'],$dateStart,$dateEnd, $limit);
-            var_dump($foods);
             foreach($foods as $foodRequest){
                 $food = array(
                     'date' => $foodRequest->getDate(),
@@ -102,8 +101,9 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageFoodAnimal.php'){
                 $animal = animalFilter($animal, $dateStart, $dateEnd, $limit);
             }
             $foods=null;
+            $msg=null;
             //on permet d'ajouter un repas si nécessaire
-            addFood($animal,$foods,50,0);
+            $msg = addFood($animal,$foods,50,0);
         }
         else
         {
