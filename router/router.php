@@ -44,7 +44,8 @@ else{
         }
     
         function optionPage($request){
-            if($request!="")
+            if($request!=""){
+                var_dump(strpos($request,'/'));
                 if(strpos($request,'/')!= false){
                     $request = explode('/',$request,2);
                     if(count($request)>1){
@@ -57,6 +58,7 @@ else{
                 else{
                     return false;
                 }
+            }
             else
             {
                 return false;
