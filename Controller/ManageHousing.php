@@ -319,12 +319,14 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
         else{
             //on récupère les données
             $housings = allHousingsView(true,-1,-1,1,1);
-            $comments = allCommentswithFilter(null,null,null,null);
-            // on permet la mise à jour des données
-            deleteHousing($housings);
-            addComment($housings,$comments);
-            deleteComment($housings, $comments);
-            changeStatusComment($housings, $comments);
+            if($_SERVER['REQUEST_URI']!='/'){
+                $comments = allCommentswithFilter(null,null,null,null);
+                // on permet la mise à jour des données
+                deleteHousing($housings);
+                addComment($housings,$comments);
+                deleteComment($housings, $comments);
+                changeStatusComment($housings, $comments);
+            }
         }
 }
 else{

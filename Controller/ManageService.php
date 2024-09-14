@@ -235,15 +235,17 @@ else{
     
         //on génère les infos des services
         $services = allServices(true);
-    
-        foreach($services as $service){
-            //on gère la suppression de service
-            deleteService($service['id_service']);
-            //on gère la modification
-            updateService($service);
+
+        if($_SERVER['REQUEST_URI']=='/services'){
+            foreach($services as $service){
+                //on gère la suppression de service
+                deleteService($service['id_service']);
+                //on gère la modification
+                updateService($service);
+            }
+        
+            //on regènére les infos des services après suppression / modification
+            $services = allServices(true);
         }
-    
-        //on regènére les infos des services après suppression / modification
-        $services = allServices(true);
 }
 
