@@ -18,11 +18,11 @@ else{?>
                 </a>
                 <?php  if(authorize(['Employé.e'])){?>
                 <div class="icon js-icon" id="popupFed">
-                    <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Ajouter un compte rendu"></div>
+                    <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/feed.svg" alt="Ajouter un repas"></div>
                 </div>
                 <?php } ?>
                 <a class="icon js-icon" href="../repas">
-                    <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/description.svg" alt="Voir la liste de tous les comptes rendus"></div>
+                    <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/meals.svg" alt="Voir la liste de tous les repas"></div>
                 </a>
             </div>
             <div class="legends">
