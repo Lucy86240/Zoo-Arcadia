@@ -71,12 +71,10 @@ else{
             $option = optionPage($request);
             $request = explode('/',$request,2);
             $actualRoute = getRouteByUrl($request[0],$option);
-            var_dump($request);
-            $option = optionPage($request);
-            var_dump($option);
+
+            //$option = optionPage($request);
             //$request = explode('/',$request,2);
-            $actualRoute = getRouteByUrl($request[0],$option);
-            var_dump($actualRoute);
+            //$actualRoute = getRouteByUrl($request[0],$option);
             var_dump($actualRoute->getPathController());
             if($actualRoute->getPathController()!=null)
             {
