@@ -55,10 +55,10 @@ else{
         function loadContentPage($request){
 
             $option = optionPage($request);
-            echo("1:".$option);
+
 
             $request = explode('/',$request,2);
-            echo("1/2:".$request[1]);
+            echo("1/2:".$request[2]);
             $actualRoute = getRouteByUrl($request[2],$option);
             $option = optionPage($request);
             $request = explode('/',$request,2);
