@@ -8,10 +8,18 @@ if($_SERVER['REQUEST_URI']=='/router/router.php'){
 else{
     try{
         require_once 'config.php';
-        require_once 'router/allRoutes.php';
-        require_once "Controller/ManageUser.php";
     }catch(error $e){
         echo("1");
+    }
+    try{
+        require_once 'router/allRoutes.php';
+    }catch(error $e){
+        echo("2");
+    }
+    try{
+        require_once "Controller/ManageUser.php";
+    }catch(error $e){
+        echo("3");
     }
 
     try{
