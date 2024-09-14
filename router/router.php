@@ -6,11 +6,19 @@ if($_SERVER['REQUEST_URI']=='/router/router.php'){
     require_once '../View/pages/404.php';
 }
 else{
+    try{
         require_once 'config.php';
         require_once 'allRoutes.php';
         require_once "Controller/ManageUser.php";
-    
-        //HTTP protocol + Server address(localhost or example.com) + requested uri (/route or /route/home)
+    }catch(error $e){
+        echo("1");
+    }
+
+    try{
+
+    }
+    catch(error $e)
+    {
         $current_url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         
         //Current URL = http://localhost:3000/something
@@ -21,6 +29,7 @@ else{
         $request = str_replace($site_url, '', $current_url);
     
         $request = strtolower($request);
+    }        //HTTP protocol + Server address(localhost or example.com) + requested uri (/route or /route/home)
     
         function getRouteByUrl($url,$option){
     
@@ -53,18 +62,41 @@ else{
         }
     
         function loadContentPage($request){
-            $option = optionPage($request);
-            $request = explode('/',$request,2);
-    
-            $actualRoute = getRouteByUrl($request[0],$option);
-    
-            if($actualRoute->getPathController()!=null)
-            {
-                include $actualRoute->getPathController();
+            try{
+
             }
-    
-            if($actualRoute->getPathHtml()!=null){
-                include $actualRoute->getPathHtml();
+            catch(error $e){
+
+            }
+            try{
+                $option = optionPage($request);
+            }
+            catch(error $e){
+                echo("option");
+            }
+            try{
+                $request = explode('/',$request,2);
+                $actualRoute = getRouteByUrl($request[0],$option);
+                $option = optionPage($request);
+                $request = explode('/',$request,2);
+                $actualRoute = getRouteByUrl($request[0],$option);
+            }
+            catch(error $e){
+                echo("getRoute");
+            }
+
+            try{
+                if($actualRoute->getPathController()!=null)
+                {
+                    include $actualRoute->getPathController();
+                }
+        
+                if($actualRoute->getPathHtml()!=null){
+                    include $actualRoute->getPathHtml();
+                }
+            }
+            catch(error $e){
+                echo("getPath");
             }
         }
 }
