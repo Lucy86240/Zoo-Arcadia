@@ -58,11 +58,11 @@ else{
             echo("1:".$option);
 
             $request = explode('/',$request,2);
-            echo("1/2:".$request[0]);
-            $actualRoute = getRouteByUrl($request[0],$option);
+            echo("1/2:".$request[1]);
+            $actualRoute = getRouteByUrl($request[1],$option);
             $option = optionPage($request);
             $request = explode('/',$request,2);
-            $actualRoute = getRouteByUrl($request[0],$option);
+            $actualRoute = getRouteByUrl($request[1],$option);
             echo("2:".$request);
             if($actualRoute->getPathController()!=null)
             {
