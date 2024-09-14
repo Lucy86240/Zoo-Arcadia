@@ -61,8 +61,8 @@ else{
             $actualRoute = getRouteByUrl($request[0],$option);
             $option = optionPage($request);
             $request = explode('/',$request,2);
+            var_dump($request);
             $actualRoute = getRouteByUrl($request[0],$option);
-            echo("2:".$request);
             if($actualRoute->getPathController()!=null)
             {
                 include $actualRoute->getPathController();
