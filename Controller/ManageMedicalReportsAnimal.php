@@ -7,7 +7,6 @@ if($_SERVER['REQUEST_URI']=='/Controller/ManageMedicalReportsAnimal.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    try{
         require_once "Controller/ManageMedicalReports.php";
 
         /**
@@ -115,8 +114,4 @@ else{
         {
             echo("Nous n'arrivons pas à trouver l'animal");
         }
-    }
-    catch(error $e){
-        echo('Oups nous ne trouvons pas les informations nécessaires à la page...');
-    }
 }

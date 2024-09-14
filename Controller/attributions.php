@@ -7,7 +7,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/attributions.php'){
         $attributions = listAttributions();
     }
     catch(error $e){
-        echo('Oups nous ne trouvons pas les informations nécessaires à la page...');
+        echo('Oups nous ne trouvons pas les informations nécessaires à la page attribution...');
     }
 }
 else{

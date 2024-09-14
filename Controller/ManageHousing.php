@@ -1,7 +1,6 @@
 <?php
 //execution du programme seulement si l'url actuel est différent du chemin du fichier
 if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
-    try{
         require_once "Model/ManageHousingModel.php";
         require_once "Controller/ManageAnimal.php";
     
@@ -327,10 +326,6 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
             deleteComment($housings, $comments);
             changeStatusComment($housings, $comments);
         }
-    }
-    catch(error $e){
-        echo('Oups nous ne trouvons pas les informations nécessaires à la page...');
-    }
 }
 else{
     //on affiche page 404

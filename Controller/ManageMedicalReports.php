@@ -7,7 +7,6 @@ if($_SERVER['REQUEST_URI']=='/Controller/ManageMedicalReports.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    try{
         require_once "Controller/ManageAnimal.php";
         require_once "Model/ManageMedicalReportsModel.php";
     
@@ -339,9 +338,5 @@ else{
         $msg = addReport(null,$reports,$perPage,$first);
         //on initialise la liste des vétérinaires
         $veterinarians = listOfUserByRole(2);
-    }
-    catch(error $e){
-        echo('Oups nous ne trouvons pas les informations nécessaires à la page...');
-    }
 }
         

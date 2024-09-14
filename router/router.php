@@ -6,7 +6,6 @@ if($_SERVER['REQUEST_URI']=='/router/router.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    try{
         require_once 'config.php';
         require_once 'allRoutes.php';
         require_once "Controller/ManageUser.php";
@@ -68,9 +67,4 @@ else{
                 include $actualRoute->getPathHtml();
             }
         }
-    }
-    catch(error $e){
-        echo('oups nous avons perdu notre chemin...');
-        die;
-    }
 }

@@ -7,7 +7,6 @@ if($_SERVER['REQUEST_URI']=='/Model/ManageServiceModel.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    try{
         require_once "Model/Service.php";
         require_once "Model/Image.php";
     
@@ -187,8 +186,4 @@ else{
                 echo('erreur bd');
             }
         }
-    }
-    catch(error $e){
-        echo('oups une ou plusieurs classes ont disparu...');
-    }
 }

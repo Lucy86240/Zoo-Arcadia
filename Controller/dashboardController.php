@@ -1,7 +1,6 @@
 <?php
 //on execute le programme si on est sur une page différente du chemin du fichier
 if($_SERVER['REQUEST_URI']!='/Controller/dashboardController.php'){
-    try{
         include_once "Controller/ManageAnimal.php";
 
         /**
@@ -28,10 +27,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/dashboardController.php'){
         //on récupère la popularité des habitats et des animaux
         $animals = animalsWithPopularity();
         $housings =  housingsPopularity();
-    }
-    catch(error $e){
-        echo('Oups nous ne trouvons pas les informations nécessaires à la page...');
-    }
+  echo('Oups nous ne trouvons pas les informations nécessaires à la page...');
 }
 else{
     // on affiche la page 404

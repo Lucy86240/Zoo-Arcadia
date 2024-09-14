@@ -1,7 +1,6 @@
 <?php
 //on execute le programme seulement si l'url est différent du chemin du fichier
 if($_SERVER['REQUEST_URI']!='/Controller/ManageAnimal.php'){
-    try{
         require_once "Model/ManageAnimalModel.php";
         require_once 'Model/ManageHousingModel.php';
         /**
@@ -289,10 +288,6 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageAnimal.php'){
                 include "View/elements/animal.php";
             } 
         }
-    }
-    catch(error $e){
-        echo('Oups nous ne trouvons pas les informations nécessaires à la page...');
-    }
 
 }
 else{

@@ -7,7 +7,6 @@ if($_SERVER['REQUEST_URI']=='/Controller/updateHousing.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    try{
         require_once "Controller/ManageHousing.php";
 
         /**
@@ -122,8 +121,4 @@ else{
         $housing = housingArrayAssociation($_GET['id']);
         //on récupère le message de fin de traitement
         $msg = updatehousing($housing);
-    }
-    catch(error $e){
-        echo('Oups nous ne trouvons pas les informations nécessaires à la page...');
-    }
 }

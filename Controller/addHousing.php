@@ -1,7 +1,6 @@
 <?php
 //on execute le code si on est sur un url différent du chemin du fichier
 if($_SERVER['REQUEST_URI']!='/Controller/addHousing.php'){
-    try{
         require_once "Controller/ManageHousing.php";
 
         /**
@@ -72,10 +71,6 @@ if($_SERVER['REQUEST_URI']!='/Controller/addHousing.php'){
         }
     
         $msg = addHousing();
-    }
-    catch(error $e){
-        echo('Oups nous ne trouvons pas les informations nécessaires à la page...');
-    }
 }
 else{
     //affiche page 404 si on est sur le chemin du fichier

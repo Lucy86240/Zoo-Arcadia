@@ -7,8 +7,6 @@ if($_SERVER['REQUEST_URI']=='/Controller/ManageReview.php'){
     require_once '../View/pages/404.php';
 }
 else{
-
-    try{
         require_once "Model/ManageReviewModel.php";
 
         /** Fonction reviews
@@ -328,8 +326,4 @@ else{
     
         //on met à jour la bd en fonction des vérifications effectuées
         validVerif($currentPage,$reviews,$pages,$nbReviews);
-    }
-    catch(error $e){
-        echo('Oups nous ne trouvons pas les informations nécessaires à la page...');
-    }
 }

@@ -1,7 +1,6 @@
 <?php 
 //on execute le programme que si l'url est différent du chemin du fichier
 if($_SERVER['REQUEST_URI']!='/Controller/ManageAllAnimals.php'){
-    try{
         require_once "Controller/ManageAnimal.php";
 
         /**
@@ -196,10 +195,6 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageAllAnimals.php'){
     
         // on affiche un animal si l'utilisateur a cliqué dessus
         if(isset($_POST['animalSelected'])) $_SESSION['allAnimals_animalSlected']=$_POST['animalSelected'];
-    }
-    catch(error $e){
-        echo('Oups nous ne trouvons pas les informations nécessaires à la page...');
-    }
 }
 else{
     //on affiche la page 404 si l'url correspond au chemin du fichier

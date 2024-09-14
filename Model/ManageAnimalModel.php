@@ -7,7 +7,6 @@ if($_SERVER['REQUEST_URI']=='/Model/ManageAnimalModel.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    try{
         require_once "Model/Animal.php";
         require_once "Model/MedicalReport.php";
         require_once "Model/FedAnimal.php";
@@ -745,8 +744,3 @@ else{
             }
         }
     }
-    catch(error $e){
-        echo('oups une ou plusieurs classes ont disparu...');
-    }
-
-}

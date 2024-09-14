@@ -1,7 +1,6 @@
 <?php
 //on execute le programme seulement si l'url est différent du chemin du fichier
 if($_SERVER['REQUEST_URI']!='/Controller/ManageFood.php'){
-    try{
         require_once "Controller/ManageAnimal.php";
         require_once "Model/ManageFedAnimalModel.php";
     
@@ -314,10 +313,6 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageFood.php'){
     
         //on donne la liste des employés possibles
         $employees = listOfUserByRole(3);
-    }
-    catch(error $e){
-        echo('Oups nous ne trouvons pas les informations nécessaires à la page...');
-    }
     
 }
 else{

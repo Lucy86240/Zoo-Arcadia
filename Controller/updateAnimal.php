@@ -7,7 +7,6 @@ if($_SERVER['REQUEST_URI']=='/Controller/updateAnimal.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    try{
         require_once "Controller/ManageAnimal.php";
 
         /**
@@ -125,9 +124,5 @@ else{
         $animal = animalById($_GET['id'], false, false);
         //on le met à jour et récupère le message de fin de traitement
         $msg = updateAnimal($animal);
-    }
-    catch(error $e){
-        echo('Oups nous ne trouvons pas les informations nécessaires à la page...');
-    }
 }
 

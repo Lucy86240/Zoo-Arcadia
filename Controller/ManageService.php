@@ -7,7 +7,6 @@ if($_SERVER['REQUEST_URI']=='/Controller/ManageService.php'){
     require_once '../View/pages/404.php';
 }
 else{
-    try{
         require_once "Model/ManageServiceModel.php";
         /**
          * Summary of AllServices : permet d'obtenir un tableau associatif avec les éléments essentiels des services
@@ -246,9 +245,5 @@ else{
     
         //on regènére les infos des services après suppression / modification
         $services = allServices(true);
-    }
-    catch(error $e){
-        echo('Oups nous ne trouvons pas les informations nécessaires à la page service...');
-    }
 }
 
