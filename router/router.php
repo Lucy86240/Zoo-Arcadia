@@ -58,7 +58,7 @@ else{
 
 
             $request = explode('/',$request,2);
-            echo("1/2:".$request[2]);
+            var_dump($request);
             $actualRoute = getRouteByUrl($request[2],$option);
             $option = optionPage($request);
             $request = explode('/',$request,2);
