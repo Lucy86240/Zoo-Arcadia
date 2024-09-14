@@ -10,7 +10,13 @@
     <?php
     require_once 'View/elements/header.php';
     
-    loadContentPage($request);
+    try{
+        loadContentPage($request);
+    }
+    catch(error $e){
+        echo("router merde");
+    }
+
     
     require_once 'View/elements/footer.php';   
 
