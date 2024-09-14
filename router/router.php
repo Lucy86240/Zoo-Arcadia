@@ -8,7 +8,7 @@ if($_SERVER['REQUEST_URI']=='/router/router.php'){
 else{
     try{
         require_once 'config.php';
-        require_once 'allRoutes.php';
+        require_once 'router/allRoutes.php';
         require_once "Controller/ManageUser.php";
     }catch(error $e){
         echo("1");
