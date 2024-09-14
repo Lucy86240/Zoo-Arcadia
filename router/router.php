@@ -6,27 +6,16 @@ if($_SERVER['REQUEST_URI']=='/router/router.php'){
     require_once '../View/pages/404.php';
 }
 else{
+    require_once 'config.php';
+
+    
     try{
-        require_once 'config.php';
-    }catch(error $e){
-        echo("1");
-    }
-    try{
-        require_once 'router/allRoutes.php';
+        require_once 'AllRoutes.php';
     }catch(error $e){
         echo("2");
     }
-    try{
-        require_once "Controller/ManageUser.php";
-    }catch(error $e){
-        echo("3");
-    }
+    require_once "Controller/ManageUser.php";
 
-    try{
-
-    }
-    catch(error $e)
-    {
         $current_url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         
         //Current URL = http://localhost:3000/something
