@@ -54,10 +54,14 @@ else{
                         return false;
                     }
                 }
-                else
+                else{
                     return false;
+                }
             else
+            {
                 return false;
+            }
+
         }
     
         function loadContentPage($request){
