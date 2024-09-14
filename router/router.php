@@ -26,7 +26,7 @@ else{
         $request = str_replace($site_url, '', $current_url);
     
         $request = strtolower($request);
-    }        //HTTP protocol + Server address(localhost or example.com) + requested uri (/route or /route/home)
+            //HTTP protocol + Server address(localhost or example.com) + requested uri (/route or /route/home)
     
         function getRouteByUrl($url,$option){
     
