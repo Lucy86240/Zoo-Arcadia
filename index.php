@@ -15,10 +15,6 @@
 
     loadContentPage($request);
 
+    require_once 'View/elements/footer.php';  
 
-    try{
-        require_once 'View/elements/footer.php';  
-    }catch(error $e){
-        echo("4");
-    }
 

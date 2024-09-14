@@ -10,7 +10,8 @@ else{
     require_once 'AllRoutes.php';
     require_once "Controller/ManageUser.php";
 
-        $current_url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        //$current_url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $current_url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         
         //Current URL = http://localhost:3000/something
         //Site URL - http://localhost:3000/
@@ -55,23 +56,19 @@ else{
         function loadContentPage($request){
 
             $option = optionPage($request);
-
-
             $request = explode('/',$request,2);
             var_dump($request);
-            $actualRoute = getRouteByUrl($request[2],$option);
+            $actualRoute = getRouteByUrl($request[0],$option);
             $option = optionPage($request);
             $request = explode('/',$request,2);
-            $actualRoute = getRouteByUrl($request[2],$option);
+            $actualRoute = getRouteByUrl($request[0],$option);
             echo("2:".$request);
             if($actualRoute->getPathController()!=null)
             {
-                echo("3:".$actualRoute->getPathController());
                 include $actualRoute->getPathController();
             }
         
             if($actualRoute->getPathHtml()!=null){
-                echo("4:".$actualRoute->getPathHtml());
                 include $actualRoute->getPathHtml();
             }
         }
