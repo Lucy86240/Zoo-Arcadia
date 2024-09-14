@@ -69,7 +69,8 @@ else{
             $option = optionPage($request);
             $request = explode('/',$request,2);
             $actualRoute = getRouteByUrl($request[0],$option);
-            $option = optionPage($request);
+            //$option = optionPage($request);
+            $option=false;
             var_dump($option);
             //$request = explode('/',$request,2);
             $actualRoute = getRouteByUrl($request[0],$option);
