@@ -44,15 +44,18 @@ else{
         }
     
         function optionPage($request){
-            if(strpos($request,'/')!= false){
-                $request = explode('/',$request,2);
-                if(count($request)>1){
-                    return true;
+            if($request!="")
+                if(strpos($request,'/')!= false){
+                    $request = explode('/',$request,2);
+                    if(count($request)>1){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
                 }
-                else{
+                else
                     return false;
-                }
-            }
             else
                 return false;
         }
@@ -61,9 +64,7 @@ else{
 
             $option = optionPage($request);
             $request = explode('/',$request,2);
-            //var_dump($request);
             $actualRoute = getRouteByUrl($request[0],$option);
-            var_dump($actualRoute);
             $option = optionPage($request);
             //$request = explode('/',$request,2);
             var_dump($request);
