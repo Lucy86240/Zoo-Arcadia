@@ -59,10 +59,10 @@ else{
 
             $request = explode('/',$request,2);
             echo("1/2:".$request[1]);
-            $actualRoute = getRouteByUrl($request[1],$option);
+            $actualRoute = getRouteByUrl($request[2],$option);
             $option = optionPage($request);
             $request = explode('/',$request,2);
-            $actualRoute = getRouteByUrl($request[1],$option);
+            $actualRoute = getRouteByUrl($request[2],$option);
             echo("2:".$request);
             if($actualRoute->getPathController()!=null)
             {
