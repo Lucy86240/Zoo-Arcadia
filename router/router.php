@@ -45,7 +45,6 @@ else{
     
         function optionPage($request){
             if($request!=""){
-                var_dump(strpos($request,'/'));
                 if(strpos($request,'/')!= false){
                     $request = explode('/',$request,2);
                     if(count($request)>1){
@@ -75,7 +74,7 @@ else{
             //$option = optionPage($request);
             //$request = explode('/',$request,2);
             //$actualRoute = getRouteByUrl($request[0],$option);
-            var_dump($actualRoute->getPathController());
+            //var_dump($actualRoute->getPathController());
             if($actualRoute->getPathController()!=null)
             {
                 include $actualRoute->getPathController();

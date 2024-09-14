@@ -13,9 +13,9 @@ else{
     
     define('SITE_URL','51.89.148.148');
     define('MAIL_CONTACT','contact@arcadia.com');
-    define('DATA_BASE','mysql:host=b4e9xxkxnpu2v96i.cbetxkdyhwsb.us-east-1.rds.amazonaws.com;dbname=nw68eqcmtkwxvnaq');
-    define('USERNAME_DB','m0593g3r35li7ysd');
-    define('PASSEWORD_DB','pieraznwj0hv0el8');
+    define('DATA_BASE','mysql:host=localhost;dbname=arcadia_zoo');
+    define('USERNAME_DB','root');
+    define('PASSEWORD_DB','LR221093jltr');
 
     define('MONGO_DB_HOST', 'mongodb://localhost:27017');
 }
