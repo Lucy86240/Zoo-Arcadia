@@ -44,13 +44,17 @@ else{
         }
     
         function optionPage($request){
-            $request = explode('/',$request,2);
-            if(count($request)>1){
-                return true;
+            if(strpos($request,'/')!= false){
+                $request = explode('/',$request,2);
+                if(count($request)>1){
+                    return true;
+                }
+                else{
+                    return false;
+                }
             }
-            else{
+            else
                 return false;
-            }
         }
     
         function loadContentPage($request){
