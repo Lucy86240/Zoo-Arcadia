@@ -1,4 +1,5 @@
 <?php
+echo('var:'.$_SERVER['REQUEST_URI']);
 //execution du programme seulement si l'url actuel est différent du chemin du fichier
 if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
     try{
@@ -8,6 +9,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
     catch(error $e){
         echo("certaines données sont manquantes");
     }
+    echo('coucou');
     
         /**
          * Retourne un tableau associatif avec au moins tout les noms des habitats
@@ -311,8 +313,6 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
             if(isset($_POST['filter']) && isset($_POST[$date])) return $_POST[$date];
             return '';
         }
-        
-        echo('var:'.$_SERVER['REQUEST_URI']);
         //si on est sur la page des commentaires vétérinaires
         if($_SERVER['REQUEST_URI']=='/commentaires_habitats'){
             //on récupère les données
