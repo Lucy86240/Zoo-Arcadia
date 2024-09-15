@@ -7,11 +7,17 @@ if($_SERVER['REQUEST_URI']=='/Model/ManageHousingModel.php'){
     require_once '../View/pages/404.php';
 }
 else{
+    try{
         require_once "Model/Housing.php";
         require_once "Model/Animal.php";
         require_once "Model/ManageAnimalModel.php";
         require_once "Model/Image.php";
         require_once "Model/CommentHousing.php";
+    }
+    catch(error $e){
+        echo("certains documents sont manquants...");
+    }
+
         /**
          * Summary of AllHousings : 
          * @param bool $portraitAccept : par défaut vrai, si les images en portrait sont acceptées

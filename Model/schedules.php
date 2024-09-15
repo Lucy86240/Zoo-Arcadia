@@ -15,7 +15,7 @@ else{
                     $collection = $client->Arcadia->schedules;
             return $collection->findOne(['text' => ['$exists'=>true]])['text'];
         }catch(error $e){
-            return '';
+            return 'oups nous ne trouvons pas les horaires';
         }
     }
 
@@ -30,6 +30,7 @@ else{
                     [ '$set' => [ 'text' => $text]]
                 );
         }catch(error $e){
+            echo('oups nous ne parvenons pas à modifier les horaires');
         }
     }
 }
