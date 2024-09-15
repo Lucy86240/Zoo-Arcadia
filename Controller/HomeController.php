@@ -1,4 +1,5 @@
 <?php
+echo('controller1');
 //si on est sur un url différent du chemin du fichier on execute le programme
 if($_SERVER['REQUEST_URI']!='/Controller/homeController.php'){
     try{
