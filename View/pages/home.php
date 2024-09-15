@@ -16,7 +16,7 @@ else{?>
             lieu en total indépendance énergétique.</p>
     </section>
 
-   <!-- <section class="home-housings">
+    <section class="home-housings">
         <h2 class="text-center text-white home-housings-title-desktop">Soyez au plus proche de la nature en visitant nos habitats</p>
         <h2 class="text-center text-white home-housings-title-mobile">Nos habitats</h2>
         <div class="home-housings-container">
@@ -63,7 +63,7 @@ else{?>
             
         </div>
         <a href="habitats"  class="button"><button type="button" class="btn btn-green">En voir plus...</button></a>
-    </section> -->
+    </section>
 
     <!-- animals for mobile -->
   <!--  <section class="animals-mobile">

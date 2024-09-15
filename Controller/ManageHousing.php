@@ -1,8 +1,13 @@
 <?php
 //execution du programme seulement si l'url actuel est différent du chemin du fichier
 if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
+    try{
         require_once "Model/ManageHousingModel.php";
         require_once "Controller/ManageAnimal.php";
+    }
+    catch(error $e){
+        echo("certaines données sont manquantes");
+    }
     
         /**
          * Retourne un tableau associatif avec au moins tout les noms des habitats
@@ -317,9 +322,11 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
             changeStatusComment($housings, $comments);
         }
         else{
+            echo('good');
             //on récupère les données
             $housings = allHousingsView(true,-1,-1,1,1);
             if($_SERVER['REQUEST_URI']!='/'){
+                echo('coucou');
                 $comments = allCommentswithFilter(null,null,null,null);
                 // on permet la mise à jour des données
                 deleteHousing($housings);
