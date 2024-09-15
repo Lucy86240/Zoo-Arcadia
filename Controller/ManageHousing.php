@@ -23,92 +23,94 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
             $housingsObject = AllHousings($portraitAccept);
             $housings = [];
             $id=0;
-            //on crée le talbeau associatifs
-            foreach($housingsObject as $housingObject){ 
-                $housing = array(
-                    "name" => $housingObject->getName(),
-                    "id" => $housingObject->getId(),
-                );
-                if($description == true){
-                    $housing["description"] = $housingObject->getDescription();
-                }
-    
-                //ajout du nombre d'images souhaitées
-                if ($nbImgs == -1 || $nbImgs > $housingObject->countImages() ){
-                    $nb = $housingObject->countImages();
-                }
-                else{
-                    $nb = $nbImgs;
-                }
-                $housing['images'] = [];
-                for($i=0 ; $i<$nb; $i++){
-                    $img= array(
-                            'path' => $housingObject->getImage($i)->getPath(),
-                            'description' => $housingObject->getImage($i)->getDescription(),
-                            'id' => $housingObject->getImage($i)->getId(),
-                        );
-                        array_push($housing['images'],$img);
+            //on crée le tableau associatif
+            if($housingsObject != null){
+                foreach($housingsObject as $housingObject){ 
+                    $housing = array(
+                        "name" => $housingObject->getName(),
+                        "id" => $housingObject->getId(),
+                    );
+                    if($description == true){
+                        $housing["description"] = $housingObject->getDescription();
                     }
-                    //si pas d'image on ajoute celle par défaut
-                    if($housing['images'] == []){
+        
+                    //ajout du nombre d'images souhaitées
+                    if ($nbImgs == -1 || $nbImgs > $housingObject->countImages() ){
+                        $nb = $housingObject->countImages();
+                    }
+                    else{
+                        $nb = $nbImgs;
+                    }
+                    $housing['images'] = [];
+                    for($i=0 ; $i<$nb; $i++){
                         $img= array(
-                            'path' => IMG_DEFAULT_HOUSING,
-                            'description' => "photo indisponible",
-                            'id' => 0,
-                        );
-                        array_push($housing['images'],$img);
-                    }
-                    
-    
-                    //ajout du nombre d'animaux souhaités
-                    if ($nbAnimals != 0)
-                    {
-                        //on récupère les objets animaux souhaités
-                        $animalsObject = findAnimalsByHousing($housingObject->getId(), $nbAnimals,1, $justVisibleAnimals,$portraitAccept);
-                        $housing["animals"] =[];
-                        //on crée un tableau asso d'animal
-                        foreach($animalsObject as $animalObject){
-                            $animal = array(
-                                "id" => $animalObject->getId(),
-                                "name" => $animalObject->getName(),
-                                "breed" => $animalObject->getBreed(),
-                                "IsVisible" => $animalObject->getIsVisible(),
+                                'path' => $housingObject->getImage($i)->getPath(),
+                                'description' => $housingObject->getImage($i)->getDescription(),
+                                'id' => $housingObject->getImage($i)->getId(),
                             );
-                            $animal['imagesAnimals'] = [];
-                            for($i=0 ; $i<$animalObject->countImages(); $i++){
-                                $img= array(
-                                    "pathAnimals" => $animalObject->getImage($i)->getPath(),
-                                    "descriptionAnimals" => $animalObject->getImage($i)->getDescription(),
-                                );
-                                array_push($animal['imagesAnimals'],$img);
-                            }
-                            if($animal['imagesAnimals']==[]){
-                                $img= array(
-                                    "pathAnimals" => IMG_DEFAULT_ANIMAL,
-                                    "descriptionAnimals" => 'pas de photo disponible',
-                                );
-                                array_push($animal['imagesAnimals'],$img);
-                            }
-                            array_push($housing["animals"],$animal);
+                            array_push($housing['images'],$img);
                         }
-                    }
-    
-                    //ajout des commentaires
-                    $commentsObject = commentHousing($housing['id'],0);
-                    $housing['comments']=[];
-                    foreach($commentsObject as $commentObject){
-                        $comment=array(
-                            "idComment" => $commentObject->getId(),
-                            "comment" => $commentObject->getComment(),
-                            "date" => date("d/m/Y",strtotime($commentObject->getDate())), // on affiche la date de manière traditionnelle
-                            "veterinarian" => findNameOfUser($commentObject->getVeterinarian()), // onr récupère le nom prénom du véto
-                        );
-                        array_push($housing['comments'],$comment);
-                    }
-    
-                    $housings[$id]=$housing;
-                    $id++;
-                }            
+                        //si pas d'image on ajoute celle par défaut
+                        if($housing['images'] == []){
+                            $img= array(
+                                'path' => IMG_DEFAULT_HOUSING,
+                                'description' => "photo indisponible",
+                                'id' => 0,
+                            );
+                            array_push($housing['images'],$img);
+                        }
+                        
+        
+                        //ajout du nombre d'animaux souhaités
+                        if ($nbAnimals != 0)
+                        {
+                            //on récupère les objets animaux souhaités
+                            $animalsObject = findAnimalsByHousing($housingObject->getId(), $nbAnimals,1, $justVisibleAnimals,$portraitAccept);
+                            $housing["animals"] =[];
+                            //on crée un tableau asso d'animal
+                            foreach($animalsObject as $animalObject){
+                                $animal = array(
+                                    "id" => $animalObject->getId(),
+                                    "name" => $animalObject->getName(),
+                                    "breed" => $animalObject->getBreed(),
+                                    "IsVisible" => $animalObject->getIsVisible(),
+                                );
+                                $animal['imagesAnimals'] = [];
+                                for($i=0 ; $i<$animalObject->countImages(); $i++){
+                                    $img= array(
+                                        "pathAnimals" => $animalObject->getImage($i)->getPath(),
+                                        "descriptionAnimals" => $animalObject->getImage($i)->getDescription(),
+                                    );
+                                    array_push($animal['imagesAnimals'],$img);
+                                }
+                                if($animal['imagesAnimals']==[]){
+                                    $img= array(
+                                        "pathAnimals" => IMG_DEFAULT_ANIMAL,
+                                        "descriptionAnimals" => 'pas de photo disponible',
+                                    );
+                                    array_push($animal['imagesAnimals'],$img);
+                                }
+                                array_push($housing["animals"],$animal);
+                            }
+                        }
+        
+                        //ajout des commentaires
+                        $commentsObject = commentHousing($housing['id'],0);
+                        $housing['comments']=[];
+                        foreach($commentsObject as $commentObject){
+                            $comment=array(
+                                "idComment" => $commentObject->getId(),
+                                "comment" => $commentObject->getComment(),
+                                "date" => date("d/m/Y",strtotime($commentObject->getDate())), // on affiche la date de manière traditionnelle
+                                "veterinarian" => findNameOfUser($commentObject->getVeterinarian()), // onr récupère le nom prénom du véto
+                            );
+                            array_push($housing['comments'],$comment);
+                        }
+        
+                        $housings[$id]=$housing;
+                        $id++;
+                    }         
+            }
             return $housings;
         }
     
@@ -309,7 +311,8 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
             if(isset($_POST['filter']) && isset($_POST[$date])) return $_POST[$date];
             return '';
         }
-    
+        
+        echo('var:'.$_SERVER['REQUEST_URI']);
         //si on est sur la page des commentaires vétérinaires
         if($_SERVER['REQUEST_URI']=='/commentaires_habitats'){
             //on récupère les données
