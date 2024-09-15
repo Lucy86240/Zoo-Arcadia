@@ -66,7 +66,7 @@ else{?>
     </section>
 
     <!-- animals for mobile -->
-  <!--  <section class="animals-mobile">
+    <section class="animals-mobile">
     </section>
 
     <section class = "home-services">
@@ -137,5 +137,5 @@ else{?>
             </button></div>
             <?php }  ?>
         </div>
-    </section>-->
+    </section>
 <?php } ?>

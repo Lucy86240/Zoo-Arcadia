@@ -1,5 +1,4 @@
 <?php
-echo('var:'.$_SERVER['REQUEST_URI']);
 //execution du programme seulement si l'url actuel est différent du chemin du fichier
 if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
     try{
@@ -8,9 +7,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
     }
     catch(error $e){
         echo("certaines données sont manquantes");
-    }
-    echo('coucou');
-    
+    }    
         /**
          * Retourne un tableau associatif avec au moins tout les noms des habitats
          * @param $id true ajoute l'id au tableau
@@ -325,7 +322,6 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
             changeStatusComment($housings, $comments);
         }
         else{
-            echo('good');
             //on récupère les données
             $housings = allHousingsView(true,-1,-1,1,1);
             if($_SERVER['REQUEST_URI']!='/'){

@@ -10,8 +10,8 @@ else{
     require_once 'AllRoutes.php';
     require_once "Controller/ManageUser.php";
 
-        //$current_url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-        $current_url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $current_url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+      //  $current_url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         
         //Current URL = http://localhost:3000/something
         //Site URL - http://localhost:3000/
@@ -44,8 +44,8 @@ else{
         }
     
         function optionPage($request){
-            if($request!=""){
-                if(strpos($request,'/')!= false){
+          //  if($request!=""){
+             //   if(strpos($request,'/')!= false){
                     $request = explode('/',$request,2);
                     if(count($request)>1){
                         return true;
@@ -54,32 +54,27 @@ else{
                         return false;
                     }
                 }
-                else{
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
+             //   else{
+            //        return false;
+           //     }
+          //  }
+         //   else
+         //   {
+         //       return false;
+         //   }
 
-        }
+      //  }
     
         function loadContentPage($request){
-
             $option = optionPage($request);
             $request = explode('/',$request,2);
             $actualRoute = getRouteByUrl($request[0],$option);
 
-            //$option = optionPage($request);
-            //$request = explode('/',$request,2);
-            //$actualRoute = getRouteByUrl($request[0],$option);
-            //var_dump($actualRoute->getPathController());
             if($actualRoute->getPathController()!=null)
             {
                 include $actualRoute->getPathController();
             }
-        
+    
             if($actualRoute->getPathHtml()!=null){
                 include $actualRoute->getPathHtml();
             }
