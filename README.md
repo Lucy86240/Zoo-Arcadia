@@ -46,12 +46,12 @@ composer require mongodb/mongodb
 
 ### Configurez les variables d'environnement :
 Dans le fichier 'config.php' (à la racine de l'application) modifiez les constantes suivantes:
-SITE_URL correspond à l’url du projet
-MAIL_CONTACT correspond à l’adresse mail à laquelle est envoyée les demandes de contact
-DATA_BASE correspond à l’hôte et nom de la base de données MySQL
-USERNAME_DB correspond au nom d’utilisateur de la base de données MySQL
-PASSEWORD_DB correspond au mot de passe de la base de données MySQL
-MONGO_DB_HOST correspond à l’hôte de la base de données MongoDB 
+* SITE_URL correspond à l’url du projet
+* MAIL_CONTACT correspond à l’adresse mail à laquelle est envoyée les demandes de contact
+* DATA_BASE correspond à l’hôte et nom de la base de données MySQL
+* USERNAME_DB correspond au nom d’utilisateur de la base de données MySQL
+* PASSEWORD_DB correspond au mot de passe de la base de données MySQL
+* MONGO_DB_HOST correspond à l’hôte de la base de données MongoDB
 Dans le fichier CONSTANTES_inputs.js modifiez la constante SITE_URL (idem que dans le fichier config.php).
 
 ## Bases de données
