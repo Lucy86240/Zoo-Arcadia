@@ -105,3 +105,6 @@ Dans le terminal de votre éditeur de code saisissez :
 php -S localhost:3000
 ```
 Utilisez le même hôte que ce que vous avez saisie dans la variable SITE_URL
+
+Source :
+Merci à Blamxis pour son readMe (https://github.com/Blamxis/garage_app/blob/main/README.md?plain=1) dont je me suis fortement inspirée.
