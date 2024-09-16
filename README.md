@@ -52,6 +52,7 @@ Dans le fichier 'config.php' (à la racine de l'application) modifiez les consta
 * USERNAME_DB correspond au nom d’utilisateur de la base de données MySQL
 * PASSEWORD_DB correspond au mot de passe de la base de données MySQL
 * MONGO_DB_HOST correspond à l’hôte de la base de données MongoDB
+
 Dans le fichier CONSTANTES_inputs.js modifiez la constante SITE_URL (idem que dans le fichier config.php).
 
 ## Bases de données
@@ -85,7 +86,7 @@ Saisissez dans Collection Name : popularity
 Cliquez sur Create Collection. Vous venez de créer la collection popularity.
 * Cliquez sur schedules (en dessous de votre base de données)
 La collection s’affiche.
-* Faites ADD DATA et copiez :
+* Cliquez sur ADD DATA et copiez :
 ```bash
 {
  "_id": {
