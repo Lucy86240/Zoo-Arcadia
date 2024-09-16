@@ -14,7 +14,7 @@ else{?>
                 </a>
                 <?php if(authorize(['Employé.e'])){ ?>
                 <div class="icon js-icon" id="popupFed">
-                    <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/note_add.svg" alt="Nourrir un animal"></div>
+                    <div class="bgc-img-box"><img class="img-box" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/icons/feed.svg" alt="Nourrir un animal"></div>
                 </div>
                 <?php } ?>
             </div>
