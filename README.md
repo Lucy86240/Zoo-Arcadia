@@ -46,12 +46,13 @@ composer require mongodb/mongodb
 
 ### Configurez les variables d'environnement :
 Dans le fichier 'config.php' (à la racine de l'application) modifiez les constantes suivantes:
-SITE_URL correspond à l’url du projet
-MAIL_CONTACT correspond à l’adresse mail à laquelle est envoyée les demandes de contact
-DATA_BASE correspond à l’hôte et nom de la base de données MySQL
-USERNAME_DB correspond au nom d’utilisateur de la base de données MySQL
-PASSEWORD_DB correspond au mot de passe de la base de données MySQL
-MONGO_DB_HOST correspond à l’hôte de la base de données MongoDB 
+* SITE_URL correspond à l’url du projet
+* MAIL_CONTACT correspond à l’adresse mail à laquelle est envoyée les demandes de contact
+* DATA_BASE correspond à l’hôte et nom de la base de données MySQL
+* USERNAME_DB correspond au nom d’utilisateur de la base de données MySQL
+* PASSEWORD_DB correspond au mot de passe de la base de données MySQL
+* MONGO_DB_HOST correspond à l’hôte de la base de données MongoDB
+
 Dans le fichier CONSTANTES_inputs.js modifiez la constante SITE_URL (idem que dans le fichier config.php).
 
 ## Bases de données
@@ -85,7 +86,7 @@ Saisissez dans Collection Name : popularity
 Cliquez sur Create Collection. Vous venez de créer la collection popularity.
 * Cliquez sur schedules (en dessous de votre base de données)
 La collection s’affiche.
-* Faites ADD DATA et copiez :
+* Cliquez sur ADD DATA et copiez :
 ```bash
 {
  "_id": {
@@ -104,3 +105,6 @@ Dans le terminal de votre éditeur de code saisissez :
 php -S localhost:3000
 ```
 Utilisez le même hôte que ce que vous avez saisie dans la variable SITE_URL
+
+Source :
+Merci à Blamxis pour son readMe (https://github.com/Blamxis/garage_app/blob/main/README.md?plain=1) dont je me suis fortement inspirée.

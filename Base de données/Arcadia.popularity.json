@@ -1,0 +1,144 @@
+[{
+  "_id": {
+    "$oid": "66d1cbc8f3c522f1510f78a2"
+  },
+  "id_animal": 28,
+  "Name_breed": "Socute - Ouistiti pygmé (singe)",
+  "nbClics": 8
+},
+{
+  "_id": {
+    "$oid": "66d1cbe3f3c522f1510f78a3"
+  },
+  "id_animal": 27,
+  "Name_breed": "Roger - Pélican",
+  "nbClics": 1
+},
+{
+  "_id": {
+    "$oid": "66d1cbfcf3c522f1510f78a4"
+  },
+  "id_animal": 30,
+  "Name_breed": "Jacko 1er - Cigogne noire",
+  "nbClics": 10
+},
+{
+  "_id": {
+    "$oid": "66d1d401f3c522f1510f78a5"
+  },
+  "id_animal": 8,
+  "Name_breed": "Nez-rond - Alligator",
+  "nbClics": 1
+},
+{
+  "_id": {
+    "$oid": "66d1d42bf3c522f1510f78a6"
+  },
+  "id_animal": 14,
+  "Name_breed": "Rivers - Dik-dik",
+  "nbClics": 1
+},
+{
+  "_id": {
+    "$oid": "66d1d904f3c522f1510f78a7"
+  },
+  "id_animal": 11,
+  "Name_breed": "Gloria - Hippopotame",
+  "nbClics": 5
+},
+{
+  "_id": {
+    "$oid": "66d1d930f3c522f1510f78a8"
+  },
+  "id_animal": 7,
+  "Name_breed": "Lacoste - Crocodile",
+  "nbClics": 1
+},
+{
+  "_id": {
+    "$oid": "66d1d963f3c522f1510f78a9"
+  },
+  "id_animal": 5,
+  "Name_breed": "Prince Edward - Lion",
+  "nbClics": 1
+},
+{
+  "_id": {
+    "$oid": "66d1d986f3c522f1510f78aa"
+  },
+  "id_animal": 25,
+  "Name_breed": "Red - Kangourou",
+  "nbClics": 1
+},
+{
+  "_id": {
+    "$oid": "66d1d9b2f3c522f1510f78ab"
+  },
+  "id_animal": 15,
+  "Name_breed": "Gigi l amoro - Girafe",
+  "nbClics": 1
+},
+{
+  "_id": {
+    "$oid": "66d1da8ff3c522f1510f78ac"
+  },
+  "id_animal": 23,
+  "Name_breed": "Serge - Macaque (singe)",
+  "nbClics": 1
+},
+{
+  "_id": {
+    "$oid": "66d1dac6f3c522f1510f78ad"
+  },
+  "id_animal": 18,
+  "Name_breed": "Marty - Zèbre",
+  "nbClics": 1
+},
+{
+  "_id": {
+    "$oid": "66d1db08f3c522f1510f78ae"
+  },
+  "id_animal": 17,
+  "Name_breed": "Miro - Lynx tacheté",
+  "nbClics": 1
+},
+{
+  "_id": {
+    "$oid": "66d1db2af3c522f1510f78af"
+  },
+  "id_animal": 22,
+  "Name_breed": "Roi Louie - Orang-outan (singe)",
+  "nbClics": 1
+},
+{
+  "_id": {
+    "$oid": "66d1dd05f3c522f1510f78b0"
+  },
+  "id_animal": 20,
+  "Name_breed": "Simba - Lion",
+  "nbClics": 1
+},
+{
+  "_id": {
+    "$oid": "66d1ddebf3c522f1510f78b1"
+  },
+  "id_animal": 2,
+  "Name_breed": "Marcel - Ouistiti (singe)",
+  "nbClics": 1
+},
+{
+  "_id": {
+    "$oid": "66d38bb923aea776ef0665c2"
+  },
+  "id_animal": 10,
+  "Name_breed": "Cléopatre - Léopard",
+  "nbClics": 1
+},
+{
+  "_id": {
+    "$oid": "66d38d8b23aea776ef0665c3"
+  },
+  "id_animal": 4,
+  "Name_breed": "Dumbo - Eléphant",
+  "nbClics": 1
+}]
