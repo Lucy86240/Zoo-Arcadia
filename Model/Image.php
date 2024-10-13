@@ -96,7 +96,7 @@ else{
             $request = 'SELECT images.id_image FROM '.$table.' JOIN images ON '.$table.'.id_image = images.id_image WHERE '.$table.'.'.$name_id.' = ';
             $stmt = $pdo->prepare($request.' :id_type and images.icon = :icon');
             $stmt->bindParam(":id_type", $id_type, PDO::PARAM_INT);
-            $stmt->bindParam(":icon", $icon, PDO::PARAM_STR);
+            $stmt->bindParam(":icon", $icon, PDO::PARAM_BOOL);
             $stmt->execute();
             return $stmt->fetch()["id_image"];
 
@@ -226,8 +226,8 @@ else{
             $stmt = $pdo->prepare('insert into images (path, description, icon, portrait,attribution) VALUES (:path, :description, :icon, :portrait, :attribution)');
             $stmt->bindParam(":path", $path, PDO::PARAM_STR);
             $stmt->bindParam(":description", $description, PDO::PARAM_STR);
-            $stmt->bindParam(":icon", $icon, PDO::PARAM_STR);
-            $stmt->bindParam(":portrait", $portrait, PDO::PARAM_STR);
+            $stmt->bindParam(":icon", $icon, PDO::PARAM_BOOL);
+            $stmt->bindParam(":portrait", $portrait, PDO::PARAM_BOOL);
             $stmt->bindParam(":attribution", $attribution, PDO::PARAM_STR);
             $stmt->execute();
 
@@ -287,7 +287,7 @@ else{
                 $stmt->bindParam(":id", $id, PDO::PARAM_INT);
                 $stmt->bindParam(":path", $path, PDO::PARAM_STR);
                 $stmt->bindParam(":description", $description, PDO::PARAM_STR);
-                $stmt->bindParam(":portrait", $portrait, PDO::PARAM_STR);
+                $stmt->bindParam(":portrait", $portrait, PDO::PARAM_BOOL);
                 $stmt->bindParam(":attr", $attr, PDO::PARAM_STR);
 
                 $stmt->execute();

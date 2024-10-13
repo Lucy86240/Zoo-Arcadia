@@ -64,7 +64,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
                         if ($nbAnimals != 0)
                         {
                             //on récupère les objets animaux souhaités
-                            $animalsObject = findAnimalsByHousing($housingObject->getId(), $nbAnimals,1, $justVisibleAnimals,$portraitAccept);
+                            $animalsObject = findAnimalsByHousing($housingObject->getId(), $nbAnimals, $justVisibleAnimals,$portraitAccept);
                             $housing["animals"] =[];
                             //on crée un tableau asso d'animal
                             foreach($animalsObject as $animalObject){
@@ -170,7 +170,7 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
             foreach($housings as $housing){
                 if(isset($_POST['ValidationDeleteHousing'.$housing['id']])){
                     // on supprime les animaux de l'habitat (BD et photos)
-                    $animals = findAnimalsByHousing($housing['id'],-1,0,2,1);
+                    $animals = findAnimalsByHousing($housing['id'],-1,2,1);
                     foreach($animals as $animal){
                         deleteAnimalWithoutForm($animal);
                     }
@@ -325,13 +325,18 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageHousing.php'){
             //on récupère les données
             $housings = allHousingsView(true,-1,-1,1,1);
             if($_SERVER['REQUEST_URI']!='/'){
-                echo('coucou');
                 $comments = allCommentswithFilter(null,null,null,null);
                 // on permet la mise à jour des données
                 deleteHousing($housings);
                 addComment($housings,$comments);
                 deleteComment($housings, $comments);
                 changeStatusComment($housings, $comments);
+                if(authorize(['Administrateur.rice']))
+                    foreach($housings as $housing){
+                        foreach($housing['animals'] as $animal){
+                            deleteAnimal($animal['id'],$animal['name'],$housing['id'],$housings,true);
+                        }
+                    }
             }
         }
 }

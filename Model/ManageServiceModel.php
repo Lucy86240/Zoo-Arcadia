@@ -77,7 +77,7 @@ else{
                 return $services;
             }
             catch (error $e){
-                echo "Désolée";
+                echo ("Désolée, une erreur est survenue");
                 return new Service();
             }
         }
@@ -131,7 +131,6 @@ else{
                     //on supprime toutes les images
                     if($res != null){
                         foreach ($res as $id_image){
-                            echo($id_image);
                             $stmt = $pdo->prepare('DELETE FROM images WHERE id_image = :id');
                             $stmt->bindParam(":id", $id_image, PDO::PARAM_INT);
                             $stmt->execute();

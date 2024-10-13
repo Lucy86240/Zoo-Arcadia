@@ -21,12 +21,31 @@ else{
                                     <span>Sélectionnées :</span>
                                     <p id="breedsSelectedAll">Toutes</p>
                                     <ul class="breeds" id="listBreedsSelected">
+                                        <?php $i=0;
+                                        foreach($breeds as $breed){ ?>
+                                            <li class="form-check <?php if(defaultValueCheckbox('breedSelected'.$i,$breed['id_breed'])!='checked') echo('none'); ?> js-liBreedsSelected">
+                                                <input class="form-check-input js-checkboxBreedsSelected" type="checkbox" name="breedSelected<?php echo($i);?>" id="breedSelected<?php echo($i);?>" value="<?php echo($breed['id_breed']) ?>" <?php echo(defaultValueCheckbox('breedSelected'.$i,$breed['id_breed'])); ?>>
+                                                <label class="form-check-label" for="breedSelect<?php echo($i); ?>">
+                                                    <?php echo($breed['label']) ?>
+                                                </label>
+                                            </li>
+                                        <?php $i++;} ?>
                                     </ul>
                                 </div>
                                 <div class="searchElements">
                                     <input type="text" class="filterSearch" name="filterBreedsSearch" id="filterBreedsSearch" placeholder="chercher" autocomplete="off" pattern="^([a-zA-Zèéëïç ])+$">
                                     <ul class="Breeds" id="listBreeds">
+                                        <?php $i=0;
+                                        foreach($breeds as $breed){ ?>
+                                            <li class="form-check none">
+                                                <input class="form-check-input js-checkboxBreedsSearch" type="checkbox" name="breed<?php echo($i);?>" id="breed<?php echo($i);?>" <?php echo(defaultValueCheckbox('breedSelected'.$i,$breed['id_breed'])); ?>>
+                                                <label class="form-check-label" for="breed<?php echo($i); ?>">
+                                                    <?php  echo($breed['label']) ?>
+                                                </label>
+                                            </li>
+                                        <?php $i++;} ?>
                                     </ul>
+                                    <p class="MessageResult none" id="msgBreedsSearch">Trop de résultats possibles... veuillez affiner</p>
                                 </div>
                             </div>
                         </div>

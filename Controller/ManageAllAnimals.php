@@ -106,10 +106,11 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageAllAnimals.php'){
                 
                 // les races
                 $_SESSION['allAnimals_filterBreeds']=[];
-                $lenght=count(listAllBreeds());
+                $allBreeds = listAllBreeds();
+                $lenght=count($allBreeds);
                 for($i=0; $i<$lenght;$i++){
-                    if(isset($_POST["breedSelected".$i])){
-                        array_push($_SESSION['allAnimals_filterBreeds'],$_POST["breedSelected".$i]);
+                    if(isset($_POST["breeds".$allBreeds[$i]['id_breed']])){
+                        array_push($_SESSION['allAnimals_filterBreeds'],$allBreeds[$i]['id_breed']);
                     }
                 }
                 $breeds = $_SESSION['allAnimals_filterBreeds'];
@@ -186,6 +187,10 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageAllAnimals.php'){
         //seul les utilisateurs connectés peuvent voir les animaux archivés
         if(authorize(['connected'])){
             $animals = allAnimals($breeds, $housings, $isVisible, $sort, $first, $perPage,$nbAnimals);
+            if(authorize(['Administrateur.rice']))
+                foreach($animals as $animal){
+                    deleteAnimal($animal['id'],$animal['name'],$animal["housing"],$animals, false);
+                }
         }
         else{
             $animals = allAnimals($breeds, $housings, 1, $sort, $first, $perPage,$nbAnimals);

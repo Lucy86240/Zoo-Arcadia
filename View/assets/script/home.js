@@ -260,12 +260,10 @@ function versionDesktopHousing(data){
 if(window.innerWidth < 576){
     versionMobileHousing()
     mobileDisplay = true;
-    console.log(1)
 }
 else if(window.innerWidth > 576){
     versionDesktopHousing(null)
     mobileDisplay = false;
-    console.log(2)
 }
 
 
@@ -345,8 +343,6 @@ window.addEventListener("resize", ()=>{
         mobileDisplay = true;
     }
     else if(window.innerWidth > 576 && mobileDisplay){
-        console.log('tab desktop:')
-        console.log(datas)
         versionDesktopHousing(datas);
         mobileDisplay = false;
     }

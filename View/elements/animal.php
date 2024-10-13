@@ -4,7 +4,9 @@
     <?php
     require_once '../pages/404.php';
 }
-else{?>
+else{
+
+    ?>
     <section class="animal">
         <div class="<?php if(isset($theme) && $theme!=null) echo($theme); else echo("theme-beige"); if(isset($reverse) && $reverse) echo(' reverse');?> layout">
         <?php if(authorize(['connected'])){ ?>

@@ -140,7 +140,6 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageAnimal.php'){
          */
         function animalById(int $id,bool $allReport,bool $foods){
             $animalObject=findAnimalById($id);
-            //var_dump($animalObject);
             if($animalObject!=null) $animal = changeAnimalObjectToAssociatif($animalObject, $allReport, $foods,false);
             else $animal = null;
             return $animal;
@@ -151,9 +150,10 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageAnimal.php'){
          * @param int $id : id de l'animal à supprimer
          * @param string $name : nom de l'animal à supprimer
          * @param int $id_housing : id de l'habitat de l'animal à supprimer
+         * @param $elements : tableau d'habitats à modifier, null si pas de suppression dans la page habitat
          * @return void
          */
-        function deleteAnimal(int $id, string $name, int $id_housing, &$elements){
+        function deleteAnimal(int $id, string $name, int $id_housing, &$elements, bool $housing){
             //on recupère le nom du bouton à cliquer pour supprimer l'animal
             $nameButton = "ValidationDeleteAnimal".$id;
             //si on a cliqué sur le bouton
@@ -164,12 +164,19 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageAnimal.php'){
                 $path = "View/assets/img/animals/".$id.'-'.$name.'/';
                 rrmdir($path);
                 //si on est sur la page habitat on enlève son affichage
-                if($elements != null){
+                if($elements != null && $housing){
                     $_SESSION['animal'.$id_housing] = null;
                     $elements = allHousingsView(true,-1,-1,1,1);
                 }
-                else{
-                    $elements = null;
+                else if($elements != null){
+                    $breeds = [];
+                    $housings = [];
+                    $isVisible = 2;
+                    $sort = null;
+                    $perPage = 50;
+                    $first = 1;
+                    $nbAnimals=0;
+                    $elements = allAnimals($breeds, $housings, $isVisible, $sort, $first, $perPage,$nbAnimals);;
                 }
                 $_POST[$nameButton]=null;
             } 
@@ -257,8 +264,8 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageAnimal.php'){
                         animalClic($animal['id']);
                     } 
                     $_SESSION['animal'.$housing["id_housing"]] = $animal['id'];
-                    //on permet la suppression / l'archivage / le désarchivage
-                    deleteAnimal($animal['id'],$animal['name'],$housing["id_housing"],$elements);
+                    //on permet l'archivage / le désarchivage
+                  //  deleteAnimal($animal['id'],$animal['name'],$housing["id_housing"],$elements,true);
                     archiveAnimal($animal,$elements);
                     unarchiveAnimal($animal);
                     //on affiche les infos
@@ -278,9 +285,8 @@ if($_SERVER['REQUEST_URI']!='/Controller/ManageAnimal.php'){
                     animalClic($animal['id']);
                 } 
                 $_SESSION['allAnimals_animalSelected'] = $animal['id'];
-                    //on permet la suppression / l'archivage / le désarchivage
+                    //on permet l'archivage / le désarchivage
                 $elements = null;
-                deleteAnimal($animal['id'],$animal['name'],$housing["id_housing"],$elements);
                 archiveAnimal($animal,$elements);
                 unarchiveAnimal($animal);
     

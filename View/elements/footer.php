@@ -6,7 +6,7 @@
 }
 else{ ?>
     <?php require 'Controller/schedules.php'; ?>
-    <section class="footer-desktop footer">
+    <footer class="footer-desktop footer">
         <hr class="line-top"> </hr>
         <div class="container-links">
             <div class="container-illu">
@@ -48,8 +48,8 @@ else{ ?>
             <a href="mentions_legales">Mentions légales</a>
             <a href="politique_confidentialite">Politique de confidentialité</a>
         </div>
-    </section>
-    <section class="footer-mobile footer">
+    </footer>
+    <footer class="footer-mobile footer">
         <hr class="line_top"> </hr>
         <div class="networks">
             <a href=""><img class="logo-network" src="<?php if($optionPage){echo("../");}?>View/assets/img/general/footer/facebook.svg" alt="logo de facebook"></a>
@@ -88,6 +88,6 @@ else{ ?>
             </div>
         </div>
         <p class="copyright text-center">© Zoo Arcadia 2024</p>
-    </section>
+    </footer>
     <script src = "<?php if($optionPage){echo("../");}?>View/assets/script/footer.js"></script>
 <?php } ?>

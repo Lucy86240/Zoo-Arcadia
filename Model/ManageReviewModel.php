@@ -20,7 +20,7 @@ else{
          * @Param $showDateCheck : false = l'avis n'inclus pas la date d'acceptation
          * @Param $showCheckBy : false = l'avis n'inclus pas l'employé qui l'a validé
          */
-        function reviewsExtract(int $nbReviews,int $startList=0, string $orderBy, bool $JustVisible=true,string $filter){
+        function reviewsExtract(int $nbReviews,int $startList, string $orderBy, bool $JustVisible,string $filter){
             switch ($orderBy){
                 case "idC": 
                     $order="id_review ASC";

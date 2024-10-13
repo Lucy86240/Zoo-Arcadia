@@ -55,9 +55,13 @@
                 }
                 if(nbResult(filter,li)==0 && filter !=""){
                     newBreed[i].classList.remove('none');
+                    console.log('remove i'+i)
+                    console.log(newBreed)
                 } 
                 else{
-                    newBreed[i].classList.add('none');}
+                    newBreed[i].classList.add('none');
+                    console.log('add i'+i)
+                    console.log(newBreed)}
             })
         }
     }

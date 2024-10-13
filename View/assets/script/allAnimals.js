@@ -22,10 +22,103 @@ for(let i=0;i<animals.length;i++){
 // Declare variables
 const input = document.getElementById('filterBreedsSearch');
 const ul = document.getElementById('listBreeds');
-const messageResult = document.getElementById('msgBreedsSearch');
 const max=20;
+function existInLabels(nameBreed,labels){
+    if(labels!=null){
+        for(let i=0; i<labels.length;i++){
+            if(labels[i].innerHTML==nameBreed)
+                return true
+        }
+    }
+    return false;
+}
+function manageSelected(selected){
+    if(selected!=null){
+        inputs = selected.querySelectorAll('input')
+        if(inputs!=null){
+            for(let b=0; b<inputs.length;b++){
+                inputs[b].addEventListener('click',()=>{
 
-search(input, ul, messageResult,max,false,true);
+                })
+            }
+        }
+    }
+}
+function listBreedsSelected(){
+    const sBreed = document.getElementById('listBreedsSelected')
+    let breeds = []
+    if(sBreed!=null)
+    {
+        const labels = sBreed.querySelectorAll('label')
+        if(labels!=null){
+            for(let c=0; c<labels.length;c++){
+                breeds.push(labels[c].innerHTML)
+            }
+        }
+    }
+    return breeds;
+}
+
+let selected = document.getElementById('listBreedsSelected')
+function manageCheckboxs(checkboxs, lis){
+    for(let i=0; i<checkboxs.length;i++){
+        checkboxs[i].addEventListener('click',()=>{
+            if(checkboxs[i].checked){
+                labelsSelected = selected.querySelectorAll('label')
+                if(!existInLabels(checkboxs[i].getAttribute('label'),labelsSelected))
+                    selected.append(lis[i])
+            }
+            else{
+                let selectTemp = document.createElement('ul')
+                selectTemp.setAttribute('id','listBreedsSelected')
+                selectTemp.classList.add("breeds")
+                if(selected!=null){
+                    const lis = selected.querySelectorAll('.form-check')
+                    if(lis!=null){
+                        for(let j=0; j<lis.length;j++){
+                            if(lis[j].getAttribute('id').substring(3)!=checkboxs[i].getAttribute('label')){
+                                lis[j].checked=true
+                                selectTemp.append(lis[j])
+                            }
+                        }
+                    }
+                }
+                selected.innerHTML = selectTemp.innerHTML
+                inputsNewSelect = selected.querySelectorAll('input')
+                if(inputsNewSelect!=null)
+                    for(let a=0; a<inputsNewSelect.length;a++){
+                        inputsNewSelect[a].checked=true
+                    }
+                manageSelected(selected)
+            }
+        })
+    }
+}
+
+if(input!=null){
+    input.addEventListener('keyup',()=>{
+        breeds = listBreedsSelected()
+        if (input.value.length == 0) {
+            ul.innerHTML = "";
+            return;
+        } 
+        else {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                ul.innerHTML = this.responseText;
+                checkboxs = ul.querySelectorAll('.js-checkboxBreedsSearch')
+                lis = ul.querySelectorAll('.form-check')
+                if(checkboxs!=null)
+                    manageCheckboxs(checkboxs,lis)
+            }
+            };
+            xmlhttp.open("GET", "../../../Controller/ajaxSearchBreeds.php?value=" + input.value+"&max="+max+"&breeds="+breeds, true);
+            xmlhttp.send();
+        }
+    })
+}
+
 
 const checkboxSelectedInput = document.querySelectorAll(".js-checkboxBreedsSelected");
 const checkboxSelectedLi = document.querySelectorAll(".js-liBreedsSelected");

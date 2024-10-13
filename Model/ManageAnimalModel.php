@@ -148,12 +148,11 @@ else{
         /**
              * @param $id_housing 
              * @param $nbAnimals numbers of animals, -1 = all
-             * @param $currentPage sert pour la pagination
              * @param $justVisibleAnimal 1: animaux visibles, 0: animaux non visibles, 2: tous
              * @param $portraitAccept si les images en portrait sont acceptées (par défaut true)
              * @return $animals array of animals
              */
-            function findAnimalsByHousing(int $id_housing, int $nbAnimals=-1, int $currentPage, int $justVisibleAnimal=1,bool $portraitAccept=true){
+            function findAnimalsByHousing(int $id_housing, int $nbAnimals=-1, int $justVisibleAnimal=1,bool $portraitAccept=true){
                 try{
                     $animals = [];
                     $pdo = new PDO(DATA_BASE,USERNAME_DB,PASSEWORD_DB);
